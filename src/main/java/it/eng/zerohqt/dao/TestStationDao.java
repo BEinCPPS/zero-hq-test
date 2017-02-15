@@ -1,26 +1,45 @@
 package it.eng.zerohqt.dao;
 
-import it.eng.zerohqt.dao.domain.TestStation;
-import it.eng.zerohqt.dao.mapper.TestStationMapper;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
+import it.eng.zerohqt.dao.domain.ContextAttribute;
+import it.eng.zerohqt.dao.domain.TestStationData;
+import it.eng.zerohqt.dao.mapper.TablesMetaDataMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
- * Created by ascatox on 13/02/17.
+ * Created by ascatox on 14/02/17.
  */
+@Repository
 public class TestStationDao {
-
     @Autowired
-    private SqlSessionFactory sqlSessionFactory;
+    private TablesMetaDataMapper tablesMetaDataMapper;
     @Autowired
-    private TestStationMapper testStationMapper;
+    private TestStationDataDao testStationDataDao;
+    private static final String TEST_STATION = "teststation";
 
-
-    public List<TestStation> findAllTestStations() {
-        return null;
+    public List<TestStationData> findAllNotifications(String service) throws Exception {
+        List<String> tablesMetaData = tablesMetaDataMapper.getTablesMetaData(service);
+        if (null == tablesMetaData || tablesMetaData.size() == 0)
+            throw new Exception("No tables metadata found on database :-(");
+        List<TestStationData> notificationsList = new ArrayList<>();
+        tablesMetaData = excludeMetadata(tablesMetaData);
+        for (String tableMetadata :
+                tablesMetaData) {
+            List<TestStationData> allNotificationsForStation = testStationDataDao.findAllNotificationsForStation(service, tableMetadata);
+            notificationsList.addAll(allNotificationsForStation);
+        }
+        return notificationsList.stream().sorted().collect(Collectors.toList());
     }
+
+    private List<String> excludeMetadata(List<String> tableMetadatas) {
+        return tableMetadatas.stream().filter(mtd -> mtd.toLowerCase().contains(TEST_STATION)).collect(Collectors.toList());
+    }
+
 
 }

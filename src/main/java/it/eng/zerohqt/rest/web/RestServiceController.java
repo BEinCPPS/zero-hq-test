@@ -1,5 +1,8 @@
 package it.eng.zerohqt.rest.web;
 
+import it.eng.zerohqt.config.OrionConfiguration;
+import it.eng.zerohqt.dao.TestStationDao;
+import it.eng.zerohqt.dao.domain.TestStationData;
 import it.eng.zerohqt.orion.OrionContextConsumer;
 import it.eng.zerohqt.orion.model.subscribe.SubscriptionResponse;
 import org.apache.log4j.Logger;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +24,10 @@ public class RestServiceController {
     private final Logger logger = Logger.getLogger(RestServiceController.class);
     @Autowired
     private OrionContextConsumer orionContextConsumer;
+    @Autowired
+    private TestStationDao testStationDao;
+    @Autowired
+    private OrionConfiguration orionConfiguration;
 
     @RequestMapping(path = "/subscribe", method = RequestMethod.GET)
     public List<SubscriptionResponse> subscribe() {
@@ -32,9 +40,19 @@ public class RestServiceController {
         return subscriptionResponses;
     }
 
+    @RequestMapping(path = "/history", method = RequestMethod.GET)
+    public List<TestStationData> history() {
+        try {
+            return testStationDao.findAllNotifications(orionConfiguration.orionService.toLowerCase());
+        } catch (Exception e) {
+            logger.error(e);
+            return new ArrayList<>();
+        }
+    }
+
     @RequestMapping(path = "/notify", method = RequestMethod.POST)
     public String notify(String message) {
-        logger.info("Notification from ORION --> "+message);
+        logger.info("Notification from ORION --> " + message);
         return message;
     }
 

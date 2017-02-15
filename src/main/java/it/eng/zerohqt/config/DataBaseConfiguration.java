@@ -1,13 +1,16 @@
 package it.eng.zerohqt.config;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import it.eng.zerohqt.dao.mapper.TablesMetaDataMapper;
+import it.eng.zerohqt.dao.mapper.TestStationDataMapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 /**
  * Created by ascatox on 13/02/17.
@@ -35,7 +38,7 @@ public class DataBaseConfiguration {
 
 
     @Bean
-    public javax.sql.DataSource dataSource() {
+    public javax.sql.DataSource getDataSource() {
         MysqlDataSource ds = new MysqlDataSource();
         ds.setURL(jdbcUrl);
         ds.setUser(username);
@@ -44,12 +47,32 @@ public class DataBaseConfiguration {
     }
 
     @Bean
-    public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource());
-        //PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        //sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mybatis/*.xml"));
-        return sqlSessionFactoryBean.getObject();
+    public DataSourceTransactionManager transactionManager() {
+        return new DataSourceTransactionManager(getDataSource());
     }
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactory() throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(getDataSource());
+        SqlSessionFactory factory = sqlSessionFactoryBean.getObject();
+        factory.getConfiguration().addMapper(TablesMetaDataMapper.class);
+        factory.getConfiguration().addMapper(TestStationDataMapper.class);
+        //TODO Add other mappers
+        return factory;
+    }
+    @Bean
+    public TablesMetaDataMapper tablesMetaDataMapper() throws Exception {
+        SqlSessionTemplate sessionTemplate = new SqlSessionTemplate(sqlSessionFactory());
+        return sessionTemplate.getMapper(TablesMetaDataMapper.class);
+    }
+
+    @Bean
+    public TestStationDataMapper testStationDataMapper() throws Exception {
+        SqlSessionTemplate sessionTemplate = new SqlSessionTemplate(sqlSessionFactory());
+        return sessionTemplate.getMapper(TestStationDataMapper.class);
+    }
+
+    //TODO Add other mappers
 
 }

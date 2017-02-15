@@ -13,15 +13,15 @@ import org.springframework.context.annotation.Configuration;
 public class OrionConfiguration {
 
     @Value("${orion.server.url}")
-    protected String orionServerUrl;
+    public String orionServerUrl;
     @Value("${orion.token}")
-    protected String orionToken;
+    public String orionToken;
     @Value("${orion.service}")
-    protected String orionService;
+    public String orionService;
     @Value("${orion.service.path}")
-    protected String orionServicepath;
+    public String orionServicepath;
     @Value("${orion.reference}")
-    protected String orionReference;
+    public String orionReference;
 
 
     @Bean
