@@ -13,6 +13,16 @@ import java.util.List;
 public interface TestStationDataMapper {
 
 
+    /**
+     * Extract Test Station Data using default state 400 and 600
+     *
+     * @param service
+     * @param context
+     * @param stateName
+     * @param statePayloadName
+     * @param acknowledgeName
+     * @return
+     */
     @Select("SELECT * FROM ${service}.${context} where " +
             "attrName = #{stateName} and " +
             "attrValue in (\"400\", \"106\") or " +
@@ -26,17 +36,27 @@ public interface TestStationDataMapper {
                                                @Param("statePayloadName") String statePayloadName,
                                                @Param("acknowledgeName") String acknowledgeName);
 
-
+    /**
+     * Extracts Test Station data passsing list of interesting states
+     *
+     * @param service
+     * @param context
+     * @param stateName
+     * @param statePayloadName
+     * @param acknowledgeName
+     * @param states
+     * @return
+     */
     @Select({"<script>",
             "SELECT * ",
             "FROM ${service}.${context}",
             "where",
             "attrName = #{stateName}",
             "and in ",
-                "<foreach item='item' index='index' collection='states'",
-                "open='(' separator=',' close=')'>",
-                "#{item}",
-                "</foreach>",
+            "<foreach item='item' index='index' collection='states'",
+            "open='(' separator=',' close=')'>",
+            "#{item}",
+            "</foreach>",
             "and attrName=#{statePayloadName} ",
             "or attrName=#{acknowledgeName}",
             "order by recvTime DESC",

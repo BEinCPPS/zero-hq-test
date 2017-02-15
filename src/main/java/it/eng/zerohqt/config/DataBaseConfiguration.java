@@ -73,6 +73,6 @@ public class DataBaseConfiguration {
         return sessionTemplate.getMapper(TestStationDataMapper.class);
     }
 
-    //TODO Add other mappers
+    //Add other mappers HERE
 
 }

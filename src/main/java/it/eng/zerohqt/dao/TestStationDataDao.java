@@ -23,7 +23,7 @@ public class TestStationDataDao {
     private TestStationDataMapper testStationDataMapper;
 
 
-    public List<TestStationData> findAllNotificationsForStation(String service, String contextName) {
+    public List<TestStationData> findAllNotificationsForStationBay(String service, String contextName) {
         return testStationDataMapper.findAllNotifications(service, contextName, ContextAttribute.state.name(),
                 ContextAttribute.statePayload.name(), ContextAttribute.acknowledge.name());
     }

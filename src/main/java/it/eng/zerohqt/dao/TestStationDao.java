@@ -1,15 +1,12 @@
 package it.eng.zerohqt.dao;
 
-import it.eng.zerohqt.dao.domain.ContextAttribute;
 import it.eng.zerohqt.dao.domain.TestStationData;
 import it.eng.zerohqt.dao.mapper.TablesMetaDataMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -28,17 +25,24 @@ public class TestStationDao {
         if (null == tablesMetaData || tablesMetaData.size() == 0)
             throw new Exception("No tables metadata found on database :-(");
         List<TestStationData> notificationsList = new ArrayList<>();
-        tablesMetaData = excludeMetadata(tablesMetaData);
+        tablesMetaData = findTestStationMetadata(tablesMetaData);
         for (String tableMetadata :
                 tablesMetaData) {
-            List<TestStationData> allNotificationsForStation = testStationDataDao.findAllNotificationsForStation(service, tableMetadata);
+            List<TestStationData> allNotificationsForStation = testStationDataDao
+                    .findAllNotificationsForStationBay(service, tableMetadata);
             notificationsList.addAll(allNotificationsForStation);
         }
         return notificationsList.stream().sorted().collect(Collectors.toList());
     }
 
-    private List<String> excludeMetadata(List<String> tableMetadatas) {
-        return tableMetadatas.stream().filter(mtd -> mtd.toLowerCase().contains(TEST_STATION)).collect(Collectors.toList());
+    /**
+     * Find only table name containing TEST_STATION
+     * @param tableMetadatas
+     * @return
+     */
+    private List<String> findTestStationMetadata(List<String> tableMetadatas) {
+        return tableMetadatas.stream().filter(mtd -> mtd.toLowerCase().contains(TEST_STATION))
+                .collect(Collectors.toList());
     }
 
 
