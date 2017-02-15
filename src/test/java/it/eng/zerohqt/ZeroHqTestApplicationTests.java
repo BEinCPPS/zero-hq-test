@@ -43,7 +43,7 @@ public class ZeroHqTestApplicationTests {
                 "state",
                 "statePayload",
                 "acknowledge",
-                NotificationState.getValueStatesString());
+                NotificationState.getValueStates());
         assertNotNull(notifications);
         assertTrue(!notifications.isEmpty());
     }

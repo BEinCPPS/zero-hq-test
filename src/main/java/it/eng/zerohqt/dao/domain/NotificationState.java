@@ -8,25 +8,21 @@ import java.util.stream.Collectors;
  * Created by ascatox on 14/02/17.
  */
 public enum NotificationState {
-    state400(400), state106(106), state700(700), state1000(1000);
+    state400("400"), state106("106"), state700("700"), state1000("1000");
 
-    NotificationState(int value) {
+    NotificationState(String value) {
         this.value = value;
     }
 
-    private int value;
+    private String value;
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
-    public static List<Integer> getValueStates() {
+    public static List<String> getValueStates() {
         return Arrays.stream(NotificationState.values()).map(notificationState
                 -> notificationState.getValue()).collect(Collectors.toList());
     }
 
-    public static List<String> getValueStatesString() {
-        return Arrays.stream(NotificationState.values()).map(notificationState
-                -> notificationState.getValue() + "").collect(Collectors.toList());
-    }
 }
