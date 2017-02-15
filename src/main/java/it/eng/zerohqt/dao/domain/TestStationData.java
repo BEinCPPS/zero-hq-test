@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class TestStationData implements Serializable, Comparable {
 
+
     private String recvTimeTs;
     private String recvTime;
     private String fiwareServicePath;
@@ -143,9 +144,7 @@ public class TestStationData implements Serializable, Comparable {
             else
                 return 0;
         } catch (ParseException e) {
-            e.printStackTrace();
-            return 0;
+            throw new RuntimeException(e);
         }
-
     }
 }

@@ -24,5 +24,4 @@ public enum NotificationState {
         return Arrays.stream(NotificationState.values()).map(notificationState
                 -> notificationState.getValue()).collect(Collectors.toList());
     }
-
 }
