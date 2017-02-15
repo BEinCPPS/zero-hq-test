@@ -1,1 +1,1 @@
-# zeroHQTest
+# zero-hq-test
