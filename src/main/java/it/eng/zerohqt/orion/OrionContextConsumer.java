@@ -1,6 +1,8 @@
 package it.eng.zerohqt.orion;
 
 import it.eng.zerohqt.orion.model.subscribe.SubscriptionResponse;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,4 +28,9 @@ public interface OrionContextConsumer {
      * @param contextAttributeName
      */
     void subscribeContextAttribute(String contextAttributeName);
+
+    /**
+     *
+     */
+    void cancelAndDeleteSubscriptions() throws Exception;
 }

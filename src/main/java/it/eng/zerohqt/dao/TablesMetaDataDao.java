@@ -4,17 +4,18 @@ import it.eng.zerohqt.dao.mapper.TablesMetaDataMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by ascatox on 14/02/17.
  */
+@Repository
 public class TablesMetaDataDao {
 
     @Autowired
     private SqlSessionFactory sqlSessionFactory;
-
 
     public List<String> getTablesMetaData(String service) {
         SqlSession sqlSession = sqlSessionFactory.openSession();

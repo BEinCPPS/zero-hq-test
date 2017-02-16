@@ -14,7 +14,7 @@ public interface TestStationDataMapper {
 
 
     /**
-     * Extract Test Station Data using default state 400 and 600
+     * Extract Test Station Data using default state 400
      *
      * @param service
      * @param context
@@ -25,7 +25,7 @@ public interface TestStationDataMapper {
      */
     @Select("SELECT * FROM ${service}.${context} where " +
             "attrName = #{stateName} and " +
-            "attrValue in (\"400\", \"106\") or " +
+            "attrValue in (\"400\") or " +
             "attrName=#{statePayloadName} " +
             "or attrName=#{acknowledgeName} " +
             "order by recvTime DESC"
@@ -48,18 +48,18 @@ public interface TestStationDataMapper {
      * @return
      */
     @Select({"<script>",
-            "SELECT * ",
-            "FROM ${service}.${context}",
-            "where",
-            "attrName = #{stateName}",
-            "and in ",
-            "<foreach item='item' index='index' collection='states'",
-            "open='(' separator=',' close=')'>",
-            "#{item}",
-            "</foreach>",
-            "and attrName=#{statePayloadName} ",
-            "or attrName=#{acknowledgeName}",
-            "order by recvTime DESC",
+                "SELECT * ",
+                "FROM ${service}.${context}",
+                "where",
+                "attrName = #{stateName}",
+                "and in ",
+                    "<foreach item='item' index='index' collection='states'",
+                    "open='(' separator=',' close=')'>",
+                    "#{item}",
+                    "</foreach>",
+                "and attrName=#{statePayloadName} ",
+                "or attrName=#{acknowledgeName}",
+                "order by recvTime DESC",
             "</script>"}
     )
     List<TestStationData> finAllNotificationsByStates(@Param("service") String service,

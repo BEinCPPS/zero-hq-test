@@ -303,6 +303,7 @@ public class OrionClient {
         request.setReference(reference);
         for (String cond : conditions)
             request.getNotifyConditions().add(new NotifyConditions("ONCHANGE", cond));
+        LOGGER.info(reference);
         LOGGER.debug(request.toString());
         LOGGER.info(new ObjectMapper().writeValueAsString(request));
         final String resp = getPathSubscription("/v1/subscribeContext", request);

@@ -26,8 +26,7 @@ public class OrionConfiguration {
 
     @Bean
     public OrionContextConsumer orionContextConsumer() {
-        return new OrionContextConsumerExecutor(orionServerUrl, orionToken, orionService, orionServicepath, orionReference) {
-        };
+        return new OrionContextConsumerExecutor(orionServerUrl, orionToken, orionService, orionServicepath, orionReference);
     }
 
 }
