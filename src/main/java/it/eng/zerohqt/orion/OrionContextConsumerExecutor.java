@@ -87,7 +87,7 @@ public class OrionContextConsumerExecutor implements OrionContextConsumer {
                 subscriptionResponses.add(subscriptionResponse);
                 orionSubscriptionDao.insertOrionSubscription(new OrionSubscription
                         (subscriptionResponse.getSubscribeResponse().getSubscriptionId(), new Date(), true,
-                                ctx.getContextElement().getId()));
+                                ctx.getContextElement().getId(), ctx.getContextElement().getType()));
 
             } catch (IOException e) {
                 logger.error(e);

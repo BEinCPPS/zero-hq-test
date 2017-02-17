@@ -15,6 +15,7 @@ public class OrionSubscription implements Serializable {
     private String creationDate;
     private int enabled;
     private String entity;
+    private String type;
 
 
     public String getSubscriptionId() {
@@ -31,11 +32,12 @@ public class OrionSubscription implements Serializable {
         setBoolEnabled(enabled);
     }
 
-    public OrionSubscription(String subscriptionId, Date creationDate, boolean enabled, String entity) {
+    public OrionSubscription(String subscriptionId, Date creationDate, boolean enabled, String entity, String type) {
         this.subscriptionId = subscriptionId;
         setCreationDate(creationDate);
         setBoolEnabled(enabled);
         this.entity = entity;
+        this.type = type;
     }
 
     public OrionSubscription() {
@@ -70,5 +72,13 @@ public class OrionSubscription implements Serializable {
 
     public void setBoolEnabled(boolean enabled) {
         this.enabled = enabled ? 1 : 0;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
