@@ -1,8 +1,7 @@
 package it.eng.zerohqt.config;
 
 import it.eng.zerohqt.security.AuthoritiesConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.ServerHttpRequest;
@@ -25,10 +24,9 @@ import java.util.Map;
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class WebsocketConfiguration extends AbstractWebSocketMessageBrokerConfigurer {
+public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfigurer {
 
-    private final Logger log = LoggerFactory.getLogger(WebsocketConfiguration.class);
-
+    private final Logger logger = org.apache.log4j.Logger.getLogger(WebSocketConfiguration.class);
     public static final String IP_ADDRESS = "IP_ADDRESS";
 
     @Override
@@ -46,7 +44,7 @@ public class WebsocketConfiguration extends AbstractWebSocketMessageBrokerConfig
                     if (principal == null) {
                         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
                         authorities.add(new SimpleGrantedAuthority(AuthoritiesConstants.ANONYMOUS));
-                        principal = new AnonymousAuthenticationToken("WebsocketConfiguration", "anonymous", authorities);
+                        principal = new AnonymousAuthenticationToken("WebSocketConfiguration", "anonymous", authorities);
                     }
                     return principal;
                 }
