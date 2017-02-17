@@ -76,6 +76,7 @@ public class ZeroHqTestApplicationTests {
             orionSubscription.setSubscriptionId("5050505");
             orionSubscription.setCreationDate(new Date());
             orionSubscription.setBoolEnabled(true);
+            orionSubscription.setType("teststation");
             orionSubscriptionDao.insertOrionSubscription(orionSubscription);
             orionSubscriptionDao.deleteOrionSubscription(orionSubscription.getSubscriptionId());
             assertTrue(true);

@@ -14,8 +14,8 @@ import java.util.List;
  */
 public interface OrionSubscriptionMapper {
 
-    @Insert("INSERT INTO ocb_subscription(subscriptionId,creationDate, enabled, entity) " +
-            "VALUES (#{subscriptionId}, #{creationDate}, #{enabled}, #{entity})")
+    @Insert("INSERT INTO ocb_subscription(subscriptionId,creationDate, enabled, entity, type) " +
+            "VALUES (#{subscriptionId}, #{creationDate}, #{enabled}, #{entity}, #{type})")
     void insertOrionSubscription(OrionSubscription orionSubscription);
 
     @Update("UPDATE ocb_subscription SET enabled = 0")
