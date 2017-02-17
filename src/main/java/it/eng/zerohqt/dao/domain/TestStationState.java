@@ -1,6 +1,7 @@
 package it.eng.zerohqt.dao.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by alberti on 17/02/2017.
@@ -11,9 +12,9 @@ public class TestStationState implements Serializable {
     private String code;
     private String description;
     private String payload;
-    private String dateTimeArrival;
+    private Date dateTimeArrival;
 
-    public TestStationState(String code, String description, String payload, String dateTimeArrival) {
+    public TestStationState(String code, String description, String payload, Date dateTimeArrival) {
         this.code = code;
         this.description = description;
         this.payload = payload;
@@ -47,11 +48,11 @@ public class TestStationState implements Serializable {
         this.payload = payload;
     }
 
-    public String getDateTimeArrival() {
+    public Date getDateTimeArrival() {
         return dateTimeArrival;
     }
 
-    public void setDateTimeArrival(String dateTimeArrival) {
+    public void setDateTimeArrival(Date dateTimeArrival) {
         this.dateTimeArrival = dateTimeArrival;
     }
 }
