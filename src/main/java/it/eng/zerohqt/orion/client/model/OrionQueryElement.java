@@ -1,5 +1,4 @@
-package it.eng.zerohqt.orion.model.subscribe;
-
+package it.eng.zerohqt.orion.client.model;
 
 /*-
  * #%L
@@ -28,26 +27,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+
 /**
- * @author Dimitrios Amaxilatis.
+ * Maps an OrionContext Element.
+ *
+ * @author Dimitrios Amaxilatis
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class OrionEntity {
-
+public class OrionQueryElement {
     String type;
     String isPattern;
     String id;
 
-    public OrionEntity() {
-        //required for mapping.
-    }
-
-    public OrionEntity(final String type, final String isPattern, final String id) {
-        this.type = type;
-        this.isPattern = isPattern;
-        this.id = id;
+    public OrionQueryElement() {
+        isPattern = "false";
     }
 
     public String getType() {
@@ -71,6 +66,16 @@ public class OrionEntity {
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = id.replaceAll("/", ":");
+    }
+
+    @Override
+    public String toString() {
+        return "OrionContextElement{" +
+                "id='" + id + '\'' +
+                ", isPattern='" + isPattern + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }
+

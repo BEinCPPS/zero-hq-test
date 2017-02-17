@@ -1,4 +1,4 @@
-package it.eng.zerohqt.dao.domain;
+package it.eng.zerohqt.dao.model;
 
 import it.eng.zerohqt.config.Constants;
 import org.apache.commons.lang3.time.DateUtils;

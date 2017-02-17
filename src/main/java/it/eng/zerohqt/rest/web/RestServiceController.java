@@ -1,11 +1,11 @@
 package it.eng.zerohqt.rest.web;
 
+import it.eng.zerohqt.business.Reasoner;
 import it.eng.zerohqt.config.OrionConfiguration;
 import it.eng.zerohqt.dao.TestStationDao;
-import it.eng.zerohqt.dao.domain.TestStationData;
+import it.eng.zerohqt.dao.model.TestStationData;
 import it.eng.zerohqt.orion.OrionContextConsumer;
-import it.eng.zerohqt.orion.model.subscribe.SubscriptionResponse;
-import javafx.application.Application;
+import it.eng.zerohqt.orion.client.model.subscribe.SubscriptionResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +29,10 @@ public class RestServiceController {
     private TestStationDao testStationDao;
     @Autowired
     private OrionConfiguration orionConfiguration;
+    @Autowired
+    Reasoner reasoner;
 
+    //TODO Eliminare in fase di configurazione
     @RequestMapping(path = "/subscribe", method = RequestMethod.GET)
     public List<SubscriptionResponse> subscribe() {
         List<SubscriptionResponse> subscriptionResponses = null;
@@ -43,6 +43,7 @@ public class RestServiceController {
         }
         return subscriptionResponses;
     }
+
     @RequestMapping(path = "/history", method = RequestMethod.GET)
     public List<TestStationData> history() {
         try {
@@ -52,9 +53,11 @@ public class RestServiceController {
             return new ArrayList<>();
         }
     }
-    @RequestMapping(path = "/accumulate", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON})
-    public void notification() {
-        logger.info("Notification from ORION --> "+new Date().toString());
+
+    @RequestMapping(path = "/notify", method = RequestMethod.POST)
+    public void notification(@RequestBody String message) {
+        logger.info("Notification from ORION --> " + message);
+        reasoner.extract(message);
     }
 
 }

@@ -1,6 +1,6 @@
 package it.eng.zerohqt.dao;
 
-import it.eng.zerohqt.dao.domain.OrionSubscription;
+import it.eng.zerohqt.dao.model.OrionSubscription;
 import it.eng.zerohqt.dao.mapper.OrionSubscriptionMapper;
 import it.eng.zerohqt.rest.web.RestServiceController;
 import org.apache.ibatis.session.SqlSession;

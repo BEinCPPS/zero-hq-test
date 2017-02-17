@@ -1,4 +1,4 @@
-package it.eng.zerohqt.orion.model.subscribe;
+package it.eng.zerohqt.orion.client.model.subscribe;
 
 
 /*-

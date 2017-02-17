@@ -1,11 +1,12 @@
-package it.eng.zerohqt.orion.model;
-/*-
+package it.eng.zerohqt.orion.client.model;
+/*-package it.eng.orion.model;
+
  * #%L
  * Orion Context Broker Client for Java
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2015 - 2016 amaxilatis
+ * Copyright (C) 2015 - 2016 Dimitrios Amaxilatis
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -27,25 +28,27 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * Maps an Orion Context Element Metadata property.
+ * Maps an Orion Context Element Attribute property.
  *
  * @author Dimitrios Amaxilatis
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class Metadata implements Serializable {
+public class Attribute implements Serializable {
     String name;
     String type;
     String value;
+    List<Metadata> metadatas;
 
-    public Metadata() {
+    public Attribute() {
         //required for object mapper
     }
 
-    public Metadata(final String name, final String type, final String value) {
+    public Attribute(final String name, final String type, final String value) {
         this.name = name;
         this.type = type;
         this.value = value;
@@ -63,21 +66,30 @@ public class Metadata implements Serializable {
         return value;
     }
 
-    public void setName(String name) {
+    public List<Metadata> getMetadatas() {
+        return metadatas;
+    }
+
+    public void setName(final String name) {
         this.name = name;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
         this.type = type;
     }
 
-    public void setValue(String value) {
+    public void setValue(final String value) {
         this.value = value;
+    }
+
+
+    public void setMetadatas(final List<Metadata> metadatas) {
+        this.metadatas = metadatas;
     }
 
     @Override
     public String toString() {
-        return "Metadata{" +
+        return "Attribute{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", value='" + value + '\'' +

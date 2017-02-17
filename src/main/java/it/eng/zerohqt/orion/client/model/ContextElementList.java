@@ -1,4 +1,4 @@
-package it.eng.zerohqt.orion.model;
+package it.eng.zerohqt.orion.client.model;
 
 /*-
  * #%L
@@ -27,55 +27,59 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * Maps an OrionContext Element.
+ * Maps a List of Orion Context Elements.
  *
- * @author Dimitrios Amaxilatis
+ * @author Dimitrios Amaxilatis.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class OrionQueryElement {
-    String type;
-    String isPattern;
-    String id;
+public class ContextElementList implements Serializable {
+    List<OrionContextElementWrapper> contextResponses;
+    StatusCode statusCode;
+    StatusCode errorCode;
 
-    public OrionQueryElement() {
-        isPattern = "false";
+    public List<OrionContextElementWrapper> getContextResponses() {
+        return contextResponses;
     }
 
-    public String getType() {
-        return type;
+    public void setContextResponses(List<OrionContextElementWrapper> contextResponses) {
+        this.contextResponses = contextResponses;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public StatusCode getStatusCode() {
+        return statusCode;
     }
 
-    public String getIsPattern() {
-        return isPattern;
+    public void setStatusCode(StatusCode statusCode) {
+        this.statusCode = statusCode;
     }
 
-    public void setIsPattern(String isPattern) {
-        this.isPattern = isPattern;
+    public StatusCode getErrorCode() {
+        return errorCode;
     }
 
-    public String getId() {
-        return id;
+    public void setErrorCode(StatusCode errorCode) {
+        this.errorCode = errorCode;
     }
 
-    public void setId(String id) {
-        this.id = id.replaceAll("/", ":");
+    public boolean hasMore(final long offset) {
+        try {
+            System.out.println("Offset:" + offset + " count:" + getErrorCode().getCount());
+            return getErrorCode().getCount() > offset;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
     public String toString() {
-        return "OrionContextElement{" +
-                "id='" + id + '\'' +
-                ", isPattern='" + isPattern + '\'' +
-                ", type='" + type + '\'' +
+        return "ContextElementList{" +
+                "statusCode=" + statusCode +
                 '}';
     }
 }
-

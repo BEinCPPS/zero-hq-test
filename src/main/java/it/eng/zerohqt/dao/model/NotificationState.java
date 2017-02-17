@@ -1,4 +1,4 @@
-package it.eng.zerohqt.dao.domain;
+package it.eng.zerohqt.dao.model;
 
 import java.util.Arrays;
 import java.util.List;

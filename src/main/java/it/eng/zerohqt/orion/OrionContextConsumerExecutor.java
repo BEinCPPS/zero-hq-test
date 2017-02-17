@@ -1,17 +1,14 @@
 package it.eng.zerohqt.orion;
 
-import it.eng.zerohqt.config.Constants;
 import it.eng.zerohqt.dao.OrionSubscriptionDao;
-import it.eng.zerohqt.dao.domain.ContextAttribute;
-import it.eng.zerohqt.dao.domain.NotificationState;
-import it.eng.zerohqt.dao.domain.OrionSubscription;
+import it.eng.zerohqt.dao.model.ContextAttribute;
+import it.eng.zerohqt.dao.model.OrionSubscription;
 import it.eng.zerohqt.orion.client.OrionClient;
-import it.eng.zerohqt.orion.model.ContextElementList;
-import it.eng.zerohqt.orion.model.OrionContextElementToOrionEntityTransformer;
-import it.eng.zerohqt.orion.model.OrionContextElementWrapper;
-import it.eng.zerohqt.orion.model.subscribe.SubscriptionResponse;
+import it.eng.zerohqt.orion.client.model.ContextElementList;
+import it.eng.zerohqt.orion.client.model.OrionContextElementToOrionEntityTransformer;
+import it.eng.zerohqt.orion.client.model.OrionContextElementWrapper;
+import it.eng.zerohqt.orion.client.model.subscribe.SubscriptionResponse;
 import it.eng.zerohqt.rest.web.RestServiceController;
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -75,15 +72,17 @@ public class OrionContextConsumerExecutor implements OrionContextConsumer {
         Consumer<OrionContextElementWrapper> orionContextElementWrapperConsumer =
                 (OrionContextElementWrapper ctx) -> {
             try {
-                String[] states = {
+                String[] attributes = {
                         ContextAttribute.state.name(),
                         ContextAttribute.statePayload.name(),
-                        ContextAttribute.acknowledge.name()
+                        ContextAttribute.acknowledge.name(),
+                        ContextAttribute.ipAddress.name(),
+                        ContextAttribute.stationInfo.name()
                 };
                 String[] conditions = {};
                 SubscriptionResponse subscriptionResponse = orionClient.subscribeChange(
                         OrionContextElementToOrionEntityTransformer
-                                .transform(ctx.getContextElement()).get(), states,
+                                .transform(ctx.getContextElement()).get(), attributes,
                         reference, conditions);
                 subscriptionResponses.add(subscriptionResponse);
                 orionSubscriptionDao.insertOrionSubscription(new OrionSubscription

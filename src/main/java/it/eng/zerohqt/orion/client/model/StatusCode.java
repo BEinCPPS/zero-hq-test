@@ -1,4 +1,4 @@
-package it.eng.zerohqt.orion.model;
+package it.eng.zerohqt.orion.client.model;
 
 /*-
  * #%L
@@ -28,58 +28,60 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
- * Maps a List of Orion Context Elements.
+ * Maps the OrionContextBroker Response Status.
  *
  * @author Dimitrios Amaxilatis.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class ContextElementList implements Serializable {
-    List<OrionContextElementWrapper> contextResponses;
-    StatusCode statusCode;
-    StatusCode errorCode;
+public class StatusCode implements Serializable {
 
-    public List<OrionContextElementWrapper> getContextResponses() {
-        return contextResponses;
+    String code;
+
+    String reasonPhrase;
+    String details;
+
+    public String getCode() {
+        return code;
     }
 
-    public void setContextResponses(List<OrionContextElementWrapper> contextResponses) {
-        this.contextResponses = contextResponses;
+    public void setCode(final String code) {
+        this.code = code;
     }
 
-    public StatusCode getStatusCode() {
-        return statusCode;
+    public String getReasonPhrase() {
+        return reasonPhrase;
     }
 
-    public void setStatusCode(StatusCode statusCode) {
-        this.statusCode = statusCode;
+    public void setReasonPhrase(final String reasonPhrase) {
+        this.reasonPhrase = reasonPhrase;
     }
 
-    public StatusCode getErrorCode() {
-        return errorCode;
+    public String getDetails() {
+        return details;
     }
 
-    public void setErrorCode(StatusCode errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    public boolean hasMore(final long offset) {
-        try {
-            System.out.println("Offset:" + offset + " count:" + getErrorCode().getCount());
-            return getErrorCode().getCount() > offset;
-        } catch (Exception e) {
-            return false;
+    public Long getCount() {
+        if (details != null && details.contains("Count: ")) {
+            return Long.parseLong(details.replaceAll("Count: ", ""));
         }
+        return null;
+    }
+
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     @Override
     public String toString() {
-        return "ContextElementList{" +
-                "statusCode=" + statusCode +
+        return "StatusCode{" +
+                "code='" + code + '\'' +
+                ", reasonPhrase='" + reasonPhrase + '\'' +
+                ", details='" + details + '\'' +
                 '}';
     }
 }

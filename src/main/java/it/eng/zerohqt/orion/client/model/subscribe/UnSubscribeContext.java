@@ -1,4 +1,6 @@
-package it.eng.zerohqt.orion.model;
+package it.eng.zerohqt.orion.client.model.subscribe;
+
+
 /*-
  * #%L
  * Orion Context Broker Client for Java
@@ -22,33 +24,32 @@ package it.eng.zerohqt.orion.model;
  * #L%
  */
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 
 /**
  * @author Dimitrios Amaxilatis.
  */
-public class OrionContextElementOperation {
-    List<OrionContextElement> contextElements;
-    String updateAction;
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+public class UnSubscribeContext {
+    String subscriptionId;
 
-    public OrionContextElementOperation() {
-        contextElements=new ArrayList<OrionContextElement>();
+    public UnSubscribeContext() {
     }
 
-    public List<OrionContextElement> getContextElements() {
-        return contextElements;
+    public UnSubscribeContext(final String subscriptionId) {
+        this.subscriptionId = subscriptionId;
     }
 
-    public void setContextElements(List<OrionContextElement> contextElements) {
-        this.contextElements = contextElements;
+    public String getSubscriptionId() {
+        return subscriptionId;
     }
 
-    public String getUpdateAction() {
-        return updateAction;
-    }
-
-    public void setUpdateAction(String updateAction) {
-        this.updateAction = updateAction;
+    public void setSubscriptionId(final String subscriptionId) {
+        this.subscriptionId = subscriptionId;
     }
 }

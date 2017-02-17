@@ -1,12 +1,11 @@
 package it.eng.zerohqt.dao.mapper;
 
-import it.eng.zerohqt.dao.domain.OrionSubscription;
+import it.eng.zerohqt.dao.model.OrionSubscription;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import javax.ws.rs.DELETE;
 import java.util.List;
 
 /**

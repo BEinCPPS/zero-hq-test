@@ -1,5 +1,4 @@
-package it.eng.zerohqt.orion.model;
-
+package it.eng.zerohqt.orion.client.model;
 /*-
  * #%L
  * Orion Context Broker Client for Java
@@ -30,39 +29,58 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 
 /**
- * Maps an Orion Context Element wrapper.
+ * Maps an Orion Context Element Metadata property.
  *
  * @author Dimitrios Amaxilatis
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class OrionContextElementWrapper implements Serializable {
+public class Metadata implements Serializable {
+    String name;
+    String type;
+    String value;
 
-    OrionContextElement contextElement;
-    StatusCode statusCode;
-
-    public OrionContextElement getContextElement() {
-        return contextElement;
+    public Metadata() {
+        //required for object mapper
     }
 
-    public void setContextElement(final OrionContextElement contextElement) {
-        this.contextElement = contextElement;
+    public Metadata(final String name, final String type, final String value) {
+        this.name = name;
+        this.type = type;
+        this.value = value;
     }
 
-    public StatusCode getStatusCode() {
-        return statusCode;
+    public String getName() {
+        return name;
     }
 
-    public void setStatusCode(StatusCode statusCode) {
-        this.statusCode = statusCode;
+    public String getType() {
+        return type;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override
     public String toString() {
-        return "OrionContextElementWrapper{" +
-                "contextElement=" + contextElement.getId() +
-                ", statusCode=" + statusCode +
+        return "Metadata{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", value='" + value + '\'' +
                 '}';
     }
 }

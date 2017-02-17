@@ -1,4 +1,5 @@
-package it.eng.zerohqt.orion.model;
+package it.eng.zerohqt.orion.client.model.subscribe;
+
 
 /*-
  * #%L
@@ -23,18 +24,21 @@ package it.eng.zerohqt.orion.model;
  * #L%
  */
 
-import java.io.Serializable;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * Maps the Object posted by OrionContextBroker in subscriptions.
- *
  * @author Dimitrios Amaxilatis.
  */
-public class SubscriptionUpdate implements Serializable {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class SubscribeResponse {
+
     String subscriptionId;
-    String originator;
-    List<OrionContextElementWrapper> contextResponses;
+    String duration;
+    String throttling;
+    String subscribeError;
+
+    public SubscribeResponse() {
+    }
 
     public String getSubscriptionId() {
         return subscriptionId;
@@ -44,27 +48,36 @@ public class SubscriptionUpdate implements Serializable {
         this.subscriptionId = subscriptionId;
     }
 
-    public String getOriginator() {
-        return originator;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setOriginator(String originator) {
-        this.originator = originator;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
-    public List<OrionContextElementWrapper> getContextResponses() {
-        return contextResponses;
+    public String getThrottling() {
+        return throttling;
     }
 
-    public void setContextResponses(List<OrionContextElementWrapper> contextResponses) {
-        this.contextResponses = contextResponses;
+    public void setThrottling(String throttling) {
+        this.throttling = throttling;
+    }
+
+    public String getSubscribeError() {
+        return subscribeError;
+    }
+
+    public void setSubscribeError(String subscribeError) {
+        this.subscribeError = subscribeError;
     }
 
     @Override
     public String toString() {
-        return "SubscriptionUpdate{" +
+        return "SubscribeResponse{" +
                 "subscriptionId='" + subscriptionId + '\'' +
-                ", originator='" + originator + '\'' +
+                ", duration='" + duration + '\'' +
+                ", throttling='" + throttling + '\'' +
                 '}';
     }
 }

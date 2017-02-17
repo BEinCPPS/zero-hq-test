@@ -1,5 +1,5 @@
-package it.eng.zerohqt.orion.model;
-import it.eng.zerohqt.orion.model.subscribe.OrionEntity;
+package it.eng.zerohqt.orion.client.model;
+import it.eng.zerohqt.orion.client.model.subscribe.OrionEntity;
 
 import java.util.Optional;
 

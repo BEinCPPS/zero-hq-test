@@ -1,4 +1,4 @@
-package it.eng.zerohqt.orion.model.subscribe;
+package it.eng.zerohqt.orion.client.model.subscribe;
 
 
 /*-
@@ -30,38 +30,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author Dimitrios Amaxilatis.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SubscribeResponse {
+public class SubscriptionResponse {
 
-    String subscriptionId;
-    String duration;
-    String throttling;
+    SubscribeResponse subscribeResponse;
     String subscribeError;
 
-    public SubscribeResponse() {
+
+    public SubscribeResponse getSubscribeResponse() {
+        return subscribeResponse;
     }
 
-    public String getSubscriptionId() {
-        return subscriptionId;
-    }
-
-    public void setSubscriptionId(String subscriptionId) {
-        this.subscriptionId = subscriptionId;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
-    public String getThrottling() {
-        return throttling;
-    }
-
-    public void setThrottling(String throttling) {
-        this.throttling = throttling;
+    public void setSubscribeResponse(SubscribeResponse subscribeResponse) {
+        this.subscribeResponse = subscribeResponse;
     }
 
     public String getSubscribeError() {
@@ -74,10 +54,8 @@ public class SubscribeResponse {
 
     @Override
     public String toString() {
-        return "SubscribeResponse{" +
-                "subscriptionId='" + subscriptionId + '\'' +
-                ", duration='" + duration + '\'' +
-                ", throttling='" + throttling + '\'' +
+        return "SubscriptionResponse{" +
+                "subscribeResponse=" + subscribeResponse +
                 '}';
     }
 }

@@ -1,16 +1,11 @@
 package it.eng.zerohqt.dao;
 
-import it.eng.zerohqt.dao.domain.ContextAttribute;
-import it.eng.zerohqt.dao.domain.NotificationState;
-import it.eng.zerohqt.dao.domain.TestStationData;
+import it.eng.zerohqt.dao.model.ContextAttribute;
+import it.eng.zerohqt.dao.model.TestStationData;
 import it.eng.zerohqt.dao.mapper.TestStationDataMapper;
-import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

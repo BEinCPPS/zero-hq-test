@@ -1,6 +1,6 @@
 package it.eng.zerohqt.dao;
 
-import it.eng.zerohqt.dao.domain.TestStationData;
+import it.eng.zerohqt.dao.model.TestStationData;
 import it.eng.zerohqt.dao.mapper.TablesMetaDataMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package it.eng.zerohqt.orion.model.subscribe;
+package it.eng.zerohqt.orion.client.model.subscribe;
 
 
 /*-
@@ -25,37 +25,52 @@ package it.eng.zerohqt.orion.model.subscribe;
  */
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * @author Dimitrios Amaxilatis.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SubscriptionResponse {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+public class OrionEntity {
 
-    SubscribeResponse subscribeResponse;
-    String subscribeError;
+    String type;
+    String isPattern;
+    String id;
 
-
-    public SubscribeResponse getSubscribeResponse() {
-        return subscribeResponse;
+    public OrionEntity() {
+        //required for mapping.
     }
 
-    public void setSubscribeResponse(SubscribeResponse subscribeResponse) {
-        this.subscribeResponse = subscribeResponse;
+    public OrionEntity(final String type, final String isPattern, final String id) {
+        this.type = type;
+        this.isPattern = isPattern;
+        this.id = id;
     }
 
-    public String getSubscribeError() {
-        return subscribeError;
+    public String getType() {
+        return type;
     }
 
-    public void setSubscribeError(String subscribeError) {
-        this.subscribeError = subscribeError;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "SubscriptionResponse{" +
-                "subscribeResponse=" + subscribeResponse +
-                '}';
+    public String getIsPattern() {
+        return isPattern;
+    }
+
+    public void setIsPattern(String isPattern) {
+        this.isPattern = isPattern;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

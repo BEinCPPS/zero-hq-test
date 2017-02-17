@@ -1,5 +1,4 @@
-package it.eng.zerohqt.orion.model.subscribe;
-
+package it.eng.zerohqt.orion.client.model;
 /*-
  * #%L
  * Orion Context Broker Client for Java
@@ -27,38 +26,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by amaxilatis on 5/7/2015.
+ * @author Dimitrios Amaxilatis.
  */
-public class NotifyConditions {
-    String type;
-    List<String> condValues;
+public class OrionContextElementOperation {
+    List<OrionContextElement> contextElements;
+    String updateAction;
 
-    public NotifyConditions(String type, String condValues) {
-        this.type = type;
-        this.condValues = new ArrayList<String>();
-        if (condValues != null) {
-            this.condValues.add(condValues);
-        }
+    public OrionContextElementOperation() {
+        contextElements=new ArrayList<OrionContextElement>();
     }
 
-    public NotifyConditions() {
-        this.type = "ONTIMEINTERVAL";
-        this.condValues = new ArrayList<String>();
+    public List<OrionContextElement> getContextElements() {
+        return contextElements;
     }
 
-    public String getType() {
-        return type;
+    public void setContextElements(List<OrionContextElement> contextElements) {
+        this.contextElements = contextElements;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public String getUpdateAction() {
+        return updateAction;
     }
 
-    public List<String> getCondValues() {
-        return condValues;
-    }
-
-    public void setCondValues(List<String> condValues) {
-        this.condValues = condValues;
+    public void setUpdateAction(String updateAction) {
+        this.updateAction = updateAction;
     }
 }
