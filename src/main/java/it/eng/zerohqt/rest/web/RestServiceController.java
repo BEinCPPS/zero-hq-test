@@ -57,7 +57,7 @@ public class RestServiceController {
     @RequestMapping(path = "/notify", method = RequestMethod.POST)
     public void notification(@RequestBody String message) {
         logger.info("Notification from ORION --> " + message);
-        reasoner.extract(message);
+        reasoner.feed(message);
     }
 
 }

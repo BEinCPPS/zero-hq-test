@@ -6,9 +6,7 @@ public class Metadatas {
     private String type;
     private String value;
     
-    
 	public Metadatas () {
-		
 	}
 
     public Metadatas(String name, String type, String value) {
