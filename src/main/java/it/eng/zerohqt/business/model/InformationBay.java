@@ -15,8 +15,7 @@ public class InformationBay implements Serializable{
     private Notification notification;
     private Date timestamp;
 
-    public InformationBay(String stationName) {
-        this.stationName = stationName;
+    public InformationBay() {
     }
 
     public InformationBay(String stationName, String stationDescription, String bayCode, String ipAddress, Notification notification, Date timestamp) {
@@ -75,5 +74,18 @@ public class InformationBay implements Serializable{
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+
+    @Override
+    public String toString() {
+        return "InformationBay{" +
+                "stationName='" + stationName + '\'' +
+                ", stationDescription='" + stationDescription + '\'' +
+                ", bayCode='" + bayCode + '\'' +
+                ", ipAddress='" + ipAddress + '\'' +
+                ", notification=" + notification +
+                ", timestamp=" + timestamp +
+                '}';
     }
 }
