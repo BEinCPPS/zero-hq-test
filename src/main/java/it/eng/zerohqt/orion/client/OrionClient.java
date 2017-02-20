@@ -26,13 +26,12 @@ package it.eng.zerohqt.orion.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mysql.jdbc.StringUtils;
-import it.eng.zerohqt.orion.model.*;
-import it.eng.zerohqt.orion.model.subscribe.*;
+import it.eng.zerohqt.orion.client.model.*;
+import it.eng.zerohqt.orion.client.model.subscribe.*;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import javax.ws.rs.client.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -507,14 +506,17 @@ public class OrionClient {
         }
         final Invocation.Builder tmpClient;
         if (content) {
-            tmpClient = webTarget.request(MediaType.APPLICATION_JSON_TYPE)
+            tmpClient = webTarget.request()
+                    // tmpClient = webTarget.request(MediaType.APPLICATION_JSON_TYPE)
                     .header("Content-Type", "application/json")
-                    .header("Accept", "application/json")
-                    .header("X-Auth-Token", token);
-        } else {
-            tmpClient = webTarget.request(MediaType.APPLICATION_JSON_TYPE)
                     .header("Accept", "application/json");
-            if (!StringUtils.isNullOrEmpty(token))
+            if (StringUtils.isNotBlank(token))
+                tmpClient.header("X-Auth-Token", token);
+        } else {
+            tmpClient = webTarget.request()
+                    // tmpClient = webTarget.request(MediaType.APPLICATION_JSON_TYPE)
+                    .header("Accept", "application/json");
+            if (StringUtils.isNotBlank(token))
                 tmpClient.header("X-Auth-Token", token);
         }
 

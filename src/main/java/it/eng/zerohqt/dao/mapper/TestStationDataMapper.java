@@ -1,6 +1,6 @@
 package it.eng.zerohqt.dao.mapper;
 
-import it.eng.zerohqt.dao.domain.TestStationData;
+import it.eng.zerohqt.dao.model.TestStationData;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

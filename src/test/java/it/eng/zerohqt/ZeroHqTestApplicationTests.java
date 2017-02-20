@@ -3,9 +3,9 @@ package it.eng.zerohqt;
 import it.eng.zerohqt.dao.OrionSubscriptionDao;
 import it.eng.zerohqt.dao.TablesMetaDataDao;
 import it.eng.zerohqt.dao.TestStationDataDao;
-import it.eng.zerohqt.dao.domain.NotificationState;
-import it.eng.zerohqt.dao.domain.OrionSubscription;
-import it.eng.zerohqt.dao.domain.TestStationData;
+import it.eng.zerohqt.dao.model.NotificationState;
+import it.eng.zerohqt.dao.model.OrionSubscription;
+import it.eng.zerohqt.dao.model.TestStationData;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -83,8 +83,9 @@ public class ZeroHqTestApplicationTests {
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
-
     }
+
+    //TODO
 
 
 }
