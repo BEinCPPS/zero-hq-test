@@ -57,8 +57,8 @@ public interface TestStationDataMapper {
                     "open='(' separator=',' close=')'>",
                     "#{item}",
                     "</foreach>",
-                "and (attrName=#{statePayloadName}",
-                "or attrName=#{acknowledgeName})",
+                "and attrName=#{statePayloadName}",
+                "or attrName=#{acknowledgeName}",
                 "order by recvTime DESC",
             "</script>"}
     )
