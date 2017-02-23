@@ -52,13 +52,13 @@ public interface TestStationDataMapper {
                 "FROM ${service}.${context}",
                 "where",
                 "attrName = #{stateName}",
-                "and in ",
+                "and attrValue in ",
                     "<foreach item='item' index='index' collection='states'",
                     "open='(' separator=',' close=')'>",
                     "#{item}",
                     "</foreach>",
-                "and attrName=#{statePayloadName} ",
-                "or attrName=#{acknowledgeName}",
+                "and (attrName=#{statePayloadName}",
+                "or attrName=#{acknowledgeName})",
                 "order by recvTime DESC",
             "</script>"}
     )
