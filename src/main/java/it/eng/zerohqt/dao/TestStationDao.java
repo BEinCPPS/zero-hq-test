@@ -35,6 +35,24 @@ public class TestStationDao {
         return notificationsList.stream().sorted().collect(Collectors.toList());
     }
 
+    public List<TestStationData> findNextNotifications(String service,int x0,int delta) throws Exception {
+        List<String> tablesMetaData = tablesMetaDataMapper.getTablesMetaData(service);
+        if (null == tablesMetaData || tablesMetaData.size() == 0)
+            throw new Exception("No tables metadata found on database :-(");
+        List<TestStationData> notificationsList = new ArrayList<>();
+        tablesMetaData = findTestStationMetadata(tablesMetaData);
+        for (String tableMetadata :
+                tablesMetaData) {
+            List<TestStationData> allNotificationsForStation = testStationDataDao
+                    .findAllNotificationsForStationBay(service, tableMetadata);
+            // notificationsList.addAll(allNotificationsForStation);
+            for(int i = x0 ; i<(x0+delta); i++)
+                  { notificationsList.add(allNotificationsForStation.get(i));
+                  }
+        }
+        return notificationsList.stream().sorted().collect(Collectors.toList());
+    }
+
     /**
      * Find only table name containing TEST_STATION
      * @param tableMetadatas

@@ -8,10 +8,7 @@ import it.eng.zerohqt.orion.OrionContextConsumer;
 import it.eng.zerohqt.orion.client.model.subscribe.SubscriptionResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +45,21 @@ public class RestServiceController {
     public List<TestStationData> history() {
         try {
             return testStationDao.findAllNotifications(orionConfiguration.orionService.toLowerCase());
+        } catch (Exception e) {
+            logger.error(e);
+            return new ArrayList<>();
+        }
+    }
+
+
+    @RequestMapping(value = "/nexthistory/x0/{x0}/delta/{delta}" ,
+    //                   params = {"x0","delta"},
+                    method = RequestMethod.GET)
+    public List<TestStationData> nexthistory(
+            @PathVariable int x0,
+            @PathVariable int delta) {
+        try {
+            return testStationDao.findNextNotifications(orionConfiguration.orionService.toLowerCase(),x0,delta);
         } catch (Exception e) {
             logger.error(e);
             return new ArrayList<>();
