@@ -2,12 +2,14 @@
   "name": "ZeroHQTest",
   "version": "1.1.0",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^4.17.4"
+  },
   "devDependencies": {
     "cordova": "^5.4.1",
     "elementtree": "0.1.6",
     "glob": "~4.3.5",
-    "grunt": "~0.4.5",
+    "grunt": "^1.0.1",
     "grunt-autoprefixer": "~2.2.0",
     "grunt-concurrent": "1.0.0",
     "grunt-contrib-clean": "~0.6.0",

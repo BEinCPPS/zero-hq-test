@@ -24,8 +24,8 @@ public interface TestStationDataMapper {
      * @return
      */
     @Select("SELECT * FROM ${service}.${context} where " +
-            "attrName = #{stateName} and " +
-            "attrValue in (\"400\") or " +
+            "(attrName = #{stateName} and " +
+            "attrValue in (\"400\")) or " +
             "attrName=#{statePayloadName} " +
             "or attrName=#{acknowledgeName} " +
             "order by recvTime DESC"
@@ -51,13 +51,13 @@ public interface TestStationDataMapper {
                 "SELECT * ",
                 "FROM ${service}.${context}",
                 "where",
-                "attrName = #{stateName}",
+                "(attrName = #{stateName}",
                 "and attrValue in ",
                     "<foreach item='item' index='index' collection='states'",
                     "open='(' separator=',' close=')'>",
                     "#{item}",
                     "</foreach>",
-                "and attrName=#{statePayloadName}",
+                ") or attrName=#{statePayloadName}",
                 "or attrName=#{acknowledgeName}",
                 "order by recvTime DESC",
             "</script>"}

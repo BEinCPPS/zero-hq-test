@@ -3,8 +3,8 @@
 		<div class="home-hello">
 			<img src="http://lorempixel.com/1024/768/"/>
 			<div class="item item-text-wrap">
-				<h1>ABC Corp Inc.</h1>
-				50 Market Street, San Francisco, California 94103, United States
+				<h1>BEinCPPS</h1><h2> by Engineering</h2>
+				<!--50 Market Street, San Francisco, California 94103, United States-->
 			</div>
 		</div>
 
@@ -12,21 +12,26 @@
 		 | http://stackoverflow.com/questions/27239735/ionic-framwork-gridlayout-with-multiple-rows-and-column-on-which-buttons-placed
 		 | http://stackoverflow.com/questions/23779773/angularjs-loops-and-formatting/23780288#23780288
 		 -->
-		<div ng-repeat="e in vm.entries" ng-if="$index%2==0" class="row">
-
-			<div class="card col home">
-				<a class="item item-text-wrap" href="#/app/{{vm.entries[$index].path}}">
-					<h1><i class="icon {{vm.entries[$index].icon}}"></i></h1>
-					<h2>{{vm.entries[$index].title}}</h2>
-				</a>
+		<div ng-repeat="e in vm.entries">
+			<div class="row">
+				<div class="card col home">
+					<!--<a class="item item-text-wrap" href="#/app/{{vm.entries[$index].path}}">-->
+					<ion-item nav-clear menu-close class="item-text-wrap" href="#/app/{{vm.entries[$index].path}}">
+						<h2>{{vm.entries[$index].title}}</h2>
+						<!--<h2>{{vm.entries[$index].title}}</h2>-->
+					<!--</a>-->
+					</ion-item>
+				</div>
 			</div>
 
-			<div class="card col home">
-				<a class="item item-text-wrap" href="#/app/{{vm.entries[$index + 1].path}}">
-					<h1><i class="icon {{vm.entries[$index + 1].icon}}"></i></h1>
-					<h2>{{vm.entries[$index + 1].title}}</h2>
-				</a>
-			</div>
+			<!--<div class = "row">-->
+			<!--<div class="card col home">-->
+			<!--<a class="item item-text-wrap" href="#/app/{{vm.entries[$index + 1].path}}">-->
+			<!--<h1><i class="icon {{vm.entries[$index + 1].icon}}"></i></h1>-->
+			<!--<h2>{{vm.entries[$index + 1].title}}</h2>-->
+			<!--</a>-->
+			<!--</div>-->
+			<!--</div>-->
 
 		</div>
 
