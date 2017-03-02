@@ -52,14 +52,12 @@ public class RestServiceController {
     }
 
 
-    @RequestMapping(value = "/nexthistory/x0/{x0}/delta/{delta}" ,
-    //                   params = {"x0","delta"},
-                    method = RequestMethod.GET)
-    public List<TestStationData> nexthistory(
-            @PathVariable int x0,
-            @PathVariable int delta) {
+    @RequestMapping(path = "/nexthistory", method = RequestMethod.GET)
+    public List<TestStationData> nextHistory(
+            @RequestParam int startPoint,
+            @RequestParam int delta) {
         try {
-            return testStationDao.findNextNotifications(orionConfiguration.orionService.toLowerCase(),x0,delta);
+            return testStationDao.findNextNotifications(orionConfiguration.orionService.toLowerCase(), startPoint, delta);
         } catch (Exception e) {
             logger.error(e);
             return new ArrayList<>();
