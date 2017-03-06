@@ -2,6 +2,7 @@ package it.eng.zerohqt.config;
 
 import it.eng.zerohqt.security.AuthoritiesConstants;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.ServerHttpRequest;
@@ -27,49 +28,18 @@ import java.util.Map;
 public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfigurer {
 
     private final Logger logger = Logger.getLogger(WebSocketConfiguration.class);
-    public static final String IP_ADDRESS = "IP_ADDRESS";
+    public static String defaultChannel = "/topic";
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/websocket");
+        config.enableSimpleBroker(defaultChannel); //TODO Constants via application.properties
+        config.setApplicationDestinationPrefixes("/app");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/topic")
-//            .setHandshakeHandler(new DefaultHandshakeHandler() {
-//                @Override
-//                protected Principal determineUser(ServerHttpRequest request, WebSocketHandler wsHandler, Map<String, Object> attributes) {
-//                    Principal principal = request.getPrincipal();
-//                    if (principal == null) {
-//                        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-//                        authorities.add(new SimpleGrantedAuthority(AuthoritiesConstants.ANONYMOUS));
-//                        principal = new AnonymousAuthenticationToken("WebSocketConfiguration", "anonymous", authorities);
-//                    }
-//                    return principal;
-//                }
-//            })
+        registry.addEndpoint("/websocket")
+                .setAllowedOrigins("*") //TODO
                 .withSockJS();
-        //.setInterceptors(httpSessionHandshakeInterceptor());
     }
-
-//    @Bean
-//    public HandshakeInterceptor httpSessionHandshakeInterceptor() {
-//        return new HandshakeInterceptor() {
-//
-//            @Override
-//            public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-//                if (request instanceof ServletServerHttpRequest) {
-//                    ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
-//                    attributes.put(IP_ADDRESS, servletRequest.getRemoteAddress());
-//                }
-//                return true;
-//            }
-//
-//            @Override
-//            public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception exception) {
-//
-//            }
-//        };
-//    }
 }

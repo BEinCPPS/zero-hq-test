@@ -1,14 +1,14 @@
-(function() {
+(function () {
 	'use strict';
 
 	angular
 		.module('zerohqt.home')
 		.controller('HomeController', HomeController);
 
-	HomeController.$inject = ['menuItems', 'homeDataService', 'externalAppsService', '$cordovaEmailComposer'];
+	HomeController.$inject = ['menuItems', 'homeDataService', 'externalAppsService', '$cordovaEmailComposer', 'websocketService'];
 
 	/* @ngInject */
-	function HomeController(menuItems, homeDataService, externalAppsService, $cordovaEmailComposer) {
+	function HomeController(menuItems, homeDataService, externalAppsService, $cordovaEmailComposer, websocketService) {
 		var vm = angular.extend(this, {
 			entries: menuItems,
 			phoneNumber: homeDataService.phoneNumber,
@@ -22,7 +22,7 @@
 		}
 
 		function sendEmail() {
-			$cordovaEmailComposer.isAvailable().then(function() {
+			$cordovaEmailComposer.isAvailable().then(function () {
 				var email = {
 					to: homeDataService.email,
 					subject: 'Cordova Icons',
@@ -36,6 +36,10 @@
 		function openFacebookPage() {
 			externalAppsService.openExternalUrl(homeDataService.facebookPage);
 		}
+
+		(function connectWebSocket() {
+			websocketService.connect();
+		})();
 
 	}
 })();

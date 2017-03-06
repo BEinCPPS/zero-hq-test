@@ -4,6 +4,7 @@ import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.business.model.Notification;
 import it.eng.zerohqt.dao.model.ContextAttribute;
 import it.eng.zerohqt.orion.model.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +26,7 @@ public class TestStationBayContextTransformer {
         for (ContextResponses contextResponse :
                 contextResponses) {
             ContextElement contextElement = contextResponse.getContextElement();
-            informationBay.setStationName(contextElement.getId());
+            informationBay.setStationName(extractStationName(contextElement.getId()));
             informationBay.setBayCode(contextElement.getId()); //TODO
             if (null == contextElement.getAttributes() || contextElement.getAttributes().isEmpty())
                 return Optional.empty();
@@ -56,5 +57,16 @@ public class TestStationBayContextTransformer {
             }
         }
         return Optional.of(informationBays);
+    }
+
+
+    private static String extractStationName(String stationId) {
+        if (StringUtils.isBlank(stationId)) return stationId;
+        String[] stationIds = stationId.split(":");
+        if (null == stationIds || stationIds.length == 0) return stationId;
+        String part = stationIds[1];
+        String[] parts = part.split("_");
+        if (null == part || parts.length == 0) return stationId;
+        return parts[0];
     }
 }

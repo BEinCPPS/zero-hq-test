@@ -20,7 +20,7 @@ angular.module('starter', [
 	'zerohqt.native-scrolling',
 	'zerohqt.new-slide-box',
 	'gMaps',
-	'ngCordova'
+	'ngCordova',
 ])
 
 .value('_', window._)
