@@ -15,7 +15,7 @@ angular.module('starter', [
 	'zerohqt.map',
 	'zerohqt.wordpress',
 	'zerohqt.menu',
-	'zerohqt.elements',
+	'zerohqt.history',
 	'zerohqt.popover-menu',
 	'zerohqt.native-scrolling',
 	'zerohqt.new-slide-box',

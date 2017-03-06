@@ -9595,3 +9595,7 @@ img {
   height: 100%; }
 
 /*# sourceMappingURL=main.css.map */
+
+
+.item-alarm {background-color: #e42112;}
+.item-warning {background-color: #ffc900}
