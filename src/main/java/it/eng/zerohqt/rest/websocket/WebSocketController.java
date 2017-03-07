@@ -24,7 +24,7 @@ public class WebSocketController {
     public void sendToClient(InformationBay informationBay) throws Exception {
         logger.info(informationBay.toString());
         ObjectMapper mapper = new ObjectMapper();
-        webSocketSender.convertAndSend(WebSocketConfiguration.defaultChannel,
+        webSocketSender.convertAndSend(WebSocketConfiguration.DEFAULT_CHANNEL,
                 mapper.writeValueAsString(informationBay));
         logger.info("Sended at: " + new Date());
     }
