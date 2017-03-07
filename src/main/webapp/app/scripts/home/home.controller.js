@@ -19,9 +19,10 @@
 			openFacebookPage: openFacebookPage
 		});
 
-		$scope.$on('wSockMessage', function (event, message) {
+		$scope.$on('wsMessage', function (event, message) {
 			console.log(message); // 'Broadcast!'
 			messageList.push(message);
+			$scope.$apply(); //Apply changes to the page
 		});
 
 		function getDirections() {
