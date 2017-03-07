@@ -1,5 +1,6 @@
 package it.eng.zerohqt;
 
+import it.eng.zerohqt.config.WebSocketConfiguration;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,9 +33,9 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public class ZeroHqWebSocketTest {
 
     static final String WEBSOCKET_URI = "ws://localhost:8080/websocket";
-    static final String WEBSOCKET_TOPIC = "/topic";
+    static final String WEBSOCKET_TOPIC = WebSocketConfiguration.DEFAULT_CHANNEL;
 
-    static final String informationBay = "{\n" +
+    static final String informationBay_1 = "{\n" +
             "\t\"stationName\": \"TestStation1\",\n" +
             "\t\"stationDescription\": \"Macchina 1 Box 1\",\n" +
             "\t\"bayCode\": \"teststation:TestStation1_1\",\n" +
@@ -48,6 +49,7 @@ public class ZeroHqWebSocketTest {
             "\t},\n" +
             "\t\"timestamp\": 1488881865343\n" +
             "}";
+
     static final String informationBay_2 = "{\n" +
             "\t\"stationName\": \"TestStation2\",\n" +
             "\t\"stationDescription\": \"Macchina 1 Box 1\",\n" +
@@ -86,7 +88,7 @@ public class ZeroHqWebSocketTest {
     @Before
     public void setup() {
         messages = new String[3];
-        messages[0] = informationBay;
+        messages[0] = informationBay_1;
         messages[1] = informationBay_2;
         messages[2] = informationBay_3;
         blockingQueue = new LinkedBlockingDeque<>();
