@@ -5,16 +5,23 @@
 		.module('zerohqt.home')
 		.controller('HomeController', HomeController);
 
-	HomeController.$inject = ['menuItems', 'homeDataService', 'externalAppsService', '$cordovaEmailComposer', 'websocketService'];
+	HomeController.$inject = ['menuItems', 'homeDataService', 'externalAppsService',
+		'$cordovaEmailComposer', 'websocketService', '$scope'];
 
 	/* @ngInject */
-	function HomeController(menuItems, homeDataService, externalAppsService, $cordovaEmailComposer, websocketService) {
+	function HomeController(menuItems, homeDataService, externalAppsService, $cordovaEmailComposer, websocketService, $scope) {
+		var messageList = [];
 		var vm = angular.extend(this, {
-			entries: menuItems,
+			entries: messageList,
 			phoneNumber: homeDataService.phoneNumber,
 			getDirections: getDirections,
 			sendEmail: sendEmail,
 			openFacebookPage: openFacebookPage
+		});
+
+		$scope.$on('wSockMessage', function (event, message) {
+			console.log(message); // 'Broadcast!'
+			messageList.push(message);
 		});
 
 		function getDirections() {

@@ -1,6 +1,8 @@
 package it.eng.zerohqt;
 
 import it.eng.zerohqt.config.WebSocketConfiguration;
+import it.eng.zerohqt.rest.web.RestServiceController;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +37,7 @@ public class ZeroHqWebSocketTest {
 
     static final String WEBSOCKET_URI = "ws://localhost:8080/websocket";
     static final String WEBSOCKET_TOPIC = WebSocketConfiguration.DEFAULT_CHANNEL;
+    private final Logger logger = Logger.getLogger(ZeroHqWebSocketTest.class);
 
     static final String informationBay_1 = "{\n" +
             "\t\"stationName\": \"TestStation1\",\n" +
@@ -53,7 +56,7 @@ public class ZeroHqWebSocketTest {
 
     static final String informationBay_2 = "{\n" +
             "\t\"stationName\": \"TestStation2\",\n" +
-            "\t\"stationDescription\": \"Macchina 1 Box 1\",\n" +
+            "\t\"stationDescription\": \"Macchina 2 Box 1\",\n" +
             "\t\"bayCode\": \"teststation:TestStation2_1\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
@@ -68,7 +71,7 @@ public class ZeroHqWebSocketTest {
 
     static final String informationBay_3 = "{\n" +
             "\t\"stationName\": \"TestStation3\",\n" +
-            "\t\"stationDescription\": \"Macchina 1 Box 1\",\n" +
+            "\t\"stationDescription\": \"Macchina 3 Box 1\",\n" +
             "\t\"bayCode\": \"teststation:TestStation3_1\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
@@ -111,6 +114,7 @@ public class ZeroHqWebSocketTest {
             Thread.sleep(5000);
             String message = messages[rand.nextInt(100) % messages.length];
             session.send(WEBSOCKET_TOPIC, message.getBytes());
+            logger.info(message);
 
             Assert.assertEquals(message, blockingQueue.poll(1, SECONDS));
         }
