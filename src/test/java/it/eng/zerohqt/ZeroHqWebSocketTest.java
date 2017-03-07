@@ -106,7 +106,7 @@ public class ZeroHqWebSocketTest {
 
         for (; ; ) {
             Thread.sleep(5000);
-            String message = messages[((int) Math.random()) % 3];
+            String message = messages[((int) Math.random()) % messages.length];
             session.send(WEBSOCKET_TOPIC, message.getBytes());
 
             Assert.assertEquals(message, blockingQueue.poll(1, SECONDS));
