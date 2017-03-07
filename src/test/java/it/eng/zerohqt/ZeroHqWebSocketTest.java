@@ -37,6 +37,7 @@ public class ZeroHqWebSocketTest {
 
     static final String WEBSOCKET_URI = "ws://localhost:8080/websocket";
     static final String WEBSOCKET_TOPIC = WebSocketConfiguration.DEFAULT_CHANNEL;
+    public static final int DELAY = 5000; //milliseconds
     private final Logger logger = Logger.getLogger(ZeroHqWebSocketTest.class);
 
     static final String informationBay_1 = "{\n" +
@@ -93,9 +94,12 @@ public class ZeroHqWebSocketTest {
     @Before
     public void setup() {
         messages = new String[3];
+        //WARNING !!! ADD NEW MESSAGES
         messages[0] = informationBay_1;
         messages[1] = informationBay_2;
         messages[2] = informationBay_3;
+        //WARNING !!! ADD NEW MESSAGES
+
         rand = new Random();
         blockingQueue = new LinkedBlockingDeque<>();
         stompClient = new WebSocketStompClient(new SockJsClient(
@@ -111,7 +115,7 @@ public class ZeroHqWebSocketTest {
         session.subscribe(WEBSOCKET_TOPIC, new DefaultStompFrameHandler());
 
         for (; ; ) {
-            Thread.sleep(5000);
+            Thread.sleep(DELAY);
             String message = messages[rand.nextInt(100) % messages.length];
             session.send(WEBSOCKET_TOPIC, message.getBytes());
             logger.info(message);
