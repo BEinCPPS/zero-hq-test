@@ -44,6 +44,7 @@ public class ZeroHqWebSocketTest {
             "\t\"stationName\": \"TestStation1\",\n" +
             "\t\"stationDescription\": \"Macchina 1 Box 1\",\n" +
             "\t\"bayCode\": \"teststation:TestStation1_1\",\n" +
+            "\t\"bayNumber\": \"1\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
             "\t\t\"stateCode\": \"104\",\n" +
@@ -59,6 +60,7 @@ public class ZeroHqWebSocketTest {
             "\t\"stationName\": \"TestStation1\",\n" +
             "\t\"stationDescription\": \"Macchina 1 Box 2\",\n" +
             "\t\"bayCode\": \"teststation:TestStation1_2\",\n" +
+            "\t\"bayNumber\": \"2\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
             "\t\t\"stateCode\": \"104\",\n" +
@@ -74,6 +76,7 @@ public class ZeroHqWebSocketTest {
             "\t\"stationName\": \"TestStation1\",\n" +
             "\t\"stationDescription\": \"Macchina 1 Box 3\",\n" +
             "\t\"bayCode\": \"teststation:TestStation1_3\",\n" +
+            "\t\"bayNumber\": \"3\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
             "\t\t\"stateCode\": \"104\",\n" +
@@ -89,6 +92,7 @@ public class ZeroHqWebSocketTest {
             "\t\"stationName\": \"TestStation1\",\n" +
             "\t\"stationDescription\": \"Macchina 1 Box 4\",\n" +
             "\t\"bayCode\": \"teststation:TestStation1_4\",\n" +
+            "\t\"bayNumber\": \"4\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
             "\t\t\"stateCode\": \"104\",\n" +
@@ -104,6 +108,7 @@ public class ZeroHqWebSocketTest {
             "\t\"stationName\": \"TestStation2\",\n" +
             "\t\"stationDescription\": \"Macchina 2 Box 1\",\n" +
             "\t\"bayCode\": \"teststation:TestStation2_1\",\n" +
+            "\t\"bayNumber\": \"1\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
             "\t\t\"stateCode\": \"104\",\n" +
@@ -119,6 +124,7 @@ public class ZeroHqWebSocketTest {
             "\t\"stationName\": \"TestStation2\",\n" +
             "\t\"stationDescription\": \"Macchina 2 Box 2\",\n" +
             "\t\"bayCode\": \"teststation:TestStation2_2\",\n" +
+            "\t\"bayNumber\": \"2\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
             "\t\t\"stateCode\": \"104\",\n" +
@@ -134,6 +140,7 @@ public class ZeroHqWebSocketTest {
             "\t\"stationName\": \"TestStation2\",\n" +
             "\t\"stationDescription\": \"Macchina 2 Box 3\",\n" +
             "\t\"bayCode\": \"teststation:TestStation2_3\",\n" +
+            "\t\"bayNumber\": \"3\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
             "\t\t\"stateCode\": \"104\",\n" +
@@ -149,6 +156,7 @@ public class ZeroHqWebSocketTest {
             "\t\"stationName\": \"TestStation2\",\n" +
             "\t\"stationDescription\": \"Macchina 2 Box 4\",\n" +
             "\t\"bayCode\": \"teststation:TestStation2_4\",\n" +
+            "\t\"bayNumber\": \"4\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
             "\t\t\"stateCode\": \"104\",\n" +
@@ -164,6 +172,7 @@ public class ZeroHqWebSocketTest {
             "\t\"stationName\": \"TestStation3\",\n" +
             "\t\"stationDescription\": \"Macchina 3 Box 1\",\n" +
             "\t\"bayCode\": \"teststation:TestStation3_1\",\n" +
+            "\t\"bayNumber\": \"1\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
             "\t\t\"stateCode\": \"104\",\n" +
@@ -179,6 +188,7 @@ public class ZeroHqWebSocketTest {
             "\t\"stationName\": \"TestStation3\",\n" +
             "\t\"stationDescription\": \"Macchina 3 Box 2\",\n" +
             "\t\"bayCode\": \"teststation:TestStation3_2\",\n" +
+            "\t\"bayNumber\": \"2\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
             "\t\t\"stateCode\": \"104\",\n" +
@@ -194,6 +204,7 @@ public class ZeroHqWebSocketTest {
             "\t\"stationName\": \"TestStation3\",\n" +
             "\t\"stationDescription\": \"Macchina 3 Box 3\",\n" +
             "\t\"bayCode\": \"teststation:TestStation3_3\",\n" +
+            "\t\"bayNumber\": \"2\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
             "\t\t\"stateCode\": \"104\",\n" +
@@ -209,6 +220,7 @@ public class ZeroHqWebSocketTest {
             "\t\"stationName\": \"TestStation3\",\n" +
             "\t\"stationDescription\": \"Macchina 3 Box 4\",\n" +
             "\t\"bayCode\": \"teststation:TestStation3_4\",\n" +
+            "\t\"bayNumber\": \"4\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
             "\t\t\"stateCode\": \"104\",\n" +

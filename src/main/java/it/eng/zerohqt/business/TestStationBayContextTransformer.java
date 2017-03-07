@@ -26,7 +26,7 @@ public class TestStationBayContextTransformer {
         for (ContextResponses contextResponse :
                 contextResponses) {
             ContextElement contextElement = contextResponse.getContextElement();
-            informationBay.setStationName(extractStationName(contextElement.getId()));
+            extractStationNameAndBayNumber(contextElement.getId(), informationBay);
             informationBay.setBayCode(contextElement.getId()); //TODO
             if (null == contextElement.getAttributes() || contextElement.getAttributes().isEmpty())
                 return Optional.empty();
@@ -60,13 +60,16 @@ public class TestStationBayContextTransformer {
     }
 
 
-    private static String extractStationName(String stationId) {
-        if (StringUtils.isBlank(stationId)) return stationId;
+    private static void extractStationNameAndBayNumber(String stationId, InformationBay informationBay) {
+        if (StringUtils.isBlank(stationId)) return;
         String[] stationIds = stationId.split(":");
-        if (null == stationIds || stationIds.length == 0) return stationId;
+        if (null == stationIds || stationIds.length == 0) return;
         String part = stationIds[1];
         String[] parts = part.split("_");
-        if (null == part || parts.length == 0) return stationId;
-        return parts[0];
+        if (null == part || parts.length == 0) return;
+        informationBay.setStationName(parts[0]);
+        informationBay.setBayNumber(Integer.parseInt(parts[1]));
     }
+
+
 }

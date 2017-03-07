@@ -11,6 +11,7 @@ public class InformationBay implements Serializable{
     private String stationName;
     private String stationDescription;
     private String bayCode;
+    private Integer bayNumber;
     private String ipAddress;
     private Notification notification;
     private Date timestamp;
@@ -18,7 +19,7 @@ public class InformationBay implements Serializable{
     public InformationBay() {
     }
 
-    public InformationBay(String stationName, String stationDescription, String bayCode, String ipAddress, Notification notification, Date timestamp) {
+    public InformationBay(String stationName, String stationDescription, String bayCode, Integer bayNumber,  String ipAddress, Notification notification, Date timestamp) {
 
         this.stationName = stationName;
         this.stationDescription = stationDescription;
@@ -26,6 +27,7 @@ public class InformationBay implements Serializable{
         this.ipAddress = ipAddress;
         this.notification = notification;
         this.timestamp = timestamp;
+        this.bayNumber = bayNumber;
     }
 
     public String getStationName() {
@@ -76,6 +78,13 @@ public class InformationBay implements Serializable{
         this.timestamp = timestamp;
     }
 
+    public Integer getBayNumber() {
+        return bayNumber;
+    }
+
+    public void setBayNumber(Integer bayNumber) {
+        this.bayNumber = bayNumber;
+    }
 
     @Override
     public String toString() {
@@ -83,6 +92,7 @@ public class InformationBay implements Serializable{
                 "stationName='" + stationName + '\'' +
                 ", stationDescription='" + stationDescription + '\'' +
                 ", bayCode='" + bayCode + '\'' +
+                ", bayNumber=" + bayNumber +
                 ", ipAddress='" + ipAddress + '\'' +
                 ", notification=" + notification +
                 ", timestamp=" + timestamp +
