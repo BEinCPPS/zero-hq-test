@@ -40,7 +40,7 @@ public class ZeroHqWebSocketTest {
     public static final int DELAY = 5000; //milliseconds
     private final Logger logger = Logger.getLogger(ZeroHqWebSocketTest.class);
 
-    static final String informationBay_1 = "{\n" +
+    static final String informationBay_11 = "{\n" +
             "\t\"stationName\": \"TestStation1\",\n" +
             "\t\"stationDescription\": \"Macchina 1 Box 1\",\n" +
             "\t\"bayCode\": \"teststation:TestStation1_1\",\n" +
@@ -55,7 +55,52 @@ public class ZeroHqWebSocketTest {
             "\t\"timestamp\": 1488881865343\n" +
             "}";
 
-    static final String informationBay_2 = "{\n" +
+    static final String informationBay_12 = "{\n" +
+            "\t\"stationName\": \"TestStation1\",\n" +
+            "\t\"stationDescription\": \"Macchina 1 Box 2\",\n" +
+            "\t\"bayCode\": \"teststation:TestStation1_2\",\n" +
+            "\t\"ipAddress\": \"100.100.100.100\",\n" +
+            "\t\"notification\": {\n" +
+            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
+            "\t\t\"stateDescription\": \"null\",\n" +
+            "\t\t\"acknowledge\": \"null\",\n" +
+            "\t\t\"timestamp\": 1488881865344\n" +
+            "\t},\n" +
+            "\t\"timestamp\": 1488881865344\n" +
+            "}";
+
+    static final String informationBay_13 = "{\n" +
+            "\t\"stationName\": \"TestStation1\",\n" +
+            "\t\"stationDescription\": \"Macchina 1 Box 3\",\n" +
+            "\t\"bayCode\": \"teststation:TestStation1_3\",\n" +
+            "\t\"ipAddress\": \"100.100.100.100\",\n" +
+            "\t\"notification\": {\n" +
+            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
+            "\t\t\"stateDescription\": \"null\",\n" +
+            "\t\t\"acknowledge\": \"null\",\n" +
+            "\t\t\"timestamp\": 1488881865345\n" +
+            "\t},\n" +
+            "\t\"timestamp\": 1488881865345\n" +
+            "}";
+
+    static final String informationBay_14 = "{\n" +
+            "\t\"stationName\": \"TestStation1\",\n" +
+            "\t\"stationDescription\": \"Macchina 1 Box 4\",\n" +
+            "\t\"bayCode\": \"teststation:TestStation1_4\",\n" +
+            "\t\"ipAddress\": \"100.100.100.100\",\n" +
+            "\t\"notification\": {\n" +
+            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
+            "\t\t\"stateDescription\": \"null\",\n" +
+            "\t\t\"acknowledge\": \"null\",\n" +
+            "\t\t\"timestamp\": 1488881865346\n" +
+            "\t},\n" +
+            "\t\"timestamp\": 1488881865346\n" +
+            "}";
+
+    static final String informationBay_21 = "{\n" +
             "\t\"stationName\": \"TestStation2\",\n" +
             "\t\"stationDescription\": \"Macchina 2 Box 1\",\n" +
             "\t\"bayCode\": \"teststation:TestStation2_1\",\n" +
@@ -70,7 +115,52 @@ public class ZeroHqWebSocketTest {
             "\t\"timestamp\": 1488881865343\n" +
             "}";
 
-    static final String informationBay_3 = "{\n" +
+    static final String informationBay_22 = "{\n" +
+            "\t\"stationName\": \"TestStation2\",\n" +
+            "\t\"stationDescription\": \"Macchina 2 Box 2\",\n" +
+            "\t\"bayCode\": \"teststation:TestStation2_2\",\n" +
+            "\t\"ipAddress\": \"100.100.100.100\",\n" +
+            "\t\"notification\": {\n" +
+            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
+            "\t\t\"stateDescription\": \"null\",\n" +
+            "\t\t\"acknowledge\": \"null\",\n" +
+            "\t\t\"timestamp\": 1488881865344\n" +
+            "\t},\n" +
+            "\t\"timestamp\": 1488881865344\n" +
+            "}";
+
+    static final String informationBay_23 = "{\n" +
+            "\t\"stationName\": \"TestStation2\",\n" +
+            "\t\"stationDescription\": \"Macchina 2 Box 3\",\n" +
+            "\t\"bayCode\": \"teststation:TestStation2_3\",\n" +
+            "\t\"ipAddress\": \"100.100.100.100\",\n" +
+            "\t\"notification\": {\n" +
+            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
+            "\t\t\"stateDescription\": \"null\",\n" +
+            "\t\t\"acknowledge\": \"null\",\n" +
+            "\t\t\"timestamp\": 1488881865345\n" +
+            "\t},\n" +
+            "\t\"timestamp\": 1488881865345\n" +
+            "}";
+
+    static final String informationBay_24 = "{\n" +
+            "\t\"stationName\": \"TestStation2\",\n" +
+            "\t\"stationDescription\": \"Macchina 2 Box 4\",\n" +
+            "\t\"bayCode\": \"teststation:TestStation2_4\",\n" +
+            "\t\"ipAddress\": \"100.100.100.100\",\n" +
+            "\t\"notification\": {\n" +
+            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
+            "\t\t\"stateDescription\": \"null\",\n" +
+            "\t\t\"acknowledge\": \"null\",\n" +
+            "\t\t\"timestamp\": 1488881865346\n" +
+            "\t},\n" +
+            "\t\"timestamp\": 1488881865346\n" +
+            "}";
+
+    static final String informationBay_31 = "{\n" +
             "\t\"stationName\": \"TestStation3\",\n" +
             "\t\"stationDescription\": \"Macchina 3 Box 1\",\n" +
             "\t\"bayCode\": \"teststation:TestStation3_1\",\n" +
@@ -85,6 +175,50 @@ public class ZeroHqWebSocketTest {
             "\t\"timestamp\": 1488881865343\n" +
             "}";
 
+    static final String informationBay_32 = "{\n" +
+            "\t\"stationName\": \"TestStation3\",\n" +
+            "\t\"stationDescription\": \"Macchina 3 Box 2\",\n" +
+            "\t\"bayCode\": \"teststation:TestStation3_2\",\n" +
+            "\t\"ipAddress\": \"100.100.100.100\",\n" +
+            "\t\"notification\": {\n" +
+            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
+            "\t\t\"stateDescription\": \"null\",\n" +
+            "\t\t\"acknowledge\": \"null\",\n" +
+            "\t\t\"timestamp\": 1488881865344\n" +
+            "\t},\n" +
+            "\t\"timestamp\": 1488881865344\n" +
+            "}";
+
+    static final String informationBay_33 = "{\n" +
+            "\t\"stationName\": \"TestStation3\",\n" +
+            "\t\"stationDescription\": \"Macchina 3 Box 3\",\n" +
+            "\t\"bayCode\": \"teststation:TestStation3_3\",\n" +
+            "\t\"ipAddress\": \"100.100.100.100\",\n" +
+            "\t\"notification\": {\n" +
+            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
+            "\t\t\"stateDescription\": \"null\",\n" +
+            "\t\t\"acknowledge\": \"null\",\n" +
+            "\t\t\"timestamp\": 1488881865345\n" +
+            "\t},\n" +
+            "\t\"timestamp\": 1488881865345\n" +
+            "}";
+
+    static final String informationBay_34 = "{\n" +
+            "\t\"stationName\": \"TestStation3\",\n" +
+            "\t\"stationDescription\": \"Macchina 3 Box 4\",\n" +
+            "\t\"bayCode\": \"teststation:TestStation3_4\",\n" +
+            "\t\"ipAddress\": \"100.100.100.100\",\n" +
+            "\t\"notification\": {\n" +
+            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
+            "\t\t\"stateDescription\": \"null\",\n" +
+            "\t\t\"acknowledge\": \"null\",\n" +
+            "\t\t\"timestamp\": 1488881865346\n" +
+            "\t},\n" +
+            "\t\"timestamp\": 1488881865346\n" +
+            "}";
 
     BlockingQueue<String> blockingQueue;
     WebSocketStompClient stompClient;
@@ -93,11 +227,20 @@ public class ZeroHqWebSocketTest {
 
     @Before
     public void setup() {
-        messages = new String[3];
+        messages = new String[12];
         //WARNING !!! ADD NEW MESSAGES
-        messages[0] = informationBay_1;
-        messages[1] = informationBay_2;
-        messages[2] = informationBay_3;
+        messages[0] = informationBay_11;
+        messages[1] = informationBay_12;
+        messages[2] = informationBay_13;
+        messages[3] = informationBay_14;
+        messages[4] = informationBay_21;
+        messages[5] = informationBay_22;
+        messages[6] = informationBay_23;
+        messages[7] = informationBay_24;
+        messages[8] = informationBay_31;
+        messages[9] = informationBay_32;
+        messages[10] = informationBay_33;
+        messages[11] = informationBay_34;
         //WARNING !!! ADD NEW MESSAGES
 
         rand = new Random();
