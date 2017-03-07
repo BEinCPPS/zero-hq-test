@@ -34,11 +34,61 @@ public class ZeroHqWebSocketTest {
     static final String WEBSOCKET_URI = "ws://localhost:8080/websocket";
     static final String WEBSOCKET_TOPIC = "/topic";
 
+    static final String informationBay = "{\n" +
+            "\t\"stationName\": \"TestStation1\",\n" +
+            "\t\"stationDescription\": \"Macchina 1 Box 1\",\n" +
+            "\t\"bayCode\": \"teststation:TestStation1_1\",\n" +
+            "\t\"ipAddress\": \"100.100.100.100\",\n" +
+            "\t\"notification\": {\n" +
+            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
+            "\t\t\"stateDescription\": \"null\",\n" +
+            "\t\t\"acknowledge\": \"null\",\n" +
+            "\t\t\"timestamp\": 1488881865343\n" +
+            "\t},\n" +
+            "\t\"timestamp\": 1488881865343\n" +
+            "}";
+    static final String informationBay_2 = "{\n" +
+            "\t\"stationName\": \"TestStation2\",\n" +
+            "\t\"stationDescription\": \"Macchina 1 Box 1\",\n" +
+            "\t\"bayCode\": \"teststation:TestStation2_1\",\n" +
+            "\t\"ipAddress\": \"100.100.100.100\",\n" +
+            "\t\"notification\": {\n" +
+            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
+            "\t\t\"stateDescription\": \"null\",\n" +
+            "\t\t\"acknowledge\": \"null\",\n" +
+            "\t\t\"timestamp\": 1488881865343\n" +
+            "\t},\n" +
+            "\t\"timestamp\": 1488881865343\n" +
+            "}";
+
+    static final String informationBay_3 = "{\n" +
+            "\t\"stationName\": \"TestStation3\",\n" +
+            "\t\"stationDescription\": \"Macchina 1 Box 1\",\n" +
+            "\t\"bayCode\": \"teststation:TestStation3_1\",\n" +
+            "\t\"ipAddress\": \"100.100.100.100\",\n" +
+            "\t\"notification\": {\n" +
+            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
+            "\t\t\"stateDescription\": \"null\",\n" +
+            "\t\t\"acknowledge\": \"null\",\n" +
+            "\t\t\"timestamp\": 1488881865343\n" +
+            "\t},\n" +
+            "\t\"timestamp\": 1488881865343\n" +
+            "}";
+
+
     BlockingQueue<String> blockingQueue;
     WebSocketStompClient stompClient;
+    String[] messages;
 
     @Before
     public void setup() {
+        messages = new String[3];
+        messages[0] = informationBay;
+        messages[1] = informationBay_2;
+        messages[2] = informationBay_3;
         blockingQueue = new LinkedBlockingDeque<>();
         stompClient = new WebSocketStompClient(new SockJsClient(
                 asList(new WebSocketTransport(new StandardWebSocketClient()))));
@@ -47,14 +97,18 @@ public class ZeroHqWebSocketTest {
     @Test
     public void shouldReceiveAMessageFromTheServer() throws Exception {
         StompSession session = stompClient
-                .connect(WEBSOCKET_URI, new StompSessionHandlerAdapter() {})
+                .connect(WEBSOCKET_URI, new StompSessionHandlerAdapter() {
+                })
                 .get(1, SECONDS);
         session.subscribe(WEBSOCKET_TOPIC, new DefaultStompFrameHandler());
 
-        String message = "MESSAGE TEST";
-        session.send(WEBSOCKET_TOPIC, message.getBytes());
+        for (; ; ) {
+            Thread.sleep(5000);
+            String message = messages[((int) Math.random()) % 3];
+            session.send(WEBSOCKET_TOPIC, message.getBytes());
 
-        Assert.assertEquals(message, blockingQueue.poll(1, SECONDS));
+            Assert.assertEquals(message, blockingQueue.poll(1, SECONDS));
+        }
     }
 
     class DefaultStompFrameHandler implements StompFrameHandler {
