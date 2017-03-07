@@ -21,7 +21,7 @@
             var onMessage = function (message) {
                 console.log("Message from WebSocket: " + message);
                 var messageObj = JSON.parse(message.body);
-                $rootScope.$broadcast('wSockMessage', messageObj);
+                $rootScope.$broadcast('wsMessage', messageObj);
             }
             var connectCallback = function () {
                 console.log('Connected!!!');
