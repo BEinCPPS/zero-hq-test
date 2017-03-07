@@ -18,6 +18,7 @@ import org.springframework.web.socket.sockjs.client.SockJsClient;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 
 import java.lang.reflect.Type;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -84,6 +85,7 @@ public class ZeroHqWebSocketTest {
     BlockingQueue<String> blockingQueue;
     WebSocketStompClient stompClient;
     String[] messages;
+    Random rand;
 
     @Before
     public void setup() {
@@ -91,6 +93,7 @@ public class ZeroHqWebSocketTest {
         messages[0] = informationBay_1;
         messages[1] = informationBay_2;
         messages[2] = informationBay_3;
+        rand = new Random();
         blockingQueue = new LinkedBlockingDeque<>();
         stompClient = new WebSocketStompClient(new SockJsClient(
                 asList(new WebSocketTransport(new StandardWebSocketClient()))));
@@ -106,7 +109,7 @@ public class ZeroHqWebSocketTest {
 
         for (; ; ) {
             Thread.sleep(5000);
-            String message = messages[((int) Math.random()) % messages.length];
+            String message = messages[rand.nextInt(100) % messages.length];
             session.send(WEBSOCKET_TOPIC, message.getBytes());
 
             Assert.assertEquals(message, blockingQueue.poll(1, SECONDS));
