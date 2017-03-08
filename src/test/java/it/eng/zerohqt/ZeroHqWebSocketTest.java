@@ -63,7 +63,7 @@ public class ZeroHqWebSocketTest {
             "\t\"bayNumber\": \"2\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
-            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"stateCode\": \"105\",\n" +
             "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
             "\t\t\"stateDescription\": \"null\",\n" +
             "\t\t\"acknowledge\": \"null\",\n" +
@@ -79,7 +79,7 @@ public class ZeroHqWebSocketTest {
             "\t\"bayNumber\": \"3\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
-            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"stateCode\": \"106\",\n" +
             "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
             "\t\t\"stateDescription\": \"null\",\n" +
             "\t\t\"acknowledge\": \"null\",\n" +
@@ -95,7 +95,7 @@ public class ZeroHqWebSocketTest {
             "\t\"bayNumber\": \"4\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
-            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"stateCode\": \"107\",\n" +
             "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
             "\t\t\"stateDescription\": \"null\",\n" +
             "\t\t\"acknowledge\": \"null\",\n" +
@@ -111,7 +111,7 @@ public class ZeroHqWebSocketTest {
             "\t\"bayNumber\": \"1\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
-            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"stateCode\": \"114\",\n" +
             "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
             "\t\t\"stateDescription\": \"null\",\n" +
             "\t\t\"acknowledge\": \"null\",\n" +
@@ -127,7 +127,7 @@ public class ZeroHqWebSocketTest {
             "\t\"bayNumber\": \"2\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
-            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"stateCode\": \"115\",\n" +
             "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
             "\t\t\"stateDescription\": \"null\",\n" +
             "\t\t\"acknowledge\": \"null\",\n" +
@@ -143,7 +143,7 @@ public class ZeroHqWebSocketTest {
             "\t\"bayNumber\": \"3\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
-            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"stateCode\": \"116\",\n" +
             "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
             "\t\t\"stateDescription\": \"null\",\n" +
             "\t\t\"acknowledge\": \"null\",\n" +
@@ -159,7 +159,7 @@ public class ZeroHqWebSocketTest {
             "\t\"bayNumber\": \"4\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
-            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"stateCode\": \"117\",\n" +
             "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
             "\t\t\"stateDescription\": \"null\",\n" +
             "\t\t\"acknowledge\": \"null\",\n" +
@@ -175,7 +175,7 @@ public class ZeroHqWebSocketTest {
             "\t\"bayNumber\": \"1\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
-            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"stateCode\": \"124\",\n" +
             "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
             "\t\t\"stateDescription\": \"null\",\n" +
             "\t\t\"acknowledge\": \"null\",\n" +
@@ -191,7 +191,7 @@ public class ZeroHqWebSocketTest {
             "\t\"bayNumber\": \"2\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
-            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"stateCode\": \"125\",\n" +
             "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
             "\t\t\"stateDescription\": \"null\",\n" +
             "\t\t\"acknowledge\": \"null\",\n" +
@@ -207,7 +207,7 @@ public class ZeroHqWebSocketTest {
             "\t\"bayNumber\": \"2\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
-            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"stateCode\": \"126\",\n" +
             "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
             "\t\t\"stateDescription\": \"null\",\n" +
             "\t\t\"acknowledge\": \"null\",\n" +
@@ -223,7 +223,7 @@ public class ZeroHqWebSocketTest {
             "\t\"bayNumber\": \"4\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
-            "\t\t\"stateCode\": \"104\",\n" +
+            "\t\t\"stateCode\": \"127\",\n" +
             "\t\t\"statePayload\": \" |N| | |N| |A|0| \",\n" +
             "\t\t\"stateDescription\": \"null\",\n" +
             "\t\t\"acknowledge\": \"null\",\n" +

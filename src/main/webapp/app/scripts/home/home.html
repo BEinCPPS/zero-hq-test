@@ -18,14 +18,20 @@
                 <div class="card col home">
                     <!--<a class="item item-text-wrap" href="#/app/{{vm.entries[$index].path}}">-->
                     <ion-item nav-clear menu-close class="item-text-wrap" href="#/app/{{vm.entries[$index].bayCode}}">
-                        <h2>{{stationName}}</h2>
-                        <div class="card col home">
+                        {{stationName}}
+						<ion-buttons ng-repeat="bay in baies" class="buttons">
+								<button ion-button small>{{bay.notification.stateCode}}</button>
+
+						</ion-buttons>
+
+
+                        <!--<div class="card col home">
                             <div ng-repeat="bay in baies">
                                 <h3>{{bay.ipAddress}}</h3>
                                 <h3>{{bay.bayCode}}</h3>
                                 <h3>{{bay.notification.stateCode}}</h3>
                             </div>
-                        </div>
+                        </div>-->
                     </ion-item>
                 </div>
             </div>
