@@ -2,6 +2,7 @@ package it.eng.zerohqt.business;
 
 import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.business.model.Notification;
+import it.eng.zerohqt.dao.model.AcknowledgeTypes;
 import it.eng.zerohqt.dao.model.ContextAttribute;
 import it.eng.zerohqt.orion.model.*;
 import org.apache.commons.lang3.StringUtils;
@@ -44,7 +45,9 @@ public class TestStationBayContextTransformer {
                 } else if (attribute.getName().equals(ContextAttribute.statePayload.name())) {
                     notification.setStatePayload(attribute.getValue());
                 } else if (attribute.getName().equals(ContextAttribute.acknowledge.name())) {
-                    notification.setAcknowledge(attribute.getValue());
+                    if (StringUtils.isNotBlank(attribute.getValue())) {
+                        notification.setAcknowledge(AcknowledgeTypes.valueOf("ack" + attribute.getValue()).getDescription());
+                     }
                 } else if (attribute.getName().equals(ContextAttribute.ipAddress.name())) {
                     informationBay.setIpAddress(attribute.getValue());
                 } else if (attribute.getName().equals(ContextAttribute.stationInfo.name())) {

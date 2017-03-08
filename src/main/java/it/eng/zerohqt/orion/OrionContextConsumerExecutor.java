@@ -8,7 +8,7 @@ import it.eng.zerohqt.orion.client.model.ContextElementList;
 import it.eng.zerohqt.orion.client.model.OrionContextElementToOrionEntityTransformer;
 import it.eng.zerohqt.orion.client.model.OrionContextElementWrapper;
 import it.eng.zerohqt.orion.client.model.subscribe.SubscriptionResponse;
-import it.eng.zerohqt.rest.web.RestServiceController;
+import it.eng.zerohqt.web.rest.RestServiceController;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

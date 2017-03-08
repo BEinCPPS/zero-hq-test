@@ -3,7 +3,7 @@ package it.eng.zerohqt.business;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.orion.model.TestStationBayContext;
-import it.eng.zerohqt.rest.websocket.WebSocketController;
+import it.eng.zerohqt.web.websocket.WebSocketController;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

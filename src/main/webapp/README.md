@@ -4,8 +4,6 @@ A super modular Ionic starter application.
 
 * Project's Home: https://github.com/BEinCPPS/zeroHQTest
 
-> Are you interesting in **Ionic 2**?
-
 ## Dependecies, Run and Build
 
 ### Install NodeJS dependencies

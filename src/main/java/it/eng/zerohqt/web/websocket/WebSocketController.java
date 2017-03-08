@@ -1,4 +1,4 @@
-package it.eng.zerohqt.rest.websocket;
+package it.eng.zerohqt.web.websocket;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.eng.zerohqt.business.Reasoner;

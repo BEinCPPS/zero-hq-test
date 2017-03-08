@@ -2,7 +2,7 @@ package it.eng.zerohqt.dao;
 
 import it.eng.zerohqt.dao.model.OrionSubscription;
 import it.eng.zerohqt.dao.mapper.OrionSubscriptionMapper;
-import it.eng.zerohqt.rest.web.RestServiceController;
+import it.eng.zerohqt.web.rest.RestServiceController;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;

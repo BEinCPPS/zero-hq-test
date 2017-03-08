@@ -1,7 +1,6 @@
 package it.eng.zerohqt;
 
 import it.eng.zerohqt.config.WebSocketConfiguration;
-import it.eng.zerohqt.rest.web.RestServiceController;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;

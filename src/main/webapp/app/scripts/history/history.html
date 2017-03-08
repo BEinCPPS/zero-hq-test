@@ -1,14 +1,14 @@
 <ion-view view-title="History">
     <ion-content>
-        <ion-list class="list" ng-repeat="n in vm.notifications">
-
-            <ion-item class="item item-divider">
+        <ion-list class="list" can-swipe="true" show-delete=”false”>
+            <ion-item class="item item-divider" ng-repeat="n in vm.notifications">
                 <i class="icon ion-alert-circled"></i>
-                {{n.notification.stateCode}}: {{n.notification.stateDescription}}
+                State {{n.notification.stateCode}} {{n.notification.stateDescription}} {{n.notification.statePayload}}
+                <!--  <a class="item item-alarm" href="#/app/history-form-placeholder-labels">
+                      Alarm in {{n.stationName}} in bay {{n.bayNumber}}
+                  </a>-->
             </ion-item>
-            <a class="item item-alarm" href="#/app/history-form-placeholder-labels">
-                Alarm in {{n.stationName}} in bay {{n.bayNumber}}
-            </a>
+
 
             <!--   <ion-item class="item item-divider">
                    <i class="icon ion-android-alert"></i>
@@ -54,5 +54,10 @@
                        Striped Style
                    </a>-->
         </ion-list>
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                icon="ion-loading-c"
+                distance="1%">
+        </ion-infinite-scroll>
     </ion-content>
 </ion-view>

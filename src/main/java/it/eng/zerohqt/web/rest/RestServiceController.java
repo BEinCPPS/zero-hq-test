@@ -1,4 +1,4 @@
-package it.eng.zerohqt.rest.web;
+package it.eng.zerohqt.web.rest;
 
 import it.eng.zerohqt.business.Reasoner;
 import it.eng.zerohqt.config.OrionConfiguration;
