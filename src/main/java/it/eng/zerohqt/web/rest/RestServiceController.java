@@ -21,6 +21,7 @@ import java.util.Optional;
  * Created by ascatox on 10/02/17.
  */
 @RestController
+@CrossOrigin //TODO Filter Cross by domain
 public class RestServiceController {
     private final Logger logger = Logger.getLogger(RestServiceController.class);
     @Autowired
@@ -33,6 +34,7 @@ public class RestServiceController {
     Reasoner reasoner;
 
     //TODO Eliminare in fase di configurazione
+
     @RequestMapping(path = "/subscribe", method = RequestMethod.GET)
     public List<SubscriptionResponse> subscribe() {
         List<SubscriptionResponse> subscriptionResponses = null;

@@ -29,7 +29,7 @@ public interface TestStationDataMapper {
             "attrName=#{statePayloadName} " +
             "or " +*/
             "attrName=#{acknowledgeName} " +
-            "order by recvTime DESC"
+            "order by recvTime DESC LIMIT 100"
     )
     List<TestStationData> findAllAcknowledges(@Param("service") String service,
                                               @Param("context") String context,

@@ -1,6 +1,7 @@
 package it.eng.zerohqt.business.model;
 
 import it.eng.zerohqt.dao.model.AcknowledgeTypes;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
@@ -10,18 +11,13 @@ import java.io.Serializable;
 public class Acknowledge extends BaseBayInfo implements Serializable {
 
     private AcknowledgeTypes ackType;
-    private String bayCode;
-    private String stationName;
-    private Integer bayNumber;
-
+    private String description;
     public Acknowledge() {
     }
 
-    public Acknowledge(AcknowledgeTypes ackType, String bayCode, String stationName, Integer bayNumber) {
+    public Acknowledge(AcknowledgeTypes ackType, String description) {
         this.ackType = ackType;
-        this.bayCode = bayCode;
-        this.stationName = stationName;
-        this.bayNumber = bayNumber;
+        this.description = description;
     }
 
     public AcknowledgeTypes getAckType() {
@@ -32,37 +28,19 @@ public class Acknowledge extends BaseBayInfo implements Serializable {
         this.ackType = ackType;
     }
 
-    public String getBayCode() {
-        return bayCode;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBayCode(String bayCode) {
-        this.bayCode = bayCode;
-    }
-
-    public String getStationName() {
-        return stationName;
-    }
-
-    public void setStationName(String stationName) {
-        this.stationName = stationName;
-    }
-
-    public Integer getBayNumber() {
-        return bayNumber;
-    }
-
-    public void setBayNumber(Integer bayNumber) {
-        this.bayNumber = bayNumber;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return super.toString() + "Acknowledge{" +
+        return super.toString()+"Acknowledge{" +
                 "ackType=" + ackType +
-                ", bayCode='" + bayCode + '\'' +
-                ", stationName='" + stationName + '\'' +
-                ", bayNumber=" + bayNumber +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
