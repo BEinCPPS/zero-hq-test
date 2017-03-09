@@ -29,7 +29,7 @@ public class TestStationDao {
         for (String tableMetadata :
                 tablesMetaData) {
             List<TestStationData> allNotificationsForStation = testStationDataDao
-                    .findAllNotificationsForStationBay(service, tableMetadata);
+                    .findAllNotificationsForStationBayByAck(service, tableMetadata);
             notificationsList.addAll(allNotificationsForStation);
         }
         return notificationsList.stream().sorted().collect(Collectors.toList());
@@ -44,7 +44,7 @@ public class TestStationDao {
         for (String tableMetadata :
                 tablesMetaData) {
             List<TestStationData> allNotificationsForStation = testStationDataDao
-                    .findAllNotificationsForStationBay(service, tableMetadata);
+                    .findAllNotificationsForStationBayByAck(service, tableMetadata);
             // notificationsList.addAll(allNotificationsForStation);
             for (int i = x0; i < (x0 + delta); i++) {
                 notificationsList.add(allNotificationsForStation.get(i));

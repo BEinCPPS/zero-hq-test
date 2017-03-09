@@ -20,7 +20,7 @@
                     <ion-item nav-clear menu-close class="item-text-wrap" href="#/app/{{vm.entries[$index].bayCode}}">
                         {{stationName}}
 						<ion-buttons ng-repeat="bay in baies" class="buttons">
-								<button ion-button small>{{bay.notification.stateCode}}</button>
+								<button ion-button small>{{bay.stateInfo.stateCode}}</button>
 
 						</ion-buttons>
 
@@ -29,7 +29,7 @@
                             <div ng-repeat="bay in baies">
                                 <h3>{{bay.ipAddress}}</h3>
                                 <h3>{{bay.bayCode}}</h3>
-                                <h3>{{bay.notification.stateCode}}</h3>
+                                <h3>{{bay.stateInfo.stateCode}}</h3>
                             </div>
                         </div>-->
                     </ion-item>

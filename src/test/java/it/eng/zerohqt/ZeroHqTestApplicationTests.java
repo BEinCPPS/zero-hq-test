@@ -47,7 +47,7 @@ public class ZeroHqTestApplicationTests {
     public void testGetAllNotificationsForStates() {
         List<String> states = new ArrayList<>();
         states.add(NotificationState.state400.getValue());
-        List<TestStationData> notifications = testStationDataDao.findAllNotificationsForStationBayByStates(
+        List<TestStationData> notifications = testStationDataDao.findAllNotificationsForStationBayByStatesAndAck(
                 DEFAULT_SERVICE,
                 "whrTestsubservice_teststation_TestStation1_1_teststation",
                 states);
@@ -58,7 +58,7 @@ public class ZeroHqTestApplicationTests {
 
     @Test
     public void testGetAllNotificationsFor400And600() {
-        List<TestStationData> notifications = testStationDataDao.findAllNotificationsForStationBay(DEFAULT_SERVICE,
+        List<TestStationData> notifications = testStationDataDao.findAllNotificationsForStationBayByAck(DEFAULT_SERVICE,
                 "whrTestsubservice_teststation_TestStation1_1_teststation");
         assertNotNull(notifications);
         assertTrue(!notifications.isEmpty());
@@ -70,7 +70,7 @@ public class ZeroHqTestApplicationTests {
     }
 
     @Test
-    public void testInsertOrionSubscription(){
+    public void testInsertOrionSubscription() {
         try {
             OrionSubscription orionSubscription = new OrionSubscription();
             orionSubscription.setSubscriptionId("5050505");
@@ -87,6 +87,11 @@ public class ZeroHqTestApplicationTests {
 
     //TODO
 
+    @Test
+    public void testTransformToInformationBay() {
+        TestStationData testStationData = new TestStationData();
+        //TODO
+    }
 
 }
 

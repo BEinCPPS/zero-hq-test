@@ -1,6 +1,9 @@
 package it.eng.zerohqt.web.rest;
 
+import it.eng.zerohqt.business.InformationBayContextTransformer;
 import it.eng.zerohqt.business.Reasoner;
+import it.eng.zerohqt.business.model.Acknowledge;
+import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.config.OrionConfiguration;
 import it.eng.zerohqt.dao.TestStationDao;
 import it.eng.zerohqt.dao.model.TestStationData;
@@ -42,9 +45,11 @@ public class RestServiceController {
     }
 
     @RequestMapping(path = "/history", method = RequestMethod.GET)
-    public List<TestStationData> history() {
+    public List<Acknowledge> history() {
         try {
-            return testStationDao.findAllNotifications(orionConfiguration.orionService.toLowerCase());
+            return InformationBayContextTransformer.
+                    transformToInformationBaies(testStationDao
+                            .findAllNotifications(orionConfiguration.orionService.toLowerCase()));
         } catch (Exception e) {
             logger.error(e);
             return new ArrayList<>();
@@ -53,20 +58,22 @@ public class RestServiceController {
 
 
     @RequestMapping(path = "/nexthistory", method = RequestMethod.GET)
-    public List<TestStationData> nextHistory(
+    public List<Acknowledge> nextHistory(
             @RequestParam int startPoint,
             @RequestParam int delta) {
         try {
-            return testStationDao.findNextNotifications(orionConfiguration.orionService.toLowerCase(), startPoint, delta);
+            return InformationBayContextTransformer.
+                    transformToInformationBaies(testStationDao.
+                            findNextNotifications(orionConfiguration.orionService.toLowerCase(), startPoint, delta));
         } catch (Exception e) {
             logger.error(e);
             return new ArrayList<>();
         }
     }
-
+    //TODO Don't secure this endpoint, used by ORION
     @RequestMapping(path = "/notify", method = RequestMethod.POST)
     public void notification(@RequestBody String message) {
-        logger.info("Notification from ORION --> " + message);
+        logger.info("StateInfo from ORION --> " + message);
         reasoner.feed(message);
     }
 
