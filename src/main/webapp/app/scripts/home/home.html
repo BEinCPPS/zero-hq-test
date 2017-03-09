@@ -20,8 +20,8 @@
                     <ion-item nav-clear menu-close class="item-text-wrap" href="#/app/{{vm.entries[$index].bayCode}}">
                         {{stationName}}
 						<ion-buttons ng-repeat="bay in baies" class="buttons">
-								<button ion-button small>{{bay.stateInfo.stateCode}}</button>
-
+								<button ion-button small ng-class={"red-button":bay.stateInfo.stateCode=='124',"yellow-button":bay.stateInfo.stateCode=='125'}>{{bay.stateInfo.stateCode}}</button>
+                            <!--<button ion-button small ng-class={bay.stateInfo.stateCode=='124'?"yellow-button":bay.stateInfo.stateCode=='125'?"green-button"}>{{bay.stateInfo.stateCode}}</button>-->
 						</ion-buttons>
 
 
