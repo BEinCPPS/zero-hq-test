@@ -203,7 +203,7 @@ public class ZeroHqWebSocketTest {
             "\t\"stationName\": \"TestStation3\",\n" +
             "\t\"stationDescription\": \"Macchina 3 Box 3\",\n" +
             "\t\"bayCode\": \"teststation:TestStation3_3\",\n" +
-            "\t\"bayNumber\": \"2\",\n" +
+            "\t\"bayNumber\": \"3\",\n" +
             "\t\"ipAddress\": \"100.100.100.100\",\n" +
             "\t\"notification\": {\n" +
             "\t\t\"stateCode\": \"126\",\n" +
