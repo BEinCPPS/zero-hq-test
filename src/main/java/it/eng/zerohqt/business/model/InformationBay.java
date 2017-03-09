@@ -6,36 +6,22 @@ import java.util.Date;
 /**
  * Created by ascatox on 17/02/17.
  */
-public class InformationBay implements Serializable{
+public class InformationBay extends BaseBayInfo implements Serializable {
 
-    private String stationName;
     private String stationDescription;
-    private String bayCode;
-    private Integer bayNumber;
     private String ipAddress;
-    private Notification notification;
+    private StateInfo stateInfo;
     private Date timestamp;
 
     public InformationBay() {
     }
 
-    public InformationBay(String stationName, String stationDescription, String bayCode, Integer bayNumber,  String ipAddress, Notification notification, Date timestamp) {
-
-        this.stationName = stationName;
+    public InformationBay(String stationName, Integer bayNumber, String bayCode, String stationDescription, String ipAddress, StateInfo notification, Date timestamp) {
+        super(stationName, bayNumber, bayCode);
         this.stationDescription = stationDescription;
-        this.bayCode = bayCode;
         this.ipAddress = ipAddress;
-        this.notification = notification;
+        this.stateInfo = notification;
         this.timestamp = timestamp;
-        this.bayNumber = bayNumber;
-    }
-
-    public String getStationName() {
-        return stationName;
-    }
-
-    public void setStationName(String stationName) {
-        this.stationName = stationName;
     }
 
     public String getStationDescription() {
@@ -46,14 +32,6 @@ public class InformationBay implements Serializable{
         this.stationDescription = stationDescription;
     }
 
-    public String getBayCode() {
-        return bayCode;
-    }
-
-    public void setBayCode(String bayCode) {
-        this.bayCode = bayCode;
-    }
-
     public String getIpAddress() {
         return ipAddress;
     }
@@ -62,12 +40,12 @@ public class InformationBay implements Serializable{
         this.ipAddress = ipAddress;
     }
 
-    public Notification getNotification() {
-        return notification;
+    public StateInfo getStateInfo() {
+        return stateInfo;
     }
 
-    public void setNotification(Notification notification) {
-        this.notification = notification;
+    public void setStateInfo(StateInfo stateInfo) {
+        this.stateInfo = stateInfo;
     }
 
     public Date getTimestamp() {
@@ -78,24 +56,13 @@ public class InformationBay implements Serializable{
         this.timestamp = timestamp;
     }
 
-    public Integer getBayNumber() {
-        return bayNumber;
-    }
-
-    public void setBayNumber(Integer bayNumber) {
-        this.bayNumber = bayNumber;
-    }
-
     @Override
     public String toString() {
-        return "InformationBay{" +
-                "stationName='" + stationName + '\'' +
-                ", stationDescription='" + stationDescription + '\'' +
-                ", bayCode='" + bayCode + '\'' +
-                ", bayNumber=" + bayNumber +
+        return super.toString() + "InformationBay{" +
+                "stationDescription='" + stationDescription + '\'' +
                 ", ipAddress='" + ipAddress + '\'' +
-                ", notification=" + notification +
+                ", stateInfo=" + stateInfo +
                 ", timestamp=" + timestamp +
-                '}';
+                "} " + super.toString();
     }
 }

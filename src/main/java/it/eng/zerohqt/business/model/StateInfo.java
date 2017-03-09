@@ -6,32 +6,22 @@ import java.util.Date;
 /**
  * Created by ascatox on 17/02/17.
  */
-public class Notification implements Serializable {
+public class StateInfo implements Serializable {
 
     private String stateCode;
     private String statePayload;
     private String stateDescription;
-    private String acknowledge;
     private Date timestamp;
 
 
-    public Notification() {
+    public StateInfo() {
     }
 
-    public Notification(String stateCode, String statePayload, String stateDescription, String acknowledge, Date timestamp) {
+    public StateInfo(String stateCode, String statePayload, String stateDescription, Date timestamp) {
         this.stateCode = stateCode;
         this.statePayload = statePayload;
         this.stateDescription = stateDescription;
-        this.acknowledge = acknowledge;
         this.timestamp = timestamp;
-    }
-
-    public String getAcknowledge() {
-        return acknowledge;
-    }
-
-    public void setAcknowledge(String acknowledge) {
-        this.acknowledge = acknowledge;
     }
 
     public String getStateDescription() {
@@ -68,7 +58,7 @@ public class Notification implements Serializable {
 
     @Override
     public String toString() {
-        return "Notification{" +
+        return "StateInfo{" +
                 "stateCode='" + stateCode + '\'' +
                 ", statePayload='" + statePayload + '\'' +
                 ", stateDescription='" + stateDescription + '\'' +

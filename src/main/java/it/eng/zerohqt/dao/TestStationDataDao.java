@@ -18,12 +18,11 @@ public class TestStationDataDao {
     private TestStationDataMapper testStationDataMapper;
 
 
-    public List<TestStationData> findAllNotificationsForStationBay(String service, String contextName) {
-        return testStationDataMapper.findAllNotifications(service, contextName, ContextAttribute.state.name(),
-                ContextAttribute.statePayload.name(), ContextAttribute.acknowledge.name());
+    public List<TestStationData> findAllNotificationsForStationBayByAck(String service, String contextName) {
+        return testStationDataMapper.findAllAcknowledges(service, contextName,  ContextAttribute.acknowledge.name());
     }
 
-    public List<TestStationData> findAllNotificationsForStationBayByStates(String service, String contextName, List<String> states) {
+    public List<TestStationData> findAllNotificationsForStationBayByStatesAndAck(String service, String contextName, List<String> states) {
         return testStationDataMapper.finAllNotificationsByStates(service, contextName, ContextAttribute.state.name(),
                 ContextAttribute.statePayload.name(), ContextAttribute.acknowledge.name(), states);
     }

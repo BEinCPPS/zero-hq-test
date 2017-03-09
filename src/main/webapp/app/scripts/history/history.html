@@ -3,7 +3,7 @@
         <ion-list class="list" can-swipe="true" show-delete=”false”>
             <ion-item class="item item-divider" ng-repeat="n in vm.notifications">
                 <i class="icon ion-alert-circled"></i>
-                State {{n.notification.stateCode}} {{n.notification.stateDescription}} {{n.notification.statePayload}}
+                State {{n.stateInfo.stateCode}} {{n.stateInfo.stateDescription}} {{n.stateInfo.statePayload}}
                 <!--  <a class="item item-alarm" href="#/app/history-form-placeholder-labels">
                       Alarm in {{n.stationName}} in bay {{n.bayNumber}}
                   </a>-->

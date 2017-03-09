@@ -1,26 +1,30 @@
 package it.eng.zerohqt.business;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import it.eng.zerohqt.business.model.Acknowledge;
+import it.eng.zerohqt.business.model.BaseBayInfo;
 import it.eng.zerohqt.business.model.InformationBay;
-import it.eng.zerohqt.business.model.Notification;
+import it.eng.zerohqt.business.model.StateInfo;
 import it.eng.zerohqt.dao.model.AcknowledgeTypes;
 import it.eng.zerohqt.dao.model.ContextAttribute;
+import it.eng.zerohqt.dao.model.TestStationData;
 import it.eng.zerohqt.orion.model.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by ascatox on 17/02/17.
  */
-public class TestStationBayContextTransformer {
-
+public class InformationBayContextTransformer {
+    private static Logger logger = Logger.getLogger(InformationBayContextTransformer.class);
 
     public static Optional<List<InformationBay>> transformToInformationBay(TestStationBayContext testStationBayContext) {
         InformationBay informationBay = new InformationBay();
-        Notification notification = new Notification();
+        StateInfo notification = new StateInfo();
         ArrayList<ContextResponses> contextResponses = testStationBayContext.getContextResponses();
         List<InformationBay> informationBays = new ArrayList<>();
         if (null == contextResponses || contextResponses.isEmpty()) Optional.empty();
@@ -44,10 +48,6 @@ public class TestStationBayContextTransformer {
                     }
                 } else if (attribute.getName().equals(ContextAttribute.statePayload.name())) {
                     notification.setStatePayload(attribute.getValue());
-                } else if (attribute.getName().equals(ContextAttribute.acknowledge.name())) {
-                    if (StringUtils.isNotBlank(attribute.getValue())) {
-                        notification.setAcknowledge(AcknowledgeTypes.valueOf("ack" + attribute.getValue()).getDescription());
-                     }
                 } else if (attribute.getName().equals(ContextAttribute.ipAddress.name())) {
                     informationBay.setIpAddress(attribute.getValue());
                 } else if (attribute.getName().equals(ContextAttribute.stationInfo.name())) {
@@ -55,23 +55,46 @@ public class TestStationBayContextTransformer {
                 }
                 notification.setTimestamp(new Date());
                 informationBay.setTimestamp(new Date());
-                informationBay.setNotification(notification);
+                informationBay.setStateInfo(notification);
                 informationBays.add(informationBay);
             }
         }
         return Optional.of(informationBays);
     }
 
+    public static List<Acknowledge> transformToInformationBaies(List<TestStationData> testStationDatas) {
+        if (null == testStationDatas || testStationDatas.isEmpty()) return null;
+        return testStationDatas.stream()
+                .map(td -> transformToInformationBay(td)).collect(Collectors.toList());
+    }
 
-    private static void extractStationNameAndBayNumber(String stationId, InformationBay informationBay) {
-        if (StringUtils.isBlank(stationId)) return;
+
+    public static Acknowledge transformToInformationBay(TestStationData testStationData) {
+        if (testStationData == null || StringUtils.isBlank(testStationData.getEntityId())) return null;
+        Acknowledge acknowledge = new Acknowledge();
+        acknowledge.setBayCode(testStationData.getEntityId());
+        extractStationNameAndBayNumber(testStationData.getEntityId(), acknowledge);
+        String attrName = testStationData.getAttrName();
+        if (attrName.equals(ContextAttribute.acknowledge.name())) {
+            acknowledge.setAckType(AcknowledgeTypes.valueOf("ack" + testStationData.getAttrValue()));
+        }
+
+        return acknowledge;
+    }
+
+    private static void extractStationNameAndBayNumber(String stationId, BaseBayInfo baseBayInfo) {
         String[] stationIds = stationId.split(":");
         if (null == stationIds || stationIds.length == 0) return;
         String part = stationIds[1];
         String[] parts = part.split("_");
         if (null == part || parts.length == 0) return;
-        informationBay.setStationName(parts[0]);
-        informationBay.setBayNumber(Integer.parseInt(parts[1]));
+        baseBayInfo.setStationName(parts[0]);
+        baseBayInfo.setBayNumber(Integer.parseInt(parts[1]));
+    }
+
+    private static Metadatas[] parseJsonMetdatas(String metadatas) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(metadatas, Metadatas[].class);
     }
 
 

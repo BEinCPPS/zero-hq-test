@@ -1,5 +1,8 @@
 package it.eng.zerohqt;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import it.eng.zerohqt.business.model.InformationBay;
+import it.eng.zerohqt.business.model.StateInfo;
 import it.eng.zerohqt.config.WebSocketConfiguration;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -19,6 +22,9 @@ import org.springframework.web.socket.sockjs.client.SockJsClient;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -39,7 +45,7 @@ public class ZeroHqWebSocketTest {
     public static final int DELAY = 5000; //milliseconds
     private final Logger logger = Logger.getLogger(ZeroHqWebSocketTest.class);
 
-    static final String informationBay_11 = "{\n" +
+    /*static final String informationBay_11 = "{\n" +
             "\t\"stationName\": \"TestStation1\",\n" +
             "\t\"stationDescription\": \"Macchina 1 Box 1\",\n" +
             "\t\"bayCode\": \"teststation:TestStation1_1\",\n" +
@@ -230,15 +236,38 @@ public class ZeroHqWebSocketTest {
             "\t},\n" +
             "\t\"timestamp\": 1488881865346\n" +
             "}";
+           */
 
     BlockingQueue<String> blockingQueue;
     WebSocketStompClient stompClient;
     String[] messages;
     Random rand;
+    List<InformationBay> informationBayList;
 
     @Before
     public void setup() {
-        messages = new String[12];
+        informationBayList = new ArrayList<>();
+        for (int i = 1; i <= 3; i++) {
+            for (int j = 1; j <= 4; j++) {
+                InformationBay informationBay = new InformationBay();
+                informationBay.setIpAddress("100.100.100.100");
+                String testStationName = "TestStation" + i;
+                informationBay.setStationName(testStationName);
+                informationBay.setBayCode("testStation:" + testStationName + "_" + j);
+                informationBay.setBayNumber(j);
+                StateInfo stateInfo = new StateInfo();
+                stateInfo.setStateDescription("Rule Execution");
+                stateInfo.setStatePayload("|N| | |N| |A|0|");
+                int stateCode = 127 - j;
+                stateInfo.setStateCode(stateCode + "");
+                stateInfo.setTimestamp(new Date());
+                informationBay.setStateInfo(stateInfo);
+                informationBay.setTimestamp(new Date());
+                informationBayList.add(informationBay);
+            }
+        }
+
+        /*messages = new String[12];
         //WARNING !!! ADD NEW MESSAGES
         messages[0] = informationBay_11;
         messages[1] = informationBay_12;
@@ -253,6 +282,7 @@ public class ZeroHqWebSocketTest {
         messages[10] = informationBay_33;
         messages[11] = informationBay_34;
         //WARNING !!! ADD NEW MESSAGES
+        */
 
         rand = new Random();
         blockingQueue = new LinkedBlockingDeque<>();
@@ -270,11 +300,14 @@ public class ZeroHqWebSocketTest {
 
         for (; ; ) {
             Thread.sleep(DELAY);
-            String message = messages[rand.nextInt(100) % messages.length];
-            session.send(WEBSOCKET_TOPIC, message.getBytes());
-            logger.info(message);
-
-            Assert.assertEquals(message, blockingQueue.poll(1, SECONDS));
+            InformationBay[] messageBays = new InformationBay[informationBayList.size()];
+            messageBays = informationBayList.toArray(messageBays);
+            InformationBay message = messageBays[rand.nextInt(100) % messages.length];
+            ObjectMapper mapper = new ObjectMapper();
+            String messageJson = mapper.writeValueAsString(message);
+            session.send(WEBSOCKET_TOPIC, messageJson.getBytes());
+            logger.info(messageJson);
+            Assert.assertEquals(messageJson, blockingQueue.poll(1, SECONDS));
         }
     }
 
