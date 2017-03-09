@@ -302,7 +302,7 @@ public class ZeroHqWebSocketTest {
             Thread.sleep(DELAY);
             InformationBay[] messageBays = new InformationBay[informationBayList.size()];
             messageBays = informationBayList.toArray(messageBays);
-            InformationBay message = messageBays[rand.nextInt(100) % messages.length];
+            InformationBay message = messageBays[rand.nextInt(100) % messageBays.length];
             ObjectMapper mapper = new ObjectMapper();
             String messageJson = mapper.writeValueAsString(message);
             session.send(WEBSOCKET_TOPIC, messageJson.getBytes());
