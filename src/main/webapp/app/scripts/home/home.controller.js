@@ -12,11 +12,7 @@
     function HomeController(menuItems, homeDataService, externalAppsService, $cordovaEmailComposer, websocketService, $scope) {
         var messageMap = {};
         var vm = angular.extend(this, {
-            entries: messageMap,
-            phoneNumber: homeDataService.phoneNumber,
-            getDirections: getDirections,
-            sendEmail: sendEmail,
-            openFacebookPage: openFacebookPage
+            entries: messageMap
         });
 
         $scope.$on('wsMessage', function (event, informationBay) {
@@ -25,7 +21,7 @@
             $scope.$apply(); //Apply changes to the page
         });
 
-        function getDirections() {
+        /*function getDirections() {
             externalAppsService.openMapsApp(homeDataService.officeLocation);
         }
 
@@ -43,7 +39,7 @@
 
         function openFacebookPage() {
             externalAppsService.openExternalUrl(homeDataService.facebookPage);
-        }
+        }*/
 
         function aggregateData(informationBay) {
             var stationName = informationBay.stationName;

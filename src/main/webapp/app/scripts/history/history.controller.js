@@ -1,28 +1,44 @@
-(function() {
-	'use strict';
+(function () {
+    'use strict';
 
-	angular
-		.module('zerohqt.history')
-		.controller('HistoryController', HistoryController);
+    angular
+        .module('zerohqt.history')
+        .controller('HistoryController', HistoryController);
 
-		HistoryController.$inject = ['menuItems','$scope'];
+    HistoryController.$inject = ['$scope', 'daoService', '$ionicLoading'];
 
-	/* @ngInject */
-	function HistoryController(menuItems, $scope) {
-		var notifications = [] ;
-		var vm = angular.extend(this, {
-			notifications : notifications,
-			loadMore: loadMore
-			//TODO: add methods and properties to this controller
-		});
+    /* @ngInject */
+    function HistoryController($scope, daoService, $ionicLoading) {
+        var notifications = [];
+        var vm = angular.extend(this, {});
+
+        $scope.loadMore = function () {
+            $scope.show($ionicLoading);
+            daoService.fullHistory().then(function (req) {
+                $scope.notifications = req.data;
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                $scope.hide($ionicLoading);
+            }, function (err) {
+                console.log(err);
+                $scope.hide($ionicLoading);
+            });
+        }
+        $scope.show = function () {
+            $ionicLoading.show({
+                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+            });
+        };
+
+        $scope.hide = function () {
+            $ionicLoading.hide();
+        };
         $scope.$on('wsMessage', function (event, informationBay) {
-        	notifications.push(informationBay);
+            notifications.push(informationBay);
             $scope.$apply(); //Apply changes to the page
         });
 
-        var loadMore = function () {
-
-        }
-
-	}
+        $scope.$on('$stateChangeSuccess', function () {
+            loadMore();
+        });
+    }
 })();

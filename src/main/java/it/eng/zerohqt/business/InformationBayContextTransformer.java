@@ -77,6 +77,7 @@ public class InformationBayContextTransformer {
         String attrName = testStationData.getAttrName();
         if (attrName.equals(ContextAttribute.acknowledge.name())) {
             acknowledge.setAckType(AcknowledgeTypes.valueOf("ack" + testStationData.getAttrValue()));
+            acknowledge.setDescription(AcknowledgeTypes.valueOf("ack" + testStationData.getAttrValue()).getDescription());
         }
 
         return acknowledge;
