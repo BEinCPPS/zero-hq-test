@@ -26,7 +26,8 @@ public class Reasoner {
         TestStationBayContext stationBayContext;
         try {
             stationBayContext = mapper.readValue(message, TestStationBayContext.class);
-            Optional<List<InformationBay>> informationBays = InformationBayContextTransformer.transformToInformationBay(stationBayContext);
+            Optional<List<InformationBay>> informationBays = InformationBayContextTransformer
+                    .transformToInformationBay(stationBayContext);
             InformationBay informationBay = null;
             if (informationBays.isPresent()) {
                 informationBay = informationBays.get().get(0); //TODO Only one

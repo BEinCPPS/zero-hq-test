@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('starter')
+		.module('zerohqt.common')
 		.config(function($httpProvider) {
 			$httpProvider.interceptors.push(function($rootScope, $q) {
 				return {

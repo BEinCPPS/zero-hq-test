@@ -61,7 +61,7 @@ module.exports = function(grunt) {
 				constants: {
 					ENV: {
 						name: 'development',
-						apiEndpoint: 'http://dev.yoursite.com:10000/',
+						apiEndpoint: 'http://localhost:8080/',
 						youtubeKey: 'AIzaSyDael5MmCQa1GKQNKQYypmBeB08GATgSEo',
 						ionicPrivateKey: 'a9265eaf15a20cc8516c770e8748aeed4891b28f453ce755', //'c63b22cd7330a4a9d5e526bfcd74891a59fd5c23d1d81239',
 						ionicPublicKey: 'e30d4d540b8c75d1f167bbf242423c3fb23fe10275d1c016', //'04dee953a91ef3857f1c8a7cf4748ecee375848681f7e833',
@@ -90,7 +90,8 @@ module.exports = function(grunt) {
 						// Requesting a user’s email address requires your application to be whitelisted by Twitter
 						// https://dev.twitter.com/rest/reference/get/account/verify_credentials
 						twitterApiKey: 'wXRPbDKzyLXOy4etLq4fNqu8M',
-						twitterApiSecret: '1Bi6DGM98yc9MToSLstGLFaB2tvHOLkBrBBYm8WWI2fTKl0gWX'
+						twitterApiSecret: '1Bi6DGM98yc9MToSLstGLFaB2tvHOLkBrBBYm8WWI2fTKl0gWX',
+						historyDelta: '25'
 					}
 				}
 			},

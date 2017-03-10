@@ -5,11 +5,10 @@
         .module('zerohqt.home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['menuItems', 'homeDataService', 'externalAppsService',
-        '$cordovaEmailComposer', 'websocketService', '$scope'];
+    HomeController.$inject = ['websocketService', '$scope'];
 
     /* @ngInject */
-    function HomeController(menuItems, homeDataService, externalAppsService, $cordovaEmailComposer, websocketService, $scope) {
+    function HomeController(websocketService, $scope) {
         var messageMap = {};
         var vm = angular.extend(this, {
             entries: messageMap
@@ -21,33 +20,21 @@
             $scope.$apply(); //Apply changes to the page
         });
 
-        /*function getDirections() {
-            externalAppsService.openMapsApp(homeDataService.officeLocation);
-        }
-
-        function sendEmail() {
-            $cordovaEmailComposer.isAvailable().then(function () {
-                var email = {
-                    to: homeDataService.email,
-                    subject: 'Cordova Icons',
-                    body: 'How are you? Nice greetings from Leipzig'
-                };
-
-                $cordovaEmailComposer.open(email);
-            });
-        }
-
-        function openFacebookPage() {
-            externalAppsService.openExternalUrl(homeDataService.facebookPage);
-        }*/
-
         function aggregateData(informationBay) {
             var stationName = informationBay.stationName;
-            var baies = messageMap[stationName] ? messageMap[stationName] : [];
+            var bays = messageMap[stationName] ? messageMap[stationName] : [];
+            initBaysArray(bays);
             var bayNumber = parseInt(informationBay.bayNumber);
             bayNumber--;
-            baies[bayNumber] = informationBay; //Station baies numbers starts from 1
-            messageMap[stationName] = baies;
+            bays[bayNumber] = informationBay; //Station baies numbers starts from 1
+            messageMap[stationName] = bays;
+        }
+
+        function initBaysArray(bays) {
+            for (var i in bays) {
+                if (bays[i]) continue;
+                else bays[i] = {};
+            }
         }
 
         (function connectWebSocket() {

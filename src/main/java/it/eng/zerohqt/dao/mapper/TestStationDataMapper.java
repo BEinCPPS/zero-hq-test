@@ -23,11 +23,6 @@ public interface TestStationDataMapper {
      * @return
      */
     @Select("SELECT * FROM ${service}.${context} where " +
-           /* "(attrName = #{stateName} " +
-            "and " +
-            "attrValue in (\"400\")) or " +
-            "attrName=#{statePayloadName} " +
-            "or " +*/
             "attrName=#{acknowledgeName} " +
             "order by recvTime DESC LIMIT 100"
     )
