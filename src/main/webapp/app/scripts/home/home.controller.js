@@ -5,11 +5,10 @@
         .module('zerohqt.home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['menuItems', 'homeDataService', 'externalAppsService',
-        '$cordovaEmailComposer', 'websocketService', '$scope'];
+    HomeController.$inject = ['websocketService', '$scope'];
 
     /* @ngInject */
-    function HomeController(menuItems, homeDataService, externalAppsService, $cordovaEmailComposer, websocketService, $scope) {
+    function HomeController(websocketService, $scope) {
         var messageMap = {};
         var vm = angular.extend(this, {
             entries: messageMap
