@@ -57,7 +57,7 @@ public class ZeroHqTestApplicationTests {
 
 
     @Test
-    public void testGetAllNotificationsFor400And600() {
+    public void testGetAllNotificationsForAck() {
         List<TestStationData> notifications = testStationDataDao.findAllNotificationsForStationBayByAck(DEFAULT_SERVICE,
                 "whrTestsubservice_teststation_TestStation1_1_teststation");
         assertNotNull(notifications);

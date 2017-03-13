@@ -13,14 +13,14 @@
         var vm = angular.extend(this, {});
 
         $scope.loadMore = function () {
-            $scope.show($ionicLoading);
+            //$scope.show($ionicLoading);
             daoService.fullHistory().then(function (req) {
                 $scope.notifications = req.data;
-                $scope.$broadcast('scroll.infiniteScrollComplete');
-                $scope.hide($ionicLoading);
+                //$scope.$broadcast('scroll.infiniteScrollComplete');
+                //$scope.hide($ionicLoading);
             }, function (err) {
                 console.log(err);
-                $scope.hide($ionicLoading);
+                //$scope.hide($ionicLoading);
             });
         }
         $scope.show = function () {
@@ -38,7 +38,7 @@
         });
 
         $scope.$on('$stateChangeSuccess', function () {
-            loadMore();
+            $scope.loadMore();
         });
     }
 })();

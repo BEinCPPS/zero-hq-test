@@ -1,9 +1,9 @@
 <ion-view view-title="History">
     <ion-content>
         <ion-list class="list" can-swipe="true" show-delete=”false”>
-            <ion-item class="item item-divider" ng-repeat="n in vm.notifications">
+            <ion-item class="item item-divider" ng-repeat="n in notifications">
                 <i class="icon ion-alert-circled"></i>
-                State {{n.stateInfo.stateCode}} {{n.stateInfo.stateDescription}} {{n.stateInfo.statePayload}}
+                Notification {{n.ackType}} {{n.description}} {{n.stationName}}
                 <!--  <a class="item item-alarm" href="#/app/history-form-placeholder-labels">
                       Alarm in {{n.stationName}} in bay {{n.bayNumber}}
                   </a>-->
@@ -57,7 +57,7 @@
         <ion-infinite-scroll
                 on-infinite="loadMore()"
                 icon="ion-loading-c"
-                distance="1%">
+        >
         </ion-infinite-scroll>
     </ion-content>
 </ion-view>

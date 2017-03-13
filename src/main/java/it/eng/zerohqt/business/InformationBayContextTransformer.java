@@ -5,6 +5,7 @@ import it.eng.zerohqt.business.model.Acknowledge;
 import it.eng.zerohqt.business.model.BaseBayInfo;
 import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.business.model.StateInfo;
+import it.eng.zerohqt.config.Utils;
 import it.eng.zerohqt.dao.model.AcknowledgeTypes;
 import it.eng.zerohqt.dao.model.ContextAttribute;
 import it.eng.zerohqt.dao.model.TestStationData;
@@ -75,7 +76,8 @@ public class InformationBayContextTransformer {
         acknowledge.setBayCode(testStationData.getEntityId());
         extractStationNameAndBayNumber(testStationData.getEntityId(), acknowledge);
         String attrName = testStationData.getAttrName();
-        if (attrName.equals(ContextAttribute.acknowledge.name())) {
+        if (attrName.equals(ContextAttribute.acknowledge.name())
+                && Utils.isStringNotBlankExt(testStationData.getAttrValue())) {
             acknowledge.setAckType(AcknowledgeTypes.valueOf("ack" + testStationData.getAttrValue()));
             acknowledge.setDescription(AcknowledgeTypes.valueOf("ack" + testStationData.getAttrValue()).getDescription());
         }
