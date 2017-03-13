@@ -26,7 +26,7 @@
             initBaysArray(bays);
             var bayNumber = parseInt(informationBay.bayNumber);
             bayNumber--;
-            bays[bayNumber] = informationBay; //Station baies numbers starts from 1
+            bays[bayNumber] = informationBay; //Station bays numbers starts from 1
             messageMap[stationName] = bays;
         }
 
