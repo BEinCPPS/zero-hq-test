@@ -1,11 +1,9 @@
 package it.eng.zerohqt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.eng.zerohqt.business.model.Acknowledge;
 import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.business.model.StateInfo;
 import it.eng.zerohqt.config.WebSocketConfiguration;
-import it.eng.zerohqt.dao.model.AcknowledgeTypes;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
@@ -40,33 +38,39 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-public class ZeroHqWebSocketAckTest {
+public class ZeroHqWebSocketTest {
 
     static final String WEBSOCKET_URI = "ws://localhost:8080/websocket";
     static final String WEBSOCKET_TOPIC = WebSocketConfiguration.DEFAULT_CHANNEL;
     public static final int DELAY = 5000; //milliseconds
-    private final Logger logger = Logger.getLogger(ZeroHqWebSocketAckTest.class);
+    private final Logger logger = Logger.getLogger(ZeroHqWebSocketTest.class);
 
     BlockingQueue<String> blockingQueue;
     WebSocketStompClient stompClient;
     String[] messages;
     Random rand;
-    List<Acknowledge> acknowledgeList;
-
+    List<InformationBay> informationBayList;
 
     @Before
     public void setup() {
-        acknowledgeList = new ArrayList<>();
+        informationBayList = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
             for (int j = 1; j <= 4; j++) {
+                InformationBay informationBay = new InformationBay();
+                informationBay.setIpAddress("100.100.100.100");
                 String testStationName = "TestStation" + i;
-                Acknowledge acknowledge = new Acknowledge();
-                acknowledge.setAckType(AcknowledgeTypes.ack1);
-                acknowledge.setDescription(AcknowledgeTypes.ack1.getDescription());
-                acknowledge.setBayCode("testStation:" + testStationName + "_" + j);
-                acknowledge.setBayNumber(j);
-                acknowledge.setStationName(testStationName);
-                acknowledgeList.add(acknowledge);
+                informationBay.setStationName(testStationName);
+                informationBay.setBayCode("testStation:" + testStationName + "_" + j);
+                informationBay.setBayNumber(j);
+                StateInfo stateInfo = new StateInfo();
+                stateInfo.setStateDescription("Rule Execution");
+                stateInfo.setStatePayload("|N| | |N| |A|0|");
+                int stateCode = 127 - j;
+                stateInfo.setStateCode(stateCode + "");
+                stateInfo.setTimestamp(new Date());
+                informationBay.setStateInfo(stateInfo);
+                informationBay.setTimestamp(new Date());
+                informationBayList.add(informationBay);
             }
         }
 
@@ -86,9 +90,9 @@ public class ZeroHqWebSocketAckTest {
 
         for (; ; ) {
             Thread.sleep(DELAY);
-            Acknowledge[] messageBays = new Acknowledge[acknowledgeList.size()];
-            messageBays = acknowledgeList.toArray(messageBays);
-            Acknowledge message = messageBays[rand.nextInt(100) % messageBays.length];
+            InformationBay[] messageBays = new InformationBay[informationBayList.size()];
+            messageBays = informationBayList.toArray(messageBays);
+            InformationBay message = messageBays[rand.nextInt(100) % messageBays.length];
             ObjectMapper mapper = new ObjectMapper();
             String messageJson = mapper.writeValueAsString(message);
             session.send(WEBSOCKET_TOPIC, messageJson.getBytes());

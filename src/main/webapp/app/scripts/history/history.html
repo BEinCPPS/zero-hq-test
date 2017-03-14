@@ -1,12 +1,16 @@
 <ion-view view-title="History">
     <ion-content>
-        <ion-list class="list" can-swipe="true">
-            <ion-item class="item item-divider" ng-repeat="n in notifications">
-                <i class="icon ion-alert-circled"></i>
-                Notification {{n.ackType}} {{n.description}} {{n.stationName}}
-                <!--  <a class="item item-alarm" href="#/app/history-form-placeholder-labels">
-                      Alarm in {{n.stationName}} in bay {{n.bayNumber}}
-                  </a>-->
+        <ion-list class="list">
+            <ion-item class="item item-divider item-text-wrap" ng-repeat="n in notifications">
+                <ion-item ng-class={"item-warning":n.ackType=='ack2',"item-alarm":n.ackType=='ack1'}>
+
+                    <i class="icon ion-alert-circled"></i>
+                    Notification {{n.ackType}} {{n.description}} in
+                    Station: {{n.stationName}} Bay: {{n.bayNumber}}
+                    <!--  <a class="item item-alarm" href="#/app/history-form-placeholder-labels">
+                          Alarm in {{n.stationName}} in bay {{n.bayNumber}}
+                      </a>-->
+                </ion-item>
             </ion-item>
 
 
