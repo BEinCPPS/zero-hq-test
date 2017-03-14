@@ -9601,3 +9601,9 @@ img {
 .item-warning {background-color: #ffc900}
 
 .buttons {float:right}
+
+.red-button {background: red;}
+.yellow-button {background: yellow;}
+.green-button {background: green;}
+
+

@@ -23,7 +23,8 @@ public interface TestStationDataMapper {
      * @return
      */
     @Select("SELECT * FROM ${service}.${context} where " +
-            "attrName=#{acknowledgeName} " +
+            "attrName=#{acknowledgeName} and " +
+            "attrValue in ('1','2','3')  " +
             "order by recvTime DESC LIMIT 100"
     )
     List<TestStationData> findAllAcknowledges(@Param("service") String service,
