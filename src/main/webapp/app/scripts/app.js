@@ -13,14 +13,14 @@ angular.module('starter', [
 	'zerohqt.common',
 	'zerohqt.home',
 	'zerohqt.map',
-	'zerohqt.wordpress',
+	'zerohqt.inbox',
 	'zerohqt.menu',
 	'zerohqt.history',
 	'zerohqt.popover-menu',
 	'zerohqt.native-scrolling',
 	'zerohqt.new-slide-box',
 	'gMaps',
-	'ngCordova',
+	'ngCordova'
 ])
 
 .value('_', window._)

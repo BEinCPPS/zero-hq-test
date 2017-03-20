@@ -2,11 +2,18 @@
     <ion-content>
         <ion-list class="list">
             <ion-item class="item item-divider item-text-wrap" ng-repeat="n in notifications">
-                <ion-item ng-class={"item-warning":n.ackType=='ack2',"item-alarm":n.ackType=='ack1'}>
+                <ion-item>
+                    <button ion-button small ion-alert-circled class="icon ion-alert-circled"
+                            ng-class={"red-button":n.ackType=='ack1',"yellow-button":n.ackType=='ack2'}>
+                    </button>
 
-                    <i class="icon ion-alert-circled"></i>
-                    Notification {{n.ackType}} {{n.description}} in
-                    Station: {{n.stationName}} Bay: {{n.bayNumber}}
+
+
+                    <!--<i ng-class={"item-warning":n.ackType=='ack2',"item-alarm":n.ackType=='ack1'} class="icon ion-alert-circled"> </i>-->
+                    Station: {{n.stationName}} Bay: {{n.bayNumber}} </br>
+                    {{n.description}}
+                   <!-- Notification {{n.ackType}} {{n.description}} in
+                    Station: {{n.stationName}} Bay: {{n.bayNumber}}-->
                     <!--  <a class="item item-alarm" href="#/app/history-form-placeholder-labels">
                           Alarm in {{n.stationName}} in bay {{n.bayNumber}}
                       </a>-->

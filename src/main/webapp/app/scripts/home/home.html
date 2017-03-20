@@ -1,79 +1,49 @@
 <ion-view view-title="Home">
     <ion-content>
-        <div class="home-hello">
-            <img src="http://lorempixel.com/1024/768/"/>
-            <div class="item item-text-wrap">
-                <h1>BEinCPPS</h1>
-                <h2> by Engineering</h2>
-                <!--50 Market Street, San Francisco, California 94103, United States-->
-            </div>
+
+        <div class="item item-text-wrap">
+            <a href="http://www.whirlpool.it" class="item item-icon-left">
+                <img src="http://www.whirlpool.it/images/whirlpool-logo.png"/>
+            </a>
         </div>
 
-        <!--
-         | http://stackoverflow.com/questions/27239735/ionic-framwork-gridlayout-with-multiple-rows-and-column-on-which-buttons-placed
-         | http://stackoverflow.com/questions/23779773/angularjs-loops-and-formatting/23780288#23780288
-         -->
+       <!-- <ion-list-header nav-clear menu-close class="item-text-wrap">
+            <ion-item> Station Name</ion-item>
+            <ion-item> Bay 1 </ion-item>
+            <ion-item> Bay 2 </ion-item>
+            <ion-item> Bay 3 </ion-item>
+            <ion-item> Bay 4 </ion-item>
+        </ion-list-header>-->
+
         <div ng-repeat="(stationName,baies) in vm.entries">
             <div class="row">
                 <div class="card col home">
                     <!--<a class="item item-text-wrap" href="#/app/{{vm.entries[$index].path}}">-->
+
                     <ion-item nav-clear menu-close class="item-text-wrap" href="#/app/{{vm.entries[$index].bayCode}}">
                         {{stationName}}
-						<ion-buttons ng-repeat="bay in baies track by $index" class="buttons">
-								<button ion-button small ng-class={"red-button":bay.stateInfo.stateCode=='124',"yellow-button":bay.stateInfo.stateCode=='125'}>{{bay.stateInfo.stateCode}}</button>
+                        <ion-buttons ng-repeat="bay in baies track by $index" class="buttons">
+                            <button ion-button small
+                                    ng-class={"red-button":bay.stateInfo.stateCode=='124',"yellow-button":bay.stateInfo.stateCode=='125'}>
+                                {{bay.stateInfo.stateCode}}
+                            </button>
                             <!--<button ion-button small ng-class={bay.stateInfo.stateCode=='124'?"yellow-button":bay.stateInfo.stateCode=='125'?"green-button"}>{{bay.stateInfo.stateCode}}</button>-->
-						</ion-buttons>
-
-
-                        <!--<div class="card col home">
-                            <div ng-repeat="bay in baies">
-                                <h3>{{bay.ipAddress}}</h3>
-                                <h3>{{bay.bayCode}}</h3>
-                                <h3>{{bay.stateInfo.stateCode}}</h3>
-                            </div>
-                        </div>-->
+                        </ion-buttons>
                     </ion-item>
                 </div>
             </div>
-
-            <!--<div class="row">-->
-            <!--<div class="card col home">-->
-            <!--<a class="item item-text-wrap" href="#/app/{{vm.entries[$index + 1].path}}">-->
-            <!--<h1><i class="icon {{vm.entries[$index + 1].icon}}"></i></h1>-->
-            <!--<h2>{{vm.entries[$index + 1].title}}</h2>-->
-            <!--</a>-->
-            <!--</div>-->
-            <!--</div>-->
-
         </div>
         <div class="item item-text-wrap">
-            <h2> Created by </h2>
+            <h2> Project </h2>
+            <a href="http://beincpps.eu" class="item item-icon-left">
+                <img src="https://static.wixstatic.com/media/03d390_8708eaa4f99440b4b59a7242a0ad76ef~mv2.png/v1/fill/w_238,h_45,al_c,usm_0.66_1.00_0.01/03d390_8708eaa4f99440b4b59a7242a0ad76ef~mv2.png"/>
+            </a>
+        </div>
+        <div class="item item-text-wrap">
+            <h2> Powered by </h2>
             <a href="http://eng.it" class="item item-icon-left">
                 <img src="http://eng.it/resources/img/eng.png"/>
             </a>
         </div>
-
-        <!--<div class="list card">
-            <a href="tel:{{vm.phoneNumber}}" class="item item-icon-left">
-                <i class="icon ion-ios-telephone"></i>
-                Call us
-            </a>
-
-            <a class="item item-icon-left" ng-click="vm.sendEmail()">
-                <i class="icon ion-email"></i>
-                Send us and Email
-            </a>
-
-            <a href="#" class="item item-icon-left" ng-click="vm.getDirections()">
-                <i class="icon ion-compass"></i>
-                Find us / Get directions
-            </a>
-
-            <a ng-click="vm.openFacebookPage()" class="item item-icon-left">
-                <i class="icon ion-social-facebook"></i>
-                Visit us on Facebook
-            </a>
-        </div>-->
-
     </ion-content>
 </ion-view>
