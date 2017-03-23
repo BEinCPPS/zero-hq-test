@@ -1,69 +1,31 @@
 <ion-view view-title="History">
     <ion-content>
+        <ion-header>
+            <div class="item item-divider"><h3>Filter by</h3>
+                <div class="row">
+                    <label class="item item-divider item-text">
+                        <input type="search" placeholder=" Station Name" ng-model="search.stationName">
+                    </label>
+                    <label class="item item-divider item-text">
+                        <input type="search" placeholder=" Bay Number" ng-model="search.bayNumber">
+                    </label>
+                </div>
+            </div>
+        </ion-header>
+
         <ion-list class="list">
-            <ion-item class="item item-divider item-text-wrap" ng-repeat="n in notifications">
+
+            <ion-item class="item item-divider item-text-wrap" ng-repeat="n in notifications|filter:search">
                 <ion-item>
                     <button ion-button small ion-alert-circled class="icon ion-alert-circled"
                             ng-class={"red-button":n.ackType=='ack1',"yellow-button":n.ackType=='ack2'}>
                     </button>
-
-
-
-                    <!--<i ng-class={"item-warning":n.ackType=='ack2',"item-alarm":n.ackType=='ack1'} class="icon ion-alert-circled"> </i>-->
                     Station: {{n.stationName}} Bay: {{n.bayNumber}} </br>
                     {{n.description}}
-                   <!-- Notification {{n.ackType}} {{n.description}} in
-                    Station: {{n.stationName}} Bay: {{n.bayNumber}}-->
-                    <!--  <a class="item item-alarm" href="#/app/history-form-placeholder-labels">
-                          Alarm in {{n.stationName}} in bay {{n.bayNumber}}
-                      </a>-->
                 </ion-item>
             </ion-item>
 
 
-            <!--   <ion-item class="item item-divider">
-                   <i class="icon ion-android-alert"></i>
-                   Warning
-               </ion-item>
-           &lt;!&ndash;    <ion-item-sliding>
-                   <ion-item class="item item-warning">
-                       Warning Incomplete Data in Station x bay y
-                   </ion-item>
-                   <ion-item-options side="left">
-                       <button ion-button color="primary">
-                           <ion-icon name="text"></ion-icon>
-                           Text
-                       </button>
-                       <button ion-button color="secondary">
-                           <ion-icon name="call"></ion-icon>
-                           Call
-                       </button>
-                   </ion-item-options>
-               </ion-item-sliding>&ndash;&gt;
-
-                   <a class="item item-warning" href="#/app/history-checkbox">
-                       Checkbox
-                   </a>
-
-                   <a class="item item-warning" href="#/app/history-radiobuttons">
-                       Radio Buttons
-                   </a>
-
-               <div class="item item-divider">
-                   <h2>Other</h2>
-               </div>
-                   <a class="item" href="#/app/history-tabs-icononly">
-                       Icon-only
-                   </a>
-                   <a class="item" href="#/app/history-tabs-topicon">
-                       Top Icon
-                   </a>
-                   <a class="item" href="#/app/history-tabs-lefticon">
-                       Left Icon
-                   </a>
-                   <a class="item" href="#/app/history-tabs-striped">
-                       Striped Style
-                   </a>-->
         </ion-list>
         <ion-infinite-scroll
                 on-infinite="loadMore()"

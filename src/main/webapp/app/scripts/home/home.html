@@ -6,14 +6,16 @@
                 <img src="http://www.whirlpool.it/images/whirlpool-logo.png"/>
             </a>
         </div>
-
-       <!-- <ion-list-header nav-clear menu-close class="item-text-wrap">
-            <ion-item> Station Name</ion-item>
-            <ion-item> Bay 1 </ion-item>
-            <ion-item> Bay 2 </ion-item>
-            <ion-item> Bay 3 </ion-item>
-            <ion-item> Bay 4 </ion-item>
-        </ion-list-header>-->
+        <div class="row">
+            <ion-item nav-clear menu-close class="row card home item-text-wrap">
+                <div class="col col-40">Station Name</div>
+                <div class="col col-13">Bay1</div>
+                <div class="col col-13">Bay2</div>
+                <div class="col col-13">Bay3</div>
+                <div class="col col-13">Bay4</div>
+                <div class="col col-8"></div>
+            </ion-item>
+        </div>
 
         <div ng-repeat="(stationName,baies) in vm.entries">
             <div class="row">
@@ -23,7 +25,7 @@
                     <ion-item nav-clear menu-close class="item-text-wrap" href="#/app/{{vm.entries[$index].bayCode}}">
                         {{stationName}}
                         <ion-buttons ng-repeat="bay in baies track by $index" class="buttons">
-                            <button ion-button small
+                            <button ion-button small class="col-13"
                                     ng-class={"red-button":bay.stateInfo.stateCode=='124',"yellow-button":bay.stateInfo.stateCode=='125'}>
                                 {{bay.stateInfo.stateCode}}
                             </button>
@@ -33,17 +35,24 @@
                 </div>
             </div>
         </div>
-        <div class="item item-text-wrap">
-            <h2> Project </h2>
-            <a href="http://beincpps.eu" class="item item-icon-left">
-                <img src="https://static.wixstatic.com/media/03d390_8708eaa4f99440b4b59a7242a0ad76ef~mv2.png/v1/fill/w_238,h_45,al_c,usm_0.66_1.00_0.01/03d390_8708eaa4f99440b4b59a7242a0ad76ef~mv2.png"/>
-            </a>
+
+        <div class="row">
+            <ion-item nav-clear menu-close class="row card home item-text-wrap">
+                <div class="item item-text-wrap">
+                    <h3> Project </h3>
+                    <a href="http://beincpps.eu" class="item item-icon-left">
+                        <img src="https://static.wixstatic.com/media/03d390_8708eaa4f99440b4b59a7242a0ad76ef~mv2.png/v1/fill/w_238,h_45,al_c,usm_0.66_1.00_0.01/03d390_8708eaa4f99440b4b59a7242a0ad76ef~mv2.png"/>
+                    </a>
+                </div>
+                <div class="item item-text-wrap">
+                    <h3> Powered by </h3>
+                    <a href="http://eng.it" class="item item-icon-left">
+                        <img src="http://eng.it/resources/img/eng.png"/>
+                    </a>
+                </div>
+            </ion-item>
         </div>
-        <div class="item item-text-wrap">
-            <h2> Powered by </h2>
-            <a href="http://eng.it" class="item item-icon-left">
-                <img src="http://eng.it/resources/img/eng.png"/>
-            </a>
-        </div>
+
+
     </ion-content>
 </ion-view>
