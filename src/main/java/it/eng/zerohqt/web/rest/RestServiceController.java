@@ -5,6 +5,7 @@ import it.eng.zerohqt.business.Reasoner;
 import it.eng.zerohqt.business.model.Acknowledge;
 import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.config.OrionConfiguration;
+import it.eng.zerohqt.dao.TablesMetaDataDao;
 import it.eng.zerohqt.dao.TestStationDao;
 import it.eng.zerohqt.dao.model.TestStationData;
 import it.eng.zerohqt.orion.OrionContextConsumer;
@@ -28,6 +29,8 @@ public class RestServiceController {
     private OrionContextConsumer orionContextConsumer;
     @Autowired
     private TestStationDao testStationDao;
+    @Autowired
+    private TablesMetaDataDao tablesMetaDataDao;
     @Autowired
     private OrionConfiguration orionConfiguration;
     @Autowired
@@ -58,6 +61,29 @@ public class RestServiceController {
         }
     }
 
+    @RequestMapping(path = "/stationsBays", method = RequestMethod.GET)
+    public List<String> stationsBays() {
+        try {
+            return tablesMetaDataDao.getTablesMetaData(orionConfiguration.orionService);
+
+        } catch (Exception e) {
+            logger.error(e);
+            return new ArrayList<>();
+        }
+    }
+
+    @RequestMapping(path = "/stationBayHistory", method = RequestMethod.GET)
+    public List<Acknowledge> stationBayHistory(
+            @RequestParam String stationBay) {
+        try {
+            return InformationBayContextTransformer.
+                    transformToInformationBaies(testStationDao.
+                            findAllNotificationsStationBay(orionConfiguration.orionService.toLowerCase(), stationBay));
+        } catch (Exception e) {
+            logger.error(e);
+            return new ArrayList<>();
+        }
+    }
 
     @RequestMapping(path = "/nexthistory", method = RequestMethod.GET)
     public List<Acknowledge> nextHistory(
@@ -73,6 +99,7 @@ public class RestServiceController {
         }
     }
     //TODO Don't secure this endpoint, used by ORION
+
     @RequestMapping(path = "/notify", method = RequestMethod.POST)
     public void notification(@RequestBody String message) {
         logger.info("StateInfo from ORION --> " + message);

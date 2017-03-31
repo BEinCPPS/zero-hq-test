@@ -1,17 +1,32 @@
 <ion-view view-title="History">
     <ion-content>
-        <ion-header>
-            <div class="item item-divider"><h3>Filter by</h3>
-                <div class="row">
-                    <label class="item item-divider item-text">
-                        <input type="search" placeholder=" Station Name" ng-model="search.stationName">
-                    </label>
-                    <label class="item item-divider item-text">
-                        <input type="search" placeholder=" Bay Number" ng-model="search.bayNumber">
-                    </label>
-                </div>
-            </div>
-        </ion-header>
+
+
+<ion-item>
+
+                      <label class="item item-input item-select">
+
+                                Filter by
+
+                          <select name="filter" id="filter"
+                                  ng-model="filter"
+                                  ng-options="stationBay.label for stationBay in stationsBays"
+                                  ng-change="show()">
+                          </select>
+                      </label>
+
+</ion-item>
+
+
+                    <!--<label class="item item-divider item-text">-->
+                        <!--<input type="search" placeholder=" Station Name" ng-model="search.stationName">-->
+                    <!--</label>-->
+                    <!--<label class="item item-divider item-text">-->
+                        <!--<input type="search" placeholder=" Bay Number" ng-model="search.bayNumber">-->
+                    <!--</label>-->
+
+
+
 
         <ion-list class="list">
 
@@ -20,17 +35,16 @@
                     <button ion-button small ion-alert-circled class="icon ion-alert-circled"
                             ng-class={"red-button":n.ackType=='ack1',"yellow-button":n.ackType=='ack2'}>
                     </button>
-                    Station: {{n.stationName}} Bay: {{n.bayNumber}} </br>
-                    {{n.description}}
+                    Station: {{n.stationName}} Bay: {{n.bayNumber}} - {{n.description}}
                 </ion-item>
             </ion-item>
 
 
         </ion-list>
-        <ion-infinite-scroll
+     <!--   <ion-infinite-scroll
                 on-infinite="loadMore()"
                 icon="ion-loading-c"
         >
-        </ion-infinite-scroll>
+        </ion-infinite-scroll>-->
     </ion-content>
 </ion-view>

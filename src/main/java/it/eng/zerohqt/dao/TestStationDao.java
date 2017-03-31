@@ -1,5 +1,6 @@
 package it.eng.zerohqt.dao;
 
+import it.eng.zerohqt.config.OrionConfiguration;
 import it.eng.zerohqt.dao.model.TestStationData;
 import it.eng.zerohqt.dao.mapper.TablesMetaDataMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class TestStationDao {
     private TablesMetaDataMapper tablesMetaDataMapper;
     @Autowired
     private TestStationDataDao testStationDataDao;
+    @Autowired
+    private OrionConfiguration orionConfiguration;
     private static final String TEST_STATION = "teststation";
 
     public List<TestStationData> findAllNotifications(String service) throws Exception {
@@ -33,6 +36,13 @@ public class TestStationDao {
             notificationsList.addAll(allNotificationsForStation);
         }
         return notificationsList.stream().sorted().collect(Collectors.toList());
+    }
+
+    public List<TestStationData> findAllNotificationsStationBay(String service,String entityId ) throws Exception {
+       String tableName = orionConfiguration.orionServicepath.substring(1).toLowerCase() + "_teststation_" + entityId.toLowerCase() + "_teststation";
+       List<TestStationData> allNotificationsForStation = testStationDataDao
+                .findAllNotificationsForStationBayByAck(service, tableName);
+        return allNotificationsForStation;
     }
 
     public List<TestStationData> findNextNotifications(String service, int x0, int delta) throws Exception {
