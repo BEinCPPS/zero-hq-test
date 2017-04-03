@@ -14,15 +14,6 @@
         var vm = angular.extend(this, {});
 
 
-//     TODO  Agganciare la station bay selezionata sulla pagina html
-       /*var stationBay = 'TestStation1_1';
-        $scope.search = function (stationBay) {
-              daoService.stationBayHistory(stationBay).then(function (req) {
-                $scope.notifications = req.data;
-               }, function (err) {
-                   console.log(err);
-                });}; */
-
         ($scope.listStationsBays = function () {
             daoService.fullStationsBays().then(function (req) {
                var all = [{'All':''}];
@@ -32,7 +23,7 @@
 
                function splitta(value) {
                   var values = value.split("_")
-                  return values[2] + ' ' + values[3]
+                  return 'Station: ' + values[2] + ' - Bay: ' + values[3]
                                 };
 
                $scope.stationsBays = [];
@@ -52,7 +43,7 @@
             });
         })();
 
-
+//     TODO  gestire el diverse situazioni con fullHistory o con searchByStationBay
         $scope.loadMore = function () {
             //$scope.show($ionicLoading);
             daoService.fullHistory().then(function (req) {
@@ -64,9 +55,24 @@
                 //$scope.hide($ionicLoading);
             });
         }
-        $scope.show = function () {
-           alert("w maria");
+        $scope.searchByStationBay = function (stationBayExtended) {
+           if (stationBayExtended.value == 'All') {
+            daoService.fullHistory().then(function (req) {
+                           $scope.notifications = req.data;
+                       }, function (err) {
+                           console.log(err);
+                       });
+           }
+           else {
+            var values = stationBayExtended.value.split("_");
+            var item = values[2] + '_' + values[3];
+           daoService.stationBayHistory(item).then(function (req) {
+                     $scope.notifications = req.data;
+                     }, function (err) {
+                        console.log(err);
+                      });
         };
+        }
 
        /* $scope.hide = function () {
             $ionicLoading.hide();

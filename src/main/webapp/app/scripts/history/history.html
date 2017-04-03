@@ -11,7 +11,7 @@
                           <select name="filter" id="filter"
                                   ng-model="filter"
                                   ng-options="stationBay.label for stationBay in stationsBays"
-                                  ng-change="show()">
+                                  ng-change="searchByStationBay(filter)">
                           </select>
                       </label>
 
