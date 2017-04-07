@@ -3,15 +3,15 @@ package it.eng.zerohqt.dao.model;
 /**
  * Created by ascatox on 08/03/17.
  */
-public enum AcknowledgeTypes {
+public enum AcknowledgeType {
     ack1("Required intervention with Elimination Rule", 1),
     ack2("Cancellation intervention with Elimination Rule", 2),
     ack3("Prompted intervention by notice cancellation FE", 3);
-    //TODO Translation
+    //TODO Translation Properties file
     private String description;
     private Integer id;
 
-    AcknowledgeTypes(String description, Integer id) {
+    AcknowledgeType(String description, Integer id) {
         this.description = description;
         this.id = id;
     }

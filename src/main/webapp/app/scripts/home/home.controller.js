@@ -14,7 +14,7 @@
             entries: messageMap
         });
 
-        $scope.$on('wsMessage', function (event, informationBay) {
+        $scope.$on('wsMessageBay', function (event, informationBay) {
             console.log(informationBay); // 'Broadcast!'
             aggregateData(informationBay);
             $scope.$apply(); //Apply changes to the page

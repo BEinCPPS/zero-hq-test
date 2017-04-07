@@ -2,6 +2,7 @@ package it.eng.zerohqt.web.websocket;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.eng.zerohqt.business.Reasoner;
+import it.eng.zerohqt.business.model.Acknowledge;
 import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.config.WebSocketConfiguration;
 import org.apache.log4j.Logger;
@@ -24,9 +25,18 @@ public class WebSocketController {
     public void sendToClient(InformationBay informationBay) throws Exception {
         logger.info(informationBay.toString());
         ObjectMapper mapper = new ObjectMapper();
-        webSocketSender.convertAndSend(WebSocketConfiguration.DEFAULT_CHANNEL,
+        webSocketSender.convertAndSend(WebSocketConfiguration.INFORMATION_BAY_CHANNEL,
                 mapper.writeValueAsString(informationBay));
         logger.info("Sended at: " + new Date());
     }
+
+    public void sendToClient(Acknowledge acknowledge) throws Exception {
+        logger.info(acknowledge.toString());
+        ObjectMapper mapper = new ObjectMapper();
+        webSocketSender.convertAndSend(WebSocketConfiguration.ACKNOWLEDGE_CHANNEL,
+                mapper.writeValueAsString(acknowledge));
+        logger.info("Sended at: " + new Date());
+    }
+
 
 }

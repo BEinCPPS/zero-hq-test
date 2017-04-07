@@ -1,7 +1,6 @@
 package it.eng.zerohqt.business.model;
 
-import it.eng.zerohqt.dao.model.AcknowledgeTypes;
-import org.apache.commons.lang3.StringUtils;
+import it.eng.zerohqt.dao.model.AcknowledgeType;
 
 import java.io.Serializable;
 
@@ -10,21 +9,21 @@ import java.io.Serializable;
  */
 public class Acknowledge extends BaseBayInfo implements Serializable {
 
-    private AcknowledgeTypes ackType;
+    private AcknowledgeType ackType;
     private String description;
     public Acknowledge() {
     }
 
-    public Acknowledge(AcknowledgeTypes ackType, String description) {
+    public Acknowledge(AcknowledgeType ackType, String description) {
         this.ackType = ackType;
         this.description = description;
     }
 
-    public AcknowledgeTypes getAckType() {
+    public AcknowledgeType getAckType() {
         return ackType;
     }
 
-    public void setAckType(AcknowledgeTypes ackType) {
+    public void setAckType(AcknowledgeType ackType) {
         this.ackType = ackType;
     }
 

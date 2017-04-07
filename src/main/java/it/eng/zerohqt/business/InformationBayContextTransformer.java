@@ -6,7 +6,7 @@ import it.eng.zerohqt.business.model.BaseBayInfo;
 import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.business.model.StateInfo;
 import it.eng.zerohqt.config.Utils;
-import it.eng.zerohqt.dao.model.AcknowledgeTypes;
+import it.eng.zerohqt.dao.model.AcknowledgeType;
 import it.eng.zerohqt.dao.model.ContextAttribute;
 import it.eng.zerohqt.dao.model.TestStationData;
 import it.eng.zerohqt.orion.model.*;
@@ -78,8 +78,8 @@ public class InformationBayContextTransformer {
         String attrName = testStationData.getAttrName();
         if (attrName.equals(ContextAttribute.acknowledge.name())
                 && Utils.isStringNotBlankExt(testStationData.getAttrValue())) {
-            acknowledge.setAckType(AcknowledgeTypes.valueOf("ack" + testStationData.getAttrValue()));
-            acknowledge.setDescription(AcknowledgeTypes.valueOf("ack" + testStationData.getAttrValue()).getDescription());
+            acknowledge.setAckType(AcknowledgeType.valueOf("ack" + testStationData.getAttrValue()));
+            acknowledge.setDescription(AcknowledgeType.valueOf("ack" + testStationData.getAttrValue()).getDescription());
         }
 
         return acknowledge;
