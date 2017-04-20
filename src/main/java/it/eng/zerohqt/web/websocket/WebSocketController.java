@@ -25,18 +25,12 @@ public class WebSocketController {
     public void sendToClient(InformationBay informationBay) throws Exception {
         logger.info(informationBay.toString());
         ObjectMapper mapper = new ObjectMapper();
-        webSocketSender.convertAndSend(WebSocketConfiguration.INFORMATION_BAY_CHANNEL,
+        webSocketSender.convertAndSend(WebSocketConfiguration.DEFAULT_CHANNEL,
                 mapper.writeValueAsString(informationBay));
         logger.info("Sended at: " + new Date());
     }
 
-    public void sendToClient(Acknowledge acknowledge) throws Exception {
-        logger.info(acknowledge.toString());
-        ObjectMapper mapper = new ObjectMapper();
-        webSocketSender.convertAndSend(WebSocketConfiguration.ACKNOWLEDGE_CHANNEL,
-                mapper.writeValueAsString(acknowledge));
-        logger.info("Sended at: " + new Date());
-    }
+
 
 
 }

@@ -3,11 +3,9 @@ package it.eng.zerohqt.web.rest;
 import it.eng.zerohqt.business.InformationBayContextTransformer;
 import it.eng.zerohqt.business.Reasoner;
 import it.eng.zerohqt.business.model.Acknowledge;
-import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.config.OrionConfiguration;
 import it.eng.zerohqt.dao.TablesMetaDataDao;
 import it.eng.zerohqt.dao.TestStationDao;
-import it.eng.zerohqt.dao.model.TestStationData;
 import it.eng.zerohqt.orion.OrionContextConsumer;
 import it.eng.zerohqt.orion.client.model.subscribe.SubscriptionResponse;
 import org.apache.log4j.Logger;
@@ -53,7 +51,7 @@ public class RestServiceController {
     public List<Acknowledge> history() {
         try {
             return InformationBayContextTransformer.
-                    transformToInformationBaies(testStationDao
+                    transformToAcknowledges(testStationDao
                             .findAllNotifications(orionConfiguration.orionService.toLowerCase()));
         } catch (Exception e) {
             logger.error(e);
@@ -77,7 +75,7 @@ public class RestServiceController {
             @RequestParam String stationBay) {
         try {
             return InformationBayContextTransformer.
-                    transformToInformationBaies(testStationDao.
+                    transformToAcknowledges(testStationDao.
                             findAllNotificationsStationBay(orionConfiguration.orionService.toLowerCase(), stationBay));
         } catch (Exception e) {
             logger.error(e);
@@ -91,7 +89,7 @@ public class RestServiceController {
             @RequestParam int delta) {
         try {
             return InformationBayContextTransformer.
-                    transformToInformationBaies(testStationDao.
+                    transformToAcknowledges(testStationDao.
                             findNextNotifications(orionConfiguration.orionService.toLowerCase(), startPoint, delta));
         } catch (Exception e) {
             logger.error(e);
@@ -99,11 +97,16 @@ public class RestServiceController {
         }
     }
     //TODO Don't secure this endpoint, used by ORION
-
     @RequestMapping(path = "/notify", method = RequestMethod.POST)
     public void notification(@RequestBody String message) {
         logger.info("StateInfo from ORION --> " + message);
         reasoner.feed(message);
     }
+
+    /*@RequestMapping(value = "/error")
+    public String error() {
+        return "<h1>You got an ERROR :-(<h1>"; //TODO
+    }*/
+
 
 }

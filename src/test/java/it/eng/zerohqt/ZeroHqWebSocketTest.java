@@ -1,9 +1,11 @@
 package it.eng.zerohqt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import it.eng.zerohqt.business.model.Acknowledge;
 import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.business.model.StateInfo;
 import it.eng.zerohqt.config.WebSocketConfiguration;
+import it.eng.zerohqt.dao.model.AcknowledgeType;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
@@ -54,6 +56,7 @@ public class ZeroHqWebSocketTest {
     @Before
     public void setup() {
         informationBayList = new ArrayList<>();
+        rand = new Random();
         for (int i = 1; i <= 3; i++) {
             for (int j = 1; j <= 4; j++) {
                 InformationBay informationBay = new InformationBay();
@@ -68,13 +71,20 @@ public class ZeroHqWebSocketTest {
                 int stateCode = 127 - j;
                 stateInfo.setStateCode(stateCode + "");
                 stateInfo.setTimestamp(new Date());
+                Acknowledge acknowledge = new Acknowledge();
+                acknowledge.setBayCode(("testStation:" + testStationName + "_" + j));
+                acknowledge.setBayNumber(j);
+                acknowledge.setStationName(testStationName);
+                acknowledge.setAckType(AcknowledgeType.ack1); //TODO Randomize
+                acknowledge.setDescription(AcknowledgeType.ack1.getDescription()); //TODO Randomize
                 informationBay.setStateInfo(stateInfo);
+                informationBay.setAcknowledge(acknowledge);
                 informationBay.setTimestamp(new Date());
                 informationBayList.add(informationBay);
             }
         }
 
-        rand = new Random();
+
         blockingQueue = new LinkedBlockingDeque<>();
         stompClient = new WebSocketStompClient(new SockJsClient(
                 asList(new WebSocketTransport(new StandardWebSocketClient()))));

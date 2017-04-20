@@ -11,6 +11,7 @@ public class Acknowledge extends BaseBayInfo implements Serializable {
 
     private AcknowledgeType ackType;
     private String description;
+
     public Acknowledge() {
     }
 
@@ -18,6 +19,17 @@ public class Acknowledge extends BaseBayInfo implements Serializable {
         this.ackType = ackType;
         this.description = description;
     }
+
+    public Acknowledge(String stationName, Integer bayNumber, String bayCode, AcknowledgeType ackType, String description) {
+        super(stationName, bayNumber, bayCode);
+        this.ackType = ackType;
+        this.description = description;
+    }
+
+    public String getId() {
+        return getStationName() + getBayNumber() + getAckType().name();
+    }
+
 
     public AcknowledgeType getAckType() {
         return ackType;
@@ -37,8 +49,9 @@ public class Acknowledge extends BaseBayInfo implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString()+"Acknowledge{" +
-                "ackType=" + ackType +
+        return "Acknowledge{" +
+                "id='" + getId() + '\'' +
+                ", ackType=" + ackType +
                 ", description='" + description + '\'' +
                 '}';
     }

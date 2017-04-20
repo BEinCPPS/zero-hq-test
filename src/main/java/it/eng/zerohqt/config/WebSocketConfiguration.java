@@ -12,14 +12,11 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfigurer {
 
     private final Logger logger = Logger.getLogger(WebSocketConfiguration.class);
-    public static String INFORMATION_BAY_CHANNEL = "/informationBay";
-    public static String ACKNOWLEDGE_CHANNEL = "/acknowledge";
-
+    public static String DEFAULT_CHANNEL = "/topic";
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker(INFORMATION_BAY_CHANNEL); //TODO Constants via application.properties
-        config.enableSimpleBroker(ACKNOWLEDGE_CHANNEL); //TODO Constants via application.properties
+        config.enableSimpleBroker(DEFAULT_CHANNEL); //TODO Constants via application.properties
         config.setApplicationDestinationPrefixes("/app");
     }
 

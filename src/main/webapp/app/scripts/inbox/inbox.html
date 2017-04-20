@@ -1,20 +1,18 @@
 <ion-view view-title="Inbox">
-	<ion-content>
-		<ion-list class="list">
-			<ion-item class="item item-divider item-text-wrap" ng-repeat="n in notificationsInbox">
-				<ion-item ng-class={"item-warning":n.ackType=='ack2',"item-alarm":n.ackType=='ack1'}>
-
-					<i class="icon ion-alert-circled"></i>
-					Notification {{n.ackType}} {{n.description}} in
-					Station: {{n.stationName}} Bay: {{n.bayNumber}}
-
-				</ion-item>
-			</ion-item>
-		</ion-list>
-		<ion-infinite-scroll
-				on-infinite="loadMore()"
-				icon="ion-loading-c"
-		>
-		</ion-infinite-scroll>
-	</ion-content>
+    <ion-content>
+        <ion-list class="list">
+            <ion-item class="item item-divider item-text-wrap" ng-repeat="n in vm.notifications track by n.id">
+                <ion-item>
+                    <button ion-button small ion-alert-circled class="icon ion-alert-circled"
+                            ng-class={"red-button":n.ackType=='ack1',"yellow-button":n.ackType=='ack2'}>
+                    </button>
+                    Station: {{n.stationName}} Bay: {{n.bayNumber}} - {{n.description}}
+                </ion-item>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                icon="ion-loading-c">
+        </ion-infinite-scroll>
+    </ion-content>
 </ion-view>

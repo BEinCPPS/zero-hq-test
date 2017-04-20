@@ -1,6 +1,9 @@
 <ion-view view-title="Home">
     <ion-content>
-
+        <div class="bar bar-header bar-light">
+            <h1 ng-if="vm.isWsConnected" class="title">Connected</h1>
+            <h1 ng-if="!vm.isWsConnected" class="title">Disconnected</h1>
+        </div>
         <div class="item item-text-wrap">
             <a href="http://www.whirlpool.it" class="item item-icon-left">
                 <img src="http://www.whirlpool.it/images/whirlpool-logo.png"/>
@@ -21,7 +24,6 @@
             <div class="row">
                 <div class="card col home">
                     <!--<a class="item item-text-wrap" href="#/app/{{vm.entries[$index].path}}">-->
-
                     <ion-item nav-clear menu-close class="item-text-wrap" href="#/app/{{vm.entries[$index].bayCode}}">
                         {{stationName}}
                         <ion-buttons ng-repeat="bay in baies track by $index" class="buttons">

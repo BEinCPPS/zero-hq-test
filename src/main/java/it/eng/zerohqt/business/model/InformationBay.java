@@ -12,8 +12,17 @@ public class InformationBay extends BaseBayInfo implements Serializable {
     private String ipAddress;
     private StateInfo stateInfo;
     private Date timestamp;
+    private Acknowledge acknowledge;
+
+    public Acknowledge getAcknowledge() {
+        return acknowledge;
+    }
+    public void setAcknowledge(Acknowledge acknowledge) {
+        this.acknowledge = acknowledge;
+    }
 
     public InformationBay() {
+
     }
 
     public InformationBay(String stationName, Integer bayNumber, String bayCode, String stationDescription, String ipAddress, StateInfo notification, Date timestamp) {
@@ -58,11 +67,12 @@ public class InformationBay extends BaseBayInfo implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + "InformationBay{" +
+        return "InformationBay{" +
                 "stationDescription='" + stationDescription + '\'' +
                 ", ipAddress='" + ipAddress + '\'' +
                 ", stateInfo=" + stateInfo +
                 ", timestamp=" + timestamp +
-                "} " + super.toString();
+                ", acknowledge=" + acknowledge +
+                '}';
     }
 }

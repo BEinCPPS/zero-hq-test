@@ -25,7 +25,8 @@ public class InformationBayContextTransformer {
 
     public static Optional<List<InformationBay>> transformToInformationBay(TestStationBayContext testStationBayContext) {
         InformationBay informationBay = new InformationBay();
-        StateInfo notification = new StateInfo();
+        Acknowledge acknowledge = null;
+        StateInfo stateInfo = new StateInfo();
         ArrayList<ContextResponses> contextResponses = testStationBayContext.getContextResponses();
         List<InformationBay> informationBays = new ArrayList<>();
         if (null == contextResponses || contextResponses.isEmpty()) Optional.empty();
@@ -38,39 +39,47 @@ public class InformationBayContextTransformer {
                 return Optional.empty();
             for (Attributes attribute : contextElement.getAttributes()) {
                 if (attribute.getName().equals(ContextAttribute.state.name())) {
-                    notification.setStateCode(attribute.getValue());
+                    stateInfo.setStateCode(attribute.getValue());
                     ArrayList<Metadatas> metadatas = attribute.getMetadatas();
                     if (metadatas != null && !metadatas.isEmpty()) {
                         for (Metadatas metadata : metadatas) {
                             if (metadata.getName().equals("description")) {
-                                notification.setStateDescription(metadata.getValue());
+                                stateInfo.setStateDescription(metadata.getValue());
                             }
                         }
                     }
                 } else if (attribute.getName().equals(ContextAttribute.statePayload.name())) {
-                    notification.setStatePayload(attribute.getValue());
+                    stateInfo.setStatePayload(attribute.getValue());
                 } else if (attribute.getName().equals(ContextAttribute.ipAddress.name())) {
                     informationBay.setIpAddress(attribute.getValue());
                 } else if (attribute.getName().equals(ContextAttribute.stationInfo.name())) {
                     informationBay.setStationDescription(attribute.getValue());
+                } else if (attribute.getName().equals(ContextAttribute.acknowledge.name())
+                        && Utils.isStringNotBlankExt(attribute.getValue())) {
+                    acknowledge = new Acknowledge();
+                    extractStationNameAndBayNumber(contextElement.getId(), acknowledge);
+                    acknowledge.setBayCode(contextElement.getId());
+                    acknowledge.setAckType(AcknowledgeType.valueOf("ack" + attribute.getValue()));
+                    acknowledge.setDescription(AcknowledgeType.valueOf("ack" + attribute.getValue()).getDescription());
                 }
-                notification.setTimestamp(new Date());
+                stateInfo.setTimestamp(new Date());
                 informationBay.setTimestamp(new Date());
-                informationBay.setStateInfo(notification);
+                informationBay.setStateInfo(stateInfo);
+                informationBay.setAcknowledge(acknowledge);
                 informationBays.add(informationBay);
             }
         }
         return Optional.of(informationBays);
     }
 
-    public static List<Acknowledge> transformToInformationBaies(List<TestStationData> testStationDatas) {
+    public static List<Acknowledge> transformToAcknowledges(List<TestStationData> testStationDatas) {
         if (null == testStationDatas || testStationDatas.isEmpty()) return null;
         return testStationDatas.stream()
-                .map(td -> transformToInformationBay(td)).collect(Collectors.toList());
+                .map(td -> transformToAcknowledge(td)).collect(Collectors.toList());
     }
 
 
-    public static Acknowledge transformToInformationBay(TestStationData testStationData) {
+    public static Acknowledge transformToAcknowledge(TestStationData testStationData) {
         if (testStationData == null || StringUtils.isBlank(testStationData.getEntityId())) return null;
         Acknowledge acknowledge = new Acknowledge();
         acknowledge.setBayCode(testStationData.getEntityId());

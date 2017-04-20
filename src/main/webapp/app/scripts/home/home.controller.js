@@ -10,11 +10,13 @@
     /* @ngInject */
     function HomeController(websocketService, $scope) {
         var messageMap = {};
+        var isWsConnected = false;
         var vm = angular.extend(this, {
-            entries: messageMap
+            entries: messageMap,
+            isWsConnected: isWsConnected
         });
 
-        $scope.$on('wsMessageBay', function (event, informationBay) {
+        $scope.$on('wsMessage', function (event, informationBay) {
             console.log(informationBay); // 'Broadcast!'
             aggregateData(informationBay);
             $scope.$apply(); //Apply changes to the page
@@ -37,9 +39,20 @@
             }
         }
 
-        (function connectWebSocket() {
-            websocketService.connect();
-        })();
+        $scope.$on('$ionicView.loaded', function (viewInfo, state) {
+            websocketService.connect().then(function (isConnected) {
+                vm.isWsConnected = isConnected;
+            }, function (error) {
+                console.log('Error encountered ' + error);
+            });
+        });
+        /*
+         $scope.$on('$ionicView.loaded', function (viewInfo, state) {});
+
+         $scope.$on('$ionicView.enter', function (viewInfo, state) {});
+
+         $scope.$on('$ionicView.afterLeave', function (viewInfo, state) {});
+         */
 
     }
 })();

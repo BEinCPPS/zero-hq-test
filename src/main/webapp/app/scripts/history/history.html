@@ -2,30 +2,28 @@
     <ion-content>
 
 
-<ion-item>
+        <ion-item>
 
-                      <label class="item item-input item-select">
+            <label class="item item-input item-select">
 
-                                Filter by
+                Filter by
 
-                          <select name="filter" id="filter"
-                                  ng-model="filter"
-                                  ng-options="stationBay.label for stationBay in stationsBays"
-                                  ng-change="searchByStationBay(filter)">
-                          </select>
-                      </label>
+                <select name="filter" id="filter"
+                        ng-model="filter"
+                        ng-options="stationBay.label for stationBay in stationsBays"
+                        ng-change="searchByStationBay(filter)">
+                </select>
+            </label>
 
-</ion-item>
-
-
-                    <!--<label class="item item-divider item-text">-->
-                        <!--<input type="search" placeholder=" Station Name" ng-model="search.stationName">-->
-                    <!--</label>-->
-                    <!--<label class="item item-divider item-text">-->
-                        <!--<input type="search" placeholder=" Bay Number" ng-model="search.bayNumber">-->
-                    <!--</label>-->
+        </ion-item>
 
 
+        <!--<label class="item item-divider item-text">-->
+        <!--<input type="search" placeholder=" Station Name" ng-model="search.stationName">-->
+        <!--</label>-->
+        <!--<label class="item item-divider item-text">-->
+        <!--<input type="search" placeholder=" Bay Number" ng-model="search.bayNumber">-->
+        <!--</label>-->
 
 
         <ion-list class="list">
@@ -41,10 +39,8 @@
 
 
         </ion-list>
-     <!--   <ion-infinite-scroll
-                on-infinite="loadMore()"
-                icon="ion-loading-c"
-        >
-        </ion-infinite-scroll>-->
+        <ion-infinite-scroll
+                on-infinite="loadMore()">
+        </ion-infinite-scroll>
     </ion-content>
 </ion-view>
