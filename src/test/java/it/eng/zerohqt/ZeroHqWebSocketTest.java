@@ -44,7 +44,7 @@ public class ZeroHqWebSocketTest {
 
     static final String WEBSOCKET_URI = "ws://localhost:8080/websocket";
     static final String WEBSOCKET_TOPIC = WebSocketConfiguration.DEFAULT_CHANNEL;
-    public static final int DELAY = 5000; //milliseconds
+    public static final int DELAY = 3000; //milliseconds
     private final Logger logger = Logger.getLogger(ZeroHqWebSocketTest.class);
 
     BlockingQueue<String> blockingQueue;

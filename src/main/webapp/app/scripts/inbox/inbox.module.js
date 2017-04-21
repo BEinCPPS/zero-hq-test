@@ -13,7 +13,7 @@
 					views: {
 						'menuContent': {
 							templateUrl: 'scripts/inbox/inbox.html',
-							controller: 'InboxController as vm'
+							controller: 'InboxController'
 						}
 					}
 				})

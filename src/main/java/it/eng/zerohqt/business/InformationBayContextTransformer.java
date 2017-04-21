@@ -8,6 +8,7 @@ import it.eng.zerohqt.business.model.StateInfo;
 import it.eng.zerohqt.config.Utils;
 import it.eng.zerohqt.dao.model.AcknowledgeType;
 import it.eng.zerohqt.dao.model.ContextAttribute;
+import it.eng.zerohqt.dao.model.StateType;
 import it.eng.zerohqt.dao.model.TestStationData;
 import it.eng.zerohqt.orion.model.*;
 import org.apache.commons.lang3.StringUtils;
@@ -63,6 +64,7 @@ public class InformationBayContextTransformer {
                     acknowledge.setDescription(AcknowledgeType.valueOf("ack" + attribute.getValue()).getDescription());
                 }
                 stateInfo.setTimestamp(new Date());
+                stateInfo.setType(resolveStateType(stateInfo.getStateCode(), acknowledge));
                 informationBay.setTimestamp(new Date());
                 informationBay.setStateInfo(stateInfo);
                 informationBay.setAcknowledge(acknowledge);
@@ -109,5 +111,15 @@ public class InformationBayContextTransformer {
         return mapper.readValue(metadatas, Metadatas[].class);
     }
 
+
+    private static StateType resolveStateType(String stateCode, Acknowledge acknowledge) {
+        boolean isAckPresent = null != acknowledge && acknowledge.getAckType() != null;
+        if (stateCode.equalsIgnoreCase("1000")
+                || stateCode.equalsIgnoreCase("106")
+                || stateCode.equalsIgnoreCase("700")) return StateType.error;
+        else if (stateCode.equalsIgnoreCase("400") && !isAckPresent) return StateType.normal;
+        else if (stateCode.equalsIgnoreCase("400") && isAckPresent) return StateType.warning;
+        else return StateType.normal;
+    }
 
 }

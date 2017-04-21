@@ -11,7 +11,7 @@
 					url: '/app',
 					abstract: true,
 					templateUrl: 'scripts/menu/menu.html',
-					controller: 'MenuController as vm'
+					controller: 'MenuController'
 				});
 		});
 })();

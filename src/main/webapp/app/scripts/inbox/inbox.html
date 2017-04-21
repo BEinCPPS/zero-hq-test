@@ -1,18 +1,21 @@
 <ion-view view-title="Inbox">
     <ion-content>
-        <ion-list class="list">
-            <ion-item class="item item-divider item-text-wrap" ng-repeat="n in vm.notifications track by n.id">
-                <ion-item>
+        <ion-list
+                show-delete="shouldShowDelete" can-swipe="listCanSwipe">
+            <ion-item class="item item-divider item-text-wrap" ng-repeat="(key,value) in notificationsMap track by key">
+                <ion-item href="#">
                     <button ion-button small ion-alert-circled class="icon ion-alert-circled"
-                            ng-class={"red-button":n.ackType=='ack1',"yellow-button":n.ackType=='ack2'}>
+                            ng-class={"red-button":value.ackType=='ack1',"yellow-button":value.ackType=='ack2'}>
                     </button>
-                    Station: {{n.stationName}} Bay: {{n.bayNumber}} - {{n.description}}
+                    Station: {{value.stationName}} Bay: {{value.bayNumber}} - {{value.description}}
+                    <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteAcknowledge(key)">
+                    </ion-option-button>
                 </ion-item>
             </ion-item>
         </ion-list>
-        <ion-infinite-scroll
-                on-infinite="loadMore()"
-                icon="ion-loading-c">
-        </ion-infinite-scroll>
+        <!-- <ion-infinite-scroll
+                 on-infinite="loadMore()"
+                 icon="ion-loading-c">
+         </ion-infinite-scroll>-->
     </ion-content>
 </ion-view>

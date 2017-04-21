@@ -1,5 +1,7 @@
 package it.eng.zerohqt.business.model;
 
+import it.eng.zerohqt.dao.model.StateType;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,16 +14,19 @@ public class StateInfo implements Serializable {
     private String statePayload;
     private String stateDescription;
     private Date timestamp;
+    private StateType type;
 
 
     public StateInfo() {
+        this.type = StateType.normal;
     }
 
-    public StateInfo(String stateCode, String statePayload, String stateDescription, Date timestamp) {
+    public StateInfo(String stateCode, String statePayload, String stateDescription, Date timestamp, StateType type) {
         this.stateCode = stateCode;
         this.statePayload = statePayload;
         this.stateDescription = stateDescription;
         this.timestamp = timestamp;
+        this.type = type;
     }
 
     public String getStateDescription() {
@@ -56,6 +61,14 @@ public class StateInfo implements Serializable {
         this.timestamp = timestamp;
     }
 
+    public StateType getType() {
+        return type;
+    }
+
+    public void setType(StateType type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "StateInfo{" +
@@ -63,6 +76,9 @@ public class StateInfo implements Serializable {
                 ", statePayload='" + statePayload + '\'' +
                 ", stateDescription='" + stateDescription + '\'' +
                 ", timestamp=" + timestamp +
+                ", type=" + type +
                 '}';
     }
+
+
 }

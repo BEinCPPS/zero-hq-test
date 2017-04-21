@@ -14,7 +14,7 @@
 					views: {
 						'menuContent': {
 							templateUrl: 'scripts/home/home.html',
-							controller: 'HomeController as vm'
+							controller: 'HomeController'
 						}
 					}
 				});

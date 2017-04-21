@@ -1,14 +1,14 @@
-(function() {
-	'use strict';
+(function () {
+    'use strict';
 
-	angular
-		.module('zerohqt.menu')
-		.controller('MenuController', MenuController);
+    angular
+        .module('zerohqt.menu')
+        .controller('MenuController', MenuController);
 
-	MenuController.$inject = [];
+    MenuController.$inject = ['$scope','websocketService'];
 
-	/* @ngInject */
-	function MenuController() {
+    /* @ngInject */
+    function MenuController($scope, websocketService) {
 
-	}
+    }
 })();

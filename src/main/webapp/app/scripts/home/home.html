@@ -1,8 +1,8 @@
 <ion-view view-title="Home">
     <ion-content>
         <div class="bar bar-header bar-light">
-            <h1 ng-if="vm.isWsConnected" class="title">Connected</h1>
-            <h1 ng-if="!vm.isWsConnected" class="title">Disconnected</h1>
+            <h1 ng-if="isWsConnected" class="title">Connected</h1>
+            <h1 ng-if="!isWsConnected" class="title">Disconnected</h1>
         </div>
         <div class="item item-text-wrap">
             <a href="http://www.whirlpool.it" class="item item-icon-left">
@@ -16,27 +16,27 @@
                 <div class="col col-13">Bay2</div>
                 <div class="col col-13">Bay3</div>
                 <div class="col col-13">Bay4</div>
-                <div class="col col-8"></div>
+                <!--<div class="col col-8"></div>-->
             </ion-item>
         </div>
 
-        <div ng-repeat="(stationName,baies) in vm.entries">
-            <div class="row">
-                <div class="card col home">
-                    <!--<a class="item item-text-wrap" href="#/app/{{vm.entries[$index].path}}">-->
-                    <ion-item nav-clear menu-close class="item-text-wrap" href="#/app/{{vm.entries[$index].bayCode}}">
+        <ion-list>
+            <ion-item ng-repeat="(stationName, bays) in entries">
+                <div class="row">
+                    <div nav-clear menu-close class="col col-40 item-text-wrap"
+                         href="#/app/{{entries[$index].bayCode}}">
                         {{stationName}}
-                        <ion-buttons ng-repeat="bay in baies track by $index" class="buttons">
-                            <button ion-button small class="col-13"
-                                    ng-class={"red-button":bay.stateInfo.stateCode=='124',"yellow-button":bay.stateInfo.stateCode=='125'}>
-                                {{bay.stateInfo.stateCode}}
-                            </button>
-                            <!--<button ion-button small ng-class={bay.stateInfo.stateCode=='124'?"yellow-button":bay.stateInfo.stateCode=='125'?"green-button"}>{{bay.stateInfo.stateCode}}</button>-->
-                        </ion-buttons>
+                    </div>
+                    <ion-item class="col col-13" ng-repeat="bay in bays track by $index" style="border-style: none;">
+                        <button ion-button large
+                                ng-class="getBackgroundColor(bay.stateInfo.type)">
+                            {{bay.stateInfo.stateCode}}
+                        </button>
                     </ion-item>
                 </div>
-            </div>
-        </div>
+            </ion-item>
+        </ion-list>
+
 
         <div class="row">
             <ion-item nav-clear menu-close class="row card home item-text-wrap">
@@ -54,7 +54,5 @@
                 </div>
             </ion-item>
         </div>
-
-
     </ion-content>
 </ion-view>

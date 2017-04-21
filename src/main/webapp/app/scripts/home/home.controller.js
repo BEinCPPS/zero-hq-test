@@ -9,12 +9,9 @@
 
     /* @ngInject */
     function HomeController(websocketService, $scope) {
-        var messageMap = {};
-        var isWsConnected = false;
-        var vm = angular.extend(this, {
-            entries: messageMap,
-            isWsConnected: isWsConnected
-        });
+        $scope.entries = {};
+        $scope.isWsConnected = false;
+        $scope.MAX_NR_BAYS = 4;
 
         $scope.$on('wsMessage', function (event, informationBay) {
             console.log(informationBay); // 'Broadcast!'
@@ -24,28 +21,36 @@
 
         function aggregateData(informationBay) {
             var stationName = informationBay.stationName;
-            var bays = messageMap[stationName] ? messageMap[stationName] : [];
+            var bays = $scope.entries[stationName] ? $scope.entries[stationName] : [];
             initBaysArray(bays);
             var bayNumber = parseInt(informationBay.bayNumber);
             bayNumber--;
             bays[bayNumber] = informationBay; //Station bays numbers starts from 1
-            messageMap[stationName] = bays;
+            $scope.entries[stationName] = bays;
         }
 
         function initBaysArray(bays) {
-            for (var i in bays) {
+            for (var i = 0; i < $scope.MAX_NR_BAYS; i++) {
                 if (bays[i]) continue;
-                else bays[i] = {};
+                bays[i] = {};
             }
         }
 
         $scope.$on('$ionicView.loaded', function (viewInfo, state) {
             websocketService.connect().then(function (isConnected) {
-                vm.isWsConnected = isConnected;
+                $scope.isWsConnected = isConnected;
+                console.log("Connection to web socket: "+isConnected);
             }, function (error) {
                 console.log('Error encountered ' + error);
             });
         });
+
+        $scope.getBackgroundColor = function (stateType) {
+            if (stateType === 'normal')  return 'button-light icon ion-ios-checkmark-outline green-button';
+            else if (stateType === 'warning') return 'button-light icon ion-ios-help yellow-button';
+            else if (stateType === 'error') return 'button-light icon ion-ios-close-outline red-button';
+
+        }
         /*
          $scope.$on('$ionicView.loaded', function (viewInfo, state) {});
 

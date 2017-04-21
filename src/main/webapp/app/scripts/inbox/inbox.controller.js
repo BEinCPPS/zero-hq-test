@@ -9,28 +9,25 @@
 
     /* @ngInject */
     function InboxController($scope, $ionicLoading) {
-        var notificationsMap = new HashMap();
-        var vm = angular.extend(this, {
-            notifications: notificationsMap.values()
-        });
+        $scope.notificationsMap = {};
+        $scope.shouldShowDelete = false;
+        $scope.listCanSwipe = true;
 
         $scope.$on('wsMessage', function (event, informationBay) {
             if (typeof informationBay.acknowledge !== 'undefined' && informationBay.acknowledge !== null) {
                 var acknowledge = informationBay.acknowledge;
-                notificationsMap.set(acknowledge.id, acknowledge);
+                $scope.notificationsMap[acknowledge.id] = acknowledge;
                 $scope.$apply(); //Apply changes to the page
             }
         });
 
         $scope.loadMore = function () {
-           // vm.notifications = vm.notifications.concat(notificationsMap);
-           // $scope.$broadcast('scroll.infiniteScrollComplete');
         }
 
         $scope.$on('$ionicView.loaded', function (viewInfo, state) {
-            var notifs = localStorage.getItem('notifications');
+            var notifs = JSON.parse(localStorage.getItem('notifications'));
             if (notifs) {
-                notificationsMap = notifs;
+                $scope.notificationsMap = notifs;
             }
         });
 
@@ -38,11 +35,16 @@
          console.log(JSON.stringify(localStorage.getItem('notifications')));
          });
          */
+        $scope.deleteAcknowledge = function (id) {
+            delete $scope.notificationsMap[id];
+        }
+
         $scope.$on('$ionicView.afterLeave', function (viewInfo, state) {
             try {
-                localStorage.setItem('notifications', notificationsMap);
+                localStorage.clear();
+                localStorage.setItem('notifications', JSON.stringify($scope.notificationsMap)); //TODO check Mb of data
             } catch (error) {
-                console.log('Error eoncontered saving notifications in localstorage: ' + error);
+                console.log('Error encountered saving notifications in localStorage: ' + error);
             }
             console.log('Saved notifications!!!');
 
