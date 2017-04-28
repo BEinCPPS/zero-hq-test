@@ -5,12 +5,22 @@
         .module('zerohqt.common')
         .factory('websocketService', websocketService);
 
-    websocketService.$inject = ['$rootScope', '$ionicPlatform'];
+    websocketService.$inject = ['$rootScope', '$ionicPlatform', 'externalAppsService'];
     /* @ngInject */
     var stompClient = null;
 
-    function websocketService($rootScope, $ionicPlatform) {
-        var sockjs = new SockJS('http://localhost:8080/websocket'); //TODO in Env
+    function websocketService($rootScope, $ionicPlatform, externalAppsService) {
+        console.log('Starting Sockjs.......' + externalAppsService.getBackEndUrl());
+        /* var wsUrl = externalAppsService.getBackEndUrl() + 'websocket';
+         var sockjs = new SockJS(wsUrl); //TODO in Env
+         console.log('SockJS built');
+         sockjs.onopen = function() {
+         console.log('SockJS is opened');
+         };
+         sockjs.onmessage = function(e) {
+         console.log('message!!!!!!!!!!', e.data);
+         }
+         */
         var isWsConnected = false;
         var service = {
             connect: connect,
@@ -20,10 +30,13 @@
 
         function connect() {
             if (stompClient != null && isWsConnected) return;
-            stompClient = Stomp.over(sockjs);
-
+            try {
+                stompClient = Stomp.client(externalAppsService.getWebSocketUrl());
+            } catch (error) {
+                console.log('Error in creating Stomp over SockJs', error);
+            }
             var onMessage = function (message) {
-                console.log("Message from WebSocket Bay: " + message);
+               // console.log("Message from WebSocket Bay: " + message);
                 var messageObj = JSON.parse(message.body);
                 $rootScope.$broadcast('wsMessage', messageObj);
             }
@@ -35,8 +48,9 @@
                     return resolve(true); //isConnected
                 }
                 var errorCallback = function (error) {
-                    console.log(error);
+                    console.log("Error in connecting STOMP over WS " + JSON.stringify(error));
                     isWsConnected = false;
+                    $rootScope.$broadcast('wsError', error);
                     return reject(error);
                 }
                 stompClient.connect({}, connectCallback, errorCallback);

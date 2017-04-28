@@ -5,12 +5,12 @@
         .module('zerohqt.home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['websocketService', '$scope'];
+    HomeController.$inject = ['websocketService', '$scope', 'orionService'];
 
     /* @ngInject */
-    function HomeController(websocketService, $scope) {
+    function HomeController(websocketService, $scope, orionService) {
         $scope.entries = {};
-        $scope.isWsConnected = false;
+       // $scope.isWsConnected = false;
         $scope.MAX_NR_BAYS = 4;
 
         $scope.$on('wsMessage', function (event, informationBay) {
@@ -18,6 +18,7 @@
             aggregateData(informationBay);
             $scope.$apply(); //Apply changes to the page
         });
+
 
         function aggregateData(informationBay) {
             var stationName = informationBay.stationName;
@@ -36,19 +37,17 @@
             }
         }
 
+
         $scope.$on('$ionicView.loaded', function (viewInfo, state) {
-            websocketService.connect().then(function (isConnected) {
-                $scope.isWsConnected = isConnected;
-                console.log("Connection to web socket: "+isConnected);
-            }, function (error) {
-                console.log('Error encountered ' + error);
-            });
+           // $scope.connect();
+            orionService.subscribe();
         });
 
+
         $scope.getBackgroundColor = function (stateType) {
-            if (stateType === 'normal')  return 'button-light icon ion-ios-checkmark-outline green-button';
-            else if (stateType === 'warning') return 'button-light icon ion-ios-help yellow-button';
-            else if (stateType === 'error') return 'button-light icon ion-ios-close-outline red-button';
+            if (stateType === 'normal')  return 'button icon ion-android-checkmark-circle green-button';
+            else if (stateType === 'warning') return 'button icon ion-android-warning yellow-button';
+            else if (stateType === 'error') return 'button icon ion-android-alert red-button';
 
         }
         /*

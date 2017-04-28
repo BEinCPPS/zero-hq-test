@@ -7,10 +7,10 @@
         .module('zerohqt.common')
         .factory('daoService', daoService);
 
-    daoService.$inject = ['$http', 'ENV'];
+    daoService.$inject = ['$http', 'externalAppsService', 'ENV'];
 
     /* @ngInject */
-    function daoService($http, ENV) {
+    function daoService($http, externalAppsService, ENV) {
         var service = {
             fullHistory: fullHistory,
             fullStationsBays: fullStationsBays,
@@ -20,19 +20,21 @@
         return service;
 
         function fullHistory() {
-            return $http.get(ENV.apiEndpoint + 'history');
+            return $http.get(externalAppsService.getBackEndUrl() + 'history');
         }
+
         function fullStationsBays() {
-                    return $http.get(ENV.apiEndpoint + 'stationsBays');
+            return $http.get(externalAppsService.getBackEndUrl() + 'stationsBays');
         }
+
         function stationBayHistory(stationBay) {
-            return $http.get(ENV.apiEndpoint + 'stationBayHistory?stationBay=' + stationBay);
+            return $http.get(externalAppsService.getBackEndUrl() + 'stationBayHistory?stationBay=' + stationBay);
         }
+
         function nextHistory(startPoint) {
-            return $http.get(ENV.apiEndpoint + 'nexthistory?startPoint=' + startPoint + '&delta=' + Number(ENV.historyDelta));
+            return $http.get(externalAppsService.getBackEndUrl() + 'nexthistory?startPoint=' + startPoint + '&delta=' +
+                Number(ENV.historyDelta));
         }
-
-
     }
 })();
 

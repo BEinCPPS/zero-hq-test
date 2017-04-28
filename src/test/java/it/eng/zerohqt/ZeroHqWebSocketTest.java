@@ -86,8 +86,9 @@ public class ZeroHqWebSocketTest {
 
 
         blockingQueue = new LinkedBlockingDeque<>();
-        stompClient = new WebSocketStompClient(new SockJsClient(
-                asList(new WebSocketTransport(new StandardWebSocketClient()))));
+        //stompClient = new WebSocketStompClient(new SockJsClient(
+        //      asList(new WebSocketTransport(new StandardWebSocketClient()))));
+        stompClient = new WebSocketStompClient(new StandardWebSocketClient());
     }
 
     @Test

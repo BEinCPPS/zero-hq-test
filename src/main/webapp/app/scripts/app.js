@@ -12,14 +12,10 @@ angular.module('starter', [
 	'ionic.service.push',
 	'zerohqt.common',
 	'zerohqt.home',
-	'zerohqt.map',
 	'zerohqt.inbox',
 	'zerohqt.menu',
 	'zerohqt.history',
-	'zerohqt.popover-menu',
-	'zerohqt.native-scrolling',
-	'zerohqt.new-slide-box',
-	'gMaps',
+    'zerohqt.login',
 	'ngCordova'
 ])
 
@@ -44,5 +40,5 @@ angular.module('starter', [
 .config(function($urlRouterProvider, $compileProvider) {
 	$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile|content):|data:image\//);
 	// if none of the above states are matched, use this as the fallback
-	$urlRouterProvider.otherwise('/app/home');
+	$urlRouterProvider.otherwise('/app/home'); //TODO Login
 });

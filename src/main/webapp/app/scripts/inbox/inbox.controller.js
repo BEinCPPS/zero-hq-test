@@ -5,10 +5,10 @@
         .module('zerohqt.inbox')
         .controller('InboxController', InboxController);
 
-    InboxController.$inject = ['$scope', '$ionicLoading'];
+    InboxController.$inject = ['$scope', '$ionicLoading','$ionicPopup'];
 
     /* @ngInject */
-    function InboxController($scope, $ionicLoading) {
+    function InboxController($scope, $ionicLoading, $ionicPopup) {
         $scope.notificationsMap = {};
         $scope.shouldShowDelete = false;
         $scope.listCanSwipe = true;

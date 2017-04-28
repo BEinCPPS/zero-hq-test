@@ -9,6 +9,10 @@
                 <button class="button button-icon button-clear ion-android-menu" menu-toggle="left">
                 </button>
             </ion-nav-buttons>
+            <ion-nav-buttons side="right">
+                <button ng-if="isWsConnected" class="button button-icon button-clear ion-android-wifi"></button>
+                <button ng-if="!isWsConnected" class="button button-icon button-clear ion-alert" ng-click="connect()">Reconnect</button>
+            </ion-nav-buttons>
 
         </ion-nav-bar>
         <ion-nav-view name="menuContent"></ion-nav-view>
