@@ -11,7 +11,9 @@
             </ion-nav-buttons>
             <ion-nav-buttons side="right">
                 <button ng-if="isWsConnected" class="button button-icon button-clear ion-android-wifi"></button>
-                <button ng-if="!isWsConnected" class="button button-icon button-clear ion-alert" ng-click="connect()">Reconnect</button>
+                <button ng-if="!isWsConnected" class="button button-icon button-clear ion-alert" ng-click="connect()">
+                    Reconnect
+                </button>
             </ion-nav-buttons>
 
         </ion-nav-bar>
@@ -35,6 +37,10 @@
                 <ion-item nav-clear menu-close class="item-icon-left" href="#/app/history">
                     <i class="icon ion-filing"></i>
                     History
+                </ion-item>
+                <ion-item nav-clear menu-close class="item-icon-left" href="#/app/dashboard">
+                    <i class="icon ion-pie-graph"></i>
+                    Dashboard
                 </ion-item>
             </ion-list>
         </ion-content>
