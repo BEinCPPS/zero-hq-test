@@ -30,7 +30,7 @@
 
             <ion-item class="item item-divider item-text-wrap" ng-repeat="n in notifications|filter:search">
                 <ion-item>
-                    <button ion-button small ion-alert-circled class="icon ion-alert-circled"
+                    <button ion-button large class="icon ion-android-warning"
                             ng-class={"red-button":n.ackType=='ack1',"yellow-button":n.ackType=='ack2'}>
                     </button>
                     Station: {{n.stationName}} Bay: {{n.bayNumber}} - {{n.description}}

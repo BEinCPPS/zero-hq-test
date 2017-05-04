@@ -4,7 +4,7 @@
                 show-delete="shouldShowDelete" can-swipe="listCanSwipe">
             <ion-item class="item item-divider item-text-wrap" ng-repeat="(key,value) in notificationsMap track by key">
                 <ion-item href="#">
-                    <button ion-button small ion-alert-circled class="icon ion-alert-circled"
+                    <button ion-button ion-android-alert class="icon ion-android-alert"
                             ng-class={"red-button":value.ackType=='ack1',"yellow-button":value.ackType=='ack2'}>
                     </button>
                     Station: {{value.stationName}} Bay: {{value.bayNumber}} - {{value.description}}
