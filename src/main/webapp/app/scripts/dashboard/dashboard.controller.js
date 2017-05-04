@@ -5,45 +5,38 @@
         .module('zerohqt.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$scope'];
+    DashboardController.$inject = ['$scope', 'dashboardOrionService'];
 
     /* @ngInject */
-    function DashboardController($scope) {
-    $scope.ctrl = this;
+    function DashboardController($scope, dashboardOrionService) {
 
-  //  ctrl.add = add;
-    $scope.ctrl.data = [
-        {
-            name: "MeasureA",
-            code: 1500,
-            limitMax: 2500,
-            limitMin:  500
-        },
-        {
-            name: "MeasureB",
-            code: 3100,
-            limitMax: 3000,
-            limitMin: 2500
-        },
-        {
-            name: "MeasureC",
-            code: 200,
-            limitMax: 2500,
-            limitMin:  500
-         },
-         {
-            name: "MeasureD",
-            code: 4500,
-            limitMax: 2500,
-            limitMin:  500
-          }
-    ]
-    $scope.controlValue = function (value, valueMin, valueMax) {
+        $scope.data = [];
+        $scope.$on('$ionicView.loaded', function (viewInfo, state) {
+            dashboardOrionService.getFeedbackScale().then(function (req) {
+                if (req.data) {
+                    $scope.data = req.data;
+                }
+            }, function (error) {
+                console.log('Error creating subscriptions: ' + error);
+            });
+        });
+
+        $scope.controlValue = function (value, valueMin, valueMax) {
             if (value < valueMax && value > valueMin)  return 'green-button';
             else if (value < valueMin) return 'yellow-button';
             else if (value > valueMax) return 'red-button';
 
         }
+
+        $scope.$on('wsMessageFeedback', function (event, feedbackInfo) {
+            for (var i in $scope.data) {
+                var feedback = $scope.data[i];
+                if (feedback.measureId === feedbackInfo.measureId) {
+                    feedback.value = feedbackInfo.value;
+                }
+            }
+            $scope.$apply(); //Apply changes to the page
+        });
 
     }
 })();

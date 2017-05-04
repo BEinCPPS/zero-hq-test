@@ -1,21 +1,4 @@
 <ion-view view-title="Dashboard">
-
-       <html ng-app="ionicApp">
-
-        <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-
-            <title>Ionic Template</title>
-
-            <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
-            <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
-        </head>
-
-        <body ng-controller="DashboardController as ctrl">
-        <ion-header-bar class="bar-stable">
-            <h1 class="title">Service Provider Details</h1>
-        </ion-header-bar>
         <ion-content>
             <div class="row header">
                 <div class="col"><b>Measure</b></div>
@@ -24,15 +7,11 @@
                 <div class="col col-center"><b>Limit Max</b></div>
 
             </div>
-            <div class="row" ng-repeat="data in ctrl.data">
-                <div class="col">{{data.name}}</div>
-                <div class="col col-center"  ng-class="controlValue(data.code,data.limitMin,data.limitMax)">{{data.code}}</div>
-                <div class="col col-center">{{data.limitMin}}</div>
-                <div class="col col-center">{{data.limitMax}}</div>
+            <div class="row" ng-repeat="elem in data">
+                <div class="col">{{elem.measureId}}</div>
+                <div class="col col-center"  ng-class="controlValue(elem.value,elem.valueMin,elem.valueMax)">{{elem.value}}</div>
+                <div class="col col-center">{{elem.valueMin}}</div>
+                <div class="col col-center">{{elem.valueMax}}</div>
             </div>
         </ion-content>
-        </body>
-
-        </html>
-
 </ion-view>

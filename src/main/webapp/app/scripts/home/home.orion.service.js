@@ -5,12 +5,12 @@
     'use strict';
     angular
         .module('zerohqt.home')
-        .factory('orionService', orionService);
+        .factory('homeOrionService', homeOrionService);
 
-    orionService.$inject = ['$http', 'externalAppsService', 'ENV'];
+    homeOrionService.$inject = ['$http', 'externalAppsService', 'ENV'];
 
     /* @ngInject */
-    function orionService($http, externalAppsService, ENV) {
+    function homeOrionService($http, externalAppsService, ENV) {
         var service = {
             subscribe: subscribe
         };

@@ -8,7 +8,8 @@ import java.util.Date;
  */
 public class ZeroHQTModel implements Serializable{
 
-    private Date timestamp;
+    protected Date timestamp;
+    protected String origin;
 
     public Date getTimestamp() {
         return timestamp;
@@ -16,6 +17,15 @@ public class ZeroHQTModel implements Serializable{
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     public ZeroHQTModel() {

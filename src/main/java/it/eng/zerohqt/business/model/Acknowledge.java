@@ -16,12 +16,14 @@ public class Acknowledge extends BaseBayInfo implements Serializable {
     }
 
     public Acknowledge(AcknowledgeType ackType, String description) {
+        this.origin = this.getClass().getSimpleName().toLowerCase();
         this.ackType = ackType;
         this.description = description;
     }
 
     public Acknowledge(String stationName, Integer bayNumber, String bayCode, AcknowledgeType ackType, String description) {
         super(stationName, bayNumber, bayCode);
+        this.origin = this.getClass().getSimpleName().toLowerCase();
         this.ackType = ackType;
         this.description = description;
     }

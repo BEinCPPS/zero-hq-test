@@ -8,12 +8,11 @@ import java.util.Date;
 /**
  * Created by ascatox on 17/02/17.
  */
-public class StateInfo implements Serializable {
+public class StateInfo extends ZeroHQTModel implements Serializable {
 
     private String stateCode;
     private String statePayload;
     private String stateDescription;
-    private Date timestamp;
     private StateType type;
 
 
@@ -25,7 +24,7 @@ public class StateInfo implements Serializable {
         this.stateCode = stateCode;
         this.statePayload = statePayload;
         this.stateDescription = stateDescription;
-        this.timestamp = timestamp;
+        super.timestamp = timestamp;
         this.type = type;
     }
 

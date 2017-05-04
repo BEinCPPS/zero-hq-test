@@ -1,33 +1,27 @@
 package it.eng.zerohqt.business.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by ascatox on 03/05/17.
  */
-public class FeedbackScale {
-    private Date timestamp;
+public class FeedbackScale extends ZeroHQTModel implements Serializable {
     private String measureId;
     private Double valueMin;
     private Double valueMax;
 
     public FeedbackScale() {
-        this.timestamp = new Date();
+        super.timestamp = new Date();
+        this.origin = FeedbackScale.class.getSimpleName().toLowerCase();
     }
 
-    public FeedbackScale( String measureId, Double valueMin, Double valueMax) {
-        this.timestamp = new Date();
+    public FeedbackScale(String measureId, Double valueMin, Double valueMax) {
+        super.timestamp = new Date();
+        super.origin = FeedbackScale.class.getSimpleName().toLowerCase();
         this.measureId = measureId;
         this.valueMin = valueMin;
         this.valueMax = valueMax;
-    }
-
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
     }
 
     public String getMeasureId() {

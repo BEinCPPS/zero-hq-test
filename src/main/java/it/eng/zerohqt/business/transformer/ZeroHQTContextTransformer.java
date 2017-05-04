@@ -55,6 +55,7 @@ public class ZeroHQTContextTransformer {
                             if (metadata.getName().equals("description")) {
                                 stateInfo.setStateDescription(metadata.getValue());
                             }
+                           //TODO Timestamp;
                         }
                     }
                 } else if (attribute.getName().equals(TestStationContextAttribute.statePayload.name())) {

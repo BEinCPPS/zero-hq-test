@@ -13,7 +13,7 @@
         $scope.shouldShowDelete = false;
         $scope.listCanSwipe = true;
 
-        $scope.$on('wsMessage', function (event, informationBay) {
+        $scope.$on('wsMessageAck', function (event, informationBay) {
             if (typeof informationBay.acknowledge !== 'undefined' && informationBay.acknowledge !== null) {
                 var acknowledge = informationBay.acknowledge;
                 $scope.notificationsMap[acknowledge.id] = acknowledge;

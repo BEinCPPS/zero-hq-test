@@ -5,10 +5,10 @@
         .module('zerohqt.home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['websocketService', '$scope', 'orionService'];
+    HomeController.$inject = ['websocketService', '$scope', 'homeOrionService'];
 
     /* @ngInject */
-    function HomeController(websocketService, $scope, orionService) {
+    function HomeController(websocketService, $scope, homeOrionService) {
         $scope.entries = {};
         // $scope.isWsConnected = false;
         $scope.MAX_NR_BAYS = 4;
@@ -39,11 +39,10 @@
 
 
         $scope.$on('$ionicView.loaded', function (viewInfo, state) {
-            // $scope.connect();
-            orionService.subscribe().then(function (req) {
-                console.log('Subscriptions created: ' + req.data);
+            homeOrionService.subscribe().then(function (req) {
+                console.log('Subscriptions created: ' + JSON.stringify(req.data));
             }, function (error) {
-                console.log('Error creating subscriptions: ' + error);
+                console.log('Error creating subscriptions: ' + JSON.stringify(error));
             });
         });
 

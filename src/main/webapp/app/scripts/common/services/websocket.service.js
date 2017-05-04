@@ -35,15 +35,28 @@
             } catch (error) {
                 console.log('Error in creating Stomp over SockJs', error);
             }
-            var onMessage = function (message) {
-               // console.log("Message from WebSocket Bay: " + message);
+            var onMessageInformationBay = function (message) {
+                console.log("Message Information Bay from WebSocket Bay: " + message);
                 var messageObj = JSON.parse(message.body);
                 $rootScope.$broadcast('wsMessage', messageObj);
             }
+            var onMessageAck = function (message) {
+                 console.log("Message Acknowledge from WebSocket Bay: " + message);
+                var messageObj = JSON.parse(message.body);
+                $rootScope.$broadcast('wsMessageAck', messageObj);
+            }
+            var onMessageFeedback = function (message) {
+                console.log("Message Feedback from WebSocket Bay: " + message);
+                var messageObj = JSON.parse(message.body);
+                $rootScope.$broadcast('wsMessageFeedback', messageObj);
+            }
+
             return new Promise(function (resolve, reject) {
                 var connectCallback = function () {
                     console.log('Connected!!!');
-                    stompClient.subscribe('/topic', onMessage);
+                    stompClient.subscribe('/topic/informationBay', onMessageInformationBay);
+                    stompClient.subscribe('/topic/acknowledge', onMessageAck);
+                    stompClient.subscribe('/topic/feedback', onMessageFeedback);
                     isWsConnected = true;
                     return resolve(true); //isConnected
                 }

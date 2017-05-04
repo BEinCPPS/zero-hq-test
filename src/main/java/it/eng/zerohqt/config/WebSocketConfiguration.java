@@ -13,6 +13,9 @@ public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfig
 
     private final Logger logger = Logger.getLogger(WebSocketConfiguration.class);
     public static String DEFAULT_CHANNEL = "/topic";
+    public static String INFORMATION_BAY_TOPIC = "informationBay";
+    public static String ACKNOWLEDGE_TOPIC = "acknowledge";
+    public static String FEEDBACK_TOPIC = "feedback";
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
@@ -24,6 +27,7 @@ public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfig
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/websocket")
                 .setAllowedOrigins("*"); //TODO
-                //.withSockJS();
+        //.withSockJS();
+
     }
 }

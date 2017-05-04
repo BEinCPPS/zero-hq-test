@@ -26,7 +26,11 @@ public class WebSocketController {
     public void sendToClient(InformationBay informationBay) throws Exception {
         logger.info(informationBay.toString());
         ObjectMapper mapper = new ObjectMapper();
-        webSocketSender.convertAndSend(WebSocketConfiguration.DEFAULT_CHANNEL,
+        webSocketSender.convertAndSend(WebSocketConfiguration.DEFAULT_CHANNEL + "/"
+                        + WebSocketConfiguration.INFORMATION_BAY_TOPIC,
+                mapper.writeValueAsString(informationBay));
+        webSocketSender.convertAndSend(WebSocketConfiguration.DEFAULT_CHANNEL + "/"
+                        + WebSocketConfiguration.ACKNOWLEDGE_TOPIC,
                 mapper.writeValueAsString(informationBay));
         logger.info("Sended at: " + new Date());
     }
@@ -34,10 +38,12 @@ public class WebSocketController {
     public void sendToClient(FeedbackInfo feedbackInfo) throws Exception {
         logger.info(feedbackInfo.toString());
         ObjectMapper mapper = new ObjectMapper();
-        webSocketSender.convertAndSend(WebSocketConfiguration.DEFAULT_CHANNEL,
+        webSocketSender.convertAndSend(WebSocketConfiguration.DEFAULT_CHANNEL + "/"
+                        + WebSocketConfiguration.FEEDBACK_TOPIC,
                 mapper.writeValueAsString(feedbackInfo));
         logger.info("Sended at: " + new Date());
     }
+
 
 
 }

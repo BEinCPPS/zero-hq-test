@@ -97,8 +97,8 @@ public class ZeroHqWebSocketTest {
                 .connect(WEBSOCKET_URI, new StompSessionHandlerAdapter() {
                 })
                 .get(1, SECONDS);
-        session.subscribe(WEBSOCKET_TOPIC, new DefaultStompFrameHandler());
-
+        session.subscribe(WEBSOCKET_TOPIC + "/" + WebSocketConfiguration.INFORMATION_BAY_TOPIC, new DefaultStompFrameHandler());
+        session.subscribe(WEBSOCKET_TOPIC + "/" + WebSocketConfiguration.ACKNOWLEDGE_TOPIC, new DefaultStompFrameHandler());
         for (; ; ) {
             Thread.sleep(DELAY);
             InformationBay[] messageBays = new InformationBay[informationBayList.size()];
@@ -106,9 +106,13 @@ public class ZeroHqWebSocketTest {
             InformationBay message = messageBays[rand.nextInt(100) % messageBays.length];
             ObjectMapper mapper = new ObjectMapper();
             String messageJson = mapper.writeValueAsString(message);
-            session.send(WEBSOCKET_TOPIC, messageJson.getBytes());
+            session.send(WEBSOCKET_TOPIC + "/" + WebSocketConfiguration.INFORMATION_BAY_TOPIC, messageJson.getBytes());
             logger.info(messageJson);
             Assert.assertEquals(messageJson, blockingQueue.poll(1, SECONDS));
+            String messageJson2 = mapper.writeValueAsString(message);
+            session.send(WEBSOCKET_TOPIC + "/" + WebSocketConfiguration.ACKNOWLEDGE_TOPIC, messageJson2.getBytes());
+            logger.info(messageJson2);
+            Assert.assertEquals(messageJson2, blockingQueue.poll(1, SECONDS));
         }
     }
 

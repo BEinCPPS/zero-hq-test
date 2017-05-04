@@ -1,17 +1,23 @@
 package it.eng.zerohqt.business.model;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * Created by ascatox on 03/05/17.
  */
-public class FeedbackInfo extends ZeroHQTModel{
+public class FeedbackInfo extends ZeroHQTModel implements Serializable{
     private String measureId;
     private Double value;
-    private String origin;
+
 
     public FeedbackInfo() {
-        this.origin = this.getClass().getSimpleName();
+        this.origin = this.getClass().getSimpleName().toLowerCase();
+    }
+
+    public FeedbackInfo(String measureId, Double value) {
+        this.origin = this.getClass().getSimpleName().toLowerCase();
+        this.measureId = measureId;
+        this.value = value;
     }
 
     public Double getValue() {
@@ -43,7 +49,6 @@ public class FeedbackInfo extends ZeroHQTModel{
         return "FeedbackInfo{" +
                 "measureId='" + measureId + '\'' +
                 ", value=" + value +
-                ", origin='" + origin + '\'' +
                 '}';
     }
 }
