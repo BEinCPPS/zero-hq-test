@@ -1,15 +1,16 @@
 package it.eng.zerohqt.business;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import it.eng.zerohqt.business.model.FeedbackInfo;
 import it.eng.zerohqt.business.model.InformationBay;
-import it.eng.zerohqt.orion.model.TestStationBayContext;
+import it.eng.zerohqt.business.transformer.ZeroHQTContextTransformer;
+import it.eng.zerohqt.orion.model.ZeroHQTContext;
 import it.eng.zerohqt.web.websocket.WebSocketController;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,20 +24,32 @@ public class Reasoner {
 
     public void feed(String message) {
         ObjectMapper mapper = new ObjectMapper();
-        TestStationBayContext stationBayContext;
+        ZeroHQTContext zeroHQTContext;
         try {
-            stationBayContext = mapper.readValue(message, TestStationBayContext.class);
-            Optional<List<InformationBay>> informationBays = InformationBayContextTransformer
-                    .transformToInformationBay(stationBayContext);
-            InformationBay informationBay = null;
-            if (informationBays.isPresent()) {
-                informationBay = informationBays.get().get(0); //TODO Only one
+            zeroHQTContext = mapper.readValue(message, ZeroHQTContext.class);
+            Optional<?> zeroHQTObject = ZeroHQTContextTransformer
+                    .transformForWebSocket(zeroHQTContext);
+            if (zeroHQTObject.isPresent()) {
+                if (zeroHQTObject.get() instanceof InformationBay) {
+                    try {
+                        InformationBay informationBay = (InformationBay) zeroHQTObject.get();
+                        webSocketController.sendToClient(informationBay);
+                    } catch (Exception e) {
+                        logger.error(e);
+                    }
+                } else {
+                    if (zeroHQTObject.get() instanceof FeedbackInfo) {
+                        try {
+                            FeedbackInfo feedbackInfo = (FeedbackInfo) zeroHQTObject.get();
+                            webSocketController.sendToClient(feedbackInfo);
+                        } catch (Exception e) {
+                            logger.error(e);
+                        }
+                    }
+                }
+
             }
-            try {
-                webSocketController.sendToClient(informationBay);
-            } catch (Exception e) {
-                logger.error(e);
-            }
+
         } catch (IOException e) {
             logger.error(e);
         }

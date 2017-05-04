@@ -5,7 +5,7 @@
         .module('zerohqt.inbox')
         .controller('InboxController', InboxController);
 
-    InboxController.$inject = ['$scope', '$ionicLoading','$ionicPopup'];
+    InboxController.$inject = ['$scope', '$ionicLoading', '$ionicPopup'];
 
     /* @ngInject */
     function InboxController($scope, $ionicLoading, $ionicPopup) {
@@ -25,18 +25,30 @@
         }
 
         $scope.$on('$ionicView.loaded', function (viewInfo, state) {
+            $scope.isRemoveAllEnabled = false;
             var notifs = JSON.parse(localStorage.getItem('notifications'));
             if (notifs) {
                 $scope.notificationsMap = notifs;
             }
         });
 
-        /* $scope.$on('$ionicView.enter', function (viewInfo, state) {
-         console.log(JSON.stringify(localStorage.getItem('notifications')));
-         });
-         */
+        $scope.$on('$ionicView.enter', function (viewInfo, state) {
+            $scope.isRemoveAllEnabled = false;
+        });
+
         $scope.deleteAcknowledge = function (id) {
             delete $scope.notificationsMap[id];
+        }
+
+        $scope.enableRemoveAll = function () {
+            if(angular.equals($scope.notificationsMap, {})) return;
+            $scope.isRemoveAllEnabled = true;
+        }
+
+        $scope.removeAll = function () {
+            $scope.notificationsMap = {};
+            localStorage.clear();
+            $scope.isRemoveAllEnabled = false;
         }
 
         $scope.$on('$ionicView.afterLeave', function (viewInfo, state) {

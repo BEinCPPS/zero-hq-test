@@ -10,7 +10,7 @@
     /* @ngInject */
     function HomeController(websocketService, $scope, orionService) {
         $scope.entries = {};
-       // $scope.isWsConnected = false;
+        // $scope.isWsConnected = false;
         $scope.MAX_NR_BAYS = 4;
 
         $scope.$on('wsMessage', function (event, informationBay) {
@@ -39,8 +39,12 @@
 
 
         $scope.$on('$ionicView.loaded', function (viewInfo, state) {
-           // $scope.connect();
-            orionService.subscribe();
+            // $scope.connect();
+            orionService.subscribe().then(function (req) {
+                console.log('Subscriptions created: ' + req.data);
+            }, function (error) {
+                console.log('Error creating subscriptions: ' + error);
+            });
         });
 
 

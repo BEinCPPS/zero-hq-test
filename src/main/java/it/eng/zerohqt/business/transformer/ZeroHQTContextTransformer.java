@@ -1,15 +1,10 @@
-package it.eng.zerohqt.business;
+package it.eng.zerohqt.business.transformer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.eng.zerohqt.business.model.Acknowledge;
-import it.eng.zerohqt.business.model.BaseBayInfo;
-import it.eng.zerohqt.business.model.InformationBay;
-import it.eng.zerohqt.business.model.StateInfo;
+import it.eng.zerohqt.business.model.*;
+import it.eng.zerohqt.config.Constants;
 import it.eng.zerohqt.config.Utils;
-import it.eng.zerohqt.dao.model.AcknowledgeType;
-import it.eng.zerohqt.dao.model.ContextAttribute;
-import it.eng.zerohqt.dao.model.StateType;
-import it.eng.zerohqt.dao.model.TestStationData;
+import it.eng.zerohqt.dao.model.*;
 import it.eng.zerohqt.orion.model.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -21,15 +16,28 @@ import java.util.stream.Collectors;
 /**
  * Created by ascatox on 17/02/17.
  */
-public class InformationBayContextTransformer {
-    private static Logger logger = Logger.getLogger(InformationBayContextTransformer.class);
+public class ZeroHQTContextTransformer {
+    private static Logger logger = Logger.getLogger(ZeroHQTContextTransformer.class);
 
-    public static Optional<List<InformationBay>> transformToInformationBay(TestStationBayContext testStationBayContext) {
+
+    public static Optional<?> transformForWebSocket(ZeroHQTContext zeroHQTContext) {
+        if (zeroHQTContext == null
+                || zeroHQTContext.getContextResponses() == null
+                || zeroHQTContext.getContextResponses().isEmpty())
+            return Optional.empty();
+        ContextElement contextElement = zeroHQTContext.getContextResponses().get(0).getContextElement();
+        if (contextElement.getId().contains(Constants.ORION_CONTEXT_PREFIX_TESTSTATION))
+            return transformToInformationBay(zeroHQTContext);
+        else if (contextElement.getId().contains(Constants.ORION_CONTEXT_PREFIX_FEEDBACK))
+            return transformToFeedback(zeroHQTContext);
+        return Optional.empty();
+    }
+
+    private static Optional<InformationBay> transformToInformationBay(ZeroHQTContext zeroHQTContext) {
         InformationBay informationBay = new InformationBay();
         Acknowledge acknowledge = null;
         StateInfo stateInfo = new StateInfo();
-        ArrayList<ContextResponses> contextResponses = testStationBayContext.getContextResponses();
-        List<InformationBay> informationBays = new ArrayList<>();
+        ArrayList<ContextResponses> contextResponses = zeroHQTContext.getContextResponses();
         if (null == contextResponses || contextResponses.isEmpty()) Optional.empty();
         for (ContextResponses contextResponse :
                 contextResponses) {
@@ -39,7 +47,7 @@ public class InformationBayContextTransformer {
             if (null == contextElement.getAttributes() || contextElement.getAttributes().isEmpty())
                 return Optional.empty();
             for (Attributes attribute : contextElement.getAttributes()) {
-                if (attribute.getName().equals(ContextAttribute.state.name())) {
+                if (attribute.getName().equals(TestStationContextAttribute.state.name())) {
                     stateInfo.setStateCode(attribute.getValue());
                     ArrayList<Metadatas> metadatas = attribute.getMetadatas();
                     if (metadatas != null && !metadatas.isEmpty()) {
@@ -49,13 +57,13 @@ public class InformationBayContextTransformer {
                             }
                         }
                     }
-                } else if (attribute.getName().equals(ContextAttribute.statePayload.name())) {
+                } else if (attribute.getName().equals(TestStationContextAttribute.statePayload.name())) {
                     stateInfo.setStatePayload(attribute.getValue());
-                } else if (attribute.getName().equals(ContextAttribute.ipAddress.name())) {
+                } else if (attribute.getName().equals(TestStationContextAttribute.ipAddress.name())) {
                     informationBay.setIpAddress(attribute.getValue());
-                } else if (attribute.getName().equals(ContextAttribute.stationInfo.name())) {
+                } else if (attribute.getName().equals(TestStationContextAttribute.stationInfo.name())) {
                     informationBay.setStationDescription(attribute.getValue());
-                } else if (attribute.getName().equals(ContextAttribute.acknowledge.name())
+                } else if (attribute.getName().equals(TestStationContextAttribute.acknowledge.name())
                         && Utils.isStringNotBlankExt(attribute.getValue())) {
                     acknowledge = new Acknowledge();
                     extractStationNameAndBayNumber(contextElement.getId(), acknowledge);
@@ -68,10 +76,26 @@ public class InformationBayContextTransformer {
                 informationBay.setTimestamp(new Date());
                 informationBay.setStateInfo(stateInfo);
                 informationBay.setAcknowledge(acknowledge);
-                informationBays.add(informationBay);
             }
         }
-        return Optional.of(informationBays);
+        return Optional.of(informationBay);
+    }
+
+    public static Optional<FeedbackInfo> transformToFeedback(ZeroHQTContext zeroHQTContext) {
+        FeedbackInfo feedbackInfo = new FeedbackInfo();
+        ArrayList<ContextResponses> contextResponses = zeroHQTContext.getContextResponses();
+        if (null == contextResponses || contextResponses.isEmpty()) Optional.empty();
+        for (ContextResponses contextResponse : contextResponses) {
+            ContextElement contextElement = contextResponse.getContextElement();
+            feedbackInfo.setTimestamp(new Date());
+            if (null == contextElement.getAttributes() || contextElement.getAttributes().isEmpty())
+                return Optional.empty();
+            for (Attributes attribute : contextElement.getAttributes()) {
+                feedbackInfo.setMeasureId(attribute.getName());
+                feedbackInfo.setValue(Double.parseDouble(attribute.getValue()));
+            }
+        }
+        return Optional.of(feedbackInfo);
     }
 
     public static List<Acknowledge> transformToAcknowledges(List<TestStationData> testStationDatas) {
@@ -87,7 +111,7 @@ public class InformationBayContextTransformer {
         acknowledge.setBayCode(testStationData.getEntityId());
         extractStationNameAndBayNumber(testStationData.getEntityId(), acknowledge);
         String attrName = testStationData.getAttrName();
-        if (attrName.equals(ContextAttribute.acknowledge.name())
+        if (attrName.equals(TestStationContextAttribute.acknowledge.name())
                 && Utils.isStringNotBlankExt(testStationData.getAttrValue())) {
             acknowledge.setAckType(AcknowledgeType.valueOf("ack" + testStationData.getAttrValue()));
             acknowledge.setDescription(AcknowledgeType.valueOf("ack" + testStationData.getAttrValue()).getDescription());
@@ -113,6 +137,7 @@ public class InformationBayContextTransformer {
 
 
     private static StateType resolveStateType(String stateCode, Acknowledge acknowledge) {
+        if (StringUtils.isBlank(stateCode)) return null;
         boolean isAckPresent = null != acknowledge && acknowledge.getAckType() != null;
         if (stateCode.equalsIgnoreCase("1000")
                 || stateCode.equalsIgnoreCase("106")
@@ -121,5 +146,6 @@ public class InformationBayContextTransformer {
         else if (stateCode.equalsIgnoreCase("400") && isAckPresent) return StateType.warning;
         else return StateType.normal;
     }
+
 
 }

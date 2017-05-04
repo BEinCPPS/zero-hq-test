@@ -2,19 +2,15 @@ package it.eng.zerohqt.orion.model;
 
 import java.util.ArrayList;
 
-public class TestStationBayContext {
-	
+public class ZeroHQTContext {
     private String subscriptionId;
     private String originator;
     private ArrayList<ContextResponses> contextResponses;
-    
-    
-	public TestStationBayContext () {
+
+	public ZeroHQTContext() {
 		
 	}
-
-
-    public TestStationBayContext(String subscriptionId, String originator, ArrayList<ContextResponses> contextResponses) {
+    public ZeroHQTContext(String subscriptionId, String originator, ArrayList<ContextResponses> contextResponses) {
         this.subscriptionId = subscriptionId;
         this.originator = originator;
         this.contextResponses = contextResponses;

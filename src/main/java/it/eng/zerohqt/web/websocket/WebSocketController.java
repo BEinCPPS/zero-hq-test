@@ -3,6 +3,7 @@ package it.eng.zerohqt.web.websocket;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.eng.zerohqt.business.Reasoner;
 import it.eng.zerohqt.business.model.Acknowledge;
+import it.eng.zerohqt.business.model.FeedbackInfo;
 import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.config.WebSocketConfiguration;
 import org.apache.log4j.Logger;
@@ -30,7 +31,13 @@ public class WebSocketController {
         logger.info("Sended at: " + new Date());
     }
 
-
+    public void sendToClient(FeedbackInfo feedbackInfo) throws Exception {
+        logger.info(feedbackInfo.toString());
+        ObjectMapper mapper = new ObjectMapper();
+        webSocketSender.convertAndSend(WebSocketConfiguration.DEFAULT_CHANNEL,
+                mapper.writeValueAsString(feedbackInfo));
+        logger.info("Sended at: " + new Date());
+    }
 
 
 }

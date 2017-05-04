@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by ascatox on 09/03/17.
  */
-public class BaseBayInfo implements Serializable {
+public class BaseBayInfo extends ZeroHQTModel implements Serializable {
 
     private String stationName;
     private Integer bayNumber;

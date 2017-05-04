@@ -1,6 +1,7 @@
 package it.eng.zerohqt.web.rest;
 
-import it.eng.zerohqt.business.InformationBayContextTransformer;
+import it.eng.zerohqt.business.model.FeedbackScale;
+import it.eng.zerohqt.business.transformer.ZeroHQTContextTransformer;
 import it.eng.zerohqt.business.Reasoner;
 import it.eng.zerohqt.business.model.Acknowledge;
 import it.eng.zerohqt.config.OrionConfiguration;
@@ -8,8 +9,11 @@ import it.eng.zerohqt.dao.TablesMetaDataDao;
 import it.eng.zerohqt.dao.TestStationDao;
 import it.eng.zerohqt.orion.OrionContextConsumer;
 import it.eng.zerohqt.orion.client.model.subscribe.SubscriptionResponse;
+import it.eng.zerohqt.orion.model.FeedbackContextAttribute;
+import it.eng.zerohqt.orion.model.TestStationContextAttribute;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -40,7 +44,9 @@ public class RestServiceController {
     public List<SubscriptionResponse> subscribe() {
         List<SubscriptionResponse> subscriptionResponses = null;
         try {
-            subscriptionResponses = orionContextConsumer.subscribeContexts(Optional.of("teststation"));
+            orionContextConsumer.cancelAndDeleteSubscriptions();
+            subscriptionResponses = orionContextConsumer.subscribeContexts(Optional.of(TestStationContextAttribute.getContextFatherNamePrefix()), TestStationContextAttribute.getValuesString());
+            subscriptionResponses.addAll(orionContextConsumer.subscribeContexts(Optional.of(FeedbackContextAttribute.getContextFatherNamePrefix()), null)); //attributes changes inside context
         } catch (Exception e) {
             logger.error(e);
         }
@@ -50,7 +56,7 @@ public class RestServiceController {
     @RequestMapping(path = "/history", method = RequestMethod.GET)
     public List<Acknowledge> history() {
         try {
-            return InformationBayContextTransformer.
+            return ZeroHQTContextTransformer.
                     transformToAcknowledges(testStationDao
                             .findAllNotifications(orionConfiguration.orionService.toLowerCase()));
         } catch (Exception e) {
@@ -58,6 +64,17 @@ public class RestServiceController {
             return new ArrayList<>();
         }
     }
+
+    @RequestMapping(path = "/feedbackScale", method = RequestMethod.GET)
+    public List<FeedbackScale> getFeedbackScale() {
+        try {
+            return orionContextConsumer.readFeedbackScaleContext();
+        } catch (Exception e) {
+            logger.error(e);
+            return new ArrayList<>();
+        }
+    }
+
 
     @RequestMapping(path = "/stationsBays", method = RequestMethod.GET)
     public List<String> stationsBays() {
@@ -74,7 +91,7 @@ public class RestServiceController {
     public List<Acknowledge> stationBayHistory(
             @RequestParam String stationBay) {
         try {
-            return InformationBayContextTransformer.
+            return ZeroHQTContextTransformer.
                     transformToAcknowledges(testStationDao.
                             findAllNotificationsStationBay(orionConfiguration.orionService.toLowerCase(), stationBay));
         } catch (Exception e) {
@@ -88,7 +105,7 @@ public class RestServiceController {
             @RequestParam int startPoint,
             @RequestParam int delta) {
         try {
-            return InformationBayContextTransformer.
+            return ZeroHQTContextTransformer.
                     transformToAcknowledges(testStationDao.
                             findNextNotifications(orionConfiguration.orionService.toLowerCase(), startPoint, delta));
         } catch (Exception e) {
@@ -96,17 +113,12 @@ public class RestServiceController {
             return new ArrayList<>();
         }
     }
+
     //TODO Don't secure this endpoint, used by ORION
     @RequestMapping(path = "/notify", method = RequestMethod.POST)
     public void notification(@RequestBody String message) {
         logger.info("StateInfo from ORION --> " + message);
         reasoner.feed(message);
     }
-
-    /*@RequestMapping(value = "/error")
-    public String error() {
-        return "<h1>You got an ERROR :-(<h1>"; //TODO
-    }*/
-
 
 }

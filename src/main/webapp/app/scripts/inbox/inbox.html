@@ -1,5 +1,14 @@
 <ion-view view-title="Inbox">
     <ion-content>
+        <div class="bar bar-header">
+            <div class="h1 title">Header Buttons</div>
+            <button ng-if="!isRemoveAllEnabled" class="button button-assertive icon ion-close-circled"
+                    ng-click="enableRemoveAll()"></button>
+            <button ng-if="isRemoveAllEnabled" class="button button-assertive" ng-click="removeAll()">Remove all
+            </button>
+        </div>
+        <br/>
+        <br/>
         <ion-list
                 show-delete="shouldShowDelete" can-swipe="listCanSwipe">
             <ion-item class="item item-divider item-text-wrap" ng-repeat="(key,value) in notificationsMap track by key">
@@ -13,9 +22,5 @@
                 </ion-item>
             </ion-item>
         </ion-list>
-        <!-- <ion-infinite-scroll
-                 on-infinite="loadMore()"
-                 icon="ion-loading-c">
-         </ion-infinite-scroll>-->
     </ion-content>
 </ion-view>

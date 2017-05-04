@@ -11,26 +11,27 @@ public class InformationBay extends BaseBayInfo implements Serializable {
     private String stationDescription;
     private String ipAddress;
     private StateInfo stateInfo;
-    private Date timestamp;
     private Acknowledge acknowledge;
+    private String origin;
 
     public Acknowledge getAcknowledge() {
         return acknowledge;
     }
+
     public void setAcknowledge(Acknowledge acknowledge) {
         this.acknowledge = acknowledge;
     }
 
     public InformationBay() {
-
+        this.origin = this.getClass().getSimpleName();
     }
 
-    public InformationBay(String stationName, Integer bayNumber, String bayCode, String stationDescription, String ipAddress, StateInfo notification, Date timestamp) {
+    public InformationBay(String stationName, Integer bayNumber, String bayCode, String stationDescription, String ipAddress, StateInfo notification) {
         super(stationName, bayNumber, bayCode);
         this.stationDescription = stationDescription;
         this.ipAddress = ipAddress;
         this.stateInfo = notification;
-        this.timestamp = timestamp;
+        this.origin = this.getClass().getSimpleName();
     }
 
     public String getStationDescription() {
@@ -57,12 +58,8 @@ public class InformationBay extends BaseBayInfo implements Serializable {
         this.stateInfo = stateInfo;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public String getOrigin() {
+        return origin;
     }
 
     @Override
@@ -71,8 +68,8 @@ public class InformationBay extends BaseBayInfo implements Serializable {
                 "stationDescription='" + stationDescription + '\'' +
                 ", ipAddress='" + ipAddress + '\'' +
                 ", stateInfo=" + stateInfo +
-                ", timestamp=" + timestamp +
                 ", acknowledge=" + acknowledge +
+                ", origin='" + origin + '\'' +
                 '}';
     }
 }

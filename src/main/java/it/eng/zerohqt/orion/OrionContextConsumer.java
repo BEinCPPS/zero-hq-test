@@ -1,5 +1,6 @@
 package it.eng.zerohqt.orion;
 
+import it.eng.zerohqt.business.model.FeedbackScale;
 import it.eng.zerohqt.orion.client.model.subscribe.SubscriptionResponse;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface OrionContextConsumer {
      * @param contextFilter
      * @throws Exception
      */
-    List<SubscriptionResponse> subscribeContexts(Optional<String> contextFilter) throws Exception;
+    List<SubscriptionResponse> subscribeContexts(Optional<String> contextFilter, String[] attributes) throws Exception;
 
     /**
      * @param contextId
@@ -32,4 +33,11 @@ public interface OrionContextConsumer {
      *
      */
     void cancelAndDeleteSubscriptions() throws Exception;
+
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
+    List<FeedbackScale> readFeedbackScaleContext() throws Exception;
 }
