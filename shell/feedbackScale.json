@@ -1,0 +1,76 @@
+{
+  "id": "feedbackScale",
+  "type": "feedbackType",
+  "attributes": [
+    {
+      "name": "measure1",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    },
+    {
+      "name": "measure2",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    },
+    {
+      "name": "measure3",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    },
+    {
+      "name": "measure4",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    },
+    {
+      "name": "measure5",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    },
+    {
+      "name": "measure6",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    },
+    {
+      "name": "measure7",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    },
+    {
+      "name": "measure8",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    },
+    {
+      "name": "measure9",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    },
+    {
+      "name": "measure10",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    },
+    {
+      "name": "measure11",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    },
+    {
+      "name": "measure12",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    },
+    {
+      "name": "measure13",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    },
+    {
+      "name": "measure14",
+      "type": "string",
+      "value": "{min: 12.89, max: 23.89}"
+    }
+  ]
+}

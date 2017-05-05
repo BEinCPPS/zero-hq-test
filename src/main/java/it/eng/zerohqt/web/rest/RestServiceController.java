@@ -38,19 +38,16 @@ public class RestServiceController {
     @Autowired
     Reasoner reasoner;
 
-    //TODO Eliminare in fase di configurazione
-
     @RequestMapping(path = "/subscribe", method = RequestMethod.GET)
     public List<SubscriptionResponse> subscribe() {
         List<SubscriptionResponse> subscriptionResponses = null;
         try {
-            orionContextConsumer.cancelAndDeleteSubscriptions();
-            subscriptionResponses = orionContextConsumer.subscribeContexts(Optional.of(TestStationContextAttribute.getContextFatherNamePrefix()), TestStationContextAttribute.getValuesString());
-            subscriptionResponses.addAll(orionContextConsumer.subscribeContexts(Optional.of(FeedbackContextAttribute.getContextFatherNamePrefix()), null)); //attributes changes inside context
+            return orionContextConsumer.subscribe();
         } catch (Exception e) {
             logger.error(e);
+            throw new RuntimeException(e);
         }
-        return subscriptionResponses;
+
     }
 
     @RequestMapping(path = "/history", method = RequestMethod.GET)
@@ -61,7 +58,7 @@ public class RestServiceController {
                             .findAllNotifications(orionConfiguration.orionService.toLowerCase()));
         } catch (Exception e) {
             logger.error(e);
-            return new ArrayList<>();
+            throw new RuntimeException(e);
         }
     }
 
@@ -71,7 +68,7 @@ public class RestServiceController {
             return orionContextConsumer.readFeedbackScaleContext();
         } catch (Exception e) {
             logger.error(e);
-            return new ArrayList<>();
+            throw new RuntimeException(e);
         }
     }
 
@@ -83,7 +80,7 @@ public class RestServiceController {
 
         } catch (Exception e) {
             logger.error(e);
-            return new ArrayList<>();
+            throw new RuntimeException(e);
         }
     }
 
@@ -96,7 +93,7 @@ public class RestServiceController {
                             findAllNotificationsStationBay(orionConfiguration.orionService.toLowerCase(), stationBay));
         } catch (Exception e) {
             logger.error(e);
-            return new ArrayList<>();
+            throw new RuntimeException(e);
         }
     }
 
@@ -110,7 +107,7 @@ public class RestServiceController {
                             findNextNotifications(orionConfiguration.orionService.toLowerCase(), startPoint, delta));
         } catch (Exception e) {
             logger.error(e);
-            return new ArrayList<>();
+            throw new RuntimeException(e);
         }
     }
 
@@ -119,6 +116,11 @@ public class RestServiceController {
     public void notification(@RequestBody String message) {
         logger.info("StateInfo from ORION --> " + message);
         reasoner.feed(message);
+    }
+
+    @ExceptionHandler(value = RuntimeException.class)
+    public String eHandler(RuntimeException e) {
+        return e.getMessage();
     }
 
 }

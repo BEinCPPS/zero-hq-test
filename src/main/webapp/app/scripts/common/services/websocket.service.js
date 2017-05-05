@@ -11,20 +11,13 @@
 
     function websocketService($rootScope, $ionicPlatform, externalAppsService) {
         console.log('Starting Sockjs.......' + externalAppsService.getBackEndUrl());
-        /* var wsUrl = externalAppsService.getBackEndUrl() + 'websocket';
-         var sockjs = new SockJS(wsUrl); //TODO in Env
-         console.log('SockJS built');
-         sockjs.onopen = function() {
-         console.log('SockJS is opened');
-         };
-         sockjs.onmessage = function(e) {
-         console.log('message!!!!!!!!!!', e.data);
-         }
-         */
         var isWsConnected = false;
+        $rootScope.informationBays = [];
+        $rootScope.feedbacks = [];
+        $rootScope.acknowledges = [];
         var service = {
             connect: connect,
-            isWsConnected: isWsConnected
+            isWsConnected: isWsConnected,
         };
         return service;
 
@@ -39,17 +32,21 @@
                 console.log("Message Information Bay from WebSocket Bay: " + message);
                 var messageObj = JSON.parse(message.body);
                 $rootScope.$broadcast('wsMessage', messageObj);
+                $rootScope.informationBays.push(messageObj);
             }
             var onMessageAck = function (message) {
-                 console.log("Message Acknowledge from WebSocket Bay: " + message);
+                console.log("Message Acknowledge from WebSocket Bay: " + message);
                 var messageObj = JSON.parse(message.body);
                 $rootScope.$broadcast('wsMessageAck', messageObj);
+                $rootScope.acknowledges.push(messageObj);
             }
             var onMessageFeedback = function (message) {
                 console.log("Message Feedback from WebSocket Bay: " + message);
                 var messageObj = JSON.parse(message.body);
                 $rootScope.$broadcast('wsMessageFeedback', messageObj);
+                $rootScope.feedbacks.push(messageObj);
             }
+
 
             return new Promise(function (resolve, reject) {
                 var connectCallback = function () {
@@ -69,5 +66,6 @@
                 stompClient.connect({}, connectCallback, errorCallback);
             });
         }
+
     }
 })();

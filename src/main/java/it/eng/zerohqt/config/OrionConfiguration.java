@@ -25,7 +25,7 @@ public class OrionConfiguration {
 
 
     @Bean
-    public OrionContextConsumer orionContextConsumer() {
+    public OrionContextConsumer orionContextConsumer() throws Exception{
         return new OrionContextConsumerExecutor(orionServerUrl, orionToken, orionService, orionServicepath, orionReference);
     }
 

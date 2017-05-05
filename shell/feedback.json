@@ -1,0 +1,21 @@
+{
+  "id": "feedbackContext",
+  "type": "feedbackType",
+  "attributes": [
+    {
+      "name": "measure1",
+      "type": "double",
+      "value": 12.90
+    },
+    {
+      "name": "measure14",
+      "type": "double",
+      "value": 1.90
+    },
+    {
+      "name": "measure2",
+      "type": "double",
+      "value": 0
+    }
+  ]
+}

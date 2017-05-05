@@ -5,10 +5,10 @@
         .module('zerohqt.home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['websocketService', '$scope', 'homeOrionService'];
+    HomeController.$inject = ['$scope', '$rootScope'];
 
     /* @ngInject */
-    function HomeController(websocketService, $scope, homeOrionService) {
+    function HomeController($scope, $rootScope) {
         $scope.entries = {};
         // $scope.isWsConnected = false;
         $scope.MAX_NR_BAYS = 4;
@@ -38,28 +38,37 @@
         }
 
 
-        $scope.$on('$ionicView.loaded', function (viewInfo, state) {
-            homeOrionService.subscribe().then(function (req) {
-                console.log('Subscriptions created: ' + JSON.stringify(req.data));
-            }, function (error) {
-                console.log('Error creating subscriptions: ' + JSON.stringify(error));
-            });
-        });
-
-
         $scope.getBackgroundColor = function (stateType) {
             if (stateType === 'normal')  return 'button icon ion-android-checkmark-circle green-button';
             else if (stateType === 'warning') return 'button icon ion-android-warning yellow-button';
             else if (stateType === 'error') return 'button icon ion-android-alert red-button';
 
         }
-        /*
-         $scope.$on('$ionicView.loaded', function (viewInfo, state) {});
 
-         $scope.$on('$ionicView.enter', function (viewInfo, state) {});
+        $scope.$on('$ionicView.loaded', function (viewInfo, state) {
+        });
 
-         $scope.$on('$ionicView.afterLeave', function (viewInfo, state) {});
-         */
+        $scope.$on('$ionicView.enter', function (viewInfo, state) {
+            if ($rootScope.informationBays) {
+                angular.forEach($rootScope.informationBays, function (value) {
+                    aggregateData(value);
+                    $scope.apply();
+                })
+            }
+        });
+
+        $scope.$on('$ionicView.afterLeave', function (viewInfo, state) {
+            $rootScope.informationBays = [];
+        });
+
+        /*var listenerCleanFn = $scope.$on('wsMessage', function () {
+
+         });
+
+         $scope.$on('$destroy', function() {
+         listenerCleanFn();
+         });*/
+
 
     }
 })();

@@ -10,6 +10,8 @@ import it.eng.zerohqt.dao.model.OrionSubscription;
 import it.eng.zerohqt.orion.client.OrionClient;
 import it.eng.zerohqt.orion.client.model.*;
 import it.eng.zerohqt.orion.client.model.subscribe.SubscriptionResponse;
+import it.eng.zerohqt.orion.model.FeedbackContextAttribute;
+import it.eng.zerohqt.orion.model.TestStationContextAttribute;
 import it.eng.zerohqt.web.rest.RestServiceController;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +43,21 @@ public class OrionContextConsumerExecutor implements OrionContextConsumer {
     private OrionSubscriptionDao orionSubscriptionDao;
 
     public OrionContextConsumerExecutor(String orionServerUrl, String orionToken, String orionService,
-                                        String orionServicePath, String orionReference) {
+                                        String orionServicePath, String orionReference) throws Exception {
         orionClient = new OrionClient(orionServerUrl, orionToken, orionService, orionServicePath);
         this.reference = orionReference;
     }
 
-    public OrionContextConsumerExecutor() {
+    public OrionContextConsumerExecutor() throws Exception {
+    }
+
+    @Override
+    public List<SubscriptionResponse> subscribe() throws Exception {
+        List<SubscriptionResponse> subscriptionResponses = new ArrayList<>();
+        cancelAndDeleteSubscriptions();
+        subscriptionResponses = subscribeContexts(Optional.of(TestStationContextAttribute.getContextFatherNamePrefix()), TestStationContextAttribute.getValuesString());
+        subscriptionResponses.addAll(subscribeContexts(Optional.of(FeedbackContextAttribute.getContextFatherNamePrefix()), null)); //attributes changes inside context
+        return subscriptionResponses;
     }
 
     private List<OrionContextElementWrapper> getAllContextsToSubscribe(Optional<String> contextFilter) throws Exception {
@@ -65,8 +76,7 @@ public class OrionContextConsumerExecutor implements OrionContextConsumer {
     }
 
 
-    //TODO Cancellare una subscription se gia presente
-    public List<SubscriptionResponse> subscribeContexts(Optional<String> contextFilter, String[] attributes) throws Exception {
+    private List<SubscriptionResponse> subscribeContexts(Optional<String> contextFilter, String[] attributes) throws Exception {
         List<OrionContextElementWrapper> allContextsToSubscribe = getAllContextsToSubscribe(contextFilter);
         List<SubscriptionResponse> subscriptionResponses = new ArrayList<>();
         //cancelAndDeleteSubscriptions();
@@ -91,12 +101,12 @@ public class OrionContextConsumerExecutor implements OrionContextConsumer {
     }
 
     public void subscribeContextAttributes(String contextId, Optional<String> attributeFilter) {
-
+        //TODO
     }
 
     @Override
     public void subscribeContextAttribute(String contextAttributeName) {
-
+        //TODO
     }
 
     @Override

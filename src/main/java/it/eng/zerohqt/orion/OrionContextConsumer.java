@@ -13,10 +13,10 @@ public interface OrionContextConsumer {
 
 
     /**
-     * @param contextFilter
+     * @param
      * @throws Exception
      */
-    List<SubscriptionResponse> subscribeContexts(Optional<String> contextFilter, String[] attributes) throws Exception;
+    List<SubscriptionResponse> subscribe() throws Exception;
 
     /**
      * @param contextId

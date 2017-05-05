@@ -5,10 +5,10 @@
         .module('zerohqt.inbox')
         .controller('InboxController', InboxController);
 
-    InboxController.$inject = ['$scope', '$ionicLoading', '$ionicPopup'];
+    InboxController.$inject = ['$scope', '$ionicLoading', '$rootScope'];
 
     /* @ngInject */
-    function InboxController($scope, $ionicLoading, $ionicPopup) {
+    function InboxController($scope, $ionicLoading, $rootScope) {
         $scope.notificationsMap = {};
         $scope.shouldShowDelete = false;
         $scope.listCanSwipe = true;
@@ -34,6 +34,13 @@
 
         $scope.$on('$ionicView.enter', function (viewInfo, state) {
             $scope.isRemoveAllEnabled = false;
+            if ($rootScope.acknowledges) {
+                angular.forEach($rootScope.acknowledges, function (value) {
+                    var acknowledge = value.acknowledge;
+                    $scope.notificationsMap[acknowledge.id] = acknowledge;
+                    $scope.$apply(); //Apply changes to the page
+                })
+            }
         });
 
         $scope.deleteAcknowledge = function (id) {
@@ -41,7 +48,7 @@
         }
 
         $scope.enableRemoveAll = function () {
-            if(angular.equals($scope.notificationsMap, {})) return;
+            if (angular.equals($scope.notificationsMap, {})) return;
             $scope.isRemoveAllEnabled = true;
         }
 
@@ -55,6 +62,7 @@
             try {
                 localStorage.clear();
                 localStorage.setItem('notifications', JSON.stringify($scope.notificationsMap)); //TODO check Mb of data
+                $rootScope.acknowledges = [];
             } catch (error) {
                 console.log('Error encountered saving notifications in localStorage: ' + error);
             }
@@ -62,5 +70,16 @@
 
         });
 
+        $scope.$on('$ionicView.afterLeave', function (viewInfo, state) {
+            $rootScope.informationBays = [];
+        });
+
+        /*var listenerCleanFn = $scope.$on('wsMessageAck', function () {
+
+         });
+
+         $scope.$on('$destroy', function () {
+         listenerCleanFn();
+         });*/
     }
 })();

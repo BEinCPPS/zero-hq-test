@@ -5,11 +5,10 @@
         .module('zerohqt.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$scope', 'dashboardOrionService'];
+    DashboardController.$inject = ['$scope', 'dashboardOrionService', 'websocketService', '$rootScope'];
 
     /* @ngInject */
-    function DashboardController($scope, dashboardOrionService) {
-
+    function DashboardController($scope, dashboardOrionService, websocketService, $rootScope) {
         $scope.data = [];
         $scope.$on('$ionicView.loaded', function (viewInfo, state) {
             dashboardOrionService.getFeedbackScale().then(function (req) {
@@ -28,15 +27,40 @@
 
         }
 
-        $scope.$on('wsMessageFeedback', function (event, feedbackInfo) {
+        function aggregateData(feedbackInfo) {
             for (var i in $scope.data) {
                 var feedback = $scope.data[i];
                 if (feedback.measureId === feedbackInfo.measureId) {
                     feedback.value = feedbackInfo.value;
                 }
             }
+        }
+
+        $scope.$on('wsMessageFeedback', function (event, feedbackInfo) {
+            aggregateData(feedbackInfo);
             $scope.$apply(); //Apply changes to the page
         });
+
+        $scope.$on('$ionicView.enter', function (viewInfo, state) {
+            if ($rootScope.feedbacks) {
+                angular.forEach($rootScope.feedbacks, function (value) {
+                    aggregateData(value);
+                    $scope.apply();
+                })
+            }
+        });
+
+        $scope.$on('$ionicView.afterLeave', function (viewInfo, state) {
+            $rootScope.feedbacks = [];
+        });
+
+        /*var listenerCleanFn = $scope.$on('wsMessageFeedback', function () {
+
+         });
+
+         $scope.$on('$destroy', function() {
+         listenerCleanFn();
+         });*/
 
     }
 })();
