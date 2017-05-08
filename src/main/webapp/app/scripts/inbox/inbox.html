@@ -13,10 +13,19 @@
                 show-delete="shouldShowDelete" can-swipe="listCanSwipe">
             <ion-item class="item item-divider item-text-wrap" ng-repeat="(key,value) in notificationsMap track by key">
                 <ion-item href="#">
-                    <button ion-button ion-android-alert class="icon ion-android-alert"
+                    <div class="row">
+                        <div class="col col-10">
+                            <button ion-item class="button button-assertive icon ion-alert"
                             ng-class={"red-button":value.ackType=='ack1',"yellow-button":value.ackType=='ack2'}>
                     </button>
-                    Station: {{value.stationName}} Bay: {{value.bayNumber}} - {{value.description}}
+                        </div>
+                        <div class="row">
+                            <div class="col90">
+                                Station: {{value.stationName}} Bay: {{value.bayNumber}} - {{value.description}}
+                                <br>
+                                Date: {{value.timestamp}}
+                            </div>
+                        </div>
                     <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteAcknowledge(key)">
                     </ion-option-button>
                 </ion-item>
