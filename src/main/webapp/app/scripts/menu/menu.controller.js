@@ -5,10 +5,10 @@
         .module('zerohqt.menu')
         .controller('MenuController', MenuController);
 
-    MenuController.$inject = ['$scope', 'websocketService'];
+    MenuController.$inject = ['$scope', 'websocketService', 'loginService', '$state', '$ionicLoading'];
 
     /* @ngInject */
-    function MenuController($scope, websocketService) {
+    function MenuController($scope, websocketService, loginService, $state, $ionicLoading) {
         $scope.isWsConnected = false;
 
         $scope.$on('wsError', function (error) {
@@ -17,6 +17,21 @@
             $scope.$apply(); //Apply changes to the page
         });
 
+        $scope.logout = function () {
+            $ionicLoading.show({
+                template: 'Logging out...'
+            });
+            window.plugins.googleplus.logout(
+                function (msg) {
+                    console.log(msg);
+                    $ionicLoading.hide();
+                    $state.go('app.login');
+                },
+                function (fail) {
+                    console.log(fail);
+                }
+            );
+        }
 
         $scope.connect = function () {
             if ($scope.isWsConnected) return;
@@ -30,7 +45,7 @@
         }
 
         $scope.$on('$ionicView.loaded', function (viewInfo, state) {
-            console.log('Trying to conenct!!!!');
+            console.log('Trying to connect!!!!');
             $scope.connect();
         });
 

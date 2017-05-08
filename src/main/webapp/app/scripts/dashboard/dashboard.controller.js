@@ -45,7 +45,7 @@
             if ($rootScope.feedbacks) {
                 angular.forEach($rootScope.feedbacks, function (value) {
                     aggregateData(value);
-                    $scope.apply();
+                    $scope.$apply();
                 })
             }
         });

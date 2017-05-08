@@ -68,6 +68,8 @@ public class ZeroHQTContextTransformer {
                         && Utils.isStringNotBlankExt(attribute.getValue())) {
                     acknowledge = new Acknowledge();
                     extractStationNameAndBayNumber(contextElement.getId(), acknowledge);
+                    acknowledge.setOrigin(Acknowledge.class.getSimpleName().toLowerCase());
+                    acknowledge.setTimestamp(new Date());
                     acknowledge.setBayCode(contextElement.getId());
                     acknowledge.setAckType(AcknowledgeType.valueOf("ack" + attribute.getValue()));
                     acknowledge.setDescription(AcknowledgeType.valueOf("ack" + attribute.getValue()).getDescription());

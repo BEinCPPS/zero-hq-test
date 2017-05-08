@@ -4,9 +4,10 @@
     angular
         .module('zerohqt.login', [
             'ionic',
-            'ngCordova'
+            'ngCordova',
+            'ionic.native'
         ])
-        .config(function ($stateProvider, $urlRouterProvider) {
+        .config(function ($stateProvider) {
             $stateProvider
                 .state('app.login', {
                     url: '/login',
@@ -17,6 +18,5 @@
                         }
                     }
                 })
-           // $urlRouterProvider.otherwise('/login');
         });
 })();

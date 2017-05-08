@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "private": true,
   "dependencies": {
+    "@ionic-native/google-plus": "^3.6.1",
     "lodash": "^4.17.4"
   },
   "devDependencies": {

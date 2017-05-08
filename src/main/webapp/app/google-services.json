@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "425596734443",
+    "project_id": "firebase-zerohqt"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425596734443:android:8e2a4f58b84d4de0",
+        "android_client_info": {
+          "package_name": "it.eng.zerohqt.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425596734443-pjuparccip692rhn5ttcerc42d6j4hep.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.eng.zerohqt.mobile",
+            "certificate_hash": "4b42f64fcb3aed40b4574b6aa24b8d1ae4c39005"
+          }
+        },
+        {
+          "client_id": "425596734443-8r5a2lgfq5pscmcg37b6l8frfb8kas51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOrNMS-Ht4V7m6F0UZ_F4_NXpbRkQk258"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
