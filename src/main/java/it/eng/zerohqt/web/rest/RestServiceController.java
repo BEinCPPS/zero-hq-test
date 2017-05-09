@@ -7,10 +7,13 @@ import it.eng.zerohqt.business.model.Acknowledge;
 import it.eng.zerohqt.config.OrionConfiguration;
 import it.eng.zerohqt.dao.TablesMetaDataDao;
 import it.eng.zerohqt.dao.TestStationDao;
+import it.eng.zerohqt.dao.UserAccessDao;
+import it.eng.zerohqt.dao.model.UserAccess;
 import it.eng.zerohqt.orion.OrionContextConsumer;
 import it.eng.zerohqt.orion.client.model.subscribe.SubscriptionResponse;
 import it.eng.zerohqt.orion.model.FeedbackContextAttribute;
 import it.eng.zerohqt.orion.model.TestStationContextAttribute;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,6 +40,8 @@ public class RestServiceController {
     private OrionConfiguration orionConfiguration;
     @Autowired
     Reasoner reasoner;
+    @Autowired
+    private UserAccessDao userAccessDao;
 
     @RequestMapping(path = "/subscribe", method = RequestMethod.GET)
     public List<SubscriptionResponse> subscribe() {
@@ -109,6 +114,18 @@ public class RestServiceController {
             logger.error(e);
             throw new RuntimeException(e);
         }
+    }
+
+    @RequestMapping(path = "/userAccess", method = RequestMethod.POST)
+    public void logUserAccess(@RequestBody UserAccess userAccess) {
+        if (userAccess != null && !StringUtils.isBlank(userAccess.getEmail()))
+            try {
+                userAccessDao.insertUserAccess(userAccess);
+            } catch (Exception e) {
+                logger.error(e);
+                throw new RuntimeException(e);
+            }
+
     }
 
     //TODO Don't secure this endpoint, used by ORION
