@@ -5,10 +5,10 @@
         .module('zerohqt.menu')
         .controller('MenuController', MenuController);
 
-    MenuController.$inject = ['$scope', 'websocketService', 'loginService', '$state', '$ionicLoading'];
+    MenuController.$inject = ['$scope', 'websocketService', 'loginService', '$location', '$ionicLoading'];
 
     /* @ngInject */
-    function MenuController($scope, websocketService, loginService, $state, $ionicLoading) {
+    function MenuController($scope, websocketService, loginService, $location, $ionicLoading) {
         $scope.isWsConnected = false;
 
         $scope.$on('wsError', function (error) {
@@ -25,7 +25,7 @@
                 function (msg) {
                     console.log(msg);
                     $ionicLoading.hide();
-                    $state.go('app.login');
+                    $location.path('/login');
                 },
                 function (fail) {
                     console.log(fail);

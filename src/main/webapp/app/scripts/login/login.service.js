@@ -10,18 +10,14 @@
     /* @ngInject */
     function loginService($rootScope) {
         var service = {
-            login: login,
-            logout: logout
+            logUserAccess: logUserAccess
         };
         return service;
 
-        function login() {
-            console.log('Sono dentro il service');
-            //return $cordovaGooglePlus({}).login();
+        function logUserAccess(userData) {
+             $http.post(externalAppsService.getBackEndUrl() + 'logUserAccess', userData);
         }
 
-        function logout() {
-           // return $cordovaGooglePlus.logout();
-        }
+
     }
 })();

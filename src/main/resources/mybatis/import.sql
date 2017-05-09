@@ -22,3 +22,29 @@
 --
 --insert into city (name, state, country) values ('San Francisco', 'CA', 'US');
 --insert into hotel(city, name, address, zip) values (1, 'Conrad Treasury Place', 'William & George Streets', '4001')
+
+
+
+--drop table if exists ocb_subscription;
+--drop table if exists user_access;
+
+
+CREATE TABLE `ocb_subscription` (
+  `subscriptionId` varchar(45) NOT NULL,
+  `creationDate` varchar(45) NOT NULL,
+  `enabled` tinyint(4) NOT NULL,
+  `entity` varchar(75) DEFAULT NULL,
+  `type` varchar(45) NOT NULL,
+  PRIMARY KEY (`subscriptionId`)
+  );
+
+
+
+CREATE TABLE `user_access` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `timestamp` varchar(45) NOT NULL,
+  `uid` varchar(45) NOT NULL,
+  `email` tinyint(4) NOT NULL,
+  `fullName` varchar(75) DEFAULT NULL
+  PRIMARY KEY (`id`)
+);

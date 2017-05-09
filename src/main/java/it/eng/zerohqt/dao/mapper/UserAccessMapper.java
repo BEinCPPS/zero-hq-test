@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Insert;
 public interface UserAccessMapper {
 
 
-    @Insert("INSERT INTO user-access(timestamp,uid, email, fullName) " +
+    @Insert("INSERT INTO user_access(timestamp,uid, email, fullName) " +
             "VALUES (#{timestamp}, #{uid}, #{email}, #{fullName})")
     void insertUserAccess(UserAccess userAccess);
 }
