@@ -44,7 +44,7 @@ CREATE TABLE `user_access` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `timestamp` varchar(45) NOT NULL,
   `uid` varchar(45) NOT NULL,
-  `email` tinyint(4) NOT NULL,
+  `email` varchar(75) NOT NULL,
   `fullName` varchar(75) DEFAULT NULL
   PRIMARY KEY (`id`)
 );

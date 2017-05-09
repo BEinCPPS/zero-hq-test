@@ -5,11 +5,12 @@
         .module('zerohqt.menu')
         .controller('MenuController', MenuController);
 
-    MenuController.$inject = ['$scope', 'websocketService', 'loginService', '$location', '$ionicLoading'];
+    MenuController.$inject = ['$scope', 'websocketService', 'loginService', '$state', '$ionicLoading', '$rootScope', '$ionicHistory'];
 
     /* @ngInject */
-    function MenuController($scope, websocketService, loginService, $location, $ionicLoading) {
+    function MenuController($scope, websocketService, loginService, $state, $ionicLoading, $rootScope, $ionicHistory) {
         $scope.isWsConnected = false;
+
 
         $scope.$on('wsError', function (error) {
             $scope.isWsConnected = false;
@@ -18,6 +19,14 @@
         });
 
         $scope.logout = function () {
+            $ionicHistory.nextViewOptions({
+                disableAnimate: true,
+                disableBack: true
+            });
+            if (typeof window.plugins === 'undefined' && !ionic.Platform.isAndroid()) {
+                $rootScope.user = {};
+                return $state.go('app.login');
+            }
             $ionicLoading.show({
                 template: 'Logging out...'
             });
@@ -25,7 +34,7 @@
                 function (msg) {
                     console.log(msg);
                     $ionicLoading.hide();
-                    $location.path('/login');
+                    $state.go('app.login');
                 },
                 function (fail) {
                     console.log(fail);
@@ -43,7 +52,6 @@
                 console.log('Error encountered ' + error);
             });
         }
-
         $scope.$on('$ionicView.loaded', function (viewInfo, state) {
             console.log('Trying to connect!!!!');
             $scope.connect();

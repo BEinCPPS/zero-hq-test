@@ -5,17 +5,18 @@
         .module('zerohqt.login')
         .factory('loginService', loginService);
 
-    loginService.$inject = ['$rootScope'];
+    loginService.$inject = ['$http', 'externalAppsService'];
 
     /* @ngInject */
-    function loginService($rootScope) {
+    function loginService($http, externalAppsService) {
+
         var service = {
             logUserAccess: logUserAccess
         };
         return service;
 
         function logUserAccess(userData) {
-             $http.post(externalAppsService.getBackEndUrl() + 'logUserAccess', userData);
+            return $http.post(externalAppsService.getBackEndUrl() + 'userAccess', userData);
         }
 
 
