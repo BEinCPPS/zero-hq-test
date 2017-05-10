@@ -1,17 +1,20 @@
 <ion-view view-title="Dashboard">
-        <ion-content>
-            <div class="row header">
-                <div class="col"><b>Measure</b></div>
-                <div class="col col-center"><b>Value</b></div>
-                <div class="col col-center"><b>Limit Min</b></div>
-                <div class="col col-center"><b>Limit Max</b></div>
-
-            </div>
-            <div class="row" ng-repeat="elem in data">
-                <div class="col">{{elem.measureId}}</div>
-                <div class="col col-center"  ng-class="controlValue(elem.value,elem.valueMin,elem.valueMax)">{{elem.value}}</div>
-                <div class="col col-center">{{elem.valueMin}}</div>
-                <div class="col col-center">{{elem.valueMax}}</div>
-            </div>
-        </ion-content>
+    <ion-content>
+        <ion-item class="row header">
+            <div class="col  col-40"><b>Measure</b></div>
+            <div class="col col-13"><b>Value</b></div>
+            <div class="col col-13"><b>Limit Min</b></div>
+            <div class="col col-13"><b>Limit Max</b></div>
+        </ion-item>
+        <ion-list>
+            <on-item class="row" ng-repeat="elem in data">
+                <div class="col col-40">{{elem.measureId}}</div>
+                <div class="col  col-13" ng-class="controlValue(elem.value,elem.valueMin,elem.valueMax)">
+                    {{elem.value}}
+                </div>
+                <div class="col  col-13">{{elem.valueMin}}</div>
+                <div class="col  col-13">{{elem.valueMax}}</div>
+            </on-item>
+        </ion-list>
+    </ion-content>
 </ion-view>

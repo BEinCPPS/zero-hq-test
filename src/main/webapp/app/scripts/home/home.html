@@ -1,50 +1,49 @@
 <ion-view view-title="Home">
     <ion-content>
-        <div class="item item-text-wrap">
+        <div class="item img-center">
             <a href="http://www.whirlpool.it" class="item item-icon-left">
-                <img src="http://www.whirlpool.it/images/whirlpool-logo.png"/>
+                <img src="../../images/whirlpool-logo.png"/>
             </a>
         </div>
         <div class="row">
-            <ion-item nav-clear menu-close class="row card home item-text-wrap">
-                <div class="col col-40">Station Name</div>
-                <div class="col col-13">Bay1</div>
-                <div class="col col-13">Bay2</div>
-                <div class="col col-13">Bay3</div>
-                <div class="col col-13">Bay4</div>
-                <!--<div class="col col-8"></div>-->
+            <ion-item class="row">
+                <div class="col col-40" style="margin-left: 2%;"><b>Station Name</b></div>
+                <div class="col col-13"><b>Bay1</b></div>
+                <div class="col col-13"><b>Bay2</b></div>
+                <div class="col col-13"><b>Bay3</b></div>
+                <div class="col col-13"><b>Bay4</b></div>
             </ion-item>
         </div>
 
         <ion-list>
             <ion-item ng-repeat="(stationName, bays) in entries">
                 <div class="row">
-                    <div nav-clear menu-close class="col col-40 item-text-wrap"
-                         href="#/app/{{entries[$index].bayCode}}">
-                        {{stationName}}
+                    <div nav-clear menu-close class="col col-40 item-text-wrap">
+                        <a class="button button-icon icon icon ion-thermometer"
+                           href="#/app/{{entries[$index].bayCode}}"> {{stationName}}
+                        </a>
                     </div>
                     <ion-item class="col col-13" ng-repeat="bay in bays track by $index" style="border-style: none;">
-                        <button ion-button large
+                        <a href="#"
                                 ng-class="getBackgroundColor(bay.stateInfo.type)">
                             {{bay.stateInfo.stateCode}}
-                        </button>
+                        </a>
                     </ion-item>
                 </div>
             </ion-item>
         </ion-list>
-
         <div class="row">
             <ion-item nav-clear menu-close class="row card home item-text-wrap">
                 <div class="item item-text-wrap">
                     <h3> Project </h3>
                     <a href="http://beincpps.eu" class="item item-icon-left">
-                        <img src="https://static.wixstatic.com/media/03d390_8708eaa4f99440b4b59a7242a0ad76ef~mv2.png/v1/fill/w_238,h_45,al_c,usm_0.66_1.00_0.01/03d390_8708eaa4f99440b4b59a7242a0ad76ef~mv2.png"/>
+                        <img src="../../images/beincpps-logo.png"/>
                     </a>
                 </div>
                 <div class="item item-text-wrap">
                     <h3> Powered by </h3>
                     <a href="http://eng.it" class="item item-icon-left">
-                        <img src="http://eng.it/resources/img/eng.png"/>
+                        <img src="../../images/eng-logo.png"/>
                     </a>
                 </div>
             </ion-item>

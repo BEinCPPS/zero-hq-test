@@ -26,6 +26,9 @@ $extended-footer-height: 70px;
 @import "common";
 @import "home";
 @import "map";
+@import "login";
+@import "dashboard";
+
 
 .item-alarm {background-color: #e42112;}
 .item-warning {background-color: #ffc900}
@@ -34,3 +37,4 @@ $extended-footer-height: 70px;
 .yellow-button {background: yellow;}
 .green-button {background: green;}
 .col-center {text-align: center;}
+.item {border-style: none;}
