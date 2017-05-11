@@ -27,3 +27,45 @@
  .card.col.home h1{text-align: center;}
  .card.col.home h2{text-align: left;}
 
+
+
+/* portrait */
+@media screen and (orientation:portrait) {
+ .examle03FlexContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+ }
+
+ .example03FlexItems {
+  flex: 1 1 auto;
+ }
+}
+
+/* landscape */
+@media screen and (orientation:landscape) {
+ .examle03FlexContainer {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+ }
+
+ .example03FlexItems {
+  flex: 1 1 auto;
+ }
+}
+
+.border01 {
+ border: 4px solid #bb1515;
+}
+
+.back03 {
+ background-color: #433e90;
+ color: #c0c0c0;
+}
+
+.back04 {
+ background-color: #2a334f;
+ color: white;
+}
+

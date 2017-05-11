@@ -9,19 +9,17 @@
         </div>
         <br/>
         <br/>
-        <ion-list
-                show-delete="shouldShowDelete" can-swipe="listCanSwipe">
+        <ion-list show-delete="shouldShowDelete" can-swipe="listCanSwipe">
             <ion-item class="item item-divider item-text-wrap" ng-repeat="(key,value) in notificationsMap track by key">
                 <ion-item href="#">
                     <div class="row">
                         <div class="col col-10">
-                            <button ion-item class="button button-assertive icon ion-alert"
-                            ng-class={"red-button":value.ackType=='ack1',"yellow-button":value.ackType=='ack2'}>
-                    </button>
+                            <i ng-class="{'button icon ion-alert red' :n.ackType=='ack1',
+                            'button icon ion-android-warning yellow':n.ackType=='ack2'}"></i>
                         </div>
                         <div class="row">
                             <div class="col90">
-                                Station: {{value.stationName}} Bay: {{value.bayNumber}} - {{value.description}}
+                                <h2>Station: {{value.stationName}} Bay: {{value.bayNumber}} - {{value.description}}</h2>
                                 <br>
                                 Date: {{value.timestamp}}
                             </div>

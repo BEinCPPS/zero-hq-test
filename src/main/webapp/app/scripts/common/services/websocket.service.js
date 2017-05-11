@@ -11,18 +11,18 @@
 
     function websocketService($rootScope, $ionicPlatform, externalAppsService) {
         console.log('Starting Sockjs.......' + externalAppsService.getBackEndUrl());
-        var isWsConnected = false;
+        $rootScope.isWsConnected = false;
         $rootScope.informationBays = [];
         $rootScope.feedbacks = [];
         $rootScope.acknowledges = [];
         var service = {
             connect: connect,
-            isWsConnected: isWsConnected,
+            disconnect: disconnect
         };
         return service;
 
         function connect() {
-            if (stompClient != null && isWsConnected) return;
+            if (stompClient != null && $rootScope.isWsConnected) return;
             try {
                 stompClient = Stomp.client(externalAppsService.getWebSocketUrl());
             } catch (error) {
@@ -54,18 +54,28 @@
                     stompClient.subscribe('/topic/informationBay', onMessageInformationBay);
                     stompClient.subscribe('/topic/acknowledge', onMessageAck);
                     stompClient.subscribe('/topic/feedback', onMessageFeedback);
-                    isWsConnected = true;
+                    $rootScope.isWsConnected = true;
                     return resolve(true); //isConnected
                 }
                 var errorCallback = function (error) {
                     console.log("Error in connecting STOMP over WS " + JSON.stringify(error));
-                    isWsConnected = false;
-                    $rootScope.$broadcast('wsError', error);
+                    $rootScope.isWsConnected = false;
                     return reject(error);
                 }
                 stompClient.connect({}, connectCallback, errorCallback);
             });
         }
 
+        function disconnect() {
+            if (stompClient) {
+                stompClient.disconnect(function () {
+                    console.log('WS connection disconnected');
+                    $rootScope.informationBays = [];
+                    $rootScope.feedbacks = [];
+                    $rootScope.acknowledges = [];
+                    $rootScope.isWsConnected = false;
+                });
+            }
+        }
     }
 })();

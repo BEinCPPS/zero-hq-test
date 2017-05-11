@@ -5,20 +5,25 @@
         .module('zerohqt.home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', '$rootScope'];
+    HomeController.$inject = ['$scope', '$rootScope', 'imageService'];
 
     /* @ngInject */
-    function HomeController($scope, $rootScope) {
+    function HomeController($scope, $rootScope, imageService) {
         $scope.entries = {};
-        // $scope.isWsConnected = false;
         $scope.MAX_NR_BAYS = 4;
+        imageService.getImage();
+
+        $scope.getImageUrl = function (imageName, isDefault) {
+
+            return !isDefault ? imageService.getImage(imageName) : imageService.getDefaultImage(imageName);
+        }
+
 
         $scope.$on('wsMessage', function (event, informationBay) {
             console.log(informationBay); // 'Broadcast!'
             aggregateData(informationBay);
             $scope.$apply(); //Apply changes to the page
         });
-
 
         function aggregateData(informationBay) {
             var stationName = informationBay.stationName;
@@ -37,7 +42,6 @@
             }
         }
 
-
         $scope.getBackgroundColor = function (stateType) {
             if (stateType === 'normal')  return 'button icon ion-android-checkmark-circle green-button';
             else if (stateType === 'warning') return 'button icon ion-android-warning yellow-button';
@@ -54,6 +58,9 @@
                     aggregateData(value);
                     $scope.apply();
                 })
+            }
+            if(!$rootScope.isWsConnected){
+                $scope.entries = {};
             }
         });
 

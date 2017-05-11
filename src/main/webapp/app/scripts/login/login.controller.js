@@ -5,11 +5,10 @@
         .module('zerohqt.login')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', '$rootScope', 'loginService', '$state', '$ionicLoading', '$ionicHistory', 'ENV'];
+    LoginController.$inject = ['$scope', '$rootScope', 'loginService', '$state', '$ionicLoading', '$ionicHistory', 'ENV', 'websocketService'];
 
     /* @ngInject */
-    function LoginController($scope, $rootScope, loginService, $state, $ionicLoading, $ionicHistory, ENV) {
-
+    function LoginController($scope, $rootScope, loginService, $state, $ionicLoading, $ionicHistory, ENV, websocketService) {
         $scope.login = function () {
             //This check is needed to test in browser env
             $ionicHistory.nextViewOptions({
@@ -24,6 +23,7 @@
                 };
                 loginService.logUserAccess($rootScope.user).then(function (req) {
                     console.log(req);
+                    $scope.connect();
                 }, function (error) {
                     console.log(error);
                 });
@@ -45,6 +45,7 @@
                     if (userData)
                         loginService.logUserAccess(userData).then(function (req) {
                             console.log(req);
+                            $scope.connect();
                         }, function (error) {
                             console.log(error);
                         });
@@ -56,8 +57,17 @@
                     $ionicLoading.hide();
                 }
             );
-        };
+        }
 
 
+        $scope.connect = function () {
+            websocketService.connect().then(function (isConnected) {
+                //$scope.isWsConnected = isConnected;
+                console.log("Connection to web socket: " + isConnected);
+                $scope.$apply(); //Apply changes to the page
+            }, function (error) {
+                console.log('Error encountered ' + error);
+            });
+        }
     }
 })();
