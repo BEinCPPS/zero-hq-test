@@ -62,7 +62,7 @@ module.exports = function (grunt) {
                     ENV: {
                         name: 'development',
                         apiEndpointHost: 'localhost',
-                        apiEndpointHostMobile: '10.0.3.2', //10.0.3.2
+                        apiEndpointHostMobile: '10.0.2.2', //10.0.3.2
                         apiEndPointPort: '8080',
                         apiEndPointDefaultProtocol: 'http',
                         googleAppId: '931186243837-oghoeuqmelr9ehrads24vuifje5qo8b3.apps.googleusercontent.com',

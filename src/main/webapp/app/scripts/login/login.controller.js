@@ -21,15 +21,12 @@
                     fullName: 'test',
                     email: 'test@mail.com'
                 };
-                console.log("Sono qui");
                 loginService.logUserAccess($rootScope.user).then(function (req) {
-                    console.log("Sono qui lo stesso");
                     console.log(req);
                     $scope.connect();
                     return $state.go('app.home');
                 }, function (error) {
-                    console.log("Sono qui in errore");
-                    console.log(error);
+                    console.log(JSON.stringify(error));
                 });
 
             } else {
