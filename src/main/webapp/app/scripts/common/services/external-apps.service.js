@@ -36,8 +36,10 @@
 
         function getBackEndUrl() {
             if (ionic.Platform.isAndroid()) {
+                console.log( ENV.apiEndpointHostMobile);
                 return ENV.apiEndPointDefaultProtocol + '://' + ENV.apiEndpointHostMobile + ':' + ENV.apiEndPointPort + '/';
             } else {
+                console.log( ENV.apiEndpointHost);
                 return ENV.apiEndPointDefaultProtocol + '://' + ENV.apiEndpointHost + ':' + ENV.apiEndPointPort + '/';
             }
         }
