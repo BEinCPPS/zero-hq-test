@@ -1,0 +1,322 @@
+{
+  "informationsBays": [
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation1",
+      "bayCode": "TestStation1_1",
+      "bayNumber": "1",
+      "timestamp": "2017-04-27T10:22:24.199Z",
+      "stateInfo":  {
+        "stateDescription":"Rule Execution",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"400",
+        "timestamp": "2017-04-27T10:22:24.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation1",
+        "bayCode": "TestStation1_1",
+        "bayNumber": "1",
+        "ackType" : "ack1"
+      }
+    },
+
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation1",
+      "bayCode": "TestStation1_2",
+      "bayNumber": "2",
+      "timestamp": "2017-04-27T10:22:25.199Z",
+      "stateInfo":  {
+        "stateDescription":"Rule Execution",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"400",
+        "timestamp": "2017-04-27T10:22:25.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation1",
+        "bayCode": "TestStation1_2",
+        "bayNumber": "2",
+        "ackType" : "ack2"
+      }
+    },
+
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation1",
+      "bayCode": "TestStation1_3",
+      "bayNumber": "3",
+      "timestamp": "2017-04-27T10:22:26.199Z",
+      "stateInfo":  {
+        "stateDescription":"Rule Execution",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"400",
+        "timestamp": "2017-04-27T10:22:26.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation1",
+        "bayCode": "TestStation1_3",
+        "bayNumber": "3",
+        "ackType" : "ack3"
+      }
+    },
+
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation1",
+      "bayCode": "TestStation1_4",
+      "bayNumber": "4",
+      "timestamp": "2017-04-27T10:22:27.199Z",
+      "stateInfo":  {
+        "stateDescription":"Alarm",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"1000",
+        "timestamp": "2017-04-27T10:22:27.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation1",
+        "bayCode": "TestStation1_4",
+        "bayNumber": "4",
+        "ackType" : ""
+      }
+    },
+
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation2",
+      "bayCode": "TestStation2_1",
+      "bayNumber": "1",
+      "timestamp": "2017-04-27T10:22:28.199Z",
+      "stateInfo":  {
+        "stateDescription":"Incomplete Data",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"106",
+        "timestamp": "2017-04-27T10:22:28.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation2",
+        "bayCode": "TestStation2_1",
+        "bayNumber": "1",
+        "ackType" : ""
+      }
+    },
+
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation2",
+      "bayCode": "TestStation2_2",
+      "bayNumber": "2",
+      "timestamp": "2017-04-27T10:22:29.199Z",
+      "stateInfo":  {
+        "stateDescription":"Initial State",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"104",
+        "timestamp": "2017-04-27T10:22:29.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation2",
+        "bayCode": "TestStation2_2",
+        "bayNumber": "2",
+        "ackType" : ""
+      }
+    },
+
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation2",
+      "bayCode": "TestStation2_3",
+      "bayNumber": "3",
+      "timestamp": "2017-04-27T10:22:30.199Z",
+      "stateInfo":  {
+        "stateDescription":"Rule Execution",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"400",
+        "timestamp": "2017-04-27T10:22:30.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation2",
+        "bayCode": "TestStation2_3",
+        "bayNumber": "3",
+        "ackType" : "ack3"
+      }
+    },
+
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation2",
+      "bayCode": "TestStation2_4",
+      "bayNumber": "4",
+      "timestamp": "2017-04-27T10:22:31.199Z",
+      "stateInfo":  {
+        "stateDescription":"Aborted",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"700",
+        "timestamp": "2017-04-27T10:22:31.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation2",
+        "bayCode": "TestStation2_4",
+        "bayNumber": "4",
+        "ackType" : ""
+      }
+    },
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation3",
+      "bayCode": "TestStation3_1",
+      "bayNumber": "1",
+      "timestamp": "2017-04-27T10:22:28.199Z",
+      "stateInfo":  {
+        "stateDescription":"Incomplete Data",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"106",
+        "timestamp": "2017-04-27T10:22:28.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation3",
+        "bayCode": "TestStation3_1",
+        "bayNumber": "1",
+        "ackType" : ""
+      }
+    },
+
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation3",
+      "bayCode": "TestStation3_2",
+      "bayNumber": "2",
+      "timestamp": "2017-04-27T10:22:29.199Z",
+      "stateInfo":  {
+        "stateDescription":"Force Data",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"105",
+        "timestamp": "2017-04-27T10:22:29.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation3",
+        "bayCode": "TestStation3_2",
+        "bayNumber": "2",
+        "ackType" : ""
+      }
+    },
+
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation3",
+      "bayCode": "TestStation3_3",
+      "bayNumber": "3",
+      "timestamp": "2017-04-27T10:22:30.199Z",
+      "stateInfo":  {
+        "stateDescription":"Rule Execution",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"400",
+        "timestamp": "2017-04-27T10:22:30.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation3",
+        "bayCode": "TestStation3_3",
+        "bayNumber": "3",
+        "ackType" : "ack3"
+      }
+    },
+
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation3",
+      "bayCode": "TestStation3_4",
+      "bayNumber": "4",
+      "timestamp": "2017-04-27T10:22:31.199Z",
+      "stateInfo":  {
+        "stateDescription":"Incomplete Data",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"106",
+        "timestamp": "2017-04-27T10:22:31.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation3",
+        "bayCode": "TestStation3_4",
+        "bayNumber": "4",
+        "ackType" : ""
+      }
+    },
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation4",
+      "bayCode": "TestStation4_1",
+      "bayNumber": "1",
+      "timestamp": "2017-04-27T10:22:32.199Z",
+      "stateInfo":  {
+        "stateDescription":"Incomplete Data",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"106",
+        "timestamp": "2017-04-27T10:22:32.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation4",
+        "bayCode": "TestStation4_1",
+        "bayNumber": "1",
+        "ackType" : ""
+      }
+    },
+
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation4",
+      "bayCode": "TestStation4_2",
+      "bayNumber": "2",
+      "timestamp": "2017-04-27T10:22:33.199Z",
+      "stateInfo":  {
+        "stateDescription":"Incomplete Data",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"106",
+        "timestamp": "2017-04-27T10:22:33.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation4",
+        "bayCode": "TestStation4_2",
+        "bayNumber": "2",
+        "ackType" : ""
+      }
+    },
+
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation4",
+      "bayCode": "TestStation4_3",
+      "bayNumber": "3",
+      "timestamp": "2017-04-27T10:22:34.199Z",
+      "stateInfo":  {
+        "stateDescription":"Rule Execution",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"400",
+        "timestamp": "2017-04-27T10:22:34.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation4",
+        "bayCode": "TestStation4_3",
+        "bayNumber": "3",
+        "ackType" : "ack3"
+      }
+    },
+
+    {
+      "ipAddress": "100.100.100.100",
+      "stationName": "TestStation4",
+      "bayCode": "TestStation4_4",
+      "bayNumber": "4",
+      "timestamp": "2017-04-27T10:22:34.199Z",
+      "stateInfo":  {
+        "stateDescription":"Force Data",
+        "statePayload": "|N| | |N| |A|0|",
+        "stateCode":"105",
+        "timestamp": "2017-04-27T10:22:35.199Z"
+      },
+      "acknowledge":  {
+        "stationName": "TestStation4",
+        "bayCode": "TestStation4_4",
+        "bayNumber": "4",
+        "ackType" : ""
+      }
+    }
+  ]
+
+}
