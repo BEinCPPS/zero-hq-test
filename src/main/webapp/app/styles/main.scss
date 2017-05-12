@@ -29,6 +29,10 @@ $extended-footer-height: 70px;
 @import "login";
 @import "dashboard";
 
+@font-face {
+  font-family:  'Roboto', sans-serif !important;
+  src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+}
 
 .item-alarm {background-color: #e42112;}
 .item-warning {background-color: #ffc900}
@@ -46,3 +50,16 @@ $extended-footer-height: 70px;
 .yellow {
   color: #e3bc08;
 };
+
+
+.notification-style-text{
+  margin-left: 2%;
+  font-size: 20px !important;
+}
+
+.notification-style-date{
+  margin-left: 2%;
+  font-size: 18px !important;
+
+}
+

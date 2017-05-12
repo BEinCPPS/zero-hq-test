@@ -15,10 +15,19 @@
 
         <ion-list class="list">
             <ion-item class="item item-divider item-text-wrap" ng-repeat="n in notifications|filter:search">
-                <ion-item class="item item-icon-left">
-                    <i ng-class="{'icon ion-alert red' :n.ackType=='ack1',
+                <ion-item>
+                    <div class="item item-icon-left">
+                        <div class="row">
+                            <p ng-if="n.timestamp" class="notification-style-date">Date: {{n.timestamp}}</p>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <i ng-class="{'icon ion-alert red' :n.ackType=='ack1',
                             'icon ion-android-warning yellow':n.ackType=='ack2'}"></i>
-                    <h2 style="margin-left: 2%;">Station: {{n.stationName}} Bay: {{n.bayNumber}} - {{n.description}}</h2>
+                            <p class="notification-style-text">Station: {{n.stationName}} Bay: {{n.bayNumber}} -
+                                {{n.description}}</p>
+                        </div>
+                    </div>
                 </ion-item>
             </ion-item>
         </ion-list>

@@ -15,48 +15,52 @@
                 disableAnimate: true,
                 disableBack: true
             });
-            if (typeof window.plugins === 'undefined' && !ionic.Platform.isAndroid()) {
+            if ((typeof window.plugins === 'undefined' && !ionic.Platform.isAndroid()) || ENV.mockSignin) {
                 $rootScope.user = {
                     uid: '0000000',
                     fullName: 'test',
                     email: 'test@mail.com'
                 };
+                console.log("Sono qui");
                 loginService.logUserAccess($rootScope.user).then(function (req) {
+                    console.log("Sono qui lo stesso");
                     console.log(req);
                     $scope.connect();
+                    return $state.go('app.home');
                 }, function (error) {
+                    console.log("Sono qui in errore");
                     console.log(error);
                 });
-                return $state.go('app.home');
-            }
 
-            $ionicLoading.show({
-                template: 'Logging in...'
-            });
-            window.plugins.googleplus.login(
-                {
-                    'webClientId': ENV.googleAppId,
-                    'offline': true //TODO
-                },
-                function (userData) {
-                    console.log("Login Google oAuth executed for user:  " + userData);
-                    // For the purpose of this example I will store user data on local storage
-                    $rootScope.user = userData;
-                    if (userData)
-                        loginService.logUserAccess(userData).then(function (req) {
-                            console.log(req);
-                            $scope.connect();
-                        }, function (error) {
-                            console.log(error);
-                        });
-                    $ionicLoading.hide();
-                    $state.go('app.home');
-                },
-                function (msg) {
-                    console.log("Error login with Google oAuth: " + msg);
-                    $ionicLoading.hide();
-                }
-            );
+            } else {
+                $ionicLoading.show({
+                    template: 'Logging in...'
+                });
+                window.plugins.googleplus.login(
+                    {
+                        'webClientId': ENV.googleAppId,
+                        'offline': true //TODO
+                    },
+                    function (userData) {
+                        console.log("Login Google oAuth executed for user:  " + userData);
+                        // For the purpose of this example I will store user data on local storage
+                        $rootScope.user = userData;
+                        if (userData)
+                            loginService.logUserAccess(userData).then(function (req) {
+                                console.log(req);
+                                $scope.connect();
+                            }, function (error) {
+                                console.log(error);
+                            });
+                        $ionicLoading.hide();
+                        $state.go('app.home');
+                    },
+                    function (msg) {
+                        console.log("Error login with Google oAuth: " + msg);
+                        $ionicLoading.hide();
+                    }
+                );
+            }
         }
 
 

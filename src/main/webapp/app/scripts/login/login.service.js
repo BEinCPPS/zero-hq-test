@@ -16,6 +16,7 @@
         return service;
 
         function logUserAccess(userData) {
+            console.log("Ci sono nel servizio "+userData);
             return $http.post(externalAppsService.getBackEndUrl() + 'userAccess', userData);
         }
 

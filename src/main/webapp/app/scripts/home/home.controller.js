@@ -49,6 +49,15 @@
 
         }
 
+        $scope.getBottomHeightPanelStyle = function () {
+            if (window.screen.height <= 700)
+                return 'bottom-low'
+            else if (window.screen.height >= 700 && window.screen.height <= 1000)
+                return 'bottom-medium';
+            else if (window.screen.height > 1000)
+                return 'bottom-high';
+        }
+
         $scope.$on('$ionicView.loaded', function (viewInfo, state) {
         });
 
@@ -59,7 +68,7 @@
                     $scope.apply();
                 })
             }
-            if(!$rootScope.isWsConnected){
+            if (!$rootScope.isWsConnected) {
                 $scope.entries = {};
             }
         });

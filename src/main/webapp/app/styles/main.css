@@ -9588,24 +9588,6 @@ img {
 .card.col.home h2 {
   text-align: left; }
 
-/* portrait */
-@media screen and (orientation: portrait) {
-  .examle03FlexContainer {
-    display: flex;
-    flex-direction: column;
-    height: 100%; }
-
-  .example03FlexItems {
-    flex: 1 1 auto; } }
-/* landscape */
-@media screen and (orientation: landscape) {
-  .examle03FlexContainer {
-    display: flex;
-    flex-direction: row;
-    height: 100%; }
-
-  .example03FlexItems {
-    flex: 1 1 auto; } }
 .border01 {
   border: 4px solid #bb1515; }
 
@@ -9616,6 +9598,15 @@ img {
 .back04 {
   background-color: #2a334f;
   color: white; }
+
+.bottom-low {
+  padding-top: 10%; }
+
+.bottom-medium {
+  padding-top: 20%; }
+
+.bottom-high {
+  padding-top: 40%; }
 
 /*
  * Map
@@ -9713,6 +9704,9 @@ img {
   text-align: right;
   padding-right: 2px; }
 
+@font-face {
+  font-family: 'Roboto', sans-serif !important;
+  src: url("../fonts/Roboto-Regular.ttf") format("truetype"); }
 .item-alarm {
   background-color: #e42112; }
 
@@ -9741,6 +9735,14 @@ img {
   color: #942a25; }
 
 .yellow {
-  color: #C6E746; }
+  color: #e3bc08; }
+
+.notification-style-text {
+  margin-left: 2%;
+  font-size: 20px !important; }
+
+.notification-style-date {
+  margin-left: 2%;
+  font-size: 18px !important; }
 
 /*# sourceMappingURL=main.css.map */
