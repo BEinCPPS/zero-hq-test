@@ -1,24 +1,16 @@
-<ion-view view-title="Login" hide-nav-bar="true">
+<ion-view title="Login" hide-nav-bar="true">
     <ion-content>
-        <div class="bar bar-header bar-light">
-            <h1 class="title">Login</h1>
-        </div>
-        <div class="item item-image">
-            <img src="./images/xhdpi/Whirlpool.jpg" style="max-width:40%;margin-top: 5%;">
-        </div>
-        <div class="card" style="text-align: center; padding-top: 10%;">
-            <div class="item item-text-wrap">
-                <h1>Welcome to ZeroHQTest!</h1>
+        <section class="login-container">
+            <div class="col header text-center">
+                <img src="./images/xhdpi/Whirlpool.jpg" class="img-header"/>
             </div>
-            <div class="item item-text-wrap">
-                <h2>Login with your Google Account</h2>
+            <div class="col button-row text-center">
             </div>
-            <div class="item item-text-wrap">
-                <button ng-click="login()" class="button button-block button-stable" style="background-color: white;">
-                    <img src="./images/xhdpi/btn_google_signin_dark_normal_web.png"/>
+            <div class="col-zero col button-row text-center">
+                <button ng-click="login()" class="button-clear">
+                    <img src="./images/xhdpi/btn_google_signin_dark_normal_web@2x.png" class="img-header"/>
                 </button>
             </div>
-        </div>
-
+        </section>
     </ion-content>
 </ion-view>

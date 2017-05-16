@@ -13,7 +13,8 @@
             openMapsApp: openMapsApp,
             openExternalUrl: openExternalUrl,
             getBackEndUrl: getBackEndUrl,
-            getWebSocketUrl: getWebSocketUrl
+            getWebSocketUrl: getWebSocketUrl,
+            openVnc: openVnc
         };
         return service;
 
@@ -36,10 +37,10 @@
 
         function getBackEndUrl() {
             if (ionic.Platform.isAndroid()) {
-                console.log( ENV.apiEndpointHostMobile);
-                return ENV.apiEndPointDefaultProtocol + '://' + ENV.apiEndpointHostMobile + ':' + ENV.apiEndPointPort + '/';
+                console.log(ENV.apiEndpointHostMobile);
+                return ENV.apiEndPointDefaultProtocol + '://' + ENV.apiEndpointHostMobile + ':' + ENV.apiEndPointPortMobile + '/';
             } else {
-                console.log( ENV.apiEndpointHost);
+                console.log(ENV.apiEndpointHost);
                 return ENV.apiEndPointDefaultProtocol + '://' + ENV.apiEndpointHost + ':' + ENV.apiEndPointPort + '/';
             }
         }
@@ -50,6 +51,11 @@
             } else {
                 return 'ws://' + ENV.apiEndpointHost + ':' + ENV.apiEndPointPort + '/websocket';
             }
+        }
+
+        function openVnc(ipAddress) {
+            var url = 'vnc://' + ipAddress;
+            openExternalUrl(url);
         }
     }
 })();

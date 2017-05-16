@@ -3,74 +3,19 @@
   "type": "feedbackType",
   "attributes": [
     {
-      "name": "measure1",
+      "name": "condition 1",
       "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
+      "value": "{min: 12.89, max: 1234}"
     },
     {
-      "name": "measure2",
+      "name": "condition 3",
       "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
+      "value": "{min: 0, max: 20}"
     },
     {
-      "name": "measure3",
+      "name": "condition teta",
       "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
-    },
-    {
-      "name": "measure4",
-      "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
-    },
-    {
-      "name": "measure5",
-      "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
-    },
-    {
-      "name": "measure6",
-      "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
-    },
-    {
-      "name": "measure7",
-      "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
-    },
-    {
-      "name": "measure8",
-      "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
-    },
-    {
-      "name": "measure9",
-      "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
-    },
-    {
-      "name": "measure10",
-      "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
-    },
-    {
-      "name": "measure11",
-      "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
-    },
-    {
-      "name": "measure12",
-      "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
-    },
-    {
-      "name": "measure13",
-      "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
-    },
-    {
-      "name": "measure14",
-      "type": "string",
-      "value": "{min: 12.89, max: 23.89}"
+      "value": "{min: 0, max: 1}"
     }
   ]
 }

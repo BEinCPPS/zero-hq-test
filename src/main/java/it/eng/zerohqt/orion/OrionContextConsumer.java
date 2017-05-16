@@ -1,6 +1,7 @@
 package it.eng.zerohqt.orion;
 
 import it.eng.zerohqt.business.model.FeedbackScale;
+import it.eng.zerohqt.orion.client.model.OrionContextElement;
 import it.eng.zerohqt.orion.client.model.subscribe.SubscriptionResponse;
 
 import java.util.List;
@@ -40,4 +41,6 @@ public interface OrionContextConsumer {
      * @throws Exception
      */
     List<FeedbackScale> readFeedbackScaleContext() throws Exception;
+
+    String createFeedbackScaleContext(OrionContextElement feedbackScale) throws Exception;
 }

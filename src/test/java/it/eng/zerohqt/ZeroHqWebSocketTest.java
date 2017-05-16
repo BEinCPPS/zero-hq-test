@@ -4,8 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import it.eng.zerohqt.business.model.Acknowledge;
 import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.business.model.StateInfo;
+import it.eng.zerohqt.business.transformer.ZeroHQTContextTransformer;
 import it.eng.zerohqt.config.WebSocketConfiguration;
 import it.eng.zerohqt.dao.model.AcknowledgeType;
+import it.eng.zerohqt.dao.model.StateType;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,11 +25,10 @@ import org.springframework.web.socket.messaging.WebSocketStompClient;
 import org.springframework.web.socket.sockjs.client.SockJsClient;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -45,6 +46,7 @@ public class ZeroHqWebSocketTest {
     static final String WEBSOCKET_URI = "ws://localhost:8080/websocket";
     static final String WEBSOCKET_TOPIC = WebSocketConfiguration.DEFAULT_CHANNEL;
     public static final int DELAY = 3000; //milliseconds
+    public static final String PATHNAME = "/Users/ascatox/Documents/Sviluppo/workspace_beincpps/zeroHQTest/src/main/resources/mock/informationBay.json";
     private final Logger logger = Logger.getLogger(ZeroHqWebSocketTest.class);
 
     BlockingQueue<String> blockingQueue;
@@ -57,6 +59,7 @@ public class ZeroHqWebSocketTest {
     public void setup() {
         informationBayList = new ArrayList<>();
         rand = new Random();
+        /*
         for (int i = 1; i <= 3; i++) {
             for (int j = 1; j <= 4; j++) {
                 InformationBay informationBay = new InformationBay();
@@ -82,8 +85,16 @@ public class ZeroHqWebSocketTest {
                 informationBay.setTimestamp(new Date());
                 informationBayList.add(informationBay);
             }
-        }
+        }*/
+        ClassLoader classLoader = getClass().getClassLoader();
+//        File file = new File(classLoader.getResource("/mock/informationBay.json").getFile());
+        ObjectMapper mapper = new ObjectMapper();
 
+        try {
+            informationBayList = Arrays.asList(mapper.readValue(new File(PATHNAME), InformationBay[].class));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         blockingQueue = new LinkedBlockingDeque<>();
         //stompClient = new WebSocketStompClient(new SockJsClient(
@@ -104,11 +115,14 @@ public class ZeroHqWebSocketTest {
             InformationBay[] messageBays = new InformationBay[informationBayList.size()];
             messageBays = informationBayList.toArray(messageBays);
             InformationBay message = messageBays[rand.nextInt(100) % messageBays.length];
+            StateType stateType = ZeroHQTContextTransformer.resolveStateType(message.getStateInfo().getStateCode(), message.getAcknowledge());
+            message.getStateInfo().setType(stateType);
             ObjectMapper mapper = new ObjectMapper();
             String messageJson = mapper.writeValueAsString(message);
             session.send(WEBSOCKET_TOPIC + "/" + WebSocketConfiguration.INFORMATION_BAY_TOPIC, messageJson.getBytes());
             logger.info(messageJson);
             Assert.assertEquals(messageJson, blockingQueue.poll(1, SECONDS));
+            if (message.getAcknowledge() == null) continue;
             String messageJson2 = mapper.writeValueAsString(message);
             session.send(WEBSOCKET_TOPIC + "/" + WebSocketConfiguration.ACKNOWLEDGE_TOPIC, messageJson2.getBytes());
             logger.info(messageJson2);

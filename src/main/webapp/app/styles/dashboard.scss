@@ -13,59 +13,59 @@
   display: flex;
 }
 
-.wrap    {
+.wrap {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 
 @media (max-width: 320px) {
 
-  .flex-container.wrap > div{
+  .flex-container.wrap > div {
     width: 50%;
     max-width: 50%;
     text-overflow: '';
-    white-space:nowrap;
+    white-space: nowrap;
     overflow: hidden;
   }
 
 }
 
 @media (min-width: 321px) {
-  .flex-container.wrap > div{
+  .flex-container.wrap > div {
     width: 33%;
     max-width: 33%;
     text-overflow: '';
-    white-space:nowrap;
+    white-space: nowrap;
     overflow: hidden;
   }
 }
 
 @media (min-width: 480px) {
-  .flex-container.wrap > div{
+  .flex-container.wrap > div {
     width: 25%;
     max-width: 25%;
     text-overflow: '';
-    white-space:nowrap;
+    white-space: nowrap;
     overflow: hidden;
   }
 }
 
 @media (min-width: 640px) {
-  .flex-container.wrap > div{
+  .flex-container.wrap > div {
     width: 20%;
     max-width: 20%;
     text-overflow: '';
-    white-space:nowrap;
+    white-space: nowrap;
     overflow: hidden;
   }
 }
 
 @media (min-width: 960px) {
-  .flex-container.wrap > div{
+  .flex-container.wrap > div {
     width: 15%;
     max-width: 15%;
     text-overflow: '';
-    white-space:nowrap;
+    white-space: nowrap;
     overflow: hidden;
   }
 }
@@ -81,7 +81,7 @@
 
 .column {
   text-overflow: '';
-  white-space:nowrap;
+  white-space: nowrap;
   overflow: hidden;
   max-width: 87%;
   float: left;
@@ -97,8 +97,20 @@
 }
 
 .column-sort {
-  min-width:13%;
+  min-width: 13%;
   float: right;
   text-align: right;
   padding-right: 2px;
+}
+
+.col-zero-value {
+  display: flex;
+}
+
+#dashboard-header > div {
+  font-size: 16px;
+}
+
+.col-dashboard-table {
+  font-size: 18px;
 }

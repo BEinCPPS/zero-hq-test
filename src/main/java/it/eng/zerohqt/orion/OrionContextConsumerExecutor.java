@@ -144,6 +144,21 @@ public class OrionContextConsumerExecutor implements OrionContextConsumer {
         return collect;
     }
 
+
+    @Override
+    public String createFeedbackScaleContext(OrionContextElement feedbackScale) throws Exception {
+        List<FeedbackScale> feedbackScaleRegistered = null;
+        try {
+            feedbackScaleRegistered = readFeedbackScaleContext();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
+        if (null == feedbackScaleRegistered || feedbackScaleRegistered.isEmpty()) {
+            return orionClient.postContextEntity("", feedbackScale);
+        }
+        return null;
+    }
+
     private Double extractMinValuePartForScale(String value) {
         JsonParser jsonParser = new JsonParser();
         JsonObject obj = (JsonObject) jsonParser.parse(value);

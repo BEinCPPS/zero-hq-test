@@ -44,7 +44,9 @@
         });
 
         $scope.deleteAcknowledge = function (id) {
-            delete $scope.notificationsMap[id];
+            var isAck3 = $scope.notificationsMap[id].ackType === 'ack3';
+            if (!isAck3)
+                delete $scope.notificationsMap[id];
         }
 
         $scope.enableRemoveAll = function () {
@@ -53,8 +55,13 @@
         }
 
         $scope.removeAll = function () {
-            $scope.notificationsMap = {};
-            localStorage.clear();
+            for (var i in  $scope.notificationsMap) {
+                var elem = $scope.notificationsMap[i];
+                if (elem.ackType !== 'ack3') {
+                    localStorage.removeItem(elem.id)
+                    delete $scope.notificationsMap[i];
+                }
+            }
             $scope.isRemoveAllEnabled = false;
         }
 
@@ -74,12 +81,5 @@
             $rootScope.informationBays = [];
         });
 
-        /*var listenerCleanFn = $scope.$on('wsMessageAck', function () {
-
-         });
-
-         $scope.$on('$destroy', function () {
-         listenerCleanFn();
-         });*/
     }
 })();

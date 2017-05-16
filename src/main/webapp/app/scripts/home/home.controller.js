@@ -5,23 +5,18 @@
         .module('zerohqt.home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', '$rootScope', 'imageService'];
+    HomeController.$inject = ['$scope', '$rootScope', 'imageService', '$ionicLoading'];
 
     /* @ngInject */
-    function HomeController($scope, $rootScope, imageService) {
+    function HomeController($scope, $rootScope, imageService, $ionicLoading) {
         $scope.entries = {};
         $scope.MAX_NR_BAYS = 4;
-        imageService.getImage();
-
-        $scope.getImageUrl = function (imageName, isDefault) {
-
-            return !isDefault ? imageService.getImage(imageName) : imageService.getDefaultImage(imageName);
-        }
-
+        $scope.isDataArrived = false;
 
         $scope.$on('wsMessage', function (event, informationBay) {
             console.log(informationBay); // 'Broadcast!'
             aggregateData(informationBay);
+            $scope.isDataArrived = true;
             $scope.$apply(); //Apply changes to the page
         });
 
@@ -43,47 +38,32 @@
         }
 
         $scope.getBackgroundColor = function (stateType) {
-            if (stateType === 'normal')  return 'button icon ion-android-checkmark-circle green-button';
-            else if (stateType === 'warning') return 'button icon ion-android-warning yellow-button';
-            else if (stateType === 'error') return 'button icon ion-android-alert red-button';
+            if (stateType === 'normal')  return 'icon ion-checkmark-circled green';
+            else if (stateType === 'warning') return 'icon ion-android-warning orange';
+            else if (stateType === 'error') return 'icon ion-android-alert red';
 
-        }
-
-        $scope.getBottomHeightPanelStyle = function () {
-            if (window.screen.height <= 700)
-                return 'bottom-low'
-            else if (window.screen.height >= 700 && window.screen.height <= 1000)
-                return 'bottom-medium';
-            else if (window.screen.height > 1000)
-                return 'bottom-high';
         }
 
         $scope.$on('$ionicView.loaded', function (viewInfo, state) {
+            $scope.entries = {};
+        });
+
+        $scope.$on('logout', function (viewInfo, state) {
+            $scope.entries = {};
+            $scope.isDataArrived = false;
         });
 
         $scope.$on('$ionicView.enter', function (viewInfo, state) {
             if ($rootScope.informationBays) {
                 angular.forEach($rootScope.informationBays, function (value) {
                     aggregateData(value);
-                    $scope.apply();
+                    $scope.$apply();
                 })
             }
-            if (!$rootScope.isWsConnected) {
-                $scope.entries = {};
-            }
         });
-
         $scope.$on('$ionicView.afterLeave', function (viewInfo, state) {
             $rootScope.informationBays = [];
         });
-
-        /*var listenerCleanFn = $scope.$on('wsMessage', function () {
-
-         });
-
-         $scope.$on('$destroy', function() {
-         listenerCleanFn();
-         });*/
 
 
     }

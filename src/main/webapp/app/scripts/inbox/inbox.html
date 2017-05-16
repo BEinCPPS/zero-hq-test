@@ -11,22 +11,18 @@
         <br/>
         <ion-list show-delete="shouldShowDelete" can-swipe="listCanSwipe">
             <ion-item class="item item-divider item-text-wrap" ng-repeat="(key,value) in notificationsMap track by key">
-                <ion-item href="#">
-                    <div class="item item-icon-left">
-                        <div class="row">
-                            <p ng-if = "value.timestamp" class="notification-style-date">Date: {{value.timestamp}}</p>
-                        </div>
-                        <br/>
-                        <div class="row">
-                            <i ng-class="{'icon ion-alert red' :value.ackType=='ack1',
-                            'icon ion-android-warning yellow':value.ackType=='ack2'}"></i>
-                            <p class="notification-style-text">Station: {{value.stationName}} Bay: {{value.bayNumber}} -
-                                {{value.description}}</p>
-                        </div>
-                    </div>
-                    <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteAcknowledge(key)">
-                    </ion-option-button>
-                </ion-item>
+                <div class="item-icon-left" style="padding-bottom: 16px">
+                    <i ng-class="{'icon ion-android-warning orange' :value.ackType=='ack1',
+                            'icon ion-android-warning yellow':value.ackType=='ack2',
+                            'icon ion-alert red':value.ackType=='ack3'}"></i>
+                    <b>{{value.stationName}} Bay: {{value.bayNumber}}</b> -
+                    {{value.description}}
+                    <span ng-if="value.timestamp" class="item-note"> <b>Date:</b>
+                        {{value.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                </div>
+                <ion-option-button ng-disabled="value.ackType==='ack3'"
+                                   class="button-assertive icon ion-trash-a" ng-click="deleteAcknowledge(key)">
+                </ion-option-button>
             </ion-item>
         </ion-list>
     </ion-content>

@@ -1,9 +1,15 @@
 /* Empty. Add your own CSS if you like */
-img {max-width: 100%;}
+img {
+  max-width: 100%;
+}
 
-.content-inner{padding: 16px;}
+.content-inner {
+  padding: 16px;
+}
 
-.card.col{padding: 0;}
+.card.col {
+  padding: 0;
+}
 
 /*
  * Android. Action sheet
@@ -13,28 +19,37 @@ img {max-width: 100%;}
 }
 
 .has-extended-footer {
-	bottom: $extended-footer-height;
+  bottom: $extended-footer-height;
 }
 
 .extended-footer {
-	height: $extended-footer-height;
-	.subtitle {
-		text-align: center;
-		width: 100%;
-		position: absolute;
-		bottom: 10px;
-		left: -5px;
-	}
+  height: $extended-footer-height;
+  .subtitle {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    left: -5px;
+  }
 }
 
 .item-icon-left-extended {
-	padding-left: 80px;
-	.icon {
-		left: 20px;
-		font-size: 50px;
-	}
+  padding-left: 80px;
+  .icon {
+    left: 20px;
+    font-size: 50px;
+  }
 }
 
 .error-message {
-	color: orangered !important;
+  color: orangered !important;
 }
+
+/*
+@media all and (min-width: 500px) {
+  .bar-zero {
+    bottom: 30px;
+  }
+}*/
+
+

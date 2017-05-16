@@ -29,37 +29,59 @@ $extended-footer-height: 70px;
 @import "login";
 @import "dashboard";
 
-@font-face {
-  font-family:  'Roboto', sans-serif !important;
-  src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+@import url('../fonts/Roboto-Regular.ttf');
+$font-family-base: 'Roboto', serif;
+
+.item-alarm {
+  background-color: #e42112;
 }
 
-.item-alarm {background-color: #e42112;}
-.item-warning {background-color: #ffc900}
-.buttons {float:right}
-.red-button {background: red;}
-.yellow-button {background: yellow;}
-.green-button {background: green;}
-.col-center {text-align: center;}
-.item {border-style: none;}
+.item-warning {
+  background-color: #ffc900
+}
+
+.buttons {
+  float: right
+}
+
+.col-center {
+  text-align: center;
+}
+
+.item {
+  border-style: none;
+}
 
 .red {
   color: red;
-};
+}
+
+.orange {
+  color: orange;
+
+}
+
+.green {
+  color: green;
+}
 
 .yellow {
-  color: #ffc900;
-};
-
-
-.notification-style-text{
-  margin-left: 2%;
-  font-size: 20px !important;
+  color: #f5e79e;
 }
 
-.notification-style-date{
+.blue {
+  color: #0c60ee;
+}
+
+.notification-style-text {
   margin-left: 2%;
   font-size: 18px !important;
+}
+
+.notification-style-date {
+  margin-left: 2%;
+  font-size: 14px !important;
 
 }
+
 

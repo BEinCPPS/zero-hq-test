@@ -20,11 +20,10 @@
             });
         });
 
-        $scope.controlValue = function (value, valueMin, valueMax) {
-            if (value < valueMax && value > valueMin)  return 'green-button';
-            else if (value < valueMin) return 'yellow-button';
-            else if (value > valueMax) return 'red-button';
-
+        $scope.getIconClass = function (value, valueMin, valueMax) {
+            if (value < valueMax && value > valueMin)  return 'icon ion-ios-checkmark green';
+            else if (value < valueMin) return 'icon ion-arrow-down-b orange';
+            else if (value > valueMax) return 'icon ion-arrow-up-b red';
         }
 
         function aggregateData(feedbackInfo) {
@@ -54,13 +53,15 @@
             $rootScope.feedbacks = [];
         });
 
-        /*var listenerCleanFn = $scope.$on('wsMessageFeedback', function () {
+        $scope.$on('$ionicView.loaded', function (viewInfo, state) {
+            $scope.data = [];
+        });
 
-         });
+        $scope.$on('logout', function (viewInfo, state) {
+            $scope.data = [];
+        });
 
-         $scope.$on('$destroy', function() {
-         listenerCleanFn();
-         });*/
+
 
     }
 })();

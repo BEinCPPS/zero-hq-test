@@ -1,3 +1,4 @@
+/*
 (function() {
 	'use strict';
 
@@ -34,4 +35,4 @@
 				$ionicLoading.hide();
 			});
 		});
-})();
+})();*/

@@ -74,6 +74,7 @@
                     $rootScope.feedbacks = [];
                     $rootScope.acknowledges = [];
                     $rootScope.isWsConnected = false;
+                    $rootScope.$broadcast("logout", true);
                 });
             }
         }

@@ -72,7 +72,6 @@
       "locator": "https://github.com/katzer/cordova-plugin-email-composer.git",
       "id": "de.appplant.cordova.plugin.email-composer"
     },
-    "cordova-plugin-network-information",
     "cordova-plugin-whitelist",
     "cordova-plugin-transport-security",
     "cordova-plugin-device",
@@ -88,7 +87,6 @@
     "cordova-plugin-inappbrowser",
     "cordova-plugin-transport-security",
     "cordova-plugin-whitelist",
-    "cordova-plugin-inappbrowser",
-    "cordova-plugin-network-information"
+    "cordova-plugin-inappbrowser"
   ]
 }

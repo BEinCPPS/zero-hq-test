@@ -1,21 +1,27 @@
-{
-  "id": "feedbackContext",
-  "type": "feedbackType",
-  "attributes": [
-    {
-      "name": "measure1",
-      "type": "double",
-      "value": 12.90
-    },
-    {
-      "name": "measure14",
-      "type": "double",
-      "value": 1.90
-    },
-    {
-      "name": "measure2",
-      "type": "double",
-      "value": 0
-    }
-  ]
-}
+[
+  {
+    "timestamp": "2017-04-27T10:22:25.199Z",
+    "measureId": "condition 1",
+    "value": 123
+  },
+  {
+    "timestamp": "2017-04-27T10:22:25.199Z",
+    "measureId": "condition teta",
+    "value": 1.34
+  },
+  {
+    "timestamp": "2017-04-27T10:22:25.199Z",
+    "measureId": "condition 3",
+    "value": 123
+  },
+  {
+    "timestamp": "2017-04-27T10:22:25.199Z",
+    "measureId": "condition 1",
+    "value": 1223
+  },
+  {
+    "timestamp": "2017-04-27T10:22:25.199Z",
+    "measureId": "condition 3",
+    "value": 0.01
+  }
+]

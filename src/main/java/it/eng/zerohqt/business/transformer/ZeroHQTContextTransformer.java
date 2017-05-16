@@ -139,7 +139,7 @@ public class ZeroHQTContextTransformer {
     }
 
 
-    private static StateType resolveStateType(String stateCode, Acknowledge acknowledge) {
+    public static StateType resolveStateType(String stateCode, Acknowledge acknowledge) {
         if (StringUtils.isBlank(stateCode)) return null;
         boolean isAckPresent = null != acknowledge && acknowledge.getAckType() != null;
         if (stateCode.equalsIgnoreCase("1000")
