@@ -4,8 +4,8 @@
             <div class="item img-center">
                 <img ng-src="./images/xhdpi/Whirlpool.jpg" class="img-header"/>
             </div>
-            <ion-spinner icon="android" class="spinner-zero" ng-if="!isWsConnected"></ion-spinner>
-            <ion-list ng-if="isWsConnected">
+            <ion-spinner icon="android" class="spinner-zero" ng-if="!isDataArrived"></ion-spinner>
+            <ion-list ng-if="isDataArrived">
                 <div class="row responsive-lg">
                     <ion-item class="col" ng-repeat="(stationName, bays) in entries">
                         <div class="card">

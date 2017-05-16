@@ -47,7 +47,7 @@
 
         function getWebSocketUrl() {
             if (ionic.Platform.isAndroid()) {
-                return 'ws://' + ENV.apiEndpointHostMobile + ':' + ENV.apiEndPointPort + '/websocket';
+                return 'ws://' + ENV.apiEndpointHostMobile + ':' + ENV.apiEndPointPortMobile + '/websocket';
             } else {
                 return 'ws://' + ENV.apiEndpointHost + ':' + ENV.apiEndPointPort + '/websocket';
             }
