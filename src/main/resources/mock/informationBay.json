@@ -58,7 +58,7 @@
       "bayCode": "TestStation1_3",
       "bayNumber": "3",
       "ackType": "ack3",
-      "description": "Intervention request with elimination notify FE",
+      "description": "Intervention required by notice cancellation FE",
       "timestamp": "2017-04-27T10:22:26.199Z"
     }
   },
@@ -82,7 +82,7 @@
     "bayNumber": "1",
     "timestamp": "2017-04-27T10:22:28.199Z",
     "stateInfo": {
-      "stateDescription": "Incomplete Data",
+      "stateDescription": "Data NOT Complete",
       "statePayload": "|N| | |N| |A|0|",
       "stateCode": "106",
       "timestamp": "2017-04-27T10:22:28.199Z"
@@ -95,7 +95,7 @@
     "bayNumber": "2",
     "timestamp": "2017-04-27T10:22:29.199Z",
     "stateInfo": {
-      "stateDescription": "Initial State",
+      "stateDescription": "Wait for Insert Data",
       "statePayload": "|N| | |N| |A|0|",
       "stateCode": "104",
       "timestamp": "2017-04-27T10:22:29.199Z"
@@ -118,7 +118,7 @@
       "bayCode": "TestStation2_3",
       "bayNumber": "3",
       "ackType": "ack3",
-      "description": "Intervention request with elimination notify FE",
+      "description": "Intervention required by notice cancellation FE",
       "timestamp": "2017-04-27T10:22:30.199Z"
     }
   },
@@ -142,7 +142,7 @@
     "bayNumber": "1",
     "timestamp": "2017-04-27T10:22:28.199Z",
     "stateInfo": {
-      "stateDescription": "Incomplete Data",
+      "stateDescription": "Data NOT Complete",
       "statePayload": "|N| | |N| |A|0|",
       "stateCode": "106",
       "timestamp": "2017-04-27T10:22:28.199Z"
@@ -155,9 +155,9 @@
     "bayNumber": "2",
     "timestamp": "2017-04-27T10:22:29.199Z",
     "stateInfo": {
-      "stateDescription": "Force Data",
+      "stateDescription": "Reset Data",
       "statePayload": "|N| | |N| |A|0|",
-      "stateCode": "105",
+      "stateCode": "107",
       "timestamp": "2017-04-27T10:22:29.199Z"
     }
   },
@@ -178,7 +178,7 @@
       "bayCode": "TestStation3_3",
       "bayNumber": "3",
       "ackType": "ack3",
-      "description": "Intervention request with elimination notify FE",
+      "description": "Intervention required by notice cancellation FE",
       "timestamp": "2017-04-27T10:22:30.199Z"
     }
   },
@@ -189,9 +189,9 @@
     "bayNumber": "4",
     "timestamp": "2017-04-27T10:22:31.199Z",
     "stateInfo": {
-      "stateDescription": "Incomplete Data",
+      "stateDescription": "Set Data",
       "statePayload": "|N| | |N| |A|0|",
-      "stateCode": "106",
+      "stateCode": "103",
       "timestamp": "2017-04-27T10:22:31.199Z"
     }
   },
@@ -202,7 +202,7 @@
     "bayNumber": "1",
     "timestamp": "2017-04-27T10:22:32.199Z",
     "stateInfo": {
-      "stateDescription": "Incomplete Data",
+      "stateDescription": "Data NOT Complete",
       "statePayload": "|N| | |N| |A|0|",
       "stateCode": "106",
       "timestamp": "2017-04-27T10:22:32.199Z"
@@ -215,9 +215,9 @@
     "bayNumber": "2",
     "timestamp": "2017-04-27T10:22:33.199Z",
     "stateInfo": {
-      "stateDescription": "Incomplete Data",
+      "stateDescription": "Search for Data",
       "statePayload": "|N| | |N| |A|0|",
-      "stateCode": "106",
+      "stateCode": "102",
       "timestamp": "2017-04-27T10:22:33.199Z"
     }
   },
@@ -238,7 +238,7 @@
       "bayCode": "TestStation4_3",
       "bayNumber": "3",
       "ackType": "ack3",
-      "description": "Intervention request with elimination notify FE",
+      "description": "Intervention required by notice cancellation FE",
       "timestamp": "2017-04-27T10:22:34.199Z"
     }
   },
@@ -298,7 +298,7 @@
       "bayCode": "TestStation5_3",
       "bayNumber": "3",
       "ackType": "ack3",
-      "description": "Intervention request with elimination notify FE",
+      "description": "Intervention required by notice cancellation FE",
       "timestamp": "2017-04-27T10:22:35.199Z"
     }
   },
@@ -332,7 +332,7 @@
       "bayCode": "TestStation6_1",
       "bayNumber": "1",
       "ackType": "ack1",
-      "description": "Intervention request with elimination rule",
+      "description": "Intervention required with elimination rule",
       "timestamp": "2017-04-27T10:22:36.199Z"
     }
   },
