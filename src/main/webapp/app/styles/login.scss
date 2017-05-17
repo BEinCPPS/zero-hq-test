@@ -1,7 +1,7 @@
 .login-container {
   display: -webkit-flex;
   -webkit-flex-direction: column;
-  height: 100%;
+  //height: 100%;
   // background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#efad62), color-stop(100%,#f7d47c));
   // background: -webkit-linear-gradient(top, #efad62 0%,#f7d47c 100%);
 }
@@ -10,9 +10,9 @@
   max-width: 50%;
 }
 
-@media all and (min-height: 600px) {
+@media all and (min-height: 500px) and (orientation: portrait) {
   .login-container > .col-zero {
-    padding-top: 10%;
+    padding-top: 30%;
   }
 }
 

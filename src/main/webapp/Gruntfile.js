@@ -62,7 +62,7 @@ module.exports = function (grunt) {
                     ENV: {
                         name: 'development',
                         apiEndpointHost: 'localhost',
-                        apiEndpointHostMobile: 'bd024221.ngrok.io', //10.0.3.2
+                        apiEndpointHostMobile: 'b74bf1a0.ngrok.io', //10.0.3.2
                         apiEndPointPort: '8080',
                         apiEndPointPortMobile: '',
                         apiEndPointDefaultProtocol: 'http',
