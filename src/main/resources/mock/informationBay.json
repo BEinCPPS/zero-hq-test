@@ -16,6 +16,7 @@
       "bayCode": "TestStation1_1",
       "bayNumber": "1",
       "ackType": "ack1",
+      "description": "Intervention request with elimination rule",
       "timestamp": "2017-04-27T10:22:24.199Z"
     }
   },
@@ -36,6 +37,7 @@
       "bayCode": "TestStation1_2",
       "bayNumber": "2",
       "ackType": "ack2",
+      "description": "Cancellation Intervention with elimination rule",
       "timestamp": "2017-04-27T10:22:25.199Z"
     }
   },
@@ -56,6 +58,7 @@
       "bayCode": "TestStation1_3",
       "bayNumber": "3",
       "ackType": "ack3",
+      "description": "Intervention request with elimination notify FE",
       "timestamp": "2017-04-27T10:22:26.199Z"
     }
   },
@@ -115,6 +118,7 @@
       "bayCode": "TestStation2_3",
       "bayNumber": "3",
       "ackType": "ack3",
+      "description": "Intervention request with elimination notify FE",
       "timestamp": "2017-04-27T10:22:30.199Z"
     }
   },
@@ -174,6 +178,7 @@
       "bayCode": "TestStation3_3",
       "bayNumber": "3",
       "ackType": "ack3",
+      "description": "Intervention request with elimination notify FE",
       "timestamp": "2017-04-27T10:22:30.199Z"
     }
   },
@@ -233,6 +238,7 @@
       "bayCode": "TestStation4_3",
       "bayNumber": "3",
       "ackType": "ack3",
+      "description": "Intervention request with elimination notify FE",
       "timestamp": "2017-04-27T10:22:34.199Z"
     }
   },
@@ -246,6 +252,66 @@
       "stateDescription": "Force Data",
       "statePayload": "|N| | |N| |A|0|",
       "stateCode": "105",
+      "timestamp": "2017-04-27T10:22:35.199Z"
+    }
+  },
+  {
+    "ipAddress": "100.100.100.100",
+    "stationName": "TestStation5",
+    "bayCode": "TestStation5_1",
+    "bayNumber": "1",
+    "timestamp": "2017-04-27T10:22:33.199Z",
+    "stateInfo": {
+      "stateDescription": "Rule Execution",
+      "statePayload": "|N| | |N| |A|0|",
+      "stateCode": "400",
+      "timestamp": "2017-04-27T10:22:33.199Z"
+    }
+  },
+  {
+    "ipAddress": "100.100.100.100",
+    "stationName": "TestStation5",
+    "bayCode": "TestStation5_2",
+    "bayNumber": "2",
+    "timestamp": "2017-04-27T10:22:34.199Z",
+    "stateInfo": {
+      "stateDescription": "Rule Execution",
+      "statePayload": "|N| | |N| |A|0|",
+      "stateCode": "400",
+      "timestamp": "2017-04-27T10:22:34.199Z"
+    }
+  },
+  {
+    "ipAddress": "100.100.100.100",
+    "stationName": "TestStation5",
+    "bayCode": "TestStation5_3",
+    "bayNumber": "3",
+    "timestamp": "2017-04-27T10:22:35.199Z",
+    "stateInfo": {
+      "stateDescription": "Rule Execution",
+      "statePayload": "|N| | |N| |A|0|",
+      "stateCode": "400",
+      "timestamp": "2017-04-27T10:22:35.199Z"
+    },
+    "acknowledge": {
+      "stationName": "TestStation5",
+      "bayCode": "TestStation5_3",
+      "bayNumber": "3",
+      "ackType": "ack3",
+      "description": "Intervention request with elimination notify FE",
+      "timestamp": "2017-04-27T10:22:35.199Z"
+    }
+  },
+  {
+    "ipAddress": "100.100.100.100",
+    "stationName": "TestStation5",
+    "bayCode": "TestStation5_4",
+    "bayNumber": "4",
+    "timestamp": "2017-04-27T10:22:35.199Z",
+    "stateInfo": {
+      "stateDescription": "Rule Execution",
+      "statePayload": "|N| | |N| |A|0|",
+      "stateCode": "400",
       "timestamp": "2017-04-27T10:22:35.199Z"
     }
   }
