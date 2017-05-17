@@ -6,12 +6,13 @@
             </div>
             <ion-spinner icon="android" class="spinner-zero" ng-if="!isDataArrived"></ion-spinner>
             <ion-list ng-if="isDataArrived">
-                <div class="row responsive-lg">
+                <div class="row responsive-lg responsive-xg">
                     <ion-item class="col" ng-repeat="(stationName, bays) in entries">
                         <div class="card">
-                            <div class="item item-divider item-icon-right">
+                            <div class="item item-divider item-icon-left item-icon-right">
+                                <i class="icon ion-ios-pulse"></i>
                                 <span class="card-header-zero">{{stationName}}</span>
-                                <button class="button icon ion-android-globe blue"
+                                <button class="button icon ion-android-globe blue" style="padding-bottom: 15px;"
                                         ng-click="openVnc()">
                                 </button>
 
