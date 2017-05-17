@@ -19,9 +19,9 @@
                     <i ng-class="{'icon ion-android-warning orange' :n.ackType=='ack1',
                             'icon ion-android-warning yellow':n.ackType=='ack2',
                             'icon ion-alert red':n.ackType=='ack3'}"></i>
-                    <b>{{n.stationName}} Bay: {{n.bayNumber}}</b> -
+                    <b>{{n.stationName}} Box: {{n.bayNumber}}</b> -
                     {{n.description}}
-                    <span ng-if="n.timestamp" class="item-note"> <b>Date:</b> {{n.timestamp | date:'yyyy-MM-dd
+                    <span ng-if="n.timestamp" class="item-note item-note-zero"> <b>Date:</b> {{n.timestamp | date:'yyyy-MM-dd
                             HH:mm:ss'}}</span>
                 </div>
             </ion-item>

@@ -45,11 +45,10 @@ img {
   color: orangered !important;
 }
 
-/*
-@media all and (min-width: 500px) {
-  .bar-zero {
-    bottom: 30px;
+@media all and (max-width: 500px) {
+  .item-note-zero {
+    float: left;
   }
-}*/
+}
 
 

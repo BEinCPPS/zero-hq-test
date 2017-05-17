@@ -65,6 +65,10 @@
             $rootScope.informationBays = [];
         });
 
+        $scope.openVnc = function () {
+            //TODO
+            $ionicLoading.show({ template: 'Functionality not available currently!', noBackdrop: true, duration: 1000 });
+        }
 
     }
 })();
