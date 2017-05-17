@@ -7,9 +7,12 @@ import it.eng.zerohqt.config.Utils;
 import it.eng.zerohqt.dao.model.*;
 import it.eng.zerohqt.orion.model.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -55,7 +58,7 @@ public class ZeroHQTContextTransformer {
                             if (metadata.getName().equals("description")) {
                                 stateInfo.setStateDescription(metadata.getValue());
                             }
-                           //TODO Timestamp;
+                            //TODO Timestamp;
                         }
                     }
                 } else if (attribute.getName().equals(TestStationContextAttribute.statePayload.name())) {
@@ -104,11 +107,18 @@ public class ZeroHQTContextTransformer {
     public static List<Acknowledge> transformToAcknowledges(List<TestStationData> testStationDatas) {
         if (null == testStationDatas || testStationDatas.isEmpty()) return null;
         return testStationDatas.stream()
-                .map(td -> transformToAcknowledge(td)).collect(Collectors.toList());
+                .map(td -> {
+                    try {
+                        return transformToAcknowledge(td);
+                    } catch (Exception e) {
+                        logger.error(e);
+                    }
+                    return null;
+                }).collect(Collectors.toList());
     }
 
 
-    public static Acknowledge transformToAcknowledge(TestStationData testStationData) {
+    public static Acknowledge transformToAcknowledge(TestStationData testStationData) throws Exception {
         if (testStationData == null || StringUtils.isBlank(testStationData.getEntityId())) return null;
         Acknowledge acknowledge = new Acknowledge();
         acknowledge.setBayCode(testStationData.getEntityId());
@@ -118,8 +128,17 @@ public class ZeroHQTContextTransformer {
                 && Utils.isStringNotBlankExt(testStationData.getAttrValue())) {
             acknowledge.setAckType(AcknowledgeType.valueOf("ack" + testStationData.getAttrValue()));
             acknowledge.setDescription(AcknowledgeType.valueOf("ack" + testStationData.getAttrValue()).getDescription());
+            if (Utils.isStringNotBlankExt(testStationData.getAttrMd())) {
+                Metadatas[] metadatas = parseJsonMetdatas(testStationData.getAttrMd());
+                if (metadatas != null && metadatas.length > 0) {
+                    Optional<Metadatas> timestamp = Arrays.asList(metadatas)
+                            .stream().filter(mtd ->
+                                    mtd.getName().equalsIgnoreCase("timestamp")).findFirst();
+                    String timestampNoTimezone = timestamp.get().getValue().substring(0, timestamp.get().getValue().length() - 5);
+                    acknowledge.setTimestamp(DateUtils.parseDate(timestampNoTimezone,"yyyy-MM-dd'T'HH:mm:ss"));
+                }
+            }
         }
-
         return acknowledge;
     }
 
