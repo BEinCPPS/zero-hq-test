@@ -4,9 +4,9 @@ package it.eng.zerohqt.dao.model;
  * Created by ascatox on 08/03/17.
  */
 public enum AcknowledgeType {
-    ack1("Required intervention with Elimination Rule", 1),
+    ack1("Intervention required with Elimination Rule", 1),
     ack2("Cancellation intervention with Elimination Rule", 2),
-    ack3("Required intervention by notice cancellation FE", 3);
+    ack3("Intervention required by notice cancellation FE", 3);
 
     //TODO Translation Properties file
     private String description;
