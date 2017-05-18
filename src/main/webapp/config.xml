@@ -2,7 +2,7 @@
 <widget id="it.eng.zerohqt.fe.mobile" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ZeroHQTest</name>
     <description>
-        zerohqt Ionic. The boostrap you need in order to build your next Ionic application.
+        zerohqt Ionic. Pushing forward the manufacturing testing.
     </description>
     <author email="antonio.scatoloni@gmail.com" href="http://www.antonioscatoloni.it">
         Antonio Scatoloni
@@ -13,6 +13,7 @@
     <access launch-external="yes" origin="mailto:*" />
     <access launch-external="yes" origin="maps:*" />
     <access launch-external="yes" origin="geo:*" />
+    <access launch-external="yes" origin="vnc:*" />
     <platform name="android">
         <preference name="android-minSdkVersion" value="14" />
         <preference name="android-targetSdkVersion" value="22" />

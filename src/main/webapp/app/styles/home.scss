@@ -78,15 +78,30 @@
     -webkit-flex-direction: row;
     flex-direction: row;
     flex-wrap: wrap;
-    -webkit-flex-wrap: wrap;
-
   }
+
   .responsive-xg .col, .responsive-xg .col-10, .responsive-xg .col-20, .responsive-xg .col-25, .responsive-xg .col-33, .responsive-xg .col-34, .responsive-xg .col-50, .responsive-xg .col-66, .responsive-xg .col-67, .responsive-xg .col-75, .responsive-xg .col-80, .responsive-xg .col-90 {
     -moz-flex: 1 0 50%; //2 columns
     flex: 1 0 50%; //2 columns
     margin-bottom: 15px;
     margin-left: 0;
-    max-width: 100%;
-    width: 100%;
+    max-width: 50%;
+    width: 50%;
+    height: 300px;
+  }
+  .card-zero {
+    height: 250px;
+  }
+}
+
+@media all and (min-width: 600px) {
+  .img-logo {
+    max-width: 20%;
+  }
+}
+
+@media all and (min-width: 200px) and (max-width: 600px) {
+  .img-logo {
+    max-width: 50%;
   }
 }

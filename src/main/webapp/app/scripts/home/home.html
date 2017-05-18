@@ -1,14 +1,14 @@
-<ion-view view-title="Home">
+<ion-view view-title="Home" padding="true">
     <ion-content>
         <section>
             <div class="item img-center">
-                <img ng-src="./images/xhdpi/Whirlpool.jpg" class="img-header"/>
+                <img ng-src="./images/xhdpi/Whirlpool.jpg" class="img-logo"/>
             </div>
             <ion-spinner icon="android" class="spinner-zero" ng-if="!isDataArrived"></ion-spinner>
             <ion-list ng-if="isDataArrived">
                 <div class="row responsive-lg responsive-xg">
                     <ion-item class="col" ng-repeat="(stationName, bays) in entries">
-                        <div class="card">
+                        <div class="card card-zero">
                             <div class="item item-divider item-icon-left item-icon-right">
                                 <i class="icon ion-ios-pulse"></i>
                                 <span class="card-header-zero">{{stationName}}</span>
