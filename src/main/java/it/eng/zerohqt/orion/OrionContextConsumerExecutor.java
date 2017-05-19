@@ -10,6 +10,7 @@ import it.eng.zerohqt.dao.model.OrionSubscription;
 import it.eng.zerohqt.orion.client.OrionClient;
 import it.eng.zerohqt.orion.client.model.*;
 import it.eng.zerohqt.orion.client.model.subscribe.SubscriptionResponse;
+import it.eng.zerohqt.orion.model.FeedbackAcknowledgeContextAttribute;
 import it.eng.zerohqt.orion.model.FeedbackContextAttribute;
 import it.eng.zerohqt.orion.model.TestStationContextAttribute;
 import it.eng.zerohqt.web.rest.RestServiceController;
@@ -57,6 +58,7 @@ public class OrionContextConsumerExecutor implements OrionContextConsumer {
         cancelAndDeleteSubscriptions();
         subscriptionResponses = subscribeContexts(Optional.of(TestStationContextAttribute.getContextFatherNamePrefix()), TestStationContextAttribute.getValuesString());
         subscriptionResponses.addAll(subscribeContexts(Optional.of(FeedbackContextAttribute.getContextFatherNamePrefix()), null)); //attributes changes inside context
+        subscriptionResponses.addAll(subscribeContexts(Optional.of(FeedbackAcknowledgeContextAttribute.getContextFatherNamePrefix()), FeedbackAcknowledgeContextAttribute.getValuesString()));
         return subscriptionResponses;
     }
 
@@ -72,7 +74,6 @@ public class OrionContextConsumerExecutor implements OrionContextConsumer {
             return contextElementList.getContextResponses().stream().
                     filter(ctx -> ctx.getContextElement().getId()
                             .contains(contextFilter.get())).collect(Collectors.toList());
-
     }
 
 

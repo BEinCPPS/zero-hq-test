@@ -24,7 +24,6 @@ public class OrionSubscriptionDao {
 
     private final Logger logger = Logger.getLogger(RestServiceController.class);
 
-
     public void insertOrionSubscription(OrionSubscription orionSubscription) {
         SqlSession sqlSession = null;
         try {

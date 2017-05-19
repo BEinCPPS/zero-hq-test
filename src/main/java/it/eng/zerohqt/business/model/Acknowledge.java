@@ -9,8 +9,8 @@ import java.io.Serializable;
  */
 public class Acknowledge extends BaseBayInfo implements Serializable {
 
-    private AcknowledgeType ackType;
-    private String description;
+    protected AcknowledgeType ackType;
+    protected String description;
 
     public Acknowledge() {
     }

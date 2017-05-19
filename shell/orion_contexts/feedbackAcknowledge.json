@@ -1,0 +1,23 @@
+{
+  "id": "feedbackAcknowledge",
+  "type": "feedbackType",
+  "attributes": [
+    {
+      "name": "acknowledge",
+      "type": "string",
+      "value": "4",
+      "metadatas": [
+        {
+          "name": "timestamp",
+          "type": "typestamp",
+          "value": "2017-05-02T08:00:28.977Z"
+        },
+        {
+          "name": "descr",
+          "type": "string",
+          "value": "Temperature Anomaly detected"
+        }
+      ]
+    }
+  ]
+}

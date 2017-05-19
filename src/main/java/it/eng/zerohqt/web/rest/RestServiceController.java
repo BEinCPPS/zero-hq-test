@@ -1,9 +1,9 @@
 package it.eng.zerohqt.web.rest;
 
-import it.eng.zerohqt.business.model.FeedbackScale;
-import it.eng.zerohqt.business.transformer.ZeroHQTContextTransformer;
 import it.eng.zerohqt.business.Reasoner;
 import it.eng.zerohqt.business.model.Acknowledge;
+import it.eng.zerohqt.business.model.FeedbackScale;
+import it.eng.zerohqt.business.transformer.ZeroHQTContextTransformer;
 import it.eng.zerohqt.config.OrionConfiguration;
 import it.eng.zerohqt.dao.TablesMetaDataDao;
 import it.eng.zerohqt.dao.TestStationDao;
@@ -11,17 +11,12 @@ import it.eng.zerohqt.dao.UserAccessDao;
 import it.eng.zerohqt.dao.model.UserAccess;
 import it.eng.zerohqt.orion.OrionContextConsumer;
 import it.eng.zerohqt.orion.client.model.subscribe.SubscriptionResponse;
-import it.eng.zerohqt.orion.model.FeedbackContextAttribute;
-import it.eng.zerohqt.orion.model.TestStationContextAttribute;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by ascatox on 10/02/17.
@@ -45,7 +40,6 @@ public class RestServiceController {
 
     @RequestMapping(path = "/subscribe", method = RequestMethod.GET)
     public List<SubscriptionResponse> subscribe() {
-        List<SubscriptionResponse> subscriptionResponses = null;
         try {
             return orionContextConsumer.subscribe();
         } catch (Exception e) {

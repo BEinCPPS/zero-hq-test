@@ -2,7 +2,6 @@ package it.eng.zerohqt.web.websocket;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.eng.zerohqt.business.Reasoner;
-import it.eng.zerohqt.business.model.Acknowledge;
 import it.eng.zerohqt.business.model.FeedbackInfo;
 import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.config.WebSocketConfiguration;

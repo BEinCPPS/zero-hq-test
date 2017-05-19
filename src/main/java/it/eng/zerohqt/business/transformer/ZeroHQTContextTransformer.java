@@ -7,12 +7,9 @@ import it.eng.zerohqt.config.Utils;
 import it.eng.zerohqt.dao.model.*;
 import it.eng.zerohqt.orion.model.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,6 +17,7 @@ import java.util.stream.Collectors;
  * Created by ascatox on 17/02/17.
  */
 public class ZeroHQTContextTransformer {
+
     private static Logger logger = Logger.getLogger(ZeroHQTContextTransformer.class);
 
 
@@ -33,6 +31,9 @@ public class ZeroHQTContextTransformer {
             return transformToInformationBay(zeroHQTContext);
         else if (contextElement.getId().contains(Constants.ORION_CONTEXT_PREFIX_FEEDBACK))
             return transformToFeedback(zeroHQTContext);
+        else if (contextElement.getId().contains(Constants.ORION_CONTEXT_PREFIX_FEEDBACK_ACKNOWLEDGE)) {
+            return transformToFeedbackAcknowledge(zeroHQTContext);
+        }
         return Optional.empty();
     }
 
@@ -58,7 +59,9 @@ public class ZeroHQTContextTransformer {
                             if (metadata.getName().equals("description")) {
                                 stateInfo.setStateDescription(metadata.getValue());
                             }
-                            //TODO Timestamp;
+                            if (metadata.getName().equals("timestamp")) {
+                                stateInfo.setTimestamp(Utils.convertContextMetadataTimestampToDate(metadata.getValue()));
+                            }
                         }
                     }
                 } else if (attribute.getName().equals(TestStationContextAttribute.statePayload.name())) {
@@ -69,15 +72,11 @@ public class ZeroHQTContextTransformer {
                     informationBay.setStationDescription(attribute.getValue());
                 } else if (attribute.getName().equals(TestStationContextAttribute.acknowledge.name())
                         && Utils.isStringNotBlankExt(attribute.getValue())) {
-                    acknowledge = new Acknowledge();
-                    extractStationNameAndBayNumber(contextElement.getId(), acknowledge);
-                    acknowledge.setOrigin(Acknowledge.class.getSimpleName().toLowerCase());
-                    acknowledge.setTimestamp(new Date());
-                    acknowledge.setBayCode(contextElement.getId());
-                    acknowledge.setAckType(AcknowledgeType.valueOf("ack" + attribute.getValue()));
-                    acknowledge.setDescription(AcknowledgeType.valueOf("ack" + attribute.getValue()).getDescription());
+                    Optional<Acknowledge> acknowledge_ = transformToAcknowledge(zeroHQTContext, false);
+                    if (acknowledge_.isPresent())
+                        acknowledge = acknowledge_.get();
                 }
-                stateInfo.setTimestamp(new Date());
+                //stateInfo.setTimestamp(new Date());
                 stateInfo.setType(resolveStateType(stateInfo.getStateCode(), acknowledge));
                 informationBay.setTimestamp(new Date());
                 informationBay.setStateInfo(stateInfo);
@@ -85,6 +84,50 @@ public class ZeroHQTContextTransformer {
             }
         }
         return Optional.of(informationBay);
+    }
+
+    private static Optional<FeedbackAcknowledge> transformToFeedbackAcknowledge(ZeroHQTContext zeroHQTContext) {
+        Optional<Acknowledge> acknowledge = transformToAcknowledge(zeroHQTContext, true);
+        if (!acknowledge.isPresent()) return Optional.empty();
+        FeedbackAcknowledge feedbackAcknowledge = (FeedbackAcknowledge) acknowledge.get();
+        return Optional.of(feedbackAcknowledge);
+    }
+
+    private static Optional<Acknowledge> transformToAcknowledge(ZeroHQTContext zeroHQTContext, boolean isFeedbackAcknowledge) {
+        ArrayList<ContextResponses> contextResponses = zeroHQTContext.getContextResponses();
+        if (null == contextResponses || contextResponses.isEmpty()) return Optional.empty();
+        for (ContextResponses contextResponse :
+                contextResponses) {
+            ContextElement contextElement = contextResponse.getContextElement();
+            if (null == contextElement.getAttributes() || contextElement.getAttributes().isEmpty())
+                return Optional.empty();
+            for (Attributes attribute : contextElement.getAttributes()) {
+                if (attribute.getName().equals(TestStationContextAttribute.acknowledge.name())
+                        && Utils.isStringNotBlankExt(attribute.getValue())) {
+                    Acknowledge acknowledge = new Acknowledge();
+                    if (!isFeedbackAcknowledge)
+                        extractStationNameAndBayNumber(contextElement.getId(), acknowledge);
+                    acknowledge.setOrigin(Acknowledge.class.getSimpleName().toLowerCase());
+                    if (!isFeedbackAcknowledge)
+                        acknowledge.setBayCode(contextElement.getId());
+                    acknowledge.setAckType(AcknowledgeType.valueOf("ack" + attribute.getValue()));
+                    if (!isFeedbackAcknowledge)
+                        acknowledge.setDescription(AcknowledgeType.valueOf("ack" + attribute.getValue()).getDescription());
+                    ArrayList<Metadatas> metadatas = attribute.getMetadatas();
+                    if (metadatas != null && !metadatas.isEmpty()) {
+                        for (Metadatas metadata : metadatas) {
+                            if (metadata.getName().equals("description") && isFeedbackAcknowledge) {
+                                acknowledge.setDescription(metadata.getValue());
+                            } else if (metadata.getName().equals("timestamp")) {
+                                acknowledge.setTimestamp(Utils.convertContextMetadataTimestampToDate(metadata.getValue()));
+                            }
+                        }
+                    }
+                    return Optional.of(acknowledge);
+                }
+            }
+        }
+        return Optional.empty();
     }
 
     public static Optional<FeedbackInfo> transformToFeedback(ZeroHQTContext zeroHQTContext) {
@@ -104,9 +147,9 @@ public class ZeroHQTContextTransformer {
         return Optional.of(feedbackInfo);
     }
 
-    public static List<Acknowledge> transformToAcknowledges(List<TestStationData> testStationDatas) {
-        if (null == testStationDatas || testStationDatas.isEmpty()) return null;
-        return testStationDatas.stream()
+    public static List<Acknowledge> transformToAcknowledges(List<TestStationData> testStationData) {
+        if (null == testStationData || testStationData.isEmpty()) return null;
+        return testStationData.stream()
                 .map(td -> {
                     try {
                         return transformToAcknowledge(td);
@@ -129,13 +172,12 @@ public class ZeroHQTContextTransformer {
             acknowledge.setAckType(AcknowledgeType.valueOf("ack" + testStationData.getAttrValue()));
             acknowledge.setDescription(AcknowledgeType.valueOf("ack" + testStationData.getAttrValue()).getDescription());
             if (Utils.isStringNotBlankExt(testStationData.getAttrMd())) {
-                Metadatas[] metadatas = parseJsonMetdatas(testStationData.getAttrMd());
+                Metadatas[] metadatas = parseJsonMetadatas(testStationData.getAttrMd());
                 if (metadatas != null && metadatas.length > 0) {
                     Optional<Metadatas> timestamp = Arrays.asList(metadatas)
                             .stream().filter(mtd ->
                                     mtd.getName().equalsIgnoreCase("timestamp")).findFirst();
-                    String timestampNoTimezone = timestamp.get().getValue().substring(0, timestamp.get().getValue().length() - 5);
-                    acknowledge.setTimestamp(DateUtils.parseDate(timestampNoTimezone,"yyyy-MM-dd'T'HH:mm:ss"));
+                    acknowledge.setTimestamp(Utils.convertContextMetadataTimestampToDate(timestamp.get().getValue()));
                 }
             }
         }
@@ -152,7 +194,7 @@ public class ZeroHQTContextTransformer {
         baseBayInfo.setBayNumber(Integer.parseInt(parts[1]));
     }
 
-    private static Metadatas[] parseJsonMetdatas(String metadatas) throws IOException {
+    private static Metadatas[] parseJsonMetadatas(String metadatas) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(metadatas, Metadatas[].class);
     }

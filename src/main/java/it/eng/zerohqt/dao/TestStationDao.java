@@ -38,9 +38,9 @@ public class TestStationDao {
         return notificationsList.stream().sorted().collect(Collectors.toList());
     }
 
-    public List<TestStationData> findAllNotificationsStationBay(String service,String entityId ) throws Exception {
-       String tableName = orionConfiguration.orionServicepath.substring(1).toLowerCase() + "_teststation_" + entityId.toLowerCase() + "_teststation";
-       List<TestStationData> allNotificationsForStation = testStationDataDao
+    public List<TestStationData> findAllNotificationsStationBay(String service, String entityId) throws Exception {
+        String tableName = orionConfiguration.orionServicepath.substring(1).toLowerCase() + "_teststation_" + entityId.toLowerCase() + "_teststation";
+        List<TestStationData> allNotificationsForStation = testStationDataDao
                 .findAllNotificationsForStationBayByAck(service, tableName);
         return allNotificationsForStation;
     }

@@ -19,9 +19,6 @@ public class UserAccessDao {
 
     @Autowired
     private SqlSessionFactory sqlSessionFactory;
-    @Autowired
-    UserAccessMapper userAccessMapper;
-
     private final Logger logger = Logger.getLogger(RestServiceController.class);
 
 
