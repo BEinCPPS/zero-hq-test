@@ -26,6 +26,7 @@ $dark:                            #444 !default;
   used under CC BY http://creativecommons.org/licenses/by/4.0/
   Modified icons to fit ionicon’s grid from original.
 */
+@import url("../fonts/Roboto-Regular.ttf");
 @font-face {
   font-family: "Ionicons";
   src: url("../fonts/ionicons.eot?v=2.0.1");
@@ -9561,6 +9562,9 @@ img {
 .error-message {
   color: orangered !important; }
 
+@media all and (max-width: 500px) {
+  .item-note-zero {
+    float: left; } }
 /*
  * Home
  */
@@ -9608,6 +9612,33 @@ img {
 .bottom-high {
   padding-top: 40%; }
 
+.card-header-zero {
+  font-size: 20px; }
+
+.spinner-zero {
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center; }
+
+@media (min-width: 1024px) {
+  .responsive-xg {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap; }
+
+  .responsive-xg .col, .responsive-xg .col-10, .responsive-xg .col-20, .responsive-xg .col-25, .responsive-xg .col-33, .responsive-xg .col-34, .responsive-xg .col-50, .responsive-xg .col-66, .responsive-xg .col-67, .responsive-xg .col-75, .responsive-xg .col-80, .responsive-xg .col-90 {
+    -moz-flex: 1 0 50%;
+    flex: 1 0 50%;
+    margin-bottom: 15px;
+    margin-left: 0;
+    max-width: 100%;
+    width: 100%; } }
 /*
  * Map
  */
@@ -9617,12 +9648,19 @@ img {
 .gmaps {
   height: 100%; }
 
-.login {
-  background: url(../../images/zeroHQTest.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover; }
+.login-container {
+  display: -webkit-flex;
+  -webkit-flex-direction: column; }
+
+.img-header {
+  max-width: 50%; }
+
+@media all and (min-height: 500px) and (orientation: portrait) {
+  .login-container > .col-zero {
+    padding-top: 30%; } }
+.login-container > .header {
+  -webkit-flex: 4;
+  padding-top: 20px; }
 
 /** For the task list header columns and tasks **/
 .flex-container {
@@ -9704,9 +9742,15 @@ img {
   text-align: right;
   padding-right: 2px; }
 
-@font-face {
-  font-family: 'Roboto', sans-serif !important;
-  src: url("../fonts/Roboto-Regular.ttf") format("truetype"); }
+.col-zero-value {
+  display: flex; }
+
+#dashboard-header > div {
+  font-size: 16px; }
+
+.col-dashboard-table {
+  font-size: 18px; }
+
 .item-alarm {
   background-color: #e42112; }
 
@@ -9715,15 +9759,6 @@ img {
 
 .buttons {
   float: right; }
-
-.red-button {
-  background: red; }
-
-.yellow-button {
-  background: yellow; }
-
-.green-button {
-  background: green; }
 
 .col-center {
   text-align: center; }
@@ -9734,15 +9769,24 @@ img {
 .red {
   color: red; }
 
+.orange {
+  color: orange; }
+
+.green {
+  color: green; }
+
 .yellow {
-  color: #ffc900; }
+  color: #f5e79e; }
+
+.blue {
+  color: #0c60ee; }
 
 .notification-style-text {
   margin-left: 2%;
-  font-size: 20px !important; }
+  font-size: 18px !important; }
 
 .notification-style-date {
   margin-left: 2%;
-  font-size: 18px !important; }
+  font-size: 14px !important; }
 
 /*# sourceMappingURL=main.css.map */

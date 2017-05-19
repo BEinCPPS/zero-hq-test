@@ -1,11 +1,11 @@
 package it.eng.zerohqt.business;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.eng.zerohqt.business.model.Acknowledge;
 import it.eng.zerohqt.business.model.FeedbackAcknowledge;
 import it.eng.zerohqt.business.model.FeedbackInfo;
 import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.business.transformer.ZeroHQTContextTransformer;
+import it.eng.zerohqt.dao.FeedbackAcknowledgeDao;
 import it.eng.zerohqt.orion.model.ZeroHQTContext;
 import it.eng.zerohqt.web.websocket.WebSocketController;
 import org.apache.log4j.Logger;
@@ -24,9 +24,8 @@ public class Reasoner {
     @Autowired
     WebSocketController webSocketController;
 
-    //TODO
-    //@Autowired
-    //FeedbackAcknowledgeDao feedbackAcknowledgeDao;
+    @Autowired
+    FeedbackAcknowledgeDao feedbackAcknowledgeDao;
 
     public void feed(String message) {
         ObjectMapper mapper = new ObjectMapper();
@@ -58,8 +57,7 @@ public class Reasoner {
                     informationBay.setAcknowledge(feedbackAcknowledge);
                     informationBay.setOrigin(FeedbackAcknowledge.class.getSimpleName().toLowerCase());
                     webSocketController.sendToClient(informationBay);
-                    //TODO insert in History database
-                    //call FeebackAcknowledgeDao
+                    feedbackAcknowledgeDao.insertFeedbackAcknowledge(feedbackAcknowledge);
                 } catch (Exception e) {
                     logger.error(e);
                 }

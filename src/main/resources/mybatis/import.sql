@@ -48,3 +48,12 @@ CREATE TABLE `user_access` (
   `fullName` varchar(75) DEFAULT NULL
   PRIMARY KEY (`id`)
 );
+
+
+CREATE TABLE `feedback_acknowledge` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `acknowledge` text NOT NULL,
+  `timestamp` text NOT NULL,
+  `description` text,
+  PRIMARY KEY (`id`)
+);
