@@ -1,10 +1,7 @@
 package it.eng.zerohqt.dao;
 
-import it.eng.zerohqt.business.model.Acknowledge;
 import it.eng.zerohqt.business.model.FeedbackAcknowledge;
 import it.eng.zerohqt.dao.mapper.FeedbackAcknowledgeMapper;
-import it.eng.zerohqt.dao.mapper.UserAccessMapper;
-import it.eng.zerohqt.dao.model.UserAccess;
 import it.eng.zerohqt.web.rest.RestServiceController;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -13,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by ascatox on 09/05/17.
@@ -22,8 +20,9 @@ public class FeedbackAcknowledgeDao {
 
     @Autowired
     private SqlSessionFactory sqlSessionFactory;
+    @Autowired
+    private FeedbackAcknowledgeMapper feedbackAcknowledgeMapper;
     private final Logger logger = Logger.getLogger(RestServiceController.class);
-
 
     public void insertFeedbackAcknowledge(FeedbackAcknowledge acknowledge) {
         SqlSession sqlSession = null;
@@ -39,5 +38,10 @@ public class FeedbackAcknowledgeDao {
             if (null != sqlSession)
                 sqlSession.close();
         }
+    }
+
+
+    public List<FeedbackAcknowledge> findFeedbackAcknowledges() {
+        return feedbackAcknowledgeMapper.findFeedbackAcknowledges();
     }
 }

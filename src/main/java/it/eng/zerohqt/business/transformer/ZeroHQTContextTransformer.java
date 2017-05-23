@@ -1,6 +1,7 @@
 package it.eng.zerohqt.business.transformer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.cfg.ContextAttributes;
 import it.eng.zerohqt.business.model.*;
 import it.eng.zerohqt.config.Constants;
 import it.eng.zerohqt.config.Utils;
@@ -56,7 +57,7 @@ public class ZeroHQTContextTransformer {
                     ArrayList<Metadatas> metadatas = attribute.getMetadatas();
                     if (metadatas != null && !metadatas.isEmpty()) {
                         for (Metadatas metadata : metadatas) {
-                            if (metadata.getName().equals("description")) {
+                            if (metadata.getName().equals("descr")) {
                                 stateInfo.setStateDescription(metadata.getValue());
                             }
                             if (metadata.getName().equals("timestamp")) {
@@ -116,7 +117,7 @@ public class ZeroHQTContextTransformer {
                     ArrayList<Metadatas> metadatas = attribute.getMetadatas();
                     if (metadatas != null && !metadatas.isEmpty()) {
                         for (Metadatas metadata : metadatas) {
-                            if (metadata.getName().equals("description") && isFeedbackAcknowledge) {
+                            if (metadata.getName().equals("descr") && isFeedbackAcknowledge) {
                                 acknowledge.setDescription(metadata.getValue());
                             } else if (metadata.getName().equals("timestamp")) {
                                 acknowledge.setTimestamp(Utils.convertContextMetadataTimestampToDate(metadata.getValue()));
@@ -159,7 +160,6 @@ public class ZeroHQTContextTransformer {
                     return null;
                 }).collect(Collectors.toList());
     }
-
 
     public static Acknowledge transformToAcknowledge(TestStationData testStationData) throws Exception {
         if (testStationData == null || StringUtils.isBlank(testStationData.getEntityId())) return null;
@@ -210,6 +210,4 @@ public class ZeroHQTContextTransformer {
         else if (stateCode.equalsIgnoreCase("400") && isAckPresent) return StateType.warning;
         else return StateType.normal;
     }
-
-
 }

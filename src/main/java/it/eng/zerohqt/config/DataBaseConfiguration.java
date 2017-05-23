@@ -1,9 +1,7 @@
 package it.eng.zerohqt.config;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-import it.eng.zerohqt.dao.mapper.OrionSubscriptionMapper;
-import it.eng.zerohqt.dao.mapper.TablesMetaDataMapper;
-import it.eng.zerohqt.dao.mapper.TestStationDataMapper;
+import it.eng.zerohqt.dao.mapper.*;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -60,6 +58,8 @@ public class DataBaseConfiguration {
         factory.getConfiguration().addMapper(TablesMetaDataMapper.class);
         factory.getConfiguration().addMapper(TestStationDataMapper.class);
         factory.getConfiguration().addMapper(OrionSubscriptionMapper.class);
+        factory.getConfiguration().addMapper(FeedbackAcknowledgeMapper.class);
+        factory.getConfiguration().addMapper(UserAccessMapper.class);
         //TODO Add other mappers
         return factory;
     }

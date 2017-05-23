@@ -65,6 +65,4 @@ public interface TestStationDataMapper {
                                                       @Param("statePayloadName") String statePayloadName,
                                                       @Param("acknowledgeName") String acknowledgeName,
                                                       @Param("states") List<String> states);
-
-
 }

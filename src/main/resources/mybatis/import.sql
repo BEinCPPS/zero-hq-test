@@ -52,7 +52,7 @@ CREATE TABLE `user_access` (
 
 CREATE TABLE `feedback_acknowledge` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `acknowledge` text NOT NULL,
+  `ackType` text NOT NULL,
   `timestamp` text NOT NULL,
   `description` text,
   PRIMARY KEY (`id`)

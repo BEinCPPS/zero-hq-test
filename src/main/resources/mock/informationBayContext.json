@@ -1,0 +1,857 @@
+{
+  "contextResponses": [
+    {
+      "contextElement": {
+        "type": "teststation",
+        "isPattern": "false",
+        "id": "teststation:TestStation1_1",
+        "attributes": [
+          {
+            "name": "12NC",
+            "type": "string",
+            "value": "851111111111",
+            "metadatas": [
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "null"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:27.762Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "1601-01-01T00:00:00.000Z"
+              }
+            ]
+          },
+          {
+            "name": "acknowledge",
+            "type": "string",
+            "value": "2",
+            "metadatas": [
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "null"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:25:40.016Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:25:39.409Z"
+              }
+            ]
+          },
+          {
+            "name": "ipAddress",
+            "type": "string",
+            "value": "159.155.85.13",
+            "metadatas": [
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "null"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:14.752Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "null"
+              }
+            ]
+          },
+          {
+            "name": "measure1",
+            "type": "integer",
+            "value": "0",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Power"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "W"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "1"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "1"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:33.793Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:02:35.306Z"
+              }
+            ]
+          },
+          {
+            "name": "measure10",
+            "type": "integer",
+            "value": "32767",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Temp 5"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "°C"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "10"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "10"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:42.794Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:02:35.593Z"
+              }
+            ]
+          },
+          {
+            "name": "measure11",
+            "type": "integer",
+            "value": "32767",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Temp 6"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "°C"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "11"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "10"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:43.760Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:02:35.625Z"
+              }
+            ]
+          },
+          {
+            "name": "measure12",
+            "type": "integer",
+            "value": "5",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Analog 0-10 1"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "null"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "12"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "1"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:28:50.490Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:03:13.182Z"
+              }
+            ]
+          },
+          {
+            "name": "measure13",
+            "type": "integer",
+            "value": "7",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Analog 0-10 2"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "null"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "13"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "1"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:29:47.610Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:03:17.263Z"
+              }
+            ]
+          },
+          {
+            "name": "measure14",
+            "type": "integer",
+            "value": "0",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Counter"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "null"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "14"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "1"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:46.771Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:02:35.721Z"
+              }
+            ]
+          },
+          {
+            "name": "measure2",
+            "type": "integer",
+            "value": "228",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Voltage"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "V"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "2"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "1"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:29:22.580Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:03:15.898Z"
+              }
+            ]
+          },
+          {
+            "name": "measure3",
+            "type": "integer",
+            "value": "0",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Current"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "A"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "3"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "100"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:35.823Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:02:35.369Z"
+              }
+            ]
+          },
+          {
+            "name": "measure4",
+            "type": "integer",
+            "value": "100",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Cos Fi"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "null"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "4"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "100"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:36.762Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:02:35.401Z"
+              }
+            ]
+          },
+          {
+            "name": "measure5",
+            "type": "integer",
+            "value": "0",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Energy"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "W/h"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "5"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "1"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:37.813Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:02:35.433Z"
+              }
+            ]
+          },
+          {
+            "name": "measure6",
+            "type": "integer",
+            "value": "32767",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Temp 1"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "°C"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "6"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "10"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:38.700Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:02:35.465Z"
+              }
+            ]
+          },
+          {
+            "name": "measure7",
+            "type": "integer",
+            "value": "32767",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Temp 2"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "°C"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "7"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "10"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:39.779Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:02:35.497Z"
+              }
+            ]
+          },
+          {
+            "name": "measure8",
+            "type": "integer",
+            "value": "32767",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Temp 3"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "°C"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "8"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "10"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:40.773Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:02:35.529Z"
+              }
+            ]
+          },
+          {
+            "name": "measure9",
+            "type": "integer",
+            "value": "32767",
+            "metadatas": [
+              {
+                "name": "12NC",
+                "type": "string",
+                "value": "851111111111"
+              },
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Temp 4"
+              },
+              {
+                "name": "descrUnitOfMeasure",
+                "type": "string",
+                "value": "°C"
+              },
+              {
+                "name": "id",
+                "type": "string",
+                "value": "9"
+              },
+              {
+                "name": "multiplier",
+                "type": "integer",
+                "value": "10"
+              },
+              {
+                "name": "serialNumber",
+                "type": "string",
+                "value": "111111111111"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:41.753Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-03-15T09:02:35.561Z"
+              }
+            ]
+          },
+          {
+            "name": "serialNumber",
+            "type": "string",
+            "value": "111111111111",
+            "metadatas": [
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "null"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:27.762Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "1601-01-01T00:00:00.000Z"
+              }
+            ]
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "value": "400",
+            "metadatas": [
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "Wait"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:30.816Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:30.406Z"
+              }
+            ]
+          },
+          {
+            "name": "statePayload",
+            "type": "string",
+            "value": "111111111111|Y|dddd|851111111111|12NC di test|Y|ui|2|Test Acquisizione|A| ",
+            "metadatas": [
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "null"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:31.837Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "null"
+              }
+            ]
+          },
+          {
+            "name": "stationInfo",
+            "type": "string",
+            "value": "Machine A - Mc A - Box 1",
+            "metadatas": [
+              {
+                "name": "descr",
+                "type": "string",
+                "value": "null"
+              },
+              {
+                "name": "serverTimestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:14.751Z"
+              },
+              {
+                "name": "timestamp",
+                "type": "typestamp",
+                "value": "2017-05-23T09:23:13.398Z"
+              }
+            ]
+          }
+        ]
+      },
+      "statusCode": {
+        "code": "200",
+        "reasonPhrase": "OK"
+      }
+    },
+    {
+      "contextElement": {
+        "type": "feedbackType",
+        "isPattern": "false",
+        "id": "feedbackScale",
+        "attributes": [
+          {
+            "name": "condition 1",
+            "type": "string",
+            "value": "{min: 12.89, max: 1234}"
+          },
+          {
+            "name": "condition 3",
+            "type": "string",
+            "value": "{min: 0, max: 20}"
+          },
+          {
+            "name": "condition teta",
+            "type": "string",
+            "value": "{min: 0, max: 1}"
+          }
+        ]
+      },
+      "statusCode": {
+        "code": "200",
+        "reasonPhrase": "OK"
+      }
+    }
+  ]
+}

@@ -19,7 +19,6 @@
         function getFeedbackScale() {
             return $http.get(externalAppsService.getBackEndUrl() + 'feedbackScale');
         }
-
     }
 })();
 

@@ -1,6 +1,7 @@
 package it.eng.zerohqt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import it.eng.zerohqt.business.Reasoner;
 import it.eng.zerohqt.business.model.FeedbackInfo;
 import it.eng.zerohqt.config.WebSocketConfiguration;
 import it.eng.zerohqt.orion.OrionContextConsumer;

@@ -5,6 +5,7 @@ import it.eng.zerohqt.business.model.Acknowledge;
 import it.eng.zerohqt.business.model.FeedbackScale;
 import it.eng.zerohqt.business.transformer.ZeroHQTContextTransformer;
 import it.eng.zerohqt.config.OrionConfiguration;
+import it.eng.zerohqt.dao.HistoryDao;
 import it.eng.zerohqt.dao.TablesMetaDataDao;
 import it.eng.zerohqt.dao.TestStationDao;
 import it.eng.zerohqt.dao.UserAccessDao;
@@ -30,6 +31,8 @@ public class RestServiceController {
     @Autowired
     private TestStationDao testStationDao;
     @Autowired
+    private HistoryDao historyDao;
+    @Autowired
     private TablesMetaDataDao tablesMetaDataDao;
     @Autowired
     private OrionConfiguration orionConfiguration;
@@ -52,9 +55,7 @@ public class RestServiceController {
     @RequestMapping(path = "/history", method = RequestMethod.GET)
     public List<Acknowledge> history() {
         try {
-            return ZeroHQTContextTransformer.
-                    transformToAcknowledges(testStationDao
-                            .findAllNotifications(orionConfiguration.orionService.toLowerCase()));
+            return historyDao.readHistory(orionConfiguration.orionService.toLowerCase());
         } catch (Exception e) {
             logger.error(e);
             throw new RuntimeException(e);
