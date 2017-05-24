@@ -1,0 +1,58 @@
+[
+  {
+    "stationName": "",
+    "bayCode"    : "",
+    "bayNumber"  : "",
+    "ackType"    : "ack4",
+    "description": "Temperature too high",
+    "timestamp"  : "2017-05-24T10:10:10.199Z"
+  },
+  {
+    "stationName": "",
+    "bayCode"    : "",
+    "bayNumber"  : "",
+    "ackType"    : "ack4",
+    "description": "Temperature too low",
+    "timestamp"  : "2017-05-24T10:10:15.199Z"
+  },
+  {
+    "stationName": "",
+    "bayCode"    : "",
+    "bayNumber"  : "",
+    "ackType"    : "ack4",
+    "description": "Temperature outside the parameters",
+    "timestamp"  : "2017-05-24T10:15:10.199Z"
+  },
+  {
+    "stationName": "",
+    "bayCode"    : "",
+    "bayNumber"  : "",
+    "ackType"    : "ack4",
+    "description": "Measures not received",
+    "timestamp"  : "2017-05-24T10:17:10.199Z"
+  },
+  {
+    "stationName": "",
+    "bayCode"    : "",
+    "bayNumber"  : "",
+    "ackType"    : "ack4",
+    "description": "Insufficient environmental variables for a correct measurement",
+    "timestamp"  : "2017-05-24T10:17:13.199Z"
+  },
+  {
+    "stationName": "",
+    "bayCode"    : "",
+    "bayNumber"  : "",
+    "ackType"    : "ack4",
+    "description": "Generic problem",
+    "timestamp"  : "2017-05-24T10:20:10.199Z"
+  },
+  {
+    "stationName": "",
+    "bayCode"    : "",
+    "bayNumber"  : "",
+    "ackType"    : "ack4",
+    "description": "Out of order",
+    "timestamp"  : "2017-05-24T10:22:10.199Z"
+  }
+]
