@@ -18,13 +18,17 @@
                 var acknowledge = informationBay.acknowledge;
                 if (acknowledge.ackType !== 'ack5')
                     $scope.notificationsMap[acknowledge.id] = acknowledge;
-                removeAck3(acknowledge);
-                sortNotifications();
+                organizeDatainView(acknowledge);
                 $scope.$apply(); //Apply changes to the page
             }
         });
 
-        function removeAck3(acknowledge) {
+        function organizeDatainView(acknowledge) {
+            removeAck3s(acknowledge);
+            sortNotifications();
+        }
+
+        function removeAck3s(acknowledge) {
             if (acknowledge.ackType !== 'ack5') return;
             var refBayCode = acknowledge.stationName + acknowledge.bayNumber;
             var keys = Object.keys($scope.notificationsMap);
@@ -67,7 +71,9 @@
             if ($rootScope.acknowledges) {
                 angular.forEach($rootScope.acknowledges, function (value) {
                     var acknowledge = value.acknowledge;
-                    $scope.notificationsMap[acknowledge.id] = acknowledge;
+                    if (acknowledge.ackType !== 'ack5')
+                        $scope.notificationsMap[acknowledge.id] = acknowledge;
+                    organizeDatainView(acknowledge);
                     $scope.$apply(); //Apply changes to the page
                 })
             }
@@ -106,10 +112,6 @@
             console.log('Saved notifications!!!');
 
         });
-
-        /*  $scope.$on('$ionicView.afterLeave', function (viewInfo, state) {
-         $rootScope.informationBays = [];
-         });*/
 
     }
 })();
