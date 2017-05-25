@@ -1,6 +1,7 @@
 package it.eng.zerohqt.business.model;
 
 import it.eng.zerohqt.dao.model.AcknowledgeType;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
@@ -29,7 +30,20 @@ public class Acknowledge extends BaseBayInfo implements Serializable {
     }
 
     public String getId() {
-        return getStationName() + getBayNumber() + getAckType().name();
+        String id = "";
+        if (StringUtils.isNotBlank(getStationName())) {
+            id += getStationName() + getBayNumber();
+        } else {
+            id += "feedbackAcknowledge";
+        }
+        return id + getAckType().name() + getTimestamp().getTime();
+    }
+
+    public int getWeight() {
+        if (getAckType().equals(AcknowledgeType.ack3))
+            return 0;
+        else
+            return 1;
     }
 
 

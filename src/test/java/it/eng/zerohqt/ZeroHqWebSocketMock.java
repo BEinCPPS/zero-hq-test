@@ -4,9 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import it.eng.zerohqt.business.model.InformationBay;
 import it.eng.zerohqt.business.transformer.ZeroHQTContextTransformer;
 import it.eng.zerohqt.config.WebSocketConfiguration;
+import it.eng.zerohqt.dao.model.AcknowledgeType;
 import it.eng.zerohqt.dao.model.StateType;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,10 +23,7 @@ import org.springframework.web.socket.messaging.WebSocketStompClient;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -38,13 +35,13 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-public class ZeroHqWebSocketTest {
+public class ZeroHqWebSocketMock {
 
     static final String WEBSOCKET_URI = "ws://localhost:8080/websocket";
     static final String WEBSOCKET_TOPIC = WebSocketConfiguration.DEFAULT_CHANNEL;
-    public static final int DELAY = 3000; //milliseconds
-    public static final String PATHNAME = "/mock/informationBay.json";
-    private final Logger logger = Logger.getLogger(ZeroHqWebSocketTest.class);
+    static final int DELAY = 3000; //milliseconds
+    static final String PATHNAME = "/mock/informationBay.json";
+    final Logger logger = Logger.getLogger(ZeroHqWebSocketMock.class);
 
     BlockingQueue<String> blockingQueue;
     WebSocketStompClient stompClient;
@@ -76,6 +73,9 @@ public class ZeroHqWebSocketTest {
                 .get(1, SECONDS);
         session.subscribe(WEBSOCKET_TOPIC + "/" + WebSocketConfiguration.INFORMATION_BAY_TOPIC, new DefaultStompFrameHandler());
         session.subscribe(WEBSOCKET_TOPIC + "/" + WebSocketConfiguration.ACKNOWLEDGE_TOPIC, new DefaultStompFrameHandler());
+        boolean isAck3 = false;
+        int ack3s = 0;
+
         for (; ; ) {
             Thread.sleep(DELAY);
             InformationBay[] messageBays = new InformationBay[informationBayList.size()];
@@ -83,16 +83,31 @@ public class ZeroHqWebSocketTest {
             InformationBay message = messageBays[rand.nextInt(100) % messageBays.length];
             StateType stateType = ZeroHQTContextTransformer.resolveStateType(message.getStateInfo().getStateCode(), message.getAcknowledge());
             message.getStateInfo().setType(stateType);
+            message.setTimestamp(new Date());
             ObjectMapper mapper = new ObjectMapper();
             String messageJson = mapper.writeValueAsString(message);
             session.send(WEBSOCKET_TOPIC + "/" + WebSocketConfiguration.INFORMATION_BAY_TOPIC, messageJson.getBytes());
             logger.info(messageJson);
-            Assert.assertEquals(messageJson, blockingQueue.poll(1, SECONDS));
+            //Assert.assertEquals(messageJson, blockingQueue.poll(1, SECONDS));
             if (message.getAcknowledge() == null) continue;
+            message.getAcknowledge().setTimestamp(new Date());
+            if (message.getAcknowledge().getAckType().equals(AcknowledgeType.ack3)) {
+                isAck3 = true;
+            } else isAck3 = false;
+            if (isAck3 && ack3s > 0) continue;
+            if (message.getAcknowledge().getAckType().equals(AcknowledgeType.ack5) && ack3s == 0) {
+                continue;
+            }
             String messageJson2 = mapper.writeValueAsString(message);
             session.send(WEBSOCKET_TOPIC + "/" + WebSocketConfiguration.ACKNOWLEDGE_TOPIC, messageJson2.getBytes());
             logger.info(messageJson2);
-            Assert.assertEquals(messageJson2, blockingQueue.poll(1, SECONDS));
+            if (isAck3) {
+                ack3s++;
+            }
+            if (message.getAcknowledge().getAckType().equals(AcknowledgeType.ack5)) {
+                ack3s--;
+            }
+            //Assert.assertEquals(messageJson2, blockingQueue.poll(1, SECONDS));
         }
     }
 

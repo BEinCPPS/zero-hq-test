@@ -5,10 +5,10 @@
         .module('zerohqt.home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', '$rootScope', 'imageService', '$ionicLoading'];
+    HomeController.$inject = ['$scope', '$rootScope', '$ionicLoading', 'insomniaService', 'externalAppsService'];
 
     /* @ngInject */
-    function HomeController($scope, $rootScope, imageService, $ionicLoading) {
+    function HomeController($scope, $rootScope, $ionicLoading, insomniaService, externalAppsService) {
         $scope.entries = {};
         $scope.MAX_NR_BAYS = 4;
         $scope.isDataArrived = false;
@@ -17,6 +17,7 @@
             console.log(informationBay); // 'Broadcast!'
             aggregateData(informationBay);
             $scope.isDataArrived = true;
+            insomniaService.keepAwake();
             $scope.$apply(); //Apply changes to the page
         });
 
@@ -65,9 +66,10 @@
             $rootScope.informationBays = [];
         });
 
-        $scope.openVnc = function () {
+        $scope.openVnc = function (ipAddress) {
             //TODO
-            $ionicLoading.show({ template: 'Functionality not available currently!', noBackdrop: true, duration: 1000 });
+            //$ionicLoading.show({template: 'Functionality not available currently!', noBackdrop: true, duration: 1000});
+            externalAppsService.openVnc(ipAddress);
         }
 
     }

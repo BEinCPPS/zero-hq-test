@@ -382,6 +382,27 @@
       "stateCode": "400",
       "timestamp": "2017-04-27T10:22:39.199Z"
     }
+  },
+  {
+    "ipAddress": "100.100.100.100",
+    "stationName": "TestStation1",
+    "bayCode": "TestStation1_3",
+    "bayNumber": "3",
+    "timestamp": "2017-04-27T10:22:26.199Z",
+    "stateInfo": {
+      "stateDescription": "Rule Execution",
+      "statePayload": "|N| | |N| |A|0|",
+      "stateCode": "400",
+      "timestamp": "2017-04-27T10:22:26.199Z"
+    },
+    "acknowledge": {
+      "stationName": "TestStation1",
+      "bayCode": "TestStation1_3",
+      "bayNumber": "3",
+      "ackType": "ack5",
+      "description": "Remove Request intervention",
+      "timestamp": "2017-04-27T10:22:26.199Z"
+    }
   }
 ]
 

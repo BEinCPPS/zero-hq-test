@@ -21,7 +21,6 @@ public class ZeroHQTContextTransformer {
 
     private static Logger logger = Logger.getLogger(ZeroHQTContextTransformer.class);
 
-
     public static Optional<?> transformForWebSocket(ZeroHQTContext zeroHQTContext) {
         if (zeroHQTContext == null
                 || zeroHQTContext.getContextResponses() == null

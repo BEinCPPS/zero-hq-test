@@ -5,10 +5,10 @@
         .module('zerohqt.menu')
         .controller('MenuController', MenuController);
 
-    MenuController.$inject = ['$scope', 'websocketService', 'loginService', '$state', '$ionicLoading', '$rootScope', '$ionicHistory', 'ENV'];
+    MenuController.$inject = ['$scope', 'websocketService','$state', '$ionicLoading', '$rootScope', '$ionicHistory', 'ENV', 'insomniaService'];
 
     /* @ngInject */
-    function MenuController($scope, websocketService, loginService, $state, $ionicLoading, $rootScope, $ionicHistory, ENV) {
+    function MenuController($scope, websocketService, $state, $ionicLoading, $rootScope, $ionicHistory, ENV, insomniaService) {
 
         $scope.logout = function () {
             $ionicHistory.nextViewOptions({
@@ -36,6 +36,7 @@
                     }
                 );
             }
+            insomniaService.allowSleepAgain();
         }
 
 

@@ -7,7 +7,8 @@ public enum AcknowledgeType {
     ack1("Intervention required with Elimination Rule", 1),
     ack2("Cancellation intervention with Elimination Rule", 2),
     ack3("Intervention required by notice cancellation FE", 3),
-    ack4("", 4);
+    ack4("", 4),
+    ack5("Remove intervention request", 5); //counterAck3
 
     //TODO Translation Properties file
     private String description;

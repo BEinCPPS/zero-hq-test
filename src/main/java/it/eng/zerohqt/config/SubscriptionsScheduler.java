@@ -19,7 +19,7 @@ public class SubscriptionsScheduler {
 
     private final Logger logger = Logger.getLogger(SubscriptionsScheduler.class);
 
-    @Scheduled(fixedRate = 30000)
+    @Scheduled(fixedRate = 60000) //ms
     public void subscribe() {
         List<SubscriptionResponse> subscriptionResponses = null;
         try {

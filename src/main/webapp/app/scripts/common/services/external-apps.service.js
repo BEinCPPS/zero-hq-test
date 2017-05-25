@@ -54,8 +54,11 @@
         }
 
         function openVnc(ipAddress) {
-            var url = 'vnc://' + ipAddress;
-            openExternalUrl(url);
+            if (ipAddress) {
+                console.log('Opening vnc ipAddress: '+ipAddress);
+                var url = 'vnc://' + ipAddress;
+                $window.location.href = url;
+            }
         }
     }
 })();
