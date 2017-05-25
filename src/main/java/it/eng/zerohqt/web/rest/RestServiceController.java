@@ -97,6 +97,17 @@ public class RestServiceController {
         }
     }
 
+    @RequestMapping(path = "/historyByAck", method = RequestMethod.GET)
+    public List<Acknowledge> historyByAck(
+            @RequestParam String ackType) {
+        try {
+            return historyDao.readHistoryByAck(orionConfiguration.orionService, ackType);
+        } catch (Exception e) {
+            logger.error(e);
+            throw new RuntimeException(e);
+        }
+    }
+
     @RequestMapping(path = "/nexthistory", method = RequestMethod.GET)
     public List<Acknowledge> nextHistory(
             @RequestParam int startPoint,

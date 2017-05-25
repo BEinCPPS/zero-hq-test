@@ -15,12 +15,17 @@
             fullHistory: fullHistory,
             fullStationsBays: fullStationsBays,
             stationBayHistory: stationBayHistory,
-            nextHistory: nextHistory
+            nextHistory: nextHistory,
+            fullHistoryByAck:fullHistoryByAck
         };
         return service;
 
         function fullHistory() {
             return $http.get(externalAppsService.getBackEndUrl() + 'history');
+        }
+
+        function fullHistoryByAck(ackType) {
+            return $http.get(externalAppsService.getBackEndUrl() + 'historyByAck?ackType=' + ackType);
         }
 
         function fullStationsBays() {

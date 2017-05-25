@@ -25,9 +25,10 @@
 
                 $scope.stationsBays = [];
                 $scope.stationsBays[0] = {label: 'All', value: 'All'};
+                $scope.stationsBays[1] = {label: 'Feedback', value: 'Feedback'};
                 for (var i = 0; i < req.data.length; i++) {
                     var labe = splitta(req.data[i]);
-                    $scope.stationsBays[(i + 1)] = {
+                    $scope.stationsBays[(i + 2)] = {
                         label: labe,
                         value: req.data[i]
                     };
@@ -58,14 +59,24 @@
                 });
             }
             else {
-                var values = stationBayExtended.value.split("_");
-                var item = values[2] + '_' + values[3];
-                daoService.stationBayHistory(item).then(function (req) {
-                    $scope.notifications = req.data;
-                }, function (err) {
-                    console.log(err);
-                });
+                if (stationBayExtended.value == 'Feedback') {
+                     daoService.fullHistoryByAck('ack4').then(function (req) {
+                        $scope.notifications = req.data;
+                     }, function (err) {
+                        console.log(err);
+                     });
+                }
+                else {
+                    var values = stationBayExtended.value.split("_");
+                    var item = values[2] + '_' + values[3];
+                    daoService.stationBayHistory(item).then(function (req) {
+                        $scope.notifications = req.data;
+                    }, function (err) {
+                        console.log(err);
+                    });
+                }
             }
         }
+
     }
 })();

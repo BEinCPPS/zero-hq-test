@@ -32,7 +32,7 @@ public class TestStationDao {
         for (String tableMetadata :
                 tablesMetaData) {
             List<TestStationData> allNotificationsForStation = testStationDataDao
-                    .findAllNotificationsForStationBayByAck(service, tableMetadata);
+                    .findAllNotificationsForStationBay(service, tableMetadata);
             notificationsList.addAll(allNotificationsForStation);
         }
         return notificationsList.stream().sorted().collect(Collectors.toList());
@@ -41,8 +41,23 @@ public class TestStationDao {
     public List<TestStationData> findAllNotificationsStationBay(String service, String entityId) throws Exception {
         String tableName = orionConfiguration.orionServicepath.substring(1).toLowerCase() + "_teststation_" + entityId.toLowerCase() + "_teststation";
         List<TestStationData> allNotificationsForStation = testStationDataDao
-                .findAllNotificationsForStationBayByAck(service, tableName);
+                .findAllNotificationsForStationBay(service, tableName);
         return allNotificationsForStation;
+    }
+
+    public List<TestStationData> findAllNotificationsByAck(String service, String ackType) throws Exception {
+        List<String> tablesMetaData = tablesMetaDataMapper.getTablesMetaData(service);
+        if (null == tablesMetaData || tablesMetaData.size() == 0)
+            throw new Exception("No tables metadata found on database :-(");
+        List<TestStationData> notificationsList = new ArrayList<>();
+        tablesMetaData = findTestStationMetadata(tablesMetaData);
+        for (String tableMetadata :
+                tablesMetaData) {
+            List<TestStationData> allNotificationsForStation = testStationDataDao
+                    .findAllNotificationsForStationBayByAck(service, tableMetadata, ackType);
+            notificationsList.addAll(allNotificationsForStation);
+        }
+        return notificationsList.stream().sorted().collect(Collectors.toList());
     }
 
     public List<TestStationData> findNextNotifications(String service, int x0, int delta) throws Exception {
@@ -54,7 +69,7 @@ public class TestStationDao {
         for (String tableMetadata :
                 tablesMetaData) {
             List<TestStationData> allNotificationsForStation = testStationDataDao
-                    .findAllNotificationsForStationBayByAck(service, tableMetadata);
+                    .findAllNotificationsForStationBay(service, tableMetadata);
             // notificationsList.addAll(allNotificationsForStation);
             for (int i = x0; i < (x0 + delta); i++) {
                 notificationsList.add(allNotificationsForStation.get(i));

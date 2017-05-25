@@ -27,11 +27,32 @@ public interface TestStationDataMapper {
             "attrValue in ('1','2','3')  " +
             "order by recvTime DESC LIMIT 100"
     )
-    List<TestStationData> findAllAcknowledges(@Param("service") String service,
-                                              @Param("context") String context,
+    List<TestStationData> findAllAcknowledgesByStationBay(@Param("service") String service,
+                                                          @Param("context") String context,
 //                                               @Param("stateName") String stateName,
 //                                               @Param("statePayloadName") String statePayloadName,
-                                              @Param("acknowledgeName") String acknowledgeName);
+                                                          @Param("acknowledgeName") String acknowledgeName);
+
+
+    /**
+     *
+     * @param service
+     * @param context
+     * @param acknowledgeName
+     * @param ackType
+     * @return
+     */
+    @Select("SELECT * FROM ${service}.${context} where " +
+            "attrName=#{acknowledgeName} and " +
+            "attrValue = ${ackType} " +
+            "order by recvTime DESC LIMIT 100"
+    )
+    List<TestStationData> findAcknowledgesByStationBayByAck(@Param("service") String service,
+                                                            @Param("context") String context,
+                                                            @Param("acknowledgeName") String acknowledgeName,
+                                                            @Param("ackType") String ackType);
+
+
 
     /**
      * Extracts Test Station data passsing list of interesting states

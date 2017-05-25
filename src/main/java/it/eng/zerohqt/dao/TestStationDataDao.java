@@ -18,9 +18,14 @@ public class TestStationDataDao {
     private TestStationDataMapper testStationDataMapper;
 
 
-    public List<TestStationData> findAllNotificationsForStationBayByAck(String service, String contextName) {
-        return testStationDataMapper.findAllAcknowledges(service, contextName,  TestStationContextAttribute.acknowledge.name());
+    public List<TestStationData> findAllNotificationsForStationBay(String service, String contextName) {
+        return testStationDataMapper.findAllAcknowledgesByStationBay(service, contextName,  TestStationContextAttribute.acknowledge.name());
     }
+
+    public List<TestStationData> findAllNotificationsForStationBayByAck(String service, String contextName, String ackType) {
+        return testStationDataMapper.findAcknowledgesByStationBayByAck(service, contextName,  TestStationContextAttribute.acknowledge.name(), ackType);
+    }
+
 
     public List<TestStationData> findAllNotificationsForStationBayByStatesAndAck(String service, String contextName, List<String> states) {
         return testStationDataMapper.finAllNotificationsByStates(service, contextName, TestStationContextAttribute.state.name(),
