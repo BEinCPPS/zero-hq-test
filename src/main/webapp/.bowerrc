@@ -1,5 +1,0 @@
-{
-  "directory": "app/bower_components",
-  "proxy": "http://alberti:TuttoEsaurito105@proxy.eng.it:3128",
-  "https-proxy":"http://alberti:TuttoEsaurito105@proxy.eng.it:3128"
-}
