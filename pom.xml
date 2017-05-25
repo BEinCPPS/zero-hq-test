@@ -5,7 +5,7 @@
     <groupId>it.eng.zerohqt</groupId>
     <artifactId>zeroHQTest</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging> <!-- use war -->
+    <packaging>${packaging.type}</packaging> <!-- use war -->
 
     <name>zeroHQTest</name>
     <description>Zero Hour Quality Test</description>
@@ -149,6 +149,7 @@
             <properties>
                 <!-- log configuration -->
                 <logback.loglevel>INFO</logback.loglevel>
+                <packaging.type>jar</packaging.type>
                 <!-- default Spring profiles -->
             </properties>
         </profile>
@@ -156,7 +157,8 @@
             <id>prod</id>
             <properties>
                 <!-- log configuration -->
-                <logback.loglevel>INFO</logback.loglevel>
+                <logback.loglevel>ERROR</logback.loglevel>
+                <packaging.type>war</packaging.type>
             </properties>
             <dependencies>
                 <dependency>
@@ -170,14 +172,7 @@
                 </dependency>
             </dependencies>
             <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/webapp</directory>
-                        <excludes>
-                            <exclude>**/*.*</exclude>
-                        </excludes>
-                    </resource>
-                </resources>
+                <finalName>zeroHQTest</finalName>
             </build>
         </profile>
     </profiles>
