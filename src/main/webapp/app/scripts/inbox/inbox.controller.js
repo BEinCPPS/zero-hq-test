@@ -18,12 +18,12 @@
                 var acknowledge = informationBay.acknowledge;
                 if (acknowledge.ackType !== 'ack5')
                     $scope.notificationsMap[acknowledge.id] = acknowledge;
-                organizeDatainView(acknowledge);
+                organizeDataInView(acknowledge);
                 $scope.$apply(); //Apply changes to the page
             }
         });
 
-        function organizeDatainView(acknowledge) {
+        function organizeDataInView(acknowledge) {
             removeAck3s(acknowledge);
             sortNotifications();
         }
@@ -68,12 +68,12 @@
 
         $scope.$on('$ionicView.enter', function (viewInfo, state) {
             $scope.isRemoveAllEnabled = false;
-            if ($rootScope.acknowledges) {
+            if ($rootScope.acknowledges && $rootScope.acknowledges.length > 0) {
                 angular.forEach($rootScope.acknowledges, function (value) {
                     var acknowledge = value.acknowledge;
                     if (acknowledge.ackType !== 'ack5')
                         $scope.notificationsMap[acknowledge.id] = acknowledge;
-                    organizeDatainView(acknowledge);
+                    organizeDataInView(acknowledge);
                     $scope.$apply(); //Apply changes to the page
                 })
             }

@@ -18,7 +18,7 @@ public enum TestStationContextAttribute {
     public static String[] getValuesString() {
         String[] values = new String[TestStationContextAttribute.values().length];
         return Arrays.stream(TestStationContextAttribute.values())
-                .map(TestStationContextAttribute::name)
+                .map(ts -> ts.name())
                 .collect(Collectors.toList())
                 .toArray(values);
     }
