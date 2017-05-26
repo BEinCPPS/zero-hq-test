@@ -12,10 +12,9 @@
                             <div class="item item-divider item-icon-left item-icon-right">
                                 <i class="icon ion-ios-pulse"></i>
                                 <span class="card-header-zero">{{stationName}}</span>
-                                <button class="button icon ion-android-globe blue" style="padding-bottom: 15px;"
+                                <button id="zero-globe-vnc" class="button icon ion-android-globe blue" style="padding-bottom: 15px;"
                                         ng-click="openVnc(bays[$index].ipAddress)">
                                 </button>
-
                             </div>
                             <div class="item item-icon-left" ng-repeat="bay in bays track by $index"
                                  style="border-style: none;">

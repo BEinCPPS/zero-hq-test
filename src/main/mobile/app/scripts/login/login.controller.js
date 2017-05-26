@@ -5,10 +5,10 @@
         .module('zerohqt.login')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', '$rootScope', 'loginService', '$state', '$ionicLoading', '$ionicHistory', 'ENV', 'websocketService'];
+    LoginController.$inject = ['$scope', '$rootScope', 'loginService', '$state', '$ionicLoading', '$ionicHistory', 'ENV', 'websocketService', 'insomniaService'];
 
     /* @ngInject */
-    function LoginController($scope, $rootScope, loginService, $state, $ionicLoading, $ionicHistory, ENV, websocketService) {
+    function LoginController($scope, $rootScope, loginService, $state, $ionicLoading, $ionicHistory, ENV, websocketService, insomniaService) {
         $scope.login = function () {
             //This check is needed to test in browser env
             $ionicHistory.nextViewOptions({
@@ -23,10 +23,12 @@
                 };
                 loginService.logUserAccess($rootScope.user).then(function (req) {
                     console.log(req);
+                    insomniaService.keepAwake();
                     $scope.connect();
                     return $state.go('app.home');
                 }, function (error) {
                     console.log(JSON.stringify(error));
+                    $ionicLoading.show({template: 'Error accessing application!', noBackdrop: true, duration: 2000});
                 });
 
             } else {
@@ -45,9 +47,15 @@
                         if (userData)
                             loginService.logUserAccess(userData).then(function (req) {
                                 console.log(req);
+                                insomniaService.keepAwake();
                                 $scope.connect();
                             }, function (error) {
                                 console.log(error);
+                                $ionicLoading.show({
+                                    template: 'Error accessing application!',
+                                    noBackdrop: true,
+                                    duration: 2000
+                                });
                             });
                         $ionicLoading.hide();
                         $state.go('app.home');

@@ -19,8 +19,8 @@ public enum FeedbackAcknowledgeContextAttribute {
     public static String[] getValuesString() {
         String[] values = new String[FeedbackAcknowledgeContextAttribute.values().length];
         return Arrays.stream(FeedbackAcknowledgeContextAttribute.values())
-                .map(FeedbackAcknowledgeContextAttribute::name)
+                .map(f -> f.name())
                 .collect(Collectors.toList())
                 .toArray(values);
     }
-    }
+}

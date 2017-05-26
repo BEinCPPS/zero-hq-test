@@ -19,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -57,30 +54,37 @@ public class OrionContextConsumerExecutor implements OrionContextConsumer {
         List<SubscriptionResponse> subscriptionResponses = new ArrayList<>();
         if (!isMerge)
             cancelAndDeleteSubscriptions();
-        subscriptionResponses = subscribeAllContexts(Optional.of(TestStationContextAttribute.getContextFatherNamePrefix()), TestStationContextAttribute.getValuesString(), isMerge);
-        subscriptionResponses.addAll(subscribeAllContexts(Optional.of(FeedbackContextAttribute.getContextFatherNamePrefix()), null, isMerge)); //attributes changes inside context
-        subscriptionResponses.addAll(subscribeAllContexts(Optional.of(FeedbackAcknowledgeContextAttribute.getContextFatherNamePrefix()), FeedbackAcknowledgeContextAttribute.getValuesString(), isMerge));
+        Optional<String> contextFatherNamePrefix = Optional.of(TestStationContextAttribute.getContextFatherNamePrefix());
+        Optional<String> contextFatherNamePrefix1 = Optional.of(FeedbackContextAttribute.getContextFatherNamePrefix());
+        Optional<String> contextFatherNamePrefix2 = Optional.of(FeedbackAcknowledgeContextAttribute.getContextFatherNamePrefix());
+
+        subscriptionResponses = subscribeAllContexts(TestStationContextAttribute.getValuesString(), isMerge,
+                contextFatherNamePrefix, contextFatherNamePrefix1, contextFatherNamePrefix2);
         return subscriptionResponses;
     }
 
-    private List<OrionContextElementWrapper> getAllContextsToSubscribe(Optional<String> contextFilter) throws Exception {
+    private List<OrionContextElementWrapper> getAllContextsToSubscribe(Optional<String>... contextFilters) throws Exception {
         ContextElementList contextElementList = orionClient.listContextEntities();
+        List<OrionContextElementWrapper> orionContextsToSubscribe = new ArrayList<>();
         if (null == contextElementList
                 || null == contextElementList.getContextResponses()
                 || contextElementList.getContextResponses().size() == 0)
             throw new IllegalStateException("No  Contexts available");
-        if (!contextFilter.isPresent()) {
+        if (contextFilters.length == 0) {
             return contextElementList.getContextResponses();
         } else
-            return contextElementList.getContextResponses().stream().
-                    filter(ctx -> ctx.getContextElement().getId()
-                            .contains(contextFilter.get())).collect(Collectors.toList());
+            contextElementList.getContextResponses().stream().forEach(ctx -> {
+                boolean match = Arrays.asList(contextFilters).stream()
+                        .anyMatch(f -> ctx.getContextElement().getId().contains(f.get()));
+                if (match)
+                    orionContextsToSubscribe.add(ctx);
+            });
+        return orionContextsToSubscribe;
     }
 
-
-    private List<SubscriptionResponse> subscribeAllContexts(Optional<String> contextFilter, String[] attributes, boolean isMerge)
+    private List<SubscriptionResponse> subscribeAllContexts(String[] attributes, boolean isMerge, Optional<String>... contextFilters)
             throws Exception {
-        List<OrionContextElementWrapper> allContextsToSubscribe = getAllContextsToSubscribe(contextFilter);
+        List<OrionContextElementWrapper> allContextsToSubscribe = getAllContextsToSubscribe(contextFilters);
         List<OrionSubscription> enabledSubscriptions = orionSubscriptionDao.findEnabledSubscriptions();
         List<SubscriptionResponse> subscriptionResponses = new ArrayList<>();
         Consumer<OrionContextElementWrapper> orionContextElementWrapperConsumer =
@@ -103,6 +107,17 @@ public class OrionContextConsumerExecutor implements OrionContextConsumer {
                     }
                 };
         allContextsToSubscribe.stream().forEach(orionContextElementWrapperConsumer);
+        Consumer<OrionSubscription> orionSubscriptionConsumer = (OrionSubscription or) -> {
+            try {
+                boolean match = allContextsToSubscribe.stream().anyMatch(ctx -> ctx.getContextElement().getId().equals(or.getEntity()));
+                if (!match && isMerge) {
+                    orionSubscriptionDao.deleteOrionSubscription(or.getSubscriptionId());
+                }
+            } catch (Exception e) {
+                logger.error(e);
+            }
+        };
+        enabledSubscriptions.stream().forEach(orionSubscriptionConsumer);
         return subscriptionResponses;
     }
 

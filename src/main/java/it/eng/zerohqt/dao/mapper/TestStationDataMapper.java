@@ -1,5 +1,6 @@
 package it.eng.zerohqt.dao.mapper;
 
+import it.eng.zerohqt.config.Constants;
 import it.eng.zerohqt.dao.model.TestStationData;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -25,7 +26,7 @@ public interface TestStationDataMapper {
     @Select("SELECT * FROM ${service}.${context} where " +
             "attrName=#{acknowledgeName} and " +
             "attrValue in ('1','2','3')  " +
-            "order by recvTime DESC LIMIT 100"
+            "order by recvTime DESC LIMIT "+ Constants.HISTORY_BLOCK_SIZE
     )
     List<TestStationData> findAllAcknowledgesByStationBay(@Param("service") String service,
                                                           @Param("context") String context,
@@ -45,7 +46,7 @@ public interface TestStationDataMapper {
     @Select("SELECT * FROM ${service}.${context} where " +
             "attrName=#{acknowledgeName} and " +
             "attrValue = ${ackType} " +
-            "order by recvTime DESC LIMIT 100"
+            "order by recvTime DESC LIMIT "+ Constants.HISTORY_BLOCK_SIZE
     )
     List<TestStationData> findAcknowledgesByStationBayByAck(@Param("service") String service,
                                                             @Param("context") String context,

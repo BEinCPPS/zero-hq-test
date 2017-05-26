@@ -61,7 +61,6 @@ public class Reasoner {
                         logger.error(e);
                     }
                 }
-
             }
         } catch (IOException e) {
             logger.error("Error encountered in feed message: " + e.getMessage());

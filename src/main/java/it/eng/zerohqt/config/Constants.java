@@ -14,8 +14,7 @@ public final class Constants {
     public static final String ORION_CONTEXT_PREFIX_FEEDBACK = "feedbackContext";
     public static final String ORION_CONTEXT_PREFIX_FEEDBACK_SCALE = "feedbackScale";
     public static final String ORION_CONTEXT_PREFIX_FEEDBACK_ACKNOWLEDGE = "feedbackAcknowledge";
-
-
+    public static final int HISTORY_BLOCK_SIZE = 50;
 
 
     private Constants() {

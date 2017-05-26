@@ -5,10 +5,14 @@
         .module('zerohqt.menu')
         .controller('MenuController', MenuController);
 
-    MenuController.$inject = ['$scope', 'websocketService','$state', '$ionicLoading', '$rootScope', '$ionicHistory', 'ENV', 'insomniaService'];
+    MenuController.$inject = ['$scope', 'websocketService', '$state', '$ionicLoading', '$rootScope', '$ionicHistory', 'ENV', 'insomniaService', '$ionicScrollDelegate'];
 
     /* @ngInject */
-    function MenuController($scope, websocketService, $state, $ionicLoading, $rootScope, $ionicHistory, ENV, insomniaService) {
+    function MenuController($scope, websocketService, $state, $ionicLoading, $rootScope, $ionicHistory, ENV, insomniaService, $ionicScrollDelegate) {
+
+        $scope.scrollTop = function () {
+            $ionicScrollDelegate.scrollTop();
+        };
 
         $scope.logout = function () {
             $ionicHistory.nextViewOptions({

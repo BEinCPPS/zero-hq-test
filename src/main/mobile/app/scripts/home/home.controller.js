@@ -16,7 +16,6 @@
         $scope.$on('wsMessage', function (event, informationBay) {
             aggregateData(informationBay);
             $scope.isDataArrived = true;
-            insomniaService.keepAwake();
             $scope.$apply(); //Apply changes to the page
         });
 

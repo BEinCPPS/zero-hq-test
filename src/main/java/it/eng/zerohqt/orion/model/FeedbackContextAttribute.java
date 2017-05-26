@@ -20,7 +20,7 @@ public enum FeedbackContextAttribute {
     public static String[] getValuesString() {
         String[] values = new String[FeedbackContextAttribute.values().length];
         return Arrays.stream(FeedbackContextAttribute.values())
-                .map(FeedbackContextAttribute::name)
+                .map(f -> f.name())
                 .collect(Collectors.toList())
                 .toArray(values);
     }
