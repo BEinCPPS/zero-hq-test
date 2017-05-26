@@ -17,6 +17,13 @@ public class OrionSubscription implements Serializable {
     private String entity;
     private String type;
 
+    public String getEntity() {
+        return entity;
+    }
+
+    public void setEntity(String entity) {
+        this.entity = entity;
+    }
 
     public String getSubscriptionId() {
         return subscriptionId;

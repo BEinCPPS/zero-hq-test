@@ -5,7 +5,7 @@
     <groupId>it.eng.zerohqt</groupId>
     <artifactId>zeroHQTest</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>${packaging.type}</packaging> <!-- use war -->
+    <packaging>${packaging.type}</packaging>
 
     <name>zeroHQTest</name>
     <description>Zero Hour Quality Test</description>

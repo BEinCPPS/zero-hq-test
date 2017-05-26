@@ -21,9 +21,11 @@
                                  style="border-style: none;">
                                 <div ng-if="bay.bayNumber">
                                     <i ng-class="getBackgroundColor(bay.stateInfo.type)"></i>
-                                    <p class="item-text-wrap">{{bay.stateInfo.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                                    <p class="item-text-wrap" style="font-size: 12px;">{{bay.stateInfo.timestamp |
+                                        date:'yyyy-MM-dd HH:mm:ss'}}</p>
                                     <p class="item-text-wrap"><b>Box: {{bay.bayNumber}}</b>
-                                        <b>State: </b>{{bay.stateInfo.stateCode}} - {{bay.stateInfo.stateDescription}}</p>
+                                        <b>State: {{bay.stateInfo.stateCode}}</b> - {{bay.stateInfo.stateDescription}}
+                                    </p>
                                 </div>
                             </div>
                         </div>

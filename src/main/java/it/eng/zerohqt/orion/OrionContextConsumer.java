@@ -14,10 +14,12 @@ public interface OrionContextConsumer {
 
 
     /**
-     * @param
+     *
+     * @param isMerge
+     * @return
      * @throws Exception
      */
-    List<SubscriptionResponse> subscribe() throws Exception;
+    List<SubscriptionResponse> subscribe(boolean isMerge) throws Exception;
 
     /**
      * @param contextId
@@ -36,7 +38,6 @@ public interface OrionContextConsumer {
     void cancelAndDeleteSubscriptions() throws Exception;
 
     /**
-     *
      * @return
      * @throws Exception
      */

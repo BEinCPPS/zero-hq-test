@@ -14,7 +14,7 @@
             openExternalUrl: openExternalUrl,
             getBackEndUrl: getBackEndUrl,
             getWebSocketUrl: getWebSocketUrl,
-            openVncApp: openVncApp
+            openVnc: openVncApp
         };
         return service;
 
@@ -55,9 +55,18 @@
 
         function openVncApp(ipAddress) {
             if (ipAddress) {
-                console.log('Opening vnc ipAddress: '+ipAddress);
-                var url = 'vnc://' + ipAddress;
-                $window.location.href = url;
+                console.log('Opening vnc ipAddress: ' + ipAddress);
+                if (ionic.Platform.isAndroid()) {
+                    if (startApp) {
+                        console.log('Im opening startApp');
+                        startApp.set({
+                            "action": "ACTION_VIEW",
+                            "uri": "kvm://" + ipAddress
+                        }).start();
+                    }
+                } else {
+                    $window.location.href = 'vnc://' + ipAddress;
+                }
             }
         }
     }

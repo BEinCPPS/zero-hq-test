@@ -13,9 +13,9 @@ import java.util.List;
 public interface FeedbackAcknowledgeMapper {
 
 
-    @Insert("INSERT INTO feedback_acknowledge(id, acknowledge, timestamp, description) " +
-            "VALUES (#{id}, #{acknowledge}, #{timestamp}, #{description})")
-    void insertFeedbackAcknowledge(Acknowledge acknowledge);
+    @Insert("INSERT INTO feedback_acknowledge(ackType, timestamp, description) " +
+            "VALUES (#{ackType}, #{timestamp}, #{description})")
+    void insertFeedbackAcknowledge(FeedbackAcknowledge acknowledge);
 
 
 

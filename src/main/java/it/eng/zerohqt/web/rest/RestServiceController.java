@@ -44,7 +44,7 @@ public class RestServiceController {
     @RequestMapping(path = "/subscribe", method = RequestMethod.GET)
     public List<SubscriptionResponse> subscribe() {
         try {
-            return orionContextConsumer.subscribe();
+            return orionContextConsumer.subscribe(true);
         } catch (Exception e) {
             logger.error(e);
             throw new RuntimeException(e);

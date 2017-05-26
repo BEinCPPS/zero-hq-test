@@ -9,6 +9,7 @@ import it.eng.zerohqt.dao.model.*;
 import it.eng.zerohqt.orion.model.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 
 import java.io.IOException;
 import java.util.*;
@@ -89,7 +90,8 @@ public class ZeroHQTContextTransformer {
     private static Optional<FeedbackAcknowledge> transformToFeedbackAcknowledge(ZeroHQTContext zeroHQTContext) {
         Optional<Acknowledge> acknowledge = transformToAcknowledge(zeroHQTContext, true);
         if (!acknowledge.isPresent()) return Optional.empty();
-        FeedbackAcknowledge feedbackAcknowledge = (FeedbackAcknowledge) acknowledge.get();
+        FeedbackAcknowledge feedbackAcknowledge = new FeedbackAcknowledge();
+        BeanUtils.copyProperties(acknowledge.get(), feedbackAcknowledge);
         return Optional.of(feedbackAcknowledge);
     }
 

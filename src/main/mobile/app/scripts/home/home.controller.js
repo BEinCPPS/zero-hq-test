@@ -14,7 +14,6 @@
         $scope.isDataArrived = false;
 
         $scope.$on('wsMessage', function (event, informationBay) {
-            console.log(informationBay); // 'Broadcast!'
             aggregateData(informationBay);
             $scope.isDataArrived = true;
             insomniaService.keepAwake();
@@ -69,7 +68,7 @@
         $scope.openVnc = function (ipAddress) {
             //TODO
             //$ionicLoading.show({template: 'Functionality not available currently!', noBackdrop: true, duration: 1000});
-            externalAppsService.openVncApp(ipAddress);
+            externalAppsService.openVnc(ipAddress);
         }
 
     }

@@ -23,7 +23,7 @@ public class SubscriptionsScheduler {
     public void subscribe() {
         List<SubscriptionResponse> subscriptionResponses = null;
         try {
-            subscriptionResponses = orionContextConsumer.subscribe();
+            subscriptionResponses = orionContextConsumer.subscribe(true);
             logger.info("Subscriptions to orion executed CORRECTLY: " + subscriptionResponses);
         } catch (Exception e) {
             logger.error("Subscriptions with error: " + e.getMessage());

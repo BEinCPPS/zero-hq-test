@@ -53,12 +53,13 @@ public class OrionContextConsumerExecutor implements OrionContextConsumer {
     }
 
     @Override
-    public List<SubscriptionResponse> subscribe() throws Exception {
+    public List<SubscriptionResponse> subscribe(boolean isMerge) throws Exception {
         List<SubscriptionResponse> subscriptionResponses = new ArrayList<>();
-        cancelAndDeleteSubscriptions();
-        subscriptionResponses = subscribeContexts(Optional.of(TestStationContextAttribute.getContextFatherNamePrefix()), TestStationContextAttribute.getValuesString());
-        subscriptionResponses.addAll(subscribeContexts(Optional.of(FeedbackContextAttribute.getContextFatherNamePrefix()), null)); //attributes changes inside context
-        subscriptionResponses.addAll(subscribeContexts(Optional.of(FeedbackAcknowledgeContextAttribute.getContextFatherNamePrefix()), FeedbackAcknowledgeContextAttribute.getValuesString()));
+        if (!isMerge)
+            cancelAndDeleteSubscriptions();
+        subscriptionResponses = subscribeAllContexts(Optional.of(TestStationContextAttribute.getContextFatherNamePrefix()), TestStationContextAttribute.getValuesString(), isMerge);
+        subscriptionResponses.addAll(subscribeAllContexts(Optional.of(FeedbackContextAttribute.getContextFatherNamePrefix()), null, isMerge)); //attributes changes inside context
+        subscriptionResponses.addAll(subscribeAllContexts(Optional.of(FeedbackAcknowledgeContextAttribute.getContextFatherNamePrefix()), FeedbackAcknowledgeContextAttribute.getValuesString(), isMerge));
         return subscriptionResponses;
     }
 
@@ -77,22 +78,26 @@ public class OrionContextConsumerExecutor implements OrionContextConsumer {
     }
 
 
-    private List<SubscriptionResponse> subscribeContexts(Optional<String> contextFilter, String[] attributes) throws Exception {
+    private List<SubscriptionResponse> subscribeAllContexts(Optional<String> contextFilter, String[] attributes, boolean isMerge)
+            throws Exception {
         List<OrionContextElementWrapper> allContextsToSubscribe = getAllContextsToSubscribe(contextFilter);
+        List<OrionSubscription> enabledSubscriptions = orionSubscriptionDao.findEnabledSubscriptions();
         List<SubscriptionResponse> subscriptionResponses = new ArrayList<>();
-        //cancelAndDeleteSubscriptions();
         Consumer<OrionContextElementWrapper> orionContextElementWrapperConsumer =
                 (OrionContextElementWrapper ctx) -> {
                     try {
                         String[] conditions = {};
-                        SubscriptionResponse subscriptionResponse = orionClient.subscribeChange(
-                                OrionContextElementToOrionEntityTransformer
-                                        .transform(ctx.getContextElement()).get(), attributes,
-                                reference, conditions);
-                        subscriptionResponses.add(subscriptionResponse);
-                        orionSubscriptionDao.insertOrionSubscription(new OrionSubscription
-                                (subscriptionResponse.getSubscribeResponse().getSubscriptionId(), new Date(), true,
-                                        ctx.getContextElement().getId(), ctx.getContextElement().getType()));
+                        boolean match = enabledSubscriptions.stream().anyMatch(s -> s.getEntity().equals(ctx.getContextElement().getId()));
+                        if (!match || !isMerge) {
+                            SubscriptionResponse subscriptionResponse = orionClient.subscribeChange(
+                                    OrionContextElementToOrionEntityTransformer
+                                            .transform(ctx.getContextElement()).get(), attributes,
+                                    reference, conditions);
+                            subscriptionResponses.add(subscriptionResponse);
+                            orionSubscriptionDao.insertOrionSubscription(new OrionSubscription
+                                    (subscriptionResponse.getSubscribeResponse().getSubscriptionId(), new Date(), true,
+                                            ctx.getContextElement().getId(), ctx.getContextElement().getType()));
+                        }
                     } catch (IOException e) {
                         logger.error(e);
                     }

@@ -49,23 +49,22 @@ public class Reasoner {
                     } catch (Exception e) {
                         logger.error(e);
                     }
+                } else if (zeroHQTObject.get() instanceof FeedbackAcknowledge) {
+                    try {
+                        FeedbackAcknowledge feedbackAcknowledge = (FeedbackAcknowledge) zeroHQTObject.get();
+                        InformationBay informationBay = new InformationBay();
+                        informationBay.setAcknowledge(feedbackAcknowledge);
+                        informationBay.setOrigin(FeedbackAcknowledge.class.getSimpleName().toLowerCase());
+                        webSocketController.sendToClient(informationBay);
+                        feedbackAcknowledgeDao.insertFeedbackAcknowledge(feedbackAcknowledge);
+                    } catch (Exception e) {
+                        logger.error(e);
+                    }
                 }
-            } else if (zeroHQTObject.get() instanceof FeedbackAcknowledge) {
-                try {
-                    FeedbackAcknowledge feedbackAcknowledge = (FeedbackAcknowledge) zeroHQTObject.get();
-                    InformationBay informationBay = new InformationBay();
-                    informationBay.setAcknowledge(feedbackAcknowledge);
-                    informationBay.setOrigin(FeedbackAcknowledge.class.getSimpleName().toLowerCase());
-                    webSocketController.sendToClient(informationBay);
-                    feedbackAcknowledgeDao.insertFeedbackAcknowledge(feedbackAcknowledge);
-                } catch (Exception e) {
-                    logger.error(e);
-                }
+
             }
-
-
         } catch (IOException e) {
-            logger.error(e);
+            logger.error("Error encountered in feed message: " + e.getMessage());
         }
     }
 
