@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by ascatox on 23/05/17.
@@ -26,7 +27,7 @@ public class HistoryDao {
                         .findAllNotifications(service));
         List<FeedbackAcknowledge> feedbackAcknowledges = feedbackAcknowledgeDao.findFeedbackAcknowledges();
         acknowledges.addAll(feedbackAcknowledges);
-        return acknowledges;
+        return acknowledges.stream().sorted().collect(Collectors.toList());
     }
 
     public List<Acknowledge> readHistoryByAck(String service, String ackType) throws Exception {
@@ -36,15 +37,12 @@ public class HistoryDao {
             List<FeedbackAcknowledge> feedbackAcknowledges = feedbackAcknowledgeDao.findFeedbackAcknowledges();
             acknowledges.addAll(feedbackAcknowledges);
 
-        }
-        else {
+        } else {
             acknowledges = ZeroHQTContextTransformer.
                     transformToAcknowledges(testStationDao
                             .findAllNotificationsByAck(service, AcknowledgeType.valueOf(ackType).getId().toString()));
         }
-
-
-        return acknowledges;
+        return acknowledges.stream().sorted().collect(Collectors.toList());
     }
 
 }

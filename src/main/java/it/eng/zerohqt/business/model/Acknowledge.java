@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Created by ascatox on 09/03/17.
  */
-public class Acknowledge extends BaseBayInfo implements Serializable {
+public class Acknowledge extends BaseBayInfo implements Serializable, Comparable {
 
     protected AcknowledgeType ackType;
     protected String description;
@@ -70,5 +70,12 @@ public class Acknowledge extends BaseBayInfo implements Serializable {
                 ", ackType=" + ackType +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Acknowledge acknowledge = (Acknowledge) o;
+        Long l = acknowledge.getTimestamp().getTime() - getTimestamp().getTime();
+        return l.intValue();
     }
 }
