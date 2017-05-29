@@ -30,7 +30,6 @@ $extended-footer-height: 70px;
 @import "dashboard";
 @import "history";
 
-
 @import url('../fonts/Roboto-Regular.ttf');
 $font-family-base: 'Roboto', serif;
 
@@ -74,6 +73,10 @@ $font-family-base: 'Roboto', serif;
   color: #0c60ee;
 }
 
+.blue :visited {
+  color: #0c60ee;
+}
+
 .notification-style-text {
   margin-left: 2%;
   font-size: 18px !important;
@@ -85,4 +88,6 @@ $font-family-base: 'Roboto', serif;
 
 }
 
-
+.overflow-scroll {
+  overflow-y: auto;
+}

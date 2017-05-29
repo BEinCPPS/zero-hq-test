@@ -1,5 +1,5 @@
 <ion-view view-title="Inbox">
-    <ion-content  overflow-scroll=”true”>
+    <ion-content overflow-scroll=”true” scrollbar-y="true" class="scroll-content has-footer">
         <div class="bar bar-header">
             <div class="h1 title"></div>
             <button ng-if="!isRemoveAllEnabled" class="button button-assertive icon ion-close-circled"
@@ -16,10 +16,16 @@
                             'icon ion-android-warning yellow':value.ackType=='ack2',
                             'icon ion-alert red':value.ackType=='ack3',
                             'icon ion-flag red':value.ackType=='ack4'}"></i>
-                    <b>{{value.stationName}} Box: {{value.bayNumber}}</b> -
-                    {{value.description}}
-                    <span ng-if="value.timestamp" class="item-note item-note-zero"> <b>Date:</b>
+                    <div class="row">
+                    <span ng-if="value.timestamp" class="item-note item-note-zero">
                         {{value.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                    </div>
+                    <div class="row">
+                        <span>
+                            <span ng-if="value.stationName"><b>{{value.stationName}} Box: {{value.bayNumber}}</b> - </span>
+                            {{value.description}}
+                        </span>
+                    </div>
                 </div>
                 <ion-option-button ng-disabled="value.ackType==='ack3'"
                                    class="button-assertive icon ion-trash-a" ng-click="deleteAcknowledge(key)">

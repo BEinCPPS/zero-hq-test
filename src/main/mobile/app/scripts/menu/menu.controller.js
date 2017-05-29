@@ -22,6 +22,7 @@
             if ((typeof window.plugins === 'undefined' && !ionic.Platform.isAndroid()) || ENV.mockSignin) {
                 $rootScope.user = {};
                 websocketService.disconnect();
+                insomniaService.allowSleepAgain();
                 return $state.go('app.login');
             } else {
                 $ionicLoading.show({
@@ -32,6 +33,7 @@
                         console.log(msg);
                         $ionicLoading.hide();
                         websocketService.disconnect();
+                        insomniaService.allowSleepAgain();
                         $state.go('app.login');
                     },
                     function (fail) {

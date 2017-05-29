@@ -66,7 +66,6 @@
 
         $scope.openVnc = function (ipAddress) {
             //TODO
-            //$ionicLoading.show({template: 'Functionality not available currently!', noBackdrop: true, duration: 1000});
             externalAppsService.openVnc(ipAddress);
         }
 
