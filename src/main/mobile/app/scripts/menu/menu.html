@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="true">
+<ion-side-menus enable-menu-with-back-views="true" class="has-footer">
     <ion-side-menu-content
             edge-drag-threshold="true">
         <ion-nav-bar class="bar-positive" ng-click="scrollTop()">
@@ -25,6 +25,10 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
+                <ion-item ng-if="user && user.fullName !== 'test'" nav-clear menu-close class="item-avatar" href="#">
+                    <img src="{{user.imageUrl}}">
+                    <p style="padding-top: 5px">{{user.givenName}}</p>
+                </ion-item>
                 <ion-item nav-clear menu-close class="item-icon-left" href="#/app/home">
                     <i class="icon ion-ios-home"></i>
                     Home

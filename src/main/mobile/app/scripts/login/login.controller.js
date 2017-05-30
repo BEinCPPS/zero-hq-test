@@ -8,6 +8,16 @@
     LoginController.$inject = ['$scope', '$rootScope', 'loginService', '$state', '$ionicLoading', '$ionicHistory', 'ENV', 'websocketService', 'insomniaService'];
 
     /* @ngInject */
+    function createUserAccess(userData) {
+        if (userData) {
+            return {
+                uid: userData.userId,
+                fullName: userData.displayName,
+                email: userData.email
+            };
+        }
+    }
+
     function LoginController($scope, $rootScope, loginService, $state, $ionicLoading, $ionicHistory, ENV, websocketService, insomniaService) {
         $scope.login = function () {
             //This check is needed to test in browser env
@@ -38,15 +48,24 @@
                 window.plugins.googleplus.login(
                     {
                         'webClientId': ENV.googleAppId,
-                        'offline': true //TODO
+                        'offline': false
                     },
                     function (userData) {
                         console.log("Login Google oAuth executed for user:  " + userData);
                         // For the purpose of this example I will store user data on local storage
                         $rootScope.user = userData;
+                        /**
+                         * email,
+                         * idToken,
+                         * displayName,
+                         * familyName,
+                         * givenName,
+                         * imageUrl,
+                         */
                         if (userData)
-                            loginService.logUserAccess(userData).then(function (req) {
+                            loginService.logUserAccess(createUserAccess(userData)).then(function (req) {
                                 console.log(req);
+                                localStorage.setItem("token", userData.idToken);
                                 insomniaService.keepAwake();
                                 $scope.connect();
                             }, function (error) {

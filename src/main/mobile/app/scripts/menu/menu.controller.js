@@ -31,6 +31,7 @@
                 window.plugins.googleplus.logout(
                     function (msg) {
                         console.log(msg);
+                        localStorage.removeItem('token');
                         $ionicLoading.hide();
                         websocketService.disconnect();
                         insomniaService.allowSleepAgain();
