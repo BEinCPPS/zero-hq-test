@@ -61,6 +61,7 @@
                          * familyName,
                          * givenName,
                          * imageUrl,
+                         * accessToken
                          */
                         if (userData)
                             loginService.logUserAccess(createUserAccess(userData)).then(function (req) {

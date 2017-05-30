@@ -14,6 +14,11 @@
             $ionicScrollDelegate.scrollTop();
         };
 
+        function sleep() {
+            websocketService.disconnect();
+            insomniaService.allowSleepAgain()
+        }
+
         $scope.logout = function () {
             $ionicHistory.nextViewOptions({
                 disableAnimate: true,
@@ -21,8 +26,7 @@
             });
             if ((typeof window.plugins === 'undefined' && !ionic.Platform.isAndroid()) || ENV.mockSignin) {
                 $rootScope.user = {};
-                websocketService.disconnect();
-                insomniaService.allowSleepAgain();
+                sleep();
                 return $state.go('app.login');
             } else {
                 $ionicLoading.show({
@@ -30,20 +34,24 @@
                 });
                 window.plugins.googleplus.logout(
                     function (msg) {
-                        console.log(msg);
+                        console.log('Logout from Google account ' + msg);
                         localStorage.removeItem('token');
                         $ionicLoading.hide();
-                        websocketService.disconnect();
-                        insomniaService.allowSleepAgain();
+                        sleep();
                         $state.go('app.login');
                     },
                     function (fail) {
-                        console.log(fail);
+                        console.log('Error executing logout: ' + fail);
+                        $ionicLoading.hide();
+                        sleep();
                         $state.go('app.login');
                     }
                 );
+
+
+
+
             }
-            insomniaService.allowSleepAgain();
         }
 
 
