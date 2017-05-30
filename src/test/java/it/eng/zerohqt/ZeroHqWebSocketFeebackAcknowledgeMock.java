@@ -34,7 +34,7 @@ public class ZeroHqWebSocketFeebackAcknowledgeMock {
     static final String WEBSOCKET_URI = "ws://localhost:8080/websocket";
     static final String WEBSOCKET_TOPIC = WebSocketConfiguration.DEFAULT_CHANNEL;
     static final String PATH_FEEDBACK_ACKNOWLEDGE = "/mock/feedbackAcknowledge.json";
-    static final int DELAY_LONG = 15000;
+    static final int DELAY_LONG = 20000;
 
     final Logger logger = Logger.getLogger(ZeroHqWebSocketFeebackAcknowledgeMock.class);
 
