@@ -66,7 +66,7 @@
                         if (userData)
                             loginService.logUserAccess(createUserAccess(userData)).then(function (req) {
                                 console.log(req);
-                                localStorage.setItem("token", userData.idToken);
+                                localStorage.setItem('token', userData.accessToken);
                                 insomniaService.keepAwake();
                                 $scope.connect();
                             }, function (error) {
