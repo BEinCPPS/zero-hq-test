@@ -62,15 +62,15 @@ module.exports = function (grunt) {
                     ENV: {
                         name: 'development',
                         apiEndpointHost: 'localhost',
-                        apiEndpointHostMobile: '16de00ef.ngrok.io', //10.0.3.2
+                        apiEndpointHostMobile: '172.16.21.102', //10.0.3.2
                         apiEndPointPort: '8080',
-                        apiEndPointPortMobile: '',
+                        apiEndPointPortMobile: '8080',
                         apiEndPointDefaultProtocol: 'http',
                         googleAppId: '931186243837-fd02v27copufd4t8ta7gsmjlenhimfpf.apps.googleusercontent.com',
                         googleAppSecret: 'X4tDb_NiKAIFTREQLbQ1iZBh',
                         historyDelta: '25',
                         imagesFolder: './images/',
-                        mockSignin: false
+                        mockSignin: true
                     }
                 }
             },

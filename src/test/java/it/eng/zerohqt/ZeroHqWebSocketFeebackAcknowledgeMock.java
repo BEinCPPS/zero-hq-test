@@ -34,7 +34,7 @@ public class ZeroHqWebSocketFeebackAcknowledgeMock {
     static final String WEBSOCKET_URI = "ws://localhost:8080/websocket";
     static final String WEBSOCKET_TOPIC = WebSocketConfiguration.DEFAULT_CHANNEL;
     static final String PATH_FEEDBACK_ACKNOWLEDGE = "/mock/feedbackAcknowledge.json";
-    static final int DELAY_LONG = 20000;
+    static final int DELAY_LONG = 1000;
 
     final Logger logger = Logger.getLogger(ZeroHqWebSocketFeebackAcknowledgeMock.class);
 
@@ -66,6 +66,7 @@ public class ZeroHqWebSocketFeebackAcknowledgeMock {
                 })
                 .get(1, SECONDS);
         session.subscribe(WEBSOCKET_TOPIC + "/" + WebSocketConfiguration.ACKNOWLEDGE_TOPIC, new DefaultStompFrameHandler());
+        int counter = 0;
         for (; ; ) {
             Thread.sleep(DELAY_LONG);
             FeedbackAcknowledge[] messagesFeedback = new FeedbackAcknowledge[feedbackAcknowledges.size()];
@@ -76,7 +77,9 @@ public class ZeroHqWebSocketFeebackAcknowledgeMock {
             informationBay.setAcknowledge(feedbackAcknowledge);
             ObjectMapper mapper = new ObjectMapper();
             String messageJson = mapper.writeValueAsString(informationBay);
-            session.send(WEBSOCKET_TOPIC + "/" + WebSocketConfiguration.ACKNOWLEDGE_TOPIC, messageJson.getBytes());
+            if (counter > 0) continue;
+                session.send(WEBSOCKET_TOPIC + "/" + WebSocketConfiguration.ACKNOWLEDGE_TOPIC, messageJson.getBytes());
+            counter++;
             logger.info(messageJson);
             //Assert.assertEquals(messageJson, blockingQueue.poll(1, SECONDS));
         }

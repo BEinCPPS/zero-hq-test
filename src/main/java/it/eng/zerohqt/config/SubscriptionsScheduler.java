@@ -4,6 +4,7 @@ import it.eng.zerohqt.orion.OrionContextConsumer;
 import it.eng.zerohqt.orion.client.model.subscribe.SubscriptionResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class SubscriptionsScheduler {
 
     private final Logger logger = Logger.getLogger(SubscriptionsScheduler.class);
 
-    @Scheduled(fixedRate = 60000) //ms
+    @Scheduled(fixedDelayString = "${orion.subscriptions.refresh.timeout}") //ms
     public void subscribe() {
         List<SubscriptionResponse> subscriptionResponses = null;
         try {
