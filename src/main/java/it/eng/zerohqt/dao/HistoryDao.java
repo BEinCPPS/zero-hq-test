@@ -26,7 +26,8 @@ public class HistoryDao {
                 transformToAcknowledges(testStationDao
                         .findAllNotifications(service));
         List<FeedbackAcknowledge> feedbackAcknowledges = feedbackAcknowledgeDao.findFeedbackAcknowledges();
-        acknowledges.addAll(feedbackAcknowledges);
+        if (feedbackAcknowledges != null)
+            acknowledges.addAll(feedbackAcknowledges);
         return acknowledges.stream().sorted().collect(Collectors.toList());
     }
 

@@ -150,7 +150,7 @@ public class ZeroHQTContextTransformer {
     }
 
     public static List<Acknowledge> transformToAcknowledges(List<TestStationData> testStationData) {
-        if (null == testStationData || testStationData.isEmpty()) return null;
+        if (null == testStationData || testStationData.isEmpty()) return new ArrayList<>();
         return testStationData.stream()
                 .map(td -> {
                     try {
